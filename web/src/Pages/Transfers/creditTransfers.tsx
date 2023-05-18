@@ -212,18 +212,24 @@ const CreditTransfer = () => {
     reqId: number,
     remarks: string,
     endpoint: string,
-    successText?: string
+    successText?: string,
+    isRetire?: boolean
   ) => {
     setLoading(true);
+    console.log('is retire -------------- > ', isRetire);
     try {
       const response: any = await post('national/programme/' + endpoint, {
         requestId: reqId,
         comment: remarks,
       });
+      let successMsg = response.message;
+      if (isRetire) {
+        successMsg = t('creditTransfer:internationalTransferReqCancelled');
+      }
       console.log(response);
       message.open({
         type: 'success',
-        content: successText ? successText : response.message,
+        content: successText ? successText : successMsg,
         duration: 3,
         style: { textAlign: 'right', marginRight: 15, marginTop: 10 },
       });
@@ -255,6 +261,11 @@ const CreditTransfer = () => {
   };
 
   const actionMenu = (record: any) => {
+    console.log('record -------', record);
+    let isRetire = false;
+    if (record.isRetirement === true) {
+      isRetire = true;
+    }
     if (record.status === 'Pending' && userInfoState?.userRole !== Role.ViewOnly) {
       return userInfoState?.companyId === record.initiatorCompanyId ? (
         <List
@@ -270,7 +281,7 @@ const CreditTransfer = () => {
                   icon: <Icon.ExclamationOctagon />,
                   actionBtnText: t('creditTransfer:proceed'),
                   okAction: (requestId: any, comment: any) =>
-                    handleRequestOk(requestId, comment, 'transferCancel'),
+                    handleRequestOk(requestId, comment, 'transferCancel', undefined, isRetire),
                   type: 'danger',
                   remarkRequired: true,
                 });
