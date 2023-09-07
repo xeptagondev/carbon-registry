@@ -1,4 +1,4 @@
-service: carbon-registry-services-2
+service: carbon-registry-services
 
 provider:
   name: aws
