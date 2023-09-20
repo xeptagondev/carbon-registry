@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post, Put, Query, UseGuards, Request } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { ProgrammeService, ApiKeyJwtAuthGuard, PoliciesGuard, CheckPolicies, AppAbility, Action, Programme, ProgrammeDto, ProgrammeDocumentRegistryDto, ProgrammeAcceptedDto, MitigationAddDto, OwnershipUpdateDto, PoliciesGuardEx, QueryDto, ConstantUpdateDto, ProgrammeApprove, ProgrammeIssue, ProgrammeReject, TransferFreezeGuard, ProgrammeTransferRequest, ProgrammeRetire, ProgrammeCertify, ProgrammeRevoke, ProgrammeTransferApprove, ProgrammeTransfer, ProgrammeTransferReject, ProgrammeTransferCancel } from 'carbon-services-lib';
+import { ProgrammeService, ApiKeyJwtAuthGuard, PoliciesGuard, CheckPolicies, AppAbility, Action, Programme, ProgrammeDto, ProgrammeDocumentRegistryDto, ProgrammeAcceptedDto, MitigationAddDto, OwnershipUpdateDto, PoliciesGuardEx, QueryDto, ConstantUpdateDto, ProgrammeApprove, ProgrammeIssue, ProgrammeReject, TransferFreezeGuard, ProgrammeTransferRequest, ProgrammeRetire, ProgrammeCertify, ProgrammeRevoke, ProgrammeTransferApprove, ProgrammeTransfer, ProgrammeTransferReject, ProgrammeTransferCancel, ProgrammeDocument } from 'carbon-services-lib';
 
 @ApiTags('Programme')
 @ApiBearerAuth()
@@ -166,5 +166,16 @@ export class ProgrammeController {
     transfersByProgrammeId(@Query('programmeId') programmeId: string, @Request() req) {
       console.log(req.abilityCondition)
       return this.programmeService.getTransferByProgrammeId(programmeId, req.abilityCondition, req.user)
+    }
+
+    @ApiBearerAuth()
+    @UseGuards(
+    ApiKeyJwtAuthGuard,
+    PoliciesGuardEx(true, Action.Read, ProgrammeDocument, true)
+    )
+    // @UseGuards(JwtAuthGuard, PoliciesGuardEx(true, Action.Read, User, true))
+    @Post("queryDocs")
+    async queryDocuments(@Body() query: QueryDto, @Request() req) {
+      return this.programmeService.queryDocuments(query, req.abilityCondition);
     }
 }
