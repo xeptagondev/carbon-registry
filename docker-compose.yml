@@ -44,6 +44,7 @@ services:
       DOMAIN_MAP: "true"
       EXPIRES_IN: "7200"
       SYSTEM_TYPE: CARBON_REGISTRY_SYSTEM
+      BACKEND_HOST:
     volumes:
       - filestore:/app/backend/services/public
       - ./users.csv:/app/backend/services/users.csv
@@ -76,7 +77,8 @@ services:
       DB_USER: root
       DB_PASSWORD: "<ANY PASSOWORD>"
       # ,data-importer
-      RUN_MODULE: replicator,async-operations-handler
+      RUN_MODULE: replicator,async-operations-handler,data-importer
+      DATA_IMPORT_TYPES: ""
       LOCATION_SERVICE: OPENSTREET
       SMTP_ENDPOINT: email-smtp.us-east-1.amazonaws.com
       SMTP_PASSWORD: ""
@@ -89,6 +91,7 @@ services:
       SYNC_API_TOKEN: ''
       SYNC_ENABLE: true
       SYSTEM_TYPE: CARBON_REGISTRY_SYSTEM
+      BACKEND_HOST: ""
   # async-operations-handler:
   #   build:
   #     context: .
