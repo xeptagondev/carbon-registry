@@ -9,7 +9,7 @@ on:
     paths:
       - web/**
       - backend/**
-      - .github/workflows/test-web*
+      - .github/workflows/test-web* 
 
 jobs:
   Test_web_build:
