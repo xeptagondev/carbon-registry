@@ -84,8 +84,6 @@ services:
       LOCATION_SERVICE: OPENSTREET
       SMTP_ENDPOINT: email-smtp.us-east-1.amazonaws.com
       SMTP_PASSWORD: ""
-      NEW_VAR1: ""
-      ADD_NEW1: ""
       ASYNC_OPERATIONS_TYPE: Database
       ITMO_API_KEY: ""
       ITMO_EMAIL: ""
@@ -94,7 +92,6 @@ services:
       SYNC_API_TOKEN: ''
       SYNC_ENABLE: true
       SYSTEM_TYPE: CARBON_REGISTRY_SYSTEM
-      TEST_SYSTEM1: ""
   web:
     image: 302213478610.dkr.ecr.us-east-1.amazonaws.com/carbon-web:CARBON-15
     # build:

@@ -9,19 +9,13 @@ on:
     paths:
       - web/**
       - backend/**
-      - .github/workflows/test-web* 
+      - .github/workflows/test-web*
 
 jobs:
   Test_web_build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          fetch-depth: 5
-      - name: Commit Changes
-        run: |
-          echo "docker-compose file Change...."
-          git diff HEAD~ -- HEAD -z ./docker-compose*
       - name: Cache modules
         uses: actions/cache@v1
         id: yarn-cache
