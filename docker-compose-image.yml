@@ -82,6 +82,9 @@ services:
       # ,data-importer
       RUN_MODULE: replicator,async-operations-handler
       LOCATION_SERVICE: OPENSTREET
+      VAR: ""
+      VAR2: ""
+      VAR3: ""
       SMTP_ENDPOINT: email-smtp.us-east-1.amazonaws.com
       SMTP_PASSWORD: ""
       ASYNC_OPERATIONS_TYPE: Database
