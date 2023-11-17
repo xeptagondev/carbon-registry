@@ -16,13 +16,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 5
       - name: Commit Changes
         working-directory: ./web
         run: |
           git config --global user.name "System Generated"
           git config --global user.email "palinda@xeptagon.com"
-          echo "docker-compose-image.yml Change"
-          git diff HEAD~ -- HEAD -z ./docker-compose-image*
+          echo "docker-compose file Change...."
+          git diff HEAD~ -- HEAD -z ./docker-compose*
       - name: Cache modules
         uses: actions/cache@v1
         id: yarn-cache
