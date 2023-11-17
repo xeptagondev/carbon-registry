@@ -24,7 +24,7 @@ jobs:
           echo "Commited the Following Changes"
           git show --name-only
           echo "docker-compose-image.yml Change"
-          git diff HEAD^ HEAD -z ./docker-compose-image*
+          git diff HEAD~ HEAD -z ./docker-compose-image*
       - name: Cache modules
         uses: actions/cache@v1
         id: yarn-cache
