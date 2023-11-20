@@ -4933,10 +4933,10 @@
     "@types/node" "^18.11.9"
     convert-units "^2.3.4"
 
-"@undp/carbon-services-lib@0.0.243":
-  version "0.0.243"
-  resolved "https://registry.yarnpkg.com/@undp/carbon-services-lib/-/carbon-services-lib-0.0.243.tgz#384b9d9e952f195b46e6b19e6322da7af75ba471"
-  integrity sha512-BioneoFADRehckXQVxtAJQOxHGc4g9bypJW+6XjMtYQlVCqokWpew1/2aFfqSjZQpDYMx0OUfHBXwRSbKFJnfw==
+"@undp/carbon-services-lib@0.0.244-CARBON-336.1":
+  version "0.0.244-CARBON-336.1"
+  resolved "https://registry.yarnpkg.com/@undp/carbon-services-lib/-/carbon-services-lib-0.0.244-CARBON-336.1.tgz#ed0c034c28c0e5ed01bc47808c8ba7cf394c0d2c"
+  integrity sha512-dCjH6DBePzBcKZDnpDaXonZ/lIQElqwGLUMU92f4Mbcu8dcPMy8tzowT+irn/edV8YzJ5UzT5bOXK+yOWXf4PQ==
   dependencies:
     "@aws-sdk/client-qldb" "^3.408.0"
     "@aws-sdk/client-qldb-session" "^3.408.0"
@@ -6273,10 +6273,8 @@ caniuse-lite@^1.0.30001449:
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001474.tgz#13b6fe301a831fe666cce8ca4ef89352334133d5"
   integrity sha512-iaIZ8gVrWfemh5DG3T9/YqarVZoYf0r188IjaGwx68j4Pf0SGY6CQkmJUIE+NZHkkecQGohzXmBGEwWDr9aM3Q==
 
-carbon-services-lib@0.0.231-CARBON-323.2:
-  version "0.0.231-CARBON-323.2"
-  resolved "https://registry.yarnpkg.com/carbon-services-lib/-/carbon-services-lib-0.0.231-CARBON-323.2.tgz#b4a33fc0955ef8839e5e4bf857c5215872df2f43"
-  integrity sha512-IR0d1s7T4jUneQ6eH1muqdXJNwHaIGVhDL66X7I1dJSIvQqQ1ajG1ZZMWyMvwk/SsQB+EWeQEFCwPVYTYBEjXQ==
+"carbon-services-lib@file:.yalc/carbon-services-lib":
+  version "0.0.231-CARBON-329.1"
   dependencies:
     "@aws-sdk/client-qldb" "^3.408.0"
     "@aws-sdk/client-qldb-session" "^3.408.0"
