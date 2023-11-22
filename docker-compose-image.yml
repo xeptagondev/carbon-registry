@@ -94,6 +94,7 @@ services:
       DISABLE_LOW_PRIORITY_EMAIL: "true"
       EMAILPREFIX: ""
       ASYNC_OPERATIONS_TYPE: Database
+      ITMO_ENABLE: ""
       ITMO_API_KEY: ""
       ITMO_EMAIL: ""
       ITMO_PASSWORD: ""
