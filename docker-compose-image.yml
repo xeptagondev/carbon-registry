@@ -85,6 +85,7 @@ services:
       SMTP_ENDPOINT: email-smtp.us-east-1.amazonaws.com
       SMTP_PASSWORD: ""
       ASYNC_OPERATIONS_TYPE: Database
+      ITMO_ENABLE: ""
       ITMO_API_KEY: ""
       ITMO_EMAIL: ""
       ITMO_PASSWORD: ""
@@ -92,6 +93,8 @@ services:
       SYNC_API_TOKEN: ''
       SYNC_ENABLE: true
       SYSTEM_TYPE: CARBON_REGISTRY_SYSTEM
+    volumes:
+      - filestore:/app/backend/services/public
   web:
     image: 302213478610.dkr.ecr.us-east-1.amazonaws.com/carbon-web:CARBON-329
     # build:

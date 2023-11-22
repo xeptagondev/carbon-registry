@@ -88,6 +88,7 @@ services:
       IS_EMAIL_DISABLED: "true"
       DISABLE_LOW_PRIORITY_EMAIL: "true"
       ASYNC_OPERATIONS_TYPE: Database
+      ITMO_ENABLE: ""
       ITMO_API_KEY: ""
       ITMO_EMAIL: ""
       ITMO_PASSWORD: ""
@@ -97,6 +98,8 @@ services:
       SYSTEM_TYPE: CARBON_REGISTRY_SYSTEM
       HOST: "http://localhost:3030"
       BACKEND_HOST: http://192.168.1.123:9000
+    volumes:
+      - filestore:/app/backend/services/public
   # async-operations-handler:
   #   build:
   #     context: .
