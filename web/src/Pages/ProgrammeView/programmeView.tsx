@@ -481,7 +481,14 @@ const ProgrammeView = () => {
           description: (
             <TimelineBody
               text={formatString('view:tlRetInitDesc', [
-                addCommSep(transfer.creditAmount),
+                addCommSep(
+                  transfer.creditAmount
+                    ? transfer.retirementType === RetireType.CROSS_BORDER
+                      ? transfer.creditAmount -
+                        Number(((transfer.omgePercentage * transfer.creditAmount) / 100).toFixed(2))
+                      : transfer.creditAmount
+                    : transfer.creditAmount
+                ),
                 creditUnit,
                 transfer.sender[0]?.name,
                 `${
@@ -494,6 +501,15 @@ const ProgrammeView = () => {
                   : transfer.retirementType === RetireType.LEGAL_ACTION
                   ? 'legal action'
                   : 'other',
+                transfer.retirementType === RetireType.CROSS_BORDER && transfer.omgePercentage
+                  ? formatString('view:t1RetInitOmgeDesc', [
+                      addCommSep(
+                        transfer.creditAmount
+                          ? ((transfer.omgePercentage * transfer.creditAmount) / 100).toFixed(2)
+                          : undefined
+                      ),
+                    ])
+                  : '',
                 transfer.requester[0]?.name,
               ])}
               remark={transfer.comment}
@@ -608,7 +624,6 @@ const ProgrammeView = () => {
       );
 
       const [response, transfers] = await Promise.all([historyPromise, transferPromise]);
-
       const txDetails: any = {};
       const txList = await getTxActivityLog(transfers.data, txDetails);
       let txListKeys = Object.keys(txList).sort();
@@ -695,14 +710,22 @@ const ProgrammeView = () => {
             subTitle: DateTime.fromMillis(activity.data.txTime).toFormat(dateTimeFormat),
             description: (
               <TimelineBody
-                text={formatString('view:tlIssueDesc', [
-                  addNdcDesc({
-                    ndcActions: getTxRefValues(activity.data.txRef, 4),
-                    t: t,
-                    creditUnit: creditUnit,
-                  }),
-                  getTxRefValues(activity.data.txRef, 1),
-                ])}
+                text={formatString(
+                  'view:tlIssueDesc',
+                  getTxRefValues(activity.data.txRef, 4)
+                    ? [
+                        addNdcDesc({
+                          ndcActions: getTxRefValues(activity.data.txRef, 4),
+                          t: t,
+                          creditUnit: creditUnit,
+                        }),
+                        getTxRefValues(activity.data.txRef, 1),
+                      ]
+                    : [
+                        `${addCommSep(activity.data.creditChange)} ${creditUnit} credits`,
+                        getTxRefValues(activity.data.txRef, 1),
+                      ]
+                )}
                 remark={getTxRefValues(activity.data.txRef, 3)}
                 via={activity.data.userName}
                 t={t}
@@ -825,11 +848,38 @@ const ProgrammeView = () => {
             description: (
               <TimelineBody
                 text={formatString('view:tlRetireDesc', [
-                  addCommSep(activity.data.creditChange),
+                  addCommSep(
+                    tx?.retirementType === RetireType.CROSS_BORDER
+                      ? activity.data.creditChange -
+                          Number(
+                            (
+                              (Number(
+                                getTxRefValues(activity.data.txRef, 10)
+                                  ? getTxRefValues(activity.data.txRef, 10)
+                                  : 0
+                              ) *
+                                activity.data.creditChange) /
+                              100
+                            ).toFixed(2)
+                          )
+                      : activity.data.creditChange
+                  ),
                   creditUnit,
                   getTxRefValues(activity.data.txRef, 6),
                   `${crossCountry ? 'to ' + crossCountry : ''} `,
                   getRetirementTypeString(tx?.retirementType)?.toLowerCase(),
+                  tx?.retirementType === RetireType.CROSS_BORDER &&
+                  getTxRefValues(activity.data.txRef, 10)
+                    ? formatString('view:t1RetInitOmgeDesc', [
+                        addCommSep(
+                          (
+                            (Number(getTxRefValues(activity.data.txRef, 10)) *
+                              activity.data.creditChange) /
+                            100
+                          ).toFixed(2)
+                        ),
+                      ])
+                    : '',
                   getTxRefValues(activity.data.txRef, 1),
                 ])}
                 remark={getTxRefValues(activity.data.txRef, 9)}
@@ -1387,6 +1437,7 @@ const ProgrammeView = () => {
   const getNdcActionHistory = async (programmeId: string, ndcActionDocs: any) => {
     setLoadingHistory(true);
     setLoadingNDC(true);
+    setNdcActionHistoryDataGrouped(null);
     try {
       const response: any = await post('national/programme/queryNdcActions', {
         page: 1,
