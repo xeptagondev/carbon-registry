@@ -20,6 +20,7 @@ const InvestmentManagement = () => {
       onNavigateToProgrammeView={onNavigateToProgrammeView}
       useUserContext={useUserContext}
       useSettingsContext={useSettingsContext}
+      enableAddOwnership={true}
     ></InvestmentManagementComponent>
   );
 };

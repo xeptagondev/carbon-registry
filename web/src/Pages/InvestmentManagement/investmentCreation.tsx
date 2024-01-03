@@ -26,7 +26,6 @@ const AddInvestmentComponent = () => {
       useSettingsContext={useSettingsContext}
       onNavigateToProgrammeManagementView={onNavigateToProgrammeManagementView}
       onNavigateToProgrammeView={onNavigateToProgrammeView}
-      enableAddOwnership={true}
     ></InvestmentCreationComponent>
   );
 };
