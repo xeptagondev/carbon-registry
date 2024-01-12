@@ -97,7 +97,10 @@ export const updateUserAbility = (ability: AppAbility, user: User) => {
       can(Action.Read, Company);
     }
 
-    if (user.role === Role.Manager && user.companyRole === CompanyRole.GOVERNMENT) {
+    if (
+      user.role === Role.Manager &&
+      (user.companyRole === CompanyRole.GOVERNMENT || user.companyRole === CompanyRole.MINISTRY)
+    ) {
       can([Action.Delete], Company);
     }
 
