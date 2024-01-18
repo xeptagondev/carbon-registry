@@ -16,7 +16,6 @@ import {
   Form,
   Tooltip,
 } from 'antd';
-import { useConnection } from '../../Context/ConnectionContext/connectionContext';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import './programmeView.scss';
 import Chart from 'react-apexcharts';
@@ -43,7 +42,6 @@ import {
 import { DateTime } from 'luxon';
 import Geocoding from '@mapbox/mapbox-sdk/services/geocoding';
 import TextArea from 'antd/lib/input/TextArea';
-import { useUserContext } from '../../Context/UserInformationContext/userInformationContext';
 import { ShieldCheck } from 'react-bootstrap-icons';
 import {
   ProgrammeIssueForm,
@@ -94,8 +92,10 @@ import {
   getValidNdcActions,
   addNdcDesc,
   mitigationTypeList,
+  useConnection,
+  useSettingsContext,
+  useUserContext,
 } from '@undp/carbon-library';
-import { useSettingsContext } from '../../Context/SettingsContext/settingsContext';
 
 const ProgrammeView = () => {
   const { get, put, post } = useConnection();
@@ -111,6 +111,7 @@ const ProgrammeView = () => {
   const { t: companyProfileTranslations } = useTranslation(['companyProfile']);
   const { i18n: programmeViewTranslator } = useTranslation(['programme', 'common']);
   const [loadingHistory, setLoadingHistory] = useState<boolean>(false);
+  const [programmeHistoryLoaded, setProgrammeHistoryLoaded] = useState<boolean>(false);
   const [loadingAll, setLoadingAll] = useState<boolean>(true);
   const [openModal, setOpenModal] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
@@ -131,16 +132,15 @@ const ProgrammeView = () => {
   const [programmeOwnerId, setProgrammeOwnerId] = useState<any[]>([]);
   const [ministrySectoralScope, setMinistrySectoralScope] = useState<any[]>([]);
   const [curentProgrammeStatus, setCurrentProgrammeStatus] = useState<any>('');
-  const [ndcActionHistoryDataGrouped, setNdcActionHistoryDataGrouped] = useState<any>();
   const [ndcActionHistoryData, setNdcActionHistoryData] = useState<any>([]);
   const [emissionsReductionExpected, setEmissionsReductionExpected] = useState(0);
   const [emissionsReductionAchieved, setEmissionsReductionAchieved] = useState(0);
-  const [programmeHistoryLoaded, setProgrammeHistoryLoaded] = useState(false);
   const { id } = useParams();
   const [ndcActionDocumentDataLoaded, setNdcActionDocumentDataLoaded] = useState(false);
   const [upcomingTimeLineMonitoringVisible, setUpcomingTimeLineMonitoringVisible] = useState(false);
   const [upcomingTimeLineVerificationVisible, setUpcomingTimeLineVerificationVisible] =
     useState(false);
+  const [activityTimelineKey, setActivityTimelineKey] = useState(0);
 
   const accessToken = process.env.REACT_APP_MAPBOXGL_ACCESS_TOKEN
     ? process.env.REACT_APP_MAPBOXGL_ACCESS_TOKEN
@@ -614,8 +614,97 @@ const ProgrammeView = () => {
     return hist;
   };
 
+  function updatePendingTimeLineForNdc(currentHistory: any) {
+    const monitoringElIndex = currentHistory.findIndex(
+      (item: any) => item.title === t('view:monitoringEl')
+    );
+    const verificationElIndex = currentHistory.findIndex(
+      (item: any) => item.title === t('view:verificationEl')
+    );
+
+    if (
+      upcomingTimeLineMonitoringVisible &&
+      data?.currentStage !== ProgrammeStageUnified.Rejected
+    ) {
+      if (monitoringElIndex === -1) {
+        const monitoringEl = {
+          status: 'process',
+          title: t('view:monitoringEl'),
+          subTitle: t('view:tlPending'),
+          icon: (
+            <span className="step-icon upcom-issue-step">
+              <Icon.Binoculars />
+            </span>
+          ),
+        };
+
+        if (
+          currentHistory.length > 0 &&
+          currentHistory[0].title === t('view:tlIssue') &&
+          currentHistory[0].subTitle === t('view:tlPending')
+        ) {
+          currentHistory.splice(1, 0, monitoringEl);
+        } else {
+          currentHistory.unshift(monitoringEl);
+        }
+      }
+    } else {
+      if (monitoringElIndex !== -1) {
+        currentHistory.splice(monitoringElIndex, 1);
+      }
+    }
+
+    if (
+      upcomingTimeLineVerificationVisible &&
+      data?.currentStage !== ProgrammeStageUnified.Rejected
+    ) {
+      if (verificationElIndex === -1) {
+        const verificationEl = {
+          status: 'process',
+          title: t('view:verificationEl'),
+          subTitle: t('view:tlPending'),
+          icon: (
+            <span className="step-icon upcom-issue-step">
+              <Icon.Flag />
+            </span>
+          ),
+        };
+
+        if (
+          currentHistory.length > 0 &&
+          currentHistory[0].title === t('view:tlIssue') &&
+          currentHistory[0].subTitle === t('view:tlPending')
+        ) {
+          currentHistory.splice(1, 0, verificationEl);
+        } else {
+          currentHistory.unshift(verificationEl);
+        }
+      }
+    } else {
+      if (verificationElIndex !== -1) {
+        currentHistory.splice(verificationElIndex, 1);
+      }
+    }
+
+    return currentHistory;
+  }
+
+  useEffect(() => {
+    setActivityTimelineKey((key) => key + 1);
+  }, [historyData.length]);
+
+  useEffect(() => {
+    if (programmeHistoryLoaded) {
+      const updatedHistory = updatePendingTimeLineForNdc(historyData);
+      setHistoryData(updatedHistory);
+    }
+  }, [
+    upcomingTimeLineMonitoringVisible,
+    upcomingTimeLineVerificationVisible,
+    programmeHistoryLoaded,
+  ]);
+
   const getProgrammeHistory = async (programmeId: string) => {
-    setProgrammeHistoryLoaded(false);
     setLoadingHistory(true);
     try {
       const historyPromise = get(`national/programme/getHistory?programmeId=${programmeId}`);
@@ -1011,10 +1100,10 @@ const ProgrammeView = () => {
       }
 
       setHistoryData(activityList);
+      setProgrammeHistoryLoaded(true);
       setLoadingHistory(false);
       setCertTimes(certifiedTime);
       genCerts(state.record, certifiedTime);
-      setProgrammeHistoryLoaded(true);
     } catch (error: any) {
       console.log('Error in getting programme', error);
       message.open({
@@ -1347,83 +1436,6 @@ const ProgrammeView = () => {
     }
   }, [data]);
 
-  useEffect(() => {
-    if (programmeHistoryLoaded && ndcActionHistoryDataGrouped) {
-      const monitoringElIndex = historyData.findIndex(
-        (item: any) => item.title === t('view:monitoringEl')
-      );
-      const verificationElIndex = historyData.findIndex(
-        (item: any) => item.title === t('view:verificationEl')
-      );
-
-      if (
-        upcomingTimeLineMonitoringVisible &&
-        data?.currentStage !== ProgrammeStageUnified.Rejected
-      ) {
-        if (monitoringElIndex === -1) {
-          const monitoringEl = {
-            status: 'process',
-            title: t('view:monitoringEl'),
-            subTitle: t('view:tlPending'),
-            icon: (
-              <span className="step-icon upcom-issue-step">
-                <Icon.Binoculars />
-              </span>
-            ),
-          };
-
-          if (
-            historyData.length > 0 &&
-            historyData[0].title === t('view:tlIssue') &&
-            historyData[0].subTitle === t('view:tlPending')
-          ) {
-            historyData.splice(1, 0, monitoringEl);
-          } else {
-            historyData.unshift(monitoringEl);
-          }
-        }
-      } else {
-        if (monitoringElIndex !== -1) {
-          historyData.splice(monitoringElIndex, 1);
-        }
-      }
-
-      if (
-        upcomingTimeLineVerificationVisible &&
-        data?.currentStage !== ProgrammeStageUnified.Rejected
-      ) {
-        if (verificationElIndex === -1) {
-          const verificationEl = {
-            status: 'process',
-            title: t('view:verificationEl'),
-            subTitle: t('view:tlPending'),
-            icon: (
-              <span className="step-icon upcom-issue-step">
-                <Icon.Flag />
-              </span>
-            ),
-          };
-
-          if (
-            historyData.length > 0 &&
-            historyData[0].title === t('view:tlIssue') &&
-            historyData[0].subTitle === t('view:tlPending')
-          ) {
-            historyData.splice(1, 0, verificationEl);
-          } else {
-            historyData.unshift(verificationEl);
-          }
-        }
-      } else {
-        if (verificationElIndex !== -1) {
-          historyData.splice(verificationElIndex, 1);
-        }
-      }
-
-      setHistoryData(historyData);
-    }
-  }, [ndcActionHistoryDataGrouped, programmeHistoryLoaded]);
-
   const onClickedAddAction = () => {
     navigate('/programmeManagement/addNdcAction', { state: { record: data } });
   };
@@ -1437,7 +1449,6 @@ const ProgrammeView = () => {
   const getNdcActionHistory = async (programmeId: string, ndcActionDocs: any) => {
     setLoadingHistory(true);
     setLoadingNDC(true);
-    setNdcActionHistoryDataGrouped(null);
     try {
       const response: any = await post('national/programme/queryNdcActions', {
         page: 1,
@@ -1469,22 +1480,24 @@ const ProgrammeView = () => {
         }
       });
 
-      setUpcomingTimeLineMonitoringVisible(false);
-      setUpcomingTimeLineVerificationVisible(false);
+      let monitoringVisible = false;
+      let verificationVisible = false;
       if (groupedByActionId && ndcActionDocumentDataLoaded) {
         Object.values(groupedByActionId).forEach((element: any) => {
           element.forEach((item: any) => {
             if (!item.monitoringReport) {
-              setUpcomingTimeLineMonitoringVisible(true);
+              monitoringVisible = true;
             }
             if (!item.verificationReport) {
-              setUpcomingTimeLineVerificationVisible(true);
+              verificationVisible = true;
             }
           });
         });
+
+        setUpcomingTimeLineMonitoringVisible(monitoringVisible);
+        setUpcomingTimeLineVerificationVisible(verificationVisible);
       }
 
-      setNdcActionHistoryDataGrouped(groupedByActionId);
       const mappedElements = Object.keys(groupedByActionId).map((actionId) => ({
         status: 'process',
         title: actionId,
@@ -1497,9 +1510,7 @@ const ProgrammeView = () => {
             canUploadMonitorReport={uploadMonitoringReport}
             getProgrammeDocs={() => getDocuments(String(data?.programmeId))}
             ministryLevelPermission={ministryLevelPermission}
-            useConnection={useConnection}
             translator={programmeViewTranslator}
-            useUserContext={useUserContext}
             onFinish={(d: any) => {
               setData(d);
             }}
@@ -2060,7 +2071,6 @@ const ProgrammeView = () => {
                                                 )
                                               }
                                               translator={i18n}
-                                              useConnection={useConnection}
                                             />
                                           ),
                                         });
@@ -2106,7 +2116,6 @@ const ProgrammeView = () => {
                                                 )
                                               }
                                               translator={i18n}
-                                              useConnection={useConnection}
                                               ministryLevelPermission={ministryLevelPermission}
                                             />
                                           ),
@@ -2162,7 +2171,6 @@ const ProgrammeView = () => {
                                               )
                                             }
                                             translator={i18n}
-                                            useConnection={useConnection}
                                           />
                                         ),
                                       });
@@ -2330,8 +2338,6 @@ const ProgrammeView = () => {
                     getProgrammeById(data?.programmeId);
                   }}
                   ministryLevelPermission={ministryLevelPermission}
-                  useConnection={useConnection}
-                  useUserContext={useUserContext}
                   translator={i18n}
                   methodologyDocumentUpdated={methodologyDocumentApproved}
                   programmeStatus={data?.currentStage}
@@ -2445,7 +2451,12 @@ const ProgrammeView = () => {
                   {loadingHistory ? (
                     <Skeleton />
                   ) : (
-                    <Steps current={0} direction="vertical" items={historyData} />
+                    <Steps
+                      key={activityTimelineKey}
+                      current={0}
+                      direction="vertical"
+                      items={historyData}
+                    />
                   )}
                 </div>
               </div>
