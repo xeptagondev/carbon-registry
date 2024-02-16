@@ -258,6 +258,9 @@ const ProgrammeView = () => {
             value: programmeId,
           },
         ],
+        extendedProperties: {
+          isGetInvestmentHistory: true,
+        },
       });
       const investmentHisData = response?.data?.map((item: any) => {
         const investmentData: any = {
