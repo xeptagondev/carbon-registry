@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Menu, Layout, MenuProps } from 'antd';
-import sliderLogo from '../../Assets/Images/logo-slider.png';
+import sliderLogo from '../../Assets/Images/xeptagon.svg';
 import { Link, useNavigate } from 'react-router-dom';
 import './layout.sider.scss';
 import * as Icon from 'react-bootstrap-icons';
@@ -49,6 +49,10 @@ const LayoutSider = (props: LayoutSiderProps) => {
 
   const items: MenuItem[] = [
     getItem(t('nav:dashboard'), 'dashboard', <DashboardOutlined />),
+    getItem(t('nav:ghgInventory'), 'ghgInventory', <CloudOutlined />, [
+      getItem(t('nav:emissions'), 'emissions/view', <AppstoreOutlined />),
+      getItem(t('nav:projections'), 'projections/view', <FallOutlined />),
+    ]),
     getItem(t('nav:programmes'), 'programmeManagement/viewAll', <AppstoreOutlined />),
     getItem(t('nav:ndcActions'), 'ndcManagement/viewAll', <Icon.Clipboard2Data />),
     getItem(t('nav:investments'), 'investmentManagement/viewAll', <Icon.Cash />),
@@ -104,22 +108,8 @@ const LayoutSider = (props: LayoutSiderProps) => {
             selectedKeys={[selectedKey ? selectedKey : 'dashboard']}
             mode="inline"
             onClick={onClick}
-          >
-            {items.map((item) => (
-              <Menu.Item
-                key={item?.key}
-                icon={item?.icon}
-                className={
-                  item?.key === 'ndcManagement/viewAll' ||
-                  item?.key === 'investmentManagement/viewAll'
-                    ? 'custom-padding-left'
-                    : ''
-                }
-              >
-                <Link to={`/${item?.key}`}>{item?.label}</Link>
-              </Menu.Item>
-            ))}
-          </Menu>
+            items={items}
+          ></Menu>
         </div>
       </div>
       <div
