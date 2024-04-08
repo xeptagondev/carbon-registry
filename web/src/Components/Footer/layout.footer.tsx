@@ -1,6 +1,6 @@
 import { Col, Divider, Row } from 'antd';
 import { useTranslation } from 'react-i18next';
-import sliderLogo from '../../Assets/Images/logo-slider.png';
+import sliderLogo from '../../Assets/Images/xeptagon.svg';
 import './layout.footer.scss';
 import { CcCircle } from 'react-bootstrap-icons';
 
@@ -16,11 +16,11 @@ const LayoutFooter = () => {
               <img src={sliderLogo} alt="slider-logo" />
             </div>
             <div>
-              <div style={{ display: 'flex' }}>
+              <div style={{ display: 'flex', marginLeft: '20px' }}>
                 <div className="title">{'CARBON'}</div>
                 <div className="title-sub">{'REGISTRY'}</div>
               </div>
-              <div className="footer-country-name">
+              <div style={{ marginLeft: '30px' }} className="footer-country-name">
                 {process.env.REACT_APP_COUNTRY_NAME || 'CountryX'}
               </div>
             </div>
