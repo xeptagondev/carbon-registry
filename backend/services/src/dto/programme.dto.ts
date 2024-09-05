@@ -140,11 +140,11 @@ export class ProgrammeDto {
 	@IsString()
 	creditUnit: string;
 
-	@ApiProperty()
-	@IsNotEmptyObject()
-	@ValidateNested()
-	@Type(() => ProgrammeProperties)
-	programmeProperties: ProgrammeProperties;
+  @ApiProperty()
+  @IsNotEmptyObject()
+  @ValidateNested()
+  @Type(() => ProgrammeProperties)
+  programmeProperties: ProgrammeProperties;
 
 	@ApiProperty()
 	@IsArray()
@@ -176,12 +176,15 @@ export class ProgrammeDto {
 	// @Type(() => MitigationProperties)
 	// mitigationActions?: MitigationProperties[]
 
-	@ApiPropertyOptional()
-	@IsNotEmpty()
-	@IsOptional()
-	@IsNumber()
-	@IsNumericLength(8, 2, { message: 'Estimated credits must be a numeric value with up to 8 digits before and 2 digits after the decimal point' })
-	creditEst: number;
+  @ApiPropertyOptional()
+  @IsNotEmpty()
+  @IsOptional()
+  @IsNumber()
+  @IsNumericLength(8, 2, {
+    message:
+      "Estimated credits must be a numeric value with up to 8 digits before and 2 digits after the decimal point",
+  })
+  creditEst: number;
 
 	@ApiPropertyOptional()
 	@ValidateNested()
