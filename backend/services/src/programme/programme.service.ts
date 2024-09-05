@@ -5999,31 +5999,31 @@ export class ProgrammeService {
     queryDto.filterBy = queryData.filterBy;
     queryDto.sort = queryData.sort;
 
-		let queryBuilder = await this.investmentViewRepo
-			.createQueryBuilder("investment")
-			.where(
-				this.helperService.generateWhereSQL(
-					queryDto,
-					this.helperService.parseMongoQueryToSQLWithTable("investment", abilityCondition)
-				)
-			);
+    let queryBuilder = await this.investmentViewRepo
+      .createQueryBuilder("investment")
+      .where(
+        this.helperService.generateWhereSQL(
+          queryDto,
+          this.helperService.parseMongoQueryToSQLWithTable("investment", abilityCondition)
+        )
+      );
 
-		if (
-			queryDto.filterBy !== null &&
-			queryDto.filterBy !== undefined &&
-			queryDto.filterBy.key === "ministryLevel"
-		) {
-			queryBuilder = queryBuilder
-				.leftJoinAndMapOne(
-					"investment.programmeDetails",
-					Programme,
-					"programme",
-					"programme.programmeId = investment.programmeId"
-				)
-				.andWhere("programme.sectoralScope IN (:...allowedScopes)", {
-					allowedScopes: queryDto.filterBy.value,
-				});
-		}
+    if (
+      queryDto.filterBy !== null &&
+      queryDto.filterBy !== undefined &&
+      queryDto.filterBy.key === "ministryLevel"
+    ) {
+      queryBuilder = queryBuilder
+        .leftJoinAndMapOne(
+          "investment.programmeDetails",
+          Programme,
+          "programme",
+          "programme.programmeId = investment.programmeId"
+        )
+        .andWhere("programme.sectoralScope IN (:...allowedScopes)", {
+          allowedScopes: queryDto.filterBy.value,
+        });
+    }
 
     if (user.companyRole === CompanyRole.PROGRAMME_DEVELOPER) {
       queryBuilder = queryBuilder.andWhere(
@@ -6046,28 +6046,28 @@ export class ProgrammeService {
       )
       .getMany();
 
-		if (resp.length > 0) {
-			const prepData = this.prepareInvestmentDataForExport(resp);
+    if (resp.length > 0) {
+      const prepData = this.prepareInvestmentDataForExport(resp);
 
-			let headers: string[] = [];
-			const titleKeys = Object.keys(prepData[0]);
-			for (const key of titleKeys) {
-				headers.push(this.helperService.formatReqMessagesString("investmentExport." + key, []));
-			}
+      let headers: string[] = [];
+      const titleKeys = Object.keys(prepData[0]);
+      for (const key of titleKeys) {
+        headers.push(this.helperService.formatReqMessagesString("investmentExport." + key, []));
+      }
 
-			const path = await this.dataExportService.generateCsv(
-				prepData,
-				headers,
-				this.helperService.formatReqMessagesString("investmentExport.financing", [])
-			);
-			return path;
-		}
+      const path = await this.dataExportService.generateCsv(
+        prepData,
+        headers,
+        this.helperService.formatReqMessagesString("investmentExport.financing", [])
+      );
+      return path;
+    }
 
-		throw new HttpException(
-			this.helperService.formatReqMessagesString("programme.nothingToExport", []),
-			HttpStatus.BAD_REQUEST
-		);
-	}
+    throw new HttpException(
+      this.helperService.formatReqMessagesString("programme.nothingToExport", []),
+      HttpStatus.BAD_REQUEST
+    );
+  }
 
   private prepareInvestmentDataForExport(investments: any) {
     const exportData: DataExportInvestmentDto[] = [];
