@@ -50,7 +50,7 @@ import { CreditAuditLog } from '../entities/credit.audit.log.entity';
       NdcDetailsPeriod,
       NdcDetailsAction,
       EventLog,
-      Region,,
+      Region,
 			CreditAuditLog
     ]),
     UtilModule,
