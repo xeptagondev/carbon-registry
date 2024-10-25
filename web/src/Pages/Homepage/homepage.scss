@@ -332,6 +332,12 @@ $title-color: #3a8ab5;
           }
         }
 
+        &.list{
+          li{
+            margin: 10px 0px;
+          }
+        }
+
         @media (max-width: $lg-size) {
           font-size: 1rem;
           color: $title-text-color;
