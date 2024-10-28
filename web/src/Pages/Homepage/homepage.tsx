@@ -130,7 +130,7 @@ const Homepage = () => {
                 <strong> {t('homepage:ourVisonContentHighlight')} </strong>
                 {t('homepage:ourVisonContentEnd')}
               </div>
-              <div className="homepagebody_subtitle">{t('homepage:OurPlatformEnables')}</div>
+              <div className="homepagebody_text">{t('homepage:OurPlatformEnables')}</div>
 
               <div className="aboutus_cards-container">
                 <Row gutter={[5, 5]} className="aboutus_card-row">
@@ -231,7 +231,7 @@ const Homepage = () => {
                 <Trans
                   i18nKey="homepage:demoSiteBody"
                   components={{
-                    ul: <ul />,
+                    ul: <ul className="homepagebody_text list" />,
                     li: <li />,
                     a: <a href="mailto:digital4planet@undp.org" target="_blank" />,
                   }}
