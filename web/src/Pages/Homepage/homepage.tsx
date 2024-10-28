@@ -94,10 +94,14 @@ const Homepage = () => {
             <Row>
               <div className="text-ctn">
                 <span>
-                  {t('homepage:national')} {t('homepage:carbon')} <br />
-                  {t('homepage:registry')}
+                  <Trans
+                    i18nKey="homepage:heading"
+                    components={{
+                      br: <br />,
+                    }}
+                  />
                 </span>
-                <div className="subhome">{t('homepage:lorem')}</div>
+                <div className="subhome">{t('homepage:subHeading')}</div>
               </div>
             </Row>
             <Row>
@@ -126,7 +130,7 @@ const Homepage = () => {
                 <strong> {t('homepage:ourVisonContentHighlight')} </strong>
                 {t('homepage:ourVisonContentEnd')}
               </div>
-              <div className="homepagebody_subtitle">{t('homepage:OurPlatformEnables')}</div>
+              <div className="homepagebody_text">{t('homepage:OurPlatformEnables')}</div>
 
               <div className="aboutus_cards-container">
                 <Row gutter={[5, 5]} className="aboutus_card-row">
@@ -227,7 +231,7 @@ const Homepage = () => {
                 <Trans
                   i18nKey="homepage:demoSiteBody"
                   components={{
-                    ul: <ul />,
+                    ul: <ul className="homepagebody_text list" />,
                     li: <li />,
                     a: <a href="mailto:digital4planet@undp.org" target="_blank" />,
                   }}
