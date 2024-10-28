@@ -94,10 +94,14 @@ const Homepage = () => {
             <Row>
               <div className="text-ctn">
                 <span>
-                  {t('homepage:national')} {t('homepage:carbon')} <br />
-                  {t('homepage:registry')}
+                  <Trans
+                    i18nKey="homepage:heading"
+                    components={{
+                      br: <br />,
+                    }}
+                  />
                 </span>
-                <div className="subhome">{t('homepage:lorem')}</div>
+                <div className="subhome">{t('homepage:subHeading')}</div>
               </div>
             </Row>
             <Row>
