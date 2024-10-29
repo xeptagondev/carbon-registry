@@ -332,9 +332,13 @@ $title-color: #3a8ab5;
           }
         }
 
-        &.list{
-          li{
+        &.list {
+          li {
             margin: 10px 0px;
+          }
+
+          @media screen and (max-width: 767px) {
+            padding-left: 20px;
           }
         }
 
