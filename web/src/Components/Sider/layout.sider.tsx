@@ -51,17 +51,17 @@ const LayoutSider = (props: LayoutSiderProps) => {
     getItem(t('nav:users'), 'userManagement/viewAll', <UserOutlined />),
   ];
 
-  if (
-    userInfoState?.userRole === Role.Root ||
-    (userInfoState?.companyRole === CompanyRole.GOVERNMENT &&
-      userInfoState?.userRole === Role.Admin)
-  ) {
-    items.splice(
-      1,
-      0,
-      getItem(t('nav:nationalAccounting'), 'nationalAccounting', <Icon.GraphUpArrow />)
-    );
-  }
+  // if (
+  //   userInfoState?.userRole === Role.Root ||
+  //   (userInfoState?.companyRole === CompanyRole.GOVERNMENT &&
+  //     userInfoState?.userRole === Role.Admin)
+  // ) {
+  //   items.splice(
+  //     1,
+  //     0,
+  //     getItem(t('nav:nationalAccounting'), 'nationalAccounting', <Icon.GraphUpArrow />)
+  //   );
+  // }
 
   const onClick: MenuProps['onClick'] = (e) => {
     navigate('/' + e.key);
