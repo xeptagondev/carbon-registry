@@ -231,6 +231,7 @@ const Homepage = () => {
                 <Trans
                   i18nKey="homepage:demoSiteBody"
                   components={{
+                    b: <strong />,
                     ul: <ul className="homepagebody_text list" />,
                     li: <li />,
                     a: <a href="mailto:digital4planet@undp.org" target="_blank" />,
