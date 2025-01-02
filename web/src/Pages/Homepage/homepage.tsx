@@ -19,7 +19,6 @@ import forestfall from '../../Assets/Images/forestnew.png';
 import resources from '../../Assets/Images/resources.webp';
 import resourcesfall from '../../Assets/Images/resources.png';
 import LayoutFooter from '../../Components/Footer/layout.footer';
-// import { ImgWithFallback } from '@undp/carbon-library';
 import './homepage.scss';
 import { GlobeAmericas, ShieldCheck, CartCheck, Briefcase } from 'react-bootstrap-icons';
 import { ImgWithFallback } from '../../Components/ImgwithFallback/imgWithFallback';
