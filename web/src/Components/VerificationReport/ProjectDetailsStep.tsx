@@ -7,9 +7,9 @@ import PhoneInput, {
 } from 'react-phone-number-input';
 
 import moment from 'moment';
-import { useConnection } from '../../../Context/ConnectionContext/connectionContext';
+import { useConnection } from '../../Context/ConnectionContext/connectionContext';
 import TextArea from 'antd/lib/input/TextArea';
-import { FormMode } from '../../../Definitions/Enums/formMode.enum';
+import { FormMode } from '../../Definitions/Enums/formMode.enum';
 
 export const ProjectDetailsStep = (props: any) => {
   const {
@@ -30,7 +30,7 @@ export const ProjectDetailsStep = (props: any) => {
   const [countryList, setCountryList] = useState<[]>([]);
   const accessToken = process.env.REACT_APP_MAPBOXGL_ACCESS_TOKEN
     ? process.env.REACT_APP_MAPBOXGL_ACCESS_TOKEN
-    : 'pk.eyJ1IjoicGFsaW5kYSIsImEiOiJjbGMyNTdqcWEwZHBoM3FxdHhlYTN4ZmF6In0.KBvFaMTjzzvoRCr1Z1dN_g';
+    : 'MAPBOX_TOKEN_PLACEHOLDER';
 
   const getCountryList = async () => {
     const response = await get('national/organisation/countries');
