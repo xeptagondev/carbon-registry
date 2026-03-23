@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useTranslation } from "react-i18next";
 import ReportingComponent from "../../Components/Reporting/ReportingComponent";
 import { useConnection } from "../../Context/ConnectionContext/connectionContext";
@@ -11,3 +12,15 @@ const Reports = () => {
 };
 
 export default Reports;
+=======
+import { useTranslation } from 'react-i18next';
+import ReportingComponent from '../../Components/Reporting/ReportingComponent';
+
+const Reports = () => {
+  const { i18n } = useTranslation(['common', 'reporting']);
+
+  return <ReportingComponent translator={i18n} />;
+};
+
+export default Reports;
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f

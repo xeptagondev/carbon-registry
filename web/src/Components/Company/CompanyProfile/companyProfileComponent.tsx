@@ -81,9 +81,9 @@ export const CompanyProfileComponent = (props: any) => {
             value: companyId,
           },
           {
-            key: 'isPending',
+            key: 'user"."isActive',
             operation: '=',
-            value: true,
+            value: false,
           },
         ],
       });
@@ -118,9 +118,15 @@ export const CompanyProfileComponent = (props: any) => {
       // const response: any = await put(`organisation/suspend?id=${companyDetails.companyId}`, {
       //   remarks: remarks,
       // });
+<<<<<<< HEAD
       console.log('Deauthorisation company id', companyDetails.companyId);
       const response: any = await put(API_PATHS.ORG_SUSPEND(companyDetails.companyId), {
         remarks: remarks,
+=======
+      const response: any = await post(API_PATHS.ORG_CHANGE_STATUS, {
+        id: companyDetails.companyId,
+        state: '0',
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       });
       setOpenDeauthorisationModal(false);
       message.open({
@@ -143,8 +149,14 @@ export const CompanyProfileComponent = (props: any) => {
       // const response: any = await put(`organisation/activate?id=${companyDetails.companyId}`, {
       //   remarks: remarks,
       // });
+<<<<<<< HEAD
       const response: any = await put(API_PATHS.ORG_REACTIVATE(companyDetails.companyId), {
         remarks: remarks,
+=======
+      const response: any = await post(API_PATHS.ORG_CHANGE_STATUS, {
+        id: companyDetails.companyId,
+        state: '1',
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       });
       setOpenReactivateModal(false);
       message.open({
@@ -389,7 +401,6 @@ export const CompanyProfileComponent = (props: any) => {
       setIsLoading(false);
     }
   };
-
   return (
     <div className="content-container company-profile">
       <div className="title-bar">
@@ -435,15 +446,18 @@ export const CompanyProfileComponent = (props: any) => {
           {parseInt(companyDetails?.state) === 2 &&
             ability.can(Action.Reject, plainToClass(Company, companyDetails)) &&
             !isLoading &&
-            companyDetails && (
+            companyDetails &&
+            companyDetails.createdBy !== Role.Root && (
               <Button className="btn-danger" onClick={onRejectOrganisation}>
                 {t('common:reject')}
               </Button>
             )}
+
           {(parseInt(companyDetails?.state) === 2 || parseInt(companyDetails?.state) === 3) &&
             ability.can(Action.Approve, plainToClass(Company, companyDetails)) &&
             !isLoading &&
-            companyDetails && (
+            companyDetails &&
+            companyDetails.createdBy !== Role.Root && (
               <Button className="mg-left-1" type="primary" onClick={onApproveOrganisation}>
                 {t('common:approve')}
               </Button>

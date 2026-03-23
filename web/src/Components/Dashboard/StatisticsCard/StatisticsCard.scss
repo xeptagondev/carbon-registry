@@ -1,4 +1,9 @@
+<<<<<<< HEAD:web/src/Components/Dashboard/StatisticsCard/StatisticsCard.scss
 @use '../../../Styles/colors.dashboard.scss';
+=======
+@use '../../../Styles/colors.dashboard.scss' as colors2;
+@use '../../../Styles/variables.scss';
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f:web/src/Components/SLCFDashboard/SlStatisticsCard/slStatisticsCard.scss
 
 .background-purple {
   background: rgba(136, 124, 253, 0.3) !important;
@@ -32,7 +37,10 @@
   }
 }
 
+<<<<<<< HEAD:web/src/Components/Dashboard/StatisticsCard/StatisticsCard.scss
 
+=======
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f:web/src/Components/SLCFDashboard/SlStatisticsCard/slStatisticsCard.scss
 .statistic-card-main-container {
   display: flex;
   flex-direction: column;
@@ -70,8 +78,11 @@
       margin-left: 10px;
     }
 
+<<<<<<< HEAD:web/src/Components/Dashboard/StatisticsCard/StatisticsCard.scss
 
 
+=======
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f:web/src/Components/SLCFDashboard/SlStatisticsCard/slStatisticsCard.scss
     .icon-section {
       display: flex;
       flex-direction: column;
@@ -141,7 +152,11 @@
   .updated-on-container {
     display: flex;
     justify-content: flex-end;
+<<<<<<< HEAD:web/src/Components/Dashboard/StatisticsCard/StatisticsCard.scss
     
+=======
+
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f:web/src/Components/SLCFDashboard/SlStatisticsCard/slStatisticsCard.scss
     .updated-on {
       display: flex;
       flex-direction: row;
@@ -149,14 +164,21 @@
       border-radius: 3.125rem;
       padding: 0.05rem 0.8rem 0.05rem 0.8rem;
       width: max-content;
+<<<<<<< HEAD:web/src/Components/Dashboard/StatisticsCard/StatisticsCard.scss
       color: colors.$primary-blue;
+=======
+      color: variables.$primary-color;
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f:web/src/Components/SLCFDashboard/SlStatisticsCard/slStatisticsCard.scss
       background-color: #ffffff;
       line-height: 2.1;
       margin-bottom: 15px;
     }
   }
+<<<<<<< HEAD:web/src/Components/Dashboard/StatisticsCard/StatisticsCard.scss
 
   
+=======
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f:web/src/Components/SLCFDashboard/SlStatisticsCard/slStatisticsCard.scss
 }
 
 .statistics-card-main-container:hover {

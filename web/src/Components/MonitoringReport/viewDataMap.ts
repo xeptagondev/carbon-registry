@@ -1,13 +1,23 @@
+<<<<<<< HEAD
 import moment from "moment";
 import { mapBase64ToFields } from "../../Utils/mapBase64ToFields";
 import { toMoment } from "../../Utils/convertTime";
 
 export const basicInformationMapDataToFields = (vals: any) => {
   console.log("--------bi------------", vals);
+=======
+import moment from 'moment';
+import { mapBase64ToFields } from '../../Utils/mapBase64ToFields';
+import { toMoment } from '../../Utils/convertTime';
+
+export const basicInformationMapDataToFields = (vals: any) => {
+  console.log('--------bi------------', vals);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   if (vals === undefined) return;
 
   const tempVals = {
     ...vals,
+<<<<<<< HEAD
     bi_completionDate: vals?.bi_completionDate
       ? moment.unix(vals?.bi_completionDate)
       : undefined,
@@ -15,6 +25,13 @@ export const basicInformationMapDataToFields = (vals: any) => {
   };
 
   console.log("-----------ret bi----------", tempVals);
+=======
+    bi_completionDate: vals?.bi_completionDate ? moment.unix(vals?.bi_completionDate) : undefined,
+    b_signature: mapBase64ToFields(vals.b_signature),
+  };
+
+  console.log('-----------ret bi----------', tempVals);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   return tempVals;
 };
 
@@ -23,8 +40,12 @@ export const projectActivityMapDataToFields = (vals: any) => {
   if (vals === undefined) return;
 
   const firstLocation =
+<<<<<<< HEAD
     vals?.locationDetailsOfProjectActivity &&
     vals?.locationDetailsOfProjectActivity?.length > 0
+=======
+    vals?.locationDetailsOfProjectActivity && vals?.locationDetailsOfProjectActivity?.length > 0
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       ? vals?.locationDetailsOfProjectActivity.shift()
       : undefined;
   //console.log('------first location-----------', firstLocation);
@@ -97,7 +118,11 @@ export const dataAndParametersMapDataToFields = (vals: any) => {
 };
 
 export const calcEmissionReductionMapDataToFields = (vals: any) => {
+<<<<<<< HEAD
   console.log("--------cal---------", vals);
+=======
+  console.log('--------cal---------', vals);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   if (vals === undefined) return;
 
   const ghgEmissionReductions = vals?.netGHGEmissionReductions;
@@ -110,6 +135,7 @@ export const calcEmissionReductionMapDataToFields = (vals: any) => {
   const tempVals = {
     ...vals,
     ce_documentUpload: mapBase64ToFields(vals?.ce_documentUpload),
+<<<<<<< HEAD
     vintage: firstYearlyReductions?.vintage
       ? toMoment(firstYearlyReductions?.vintage)
       : undefined,
@@ -122,6 +148,12 @@ export const calcEmissionReductionMapDataToFields = (vals: any) => {
     leakageEmissionReductions: String(
       firstYearlyReductions?.leakageEmissionReductions
     ),
+=======
+    vintage: firstYearlyReductions?.vintage ? toMoment(firstYearlyReductions?.vintage) : undefined,
+    baselineEmissionReductions: String(firstYearlyReductions?.baselineEmissionReductions),
+    projectEmissionReductions: String(firstYearlyReductions?.projectEmissionReductions),
+    leakageEmissionReductions: String(firstYearlyReductions?.leakageEmissionReductions),
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     netEmissionReductions: String(firstYearlyReductions?.netEmissionReductions),
     extraEmissionReductions: (function () {
       let tempExtraReductions: any = [];
@@ -129,6 +161,7 @@ export const calcEmissionReductionMapDataToFields = (vals: any) => {
       if (yearlyReductions !== undefined && yearlyReductions?.length > 0) {
         tempExtraReductions = yearlyReductions.map((reductions: any) => {
           return {
+<<<<<<< HEAD
             vintage: reductions?.vintage
               ? toMoment(reductions?.vintage)
               : undefined,
@@ -141,12 +174,19 @@ export const calcEmissionReductionMapDataToFields = (vals: any) => {
             leakageEmissionReductions: String(
               reductions?.leakageEmissionReductions
             ),
+=======
+            vintage: reductions?.vintage ? toMoment(reductions?.vintage) : undefined,
+            baselineEmissionReductions: String(reductions?.baselineEmissionReductions),
+            projectEmissionReductions: String(reductions?.projectEmissionReductions),
+            leakageEmissionReductions: String(reductions?.leakageEmissionReductions),
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
             netEmissionReductions: String(reductions?.netEmissionReductions),
           };
         });
       }
       return tempExtraReductions;
     })(),
+<<<<<<< HEAD
     totalBaselineEmissionReductions: String(
       ghgEmissionReductions?.totalBaselineEmissionReductions
     ),
@@ -174,6 +214,17 @@ export const calcEmissionReductionMapDataToFields = (vals: any) => {
     avgNetEmissionReductions: String(
       ghgEmissionReductions?.avgNetEmissionReductions
     ),
+=======
+    totalBaselineEmissionReductions: String(ghgEmissionReductions?.totalBaselineEmissionReductions),
+    totalProjectEmissionReductions: String(ghgEmissionReductions?.totalProjectEmissionReductions),
+    totalLeakageEmissionReductions: String(ghgEmissionReductions?.totalLeakageEmissionReductions),
+    totalNetEmissionReductions: String(ghgEmissionReductions?.totalNetEmissionReductions),
+    totalCreditingYears: String(ghgEmissionReductions?.totalNumberOfCreditingYears),
+    avgBaselineEmissionReductions: String(ghgEmissionReductions?.avgBaselineEmissionReductions),
+    avgProjectEmissionReductions: String(ghgEmissionReductions?.avgProjectEmissionReductions),
+    avgLeakageEmissionReductions: String(ghgEmissionReductions?.avgLeakageEmissionReductions),
+    avgNetEmissionReductions: String(ghgEmissionReductions?.avgNetEmissionReductions),
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   };
 
   return tempVals;

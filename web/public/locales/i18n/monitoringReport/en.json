@@ -46,7 +46,11 @@
   "dp_descriptionPlaceholder": "Provide a brief description of the data/parameter",
   "dp_sourceOfData": "Source of Data",
   "dp_sourceOfDataPlaceholder": "Indicate the source(s) of data",
+<<<<<<< HEAD:web/public/locales/i18n/monitoringReport/en.json
   "dp_valueApplied": "Value(s) Applied",
+=======
+  "dp_valueApplied": "Value(S) Applied",
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f:web/src/locales/i18n/monitoringReport/en.json
   "dp_valueAppliedPlaceholder": "Provide an estimated value for the data/parameter",
   "dp_choiceOfDataOrMeasurement": "Choice  of Data or measurement methods and procedures",
   "dp_choiceOfDataOrMeasurementPlaceholder": "Specify the measurement methods and procedures, any  standards or protocols to be followed, and the person/entity  responsible for the measurement. Include any relevant  information regarding the accuracy of the measurements  (e.g., accuracy associated with meter equipment or  laboratory tests)",
@@ -119,7 +123,11 @@
   "q_leakagePlaceholder": "Quantify project emissions and/or removals providing sufficient information to allow the  reader to reproduce the calculation. This section shall include all formulae used and  description to calculate the project emissions applying actual values. Attach electronic  spreadsheets as an appendix or separate file to facilitate the verification of the results.",
   "q_projectEmissionsPlaceholder": "Quantify project emissions and/or removals providing sufficient information to allow the  reader to reproduce the calculation. This section shall include all formulae used and  description to calculate the project emissions applying actual values. Attach electronic  spreadsheets as an appendix or separate file to facilitate the verification of the results.",
   "a_appendix": "Appendix",
+<<<<<<< HEAD:web/public/locales/i18n/monitoringReport/en.json
   "a_uploadDoc": "Upload your additional documents",
+=======
+  "a_uploadDoc": "Upload your images here(Optional)",
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f:web/src/locales/i18n/monitoringReport/en.json
   "contactPerson": "Contact Person",
   "telephone": "Telephone",
   "fax": "Fax",

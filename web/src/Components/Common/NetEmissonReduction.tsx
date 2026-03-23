@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Col, DatePicker, Form, Input, InputNumber, Row } from "antd";
 import moment from "moment";
@@ -7,6 +8,17 @@ import { ProjectCategory } from "../../Definitions/Enums/slRegistryEnum";
 import { toMoment } from "../../Utils/convertTime";
 import "./NetEmissonReduction.scss";
 import { disableYears } from "../../Utils/disableYears";
+=======
+import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
+import { Button, Col, DatePicker, Form, Input, InputNumber, Row } from 'antd';
+import moment from 'moment';
+import { formatNumberWithDecimalPlaces } from '../../Utils/utilityHelper';
+import { useState } from 'react';
+import { ProjectCategory } from '../../Definitions/Enums/slRegistryEnum';
+import { toMoment } from '../../Utils/convertTime';
+import './NetEmissonReduction.scss';
+import { disableYears } from '../../Utils/disableYears';
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
 const EMISSION_CATEGORY_AVG_MAP: { [key: string]: string } = {
   baselineEmissionReductions: "avgBaselineEmissionReductions",
@@ -27,7 +39,11 @@ const NetEmissionReduction = (props: any) => {
     disableFutureYears,
   } = props;
 
+<<<<<<< HEAD
   console.log("--------disabled-----------", disabled);
+=======
+  console.log('--------disabled-----------', disabled);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
   const calculateNetGHGEmissions = (value: any, index?: number) => {
     let baselineEmissionReductionsVal = 0;
@@ -132,6 +148,7 @@ const NetEmissionReduction = (props: any) => {
       });
     }
 
+<<<<<<< HEAD
     console.log("----------netGHG reduction", maxNetGHGReduction);
     if (maxNetGHGReduction !== undefined && tempTotal > maxNetGHGReduction) {
       form.setFields([
@@ -140,20 +157,36 @@ const NetEmissionReduction = (props: any) => {
           errors: [
             `Total Net Emission Reduction cannot exceed ${maxNetGHGReduction}`,
           ],
+=======
+    console.log('----------netGHG reduction', maxNetGHGReduction);
+    if (maxNetGHGReduction !== undefined && tempTotal > maxNetGHGReduction) {
+      form.setFields([
+        {
+          name: 'totalNetEmissionReductions',
+          errors: [`Total Net Emission Reduction cannot exceed ${maxNetGHGReduction}`],
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         },
       ]);
     } else {
       form.setFields([
         {
+<<<<<<< HEAD
           name: "totalNetEmissionReductions",
+=======
+          name: 'totalNetEmissionReductions',
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
           errors: [``],
         },
       ]);
     }
 
+<<<<<<< HEAD
     const creditingYears = Number(
       form.getFieldValue("totalNumberOfCreditingYears") || 0
     );
+=======
+    const creditingYears = Number(form.getFieldValue('totalNumberOfCreditingYears') || 0);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     if (creditingYears > 0) {
       form.setFieldValue(categoryToAdd, String(tempTotal));
       form.setFieldValue(
@@ -182,9 +215,13 @@ const NetEmissionReduction = (props: any) => {
       return total + (Number(currentVal[category]) || 0);
     }, 0);
 
+<<<<<<< HEAD
     const creditingYears = Number(
       form.getFieldValue("totalNumberOfCreditingYears") || 0
     );
+=======
+    const creditingYears = Number(form.getFieldValue('totalNumberOfCreditingYears') || 0);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     if (creditingYears > 0) {
       form.setFieldValue(categoryToAdd, String(tempTotal));
       form.setFieldValue(
@@ -209,9 +246,13 @@ const NetEmissionReduction = (props: any) => {
     }, 0);
 
     const tempTotal = bufferPool;
+<<<<<<< HEAD
     const creditingYears = Number(
       form.getFieldValue("totalNumberOfCreditingYears") || 0
     );
+=======
+    const creditingYears = Number(form.getFieldValue('totalNumberOfCreditingYears') || 0);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     form.setFieldValue(categoryToAdd, bufferPool);
     if (creditingYears > 0) {
       form.setFieldValue(
@@ -224,8 +265,15 @@ const NetEmissionReduction = (props: any) => {
   };
 
   const onPeriodChange = (value: any, fieldCounts: number) => {
+<<<<<<< HEAD
     let totalNumberOfCreditingYears =
       form.getFieldValue("totalNumberOfCreditingYears") || 0;
+=======
+    let totalNumberOfCreditingYears = form.getFieldValue('totalNumberOfCreditingYears') || 0;
+
+    console.log('-------onPeriodChange--------', fieldCounts, totalNumberOfCreditingYears);
+
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     if (value && totalNumberOfCreditingYears < fieldCounts) {
       totalNumberOfCreditingYears += 1;
     } else if (
@@ -235,10 +283,14 @@ const NetEmissionReduction = (props: any) => {
     ) {
       totalNumberOfCreditingYears -= 1;
     }
+<<<<<<< HEAD
     form.setFieldValue(
       "totalNumberOfCreditingYears",
       totalNumberOfCreditingYears
     );
+=======
+    form.setFieldValue('totalNumberOfCreditingYears', totalNumberOfCreditingYears);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   };
 
   return (
@@ -275,6 +327,7 @@ const NetEmissionReduction = (props: any) => {
             <>
               {fields.map(({ key, name, ...restField }, index: number) => (
                 <>
+<<<<<<< HEAD
                   <Row
                     justify={"space-between"}
                     align={"middle"}
@@ -285,12 +338,24 @@ const NetEmissionReduction = (props: any) => {
                         style={{
                           display: "flex",
                           alignItems: "center",
+=======
+                  <Row justify={'space-between'} align={'middle'} className="mg-top-1">
+                    <Col md={6} xl={6} className="col1">
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           gap: 5,
                         }}
                       >
                         <Form.Item
                           label={``}
+<<<<<<< HEAD
                           name={[name, "vintage"]}
+=======
+                          name={[name, 'vintage']}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           className="datepicker"
                           rules={[
                             {
@@ -321,6 +386,7 @@ const NetEmissionReduction = (props: any) => {
                               return disableYears(
                                 currentDate,
                                 form,
+<<<<<<< HEAD
                                 "estimatedNetEmissionReductions",
                                 disableFutureYears
                               );
@@ -328,6 +394,13 @@ const NetEmissionReduction = (props: any) => {
                             onChange={(value) =>
                               onPeriodChange(value, fields?.length + 1)
                             }
+=======
+                                'estimatedNetEmissionReductions',
+                                disableFutureYears
+                              );
+                            }}
+                            onChange={(value) => onPeriodChange(value, fields.length)}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           />
                         </Form.Item>
                       </div>
@@ -351,6 +424,7 @@ const NetEmissionReduction = (props: any) => {
 
                               // Check if it's a non-negative integer (includes 0)
                               if (numValue < 0 || !Number.isInteger(numValue)) {
+<<<<<<< HEAD
                                 return Promise.reject(
                                   new Error("Should be a positive integer")
                                 );
@@ -398,6 +472,9 @@ const NetEmissionReduction = (props: any) => {
                                 return Promise.reject(
                                   new Error("Should be a positive integer")
                                 );
+=======
+                                return Promise.reject(new Error('Should be a positive integer'));
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                               }
 
                               return Promise.resolve();
@@ -405,9 +482,14 @@ const NetEmissionReduction = (props: any) => {
                           },
                         ]}
                       >
+<<<<<<< HEAD
                         <InputNumber
                           type="number"
                           precision={0}
+=======
+                        <Input
+                          type="number"
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           size="large"
                           className="full-width-form-item"
                           onChange={(value) => {
@@ -440,9 +522,13 @@ const NetEmissionReduction = (props: any) => {
 
                               // Check if it's a non-negative integer (includes 0)
                               if (numValue < 0 || !Number.isInteger(numValue)) {
+<<<<<<< HEAD
                                 return Promise.reject(
                                   new Error("Should be a positive integer")
                                 );
+=======
+                                return Promise.reject(new Error('Should be a positive integer'));
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                               }
 
                               return Promise.resolve();
@@ -473,16 +559,67 @@ const NetEmissionReduction = (props: any) => {
                         rules={[
                           {
                             required: true,
+<<<<<<< HEAD
                             message: `${t("common:required")}`,
+=======
+                            message: `${t('common:required')}`,
+                          },
+                          {
+                            validator(rule, value) {
+                              if (!value) {
+                                return Promise.resolve();
+                              }
+
+                              const numValue = Number(value);
+
+                              // Check if it's a non-negative integer (includes 0)
+                              if (numValue < 0 || !Number.isInteger(numValue)) {
+                                return Promise.reject(new Error('Should be a positive integer'));
+                              }
+
+                              return Promise.resolve();
+                            },
+                          },
+                        ]}
+                      >
+                        <InputNumber
+                          type="number"
+                          precision={0}
+                          size="large"
+                          className="full-width-form-item"
+                          onChange={(value) => {
+                            calculateNetGHGEmissions(value, name);
+                            calculateTotalEmissions(
+                              value,
+                              'leakageEmissionReductions',
+                              'totalLeakageEmissionReductions'
+                            );
+                          }}
+                          disabled={disabled}
+                        />
+                      </Form.Item>
+                    </Col>
+                    <Col md={3} xl={3}>
+                      <Form.Item
+                        name={[name, 'netEmissionReductions']}
+                        rules={[
+                          {
+                            required: true,
+                            message: `${t('common:required')}`,
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                           {
                             validator(rule, value) {
                               if (!value) {
                                 return Promise.resolve();
                               } else if (isNaN(value)) {
+<<<<<<< HEAD
                                 return Promise.reject(
                                   new Error("Should be an integer")
                                 );
+=======
+                                return Promise.reject(new Error('Should be an integer'));
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                               } else if (Number(value) < 0) {
                                 return Promise.reject(
                                   new Error(
@@ -524,9 +661,13 @@ const NetEmissionReduction = (props: any) => {
 
                                 // eslint-disable-next-line no-restricted-globals
                                 if (isNaN(value)) {
+<<<<<<< HEAD
                                   return Promise.reject(
                                     new Error("Should be an integer")
                                   );
+=======
+                                  return Promise.reject(new Error('Should be an integer'));
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                 }
 
                                 return Promise.resolve();
@@ -642,7 +783,11 @@ const NetEmissionReduction = (props: any) => {
 
                     // eslint-disable-next-line no-restricted-globals
                     if (isNaN(value)) {
+<<<<<<< HEAD
                       return Promise.reject(new Error("Should be an integer"));
+=======
+                      return Promise.reject(new Error('Should be an integer'));
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     }
 
                     return Promise.resolve();
@@ -671,9 +816,12 @@ const NetEmissionReduction = (props: any) => {
                       return Promise.resolve();
                     }
 
-                    // eslint-disable-next-line no-restricted-globals
                     if (isNaN(value)) {
+<<<<<<< HEAD
                       return Promise.reject(new Error("Should be an integer"));
+=======
+                      return Promise.reject(new Error('Should be an integer'));
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     }
 
                     return Promise.resolve();
@@ -704,7 +852,11 @@ const NetEmissionReduction = (props: any) => {
 
                     // eslint-disable-next-line no-restricted-globals
                     if (isNaN(value)) {
+<<<<<<< HEAD
                       return Promise.reject(new Error("Should be an integer"));
+=======
+                      return Promise.reject(new Error('Should be an integer'));
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     }
 
                     return Promise.resolve();
@@ -735,7 +887,11 @@ const NetEmissionReduction = (props: any) => {
 
                     // eslint-disable-next-line no-restricted-globals
                     if (isNaN(value)) {
+<<<<<<< HEAD
                       return Promise.reject(new Error("Should be an integer"));
+=======
+                      return Promise.reject(new Error('Should be an integer'));
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     }
 
                     return Promise.resolve();
@@ -768,9 +924,13 @@ const NetEmissionReduction = (props: any) => {
 
                       // eslint-disable-next-line no-restricted-globals
                       if (isNaN(value)) {
+<<<<<<< HEAD
                         return Promise.reject(
                           new Error("Should be an integer")
                         );
+=======
+                        return Promise.reject(new Error('Should be an integer'));
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                       }
 
                       return Promise.resolve();
@@ -812,7 +972,11 @@ const NetEmissionReduction = (props: any) => {
 
                     // eslint-disable-next-line no-restricted-globals
                     if (isNaN(value)) {
+<<<<<<< HEAD
                       return Promise.reject(new Error("Should be an integer"));
+=======
+                      return Promise.reject(new Error('Should be an integer'));
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     }
 
                     return Promise.resolve();
@@ -867,7 +1031,11 @@ const NetEmissionReduction = (props: any) => {
 
                     // eslint-disable-next-line no-restricted-globals
                     if (isNaN(value)) {
+<<<<<<< HEAD
                       return Promise.reject(new Error("Should be an integer"));
+=======
+                      return Promise.reject(new Error('Should be an integer'));
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     }
 
                     return Promise.resolve();
@@ -898,7 +1066,11 @@ const NetEmissionReduction = (props: any) => {
 
                     // eslint-disable-next-line no-restricted-globals
                     if (isNaN(value)) {
+<<<<<<< HEAD
                       return Promise.reject(new Error("Should be an integer"));
+=======
+                      return Promise.reject(new Error('Should be an integer'));
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     }
 
                     return Promise.resolve();
@@ -929,7 +1101,11 @@ const NetEmissionReduction = (props: any) => {
 
                     // eslint-disable-next-line no-restricted-globals
                     if (isNaN(value)) {
+<<<<<<< HEAD
                       return Promise.reject(new Error("Should be an integer"));
+=======
+                      return Promise.reject(new Error('Should be an integer'));
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     }
 
                     return Promise.resolve();
@@ -956,7 +1132,11 @@ const NetEmissionReduction = (props: any) => {
 
                     // eslint-disable-next-line no-restricted-globals
                     if (isNaN(value)) {
+<<<<<<< HEAD
                       return Promise.reject(new Error("Should be an integer"));
+=======
+                      return Promise.reject(new Error('Should be an integer'));
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     }
 
                     return Promise.resolve();
@@ -984,9 +1164,13 @@ const NetEmissionReduction = (props: any) => {
 
                       // eslint-disable-next-line no-restricted-globals
                       if (isNaN(value)) {
+<<<<<<< HEAD
                         return Promise.reject(
                           new Error("Should be an integer")
                         );
+=======
+                        return Promise.reject(new Error('Should be an integer'));
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                       }
 
                       return Promise.resolve();

@@ -11,6 +11,7 @@ on:
 jobs:
   changes:
     name: Deploy Pre Check
+    environment: guardian
     runs-on: ubuntu-latest
     outputs:
       backend-changes: ${{ steps.changes.outputs.backend-changes }}
@@ -128,6 +129,7 @@ jobs:
   deploy_backend:
     name: Carbon Registry Backend Deploy
     needs: changes
+    environment: guardian
     if: needs.changes.outputs.backend-changes == 'true' || needs.changes.outputs.workflows-changes == 'true' || needs.changes.outputs.all-changes == 'true'
     runs-on: ubuntu-latest
     concurrency:

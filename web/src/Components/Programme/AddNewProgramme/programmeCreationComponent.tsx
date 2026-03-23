@@ -37,8 +37,13 @@
 
 // type SizeType = Parameters<typeof Form>[0]['size'];
 
+<<<<<<< HEAD
 // const maximumImageSize = import.meta.env.VITE_APP_MAXIMUM_FILE_SIZE
 //   ? parseInt(import.meta.env.VITE_APP_MAXIMUM_FILE_SIZE)
+=======
+// const maximumImageSize = process.env.REACT_APP_MAXIMUM_FILE_SIZE
+//   ? parseInt(process.env.REACT_APP_MAXIMUM_FILE_SIZE)
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 //   : 5000000;
 
 // const sectoralScopes: any = {
@@ -108,9 +113,15 @@
 //   const [projectLocationMapOutlineLayer, setProjectLocationMapOutlineLayer] = useState<any>();
 //   const [projectLocationMapCenter, setProjectLocationMapCenter] = useState<number[]>([]);
 
+<<<<<<< HEAD
 //   const mapType = import.meta.env.VITE_APP_MAP_TYPE ? import.meta.env.VITE_APP_MAP_TYPE : 'None';
 //   const accessToken = import.meta.env.VITE_APP_MAPBOXGL_ACCESS_TOKEN
 //     ? import.meta.env.VITE_APP_MAPBOXGL_ACCESS_TOKEN
+=======
+//   const mapType = process.env.REACT_APP_MAP_TYPE ? process.env.REACT_APP_MAP_TYPE : 'None';
+//   const accessToken = process.env.REACT_APP_MAPBOXGL_ACCESS_TOKEN
+//     ? process.env.REACT_APP_MAPBOXGL_ACCESS_TOKEN
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 //     : '';
 //   // const initialOrganisationOwnershipValues: any[] = [
 //   //   {
@@ -2148,4 +2159,8 @@
 //   );
 // };
 
+<<<<<<< HEAD
 export {};
+=======
+export {}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f

@@ -12,7 +12,7 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_PASSWORD: "<ANY PASSOWORD>"
+      POSTGRES_PASSWORD: root
       POSTGRES_USER: root
       PSQL_USERNAME: root
       # POSTGRES_HOST_AUTH_METHOD: trust
@@ -31,7 +31,7 @@ services:
     environment:
       DB_HOST: db
       DB_USER: root
-      DB_PASSWORD: "<ANY PASSOWORD>"
+      DB_PASSWORD: root
       RUN_MODULE: national-api
       rootEmail: <ROOT EMAIL>
       cfAdminEmail: <CLIMATE FUND ADMIN EMAIL>
@@ -148,7 +148,7 @@ services:
         REACT_APP_COUNTRY_FLAG_URL: "https://carbon-common-dev.s3.amazonaws.com/flag.png"
         REACT_APP_COUNTRY_CODE: "NG"
         REACT_APP_MAP_TYPE: "None"
-        REACT_APP_MAPBOXGL_ACCESS_TOKEN: ""
+        REACT_APP_MAPBOXGL_ACCESS_TOKEN: "MAPBOX_TOKEN_PLACEHOLDER"
     ports:
       - "3030:3030"
     depends_on:

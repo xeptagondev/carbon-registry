@@ -1,4 +1,5 @@
 export enum ProgrammeManagementSlColumns {
+<<<<<<< HEAD
   title = "title",
   company = "company",
   projectCategory = "projectCategory",
@@ -21,4 +22,28 @@ export enum ProgrammeManagementSlColumns {
   emissionReductionExpected = "emissionReductionExpected",
   emissionReductionAchieved = "emissionReductionAchieved",
   emissionReductionAchievedandCreditIssued = "emissionReductionAchievedandCreditIssued",
+=======
+  title = 'title',
+  company = 'company',
+  projectCategory = 'projectCategory',
+  sector = 'sector',
+  sectoralScope = 'sectoralScope',
+  projectProposalStage = 'projectProposalStage',
+  projectStatus = 'projectStatus',
+  currentStage = 'currentStage',
+  creditIssued = 'creditIssued',
+  creditBalance = 'creditBalance',
+  purposeOfCreditDevelopment = 'purposeOfCreditDevelopment',
+  creditRetired = 'creditRetired',
+  creditTransferred = 'creditTransferred',
+  authorizationId = 'authorizationId',
+  projectCreatedDate = 'projectCreatedDate',
+  certifierId = 'certifierId',
+  serialNo = 'serialNo',
+  action = 'action',
+  projectId = 'projectId',
+  emissionReductionExpected = 'emissionReductionExpected',
+  emissionReductionAchieved = 'emissionReductionAchieved',
+  emissionReductionAchievedandCreditIssued = 'emissionReductionAchievedandCreditIssued',
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 }

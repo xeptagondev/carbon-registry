@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {
   Button,
   Col,
@@ -10,12 +11,18 @@ import {
 } from "antd";
 import moment from "moment";
 import TextArea from "antd/lib/input/TextArea";
+=======
+import { Button, Col, Form, Input, Row, Upload, DatePicker, message } from 'antd';
+import moment from 'moment';
+import TextArea from 'antd/lib/input/TextArea';
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 import {
   CheckCircleOutlined,
   CloseCircleOutlined,
   MinusOutlined,
   PlusOutlined,
   UploadOutlined,
+<<<<<<< HEAD
 } from "@ant-design/icons";
 import { FormMode } from "../../Definitions/Enums/formMode.enum";
 import { useUserContext } from "../../Context/UserInformationContext/userInformationContext";
@@ -33,6 +40,23 @@ import { useLocation } from "react-router-dom";
 import ConfirmSubmitSVG from "../../Assets/DialogIcons/ConfirmSubmit.svg";
 import { defaultTimeout } from "../../Definitions/Constants/defaultTimeout";
 import { safeClone } from "../../Utils/deepCopy";
+=======
+} from '@ant-design/icons';
+import { FormMode } from '../../Definitions/Enums/formMode.enum';
+import { useUserContext } from '../../Context/UserInformationContext/userInformationContext';
+import { CompanyRole } from '../../Definitions/Enums/company.role.enum';
+import { DocumentStatus } from '../../Definitions/Enums/document.status';
+import { fileUploadValueExtract } from '../../Utils/utilityHelper';
+import { VerificationStepProps } from './StepProps';
+import { useEffect, useState } from 'react';
+import { API_PATHS } from '../../Config/apiConfig';
+import { useConnection } from '../../Context/ConnectionContext/connectionContext';
+import { DocumentEnum } from '../../Definitions/Enums/document.enum';
+import { DocumentStateEnum } from '../../Definitions/Definitions/documentState.enum';
+import { SlcfFormActionModel } from '../Models/SlcfFormActionModel';
+import { useLocation } from 'react-router-dom';
+import { ReactComponent as ConfirmSubmitSVG } from '../../Assets/DialogIcons/ConfirmSubmit.svg';
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
 export const AppendixStep = (props: VerificationStepProps) => {
   const {
@@ -47,10 +71,16 @@ export const AppendixStep = (props: VerificationStepProps) => {
     documentId,
     handleLoading,
   } = props;
+<<<<<<< HEAD
 
   const { userInfoState } = useUserContext();
   const maximumImageSize = import.meta.env.VITE_APP_MAXIMUM_FILE_SIZE
     ? parseInt(import.meta.env.VITE_APP_MAXIMUM_FILE_SIZE)
+=======
+  const { userInfoState } = useUserContext();
+  const maximumImageSize = process.env.REACT_APP_MAXIMUM_FILE_SIZE
+    ? parseInt(process.env.REACT_APP_MAXIMUM_FILE_SIZE)
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     : 5000000;
   const normFile = (e: any) => {
     if (Array.isArray(e)) {
@@ -65,7 +95,11 @@ export const AppendixStep = (props: VerificationStepProps) => {
 
   useEffect(() => {
     if (formMode === FormMode.CREATE) {
+<<<<<<< HEAD
       form.setFieldValue("documentsReviewed", [{ author: "" }]);
+=======
+      form.setFieldValue('documentsReviewed', [{ author: '' }]);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     }
   }, []);
 
@@ -105,6 +139,7 @@ export const AppendixStep = (props: VerificationStepProps) => {
           provider: item?.provider,
         };
       }),
+<<<<<<< HEAD
       appendix1Documents: await fileUploadValueExtract(
         values,
         "appendix1Documents"
@@ -112,6 +147,12 @@ export const AppendixStep = (props: VerificationStepProps) => {
       farIdDate: moment(values?.farIdDate).startOf("day").unix(),
       responseDate: moment(values?.responseDate).startOf("day").unix(),
       doeDate: moment(values?.doeDate).startOf("day").unix(),
+=======
+      appendix1Documents: await fileUploadValueExtract(values, 'appendix1Documents'),
+      farIdDate: moment(values?.farIdDate).startOf('day').unix(),
+      responseDate: moment(values?.responseDate).startOf('day').unix(),
+      doeDate: moment(values?.doeDate).startOf('day').unix(),
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     };
 
     handleValuesUpdate({ ...appendixFormValues });
@@ -126,6 +167,7 @@ export const AppendixStep = (props: VerificationStepProps) => {
         const res = await post(API_PATHS.VERIFY_DOCUMENT, {
           refId: documentId,
           documentType: DocumentEnum.VERIFICATION,
+<<<<<<< HEAD
           remarks: "approved",
           action: DocumentStateEnum.DNA_APPROVED,
         });
@@ -167,6 +209,42 @@ export const AppendixStep = (props: VerificationStepProps) => {
             style: { textAlign: "right", marginRight: 15, marginTop: 10 },
           });
         }
+=======
+          remarks: 'approved',
+          action: DocumentStateEnum.DNA_APPROVED,
+        });
+
+        if (res?.statusText === 'SUCCESS') {
+          message.open({
+            type: 'success',
+            content: 'Verification report was approved successfully',
+            duration: 4,
+            style: { textAlign: 'right', marginRight: 15, marginTop: 10 },
+          });
+
+          if (next) {
+            next();
+          }
+        }
+      } catch (error: any) {
+        console.log('--------------error----------------', error);
+        if (error?.status === 500) {
+          message.open({
+            type: 'error',
+            content: t('common:somethingWentWrong'),
+            duration: 4,
+            style: { textAlign: 'right', marginRight: 15, marginTop: 10 },
+          });
+        } else {
+          message.open({
+            type: 'error',
+            content: error.message,
+            duration: 4,
+            style: { textAlign: 'right', marginRight: 15, marginTop: 10 },
+          });
+        }
+      } finally {
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         if (handleLoading) {
           handleLoading(false);
         }
@@ -187,6 +265,7 @@ export const AppendixStep = (props: VerificationStepProps) => {
           action: DocumentStateEnum.DNA_REJECTED,
         });
 
+<<<<<<< HEAD
         if (res?.statusText === "SUCCESS") {
           message.open({
             type: "success",
@@ -224,6 +303,41 @@ export const AppendixStep = (props: VerificationStepProps) => {
             style: { textAlign: "right", marginRight: 15, marginTop: 10 },
           });
         }
+=======
+        if (res?.statusText === 'SUCCESS') {
+          message.open({
+            type: 'success',
+            content: 'Verification report rejected',
+            duration: 4,
+            style: { textAlign: 'right', marginRight: 15, marginTop: 10 },
+          });
+
+          if (next) {
+            next();
+          }
+        }
+      } catch (error: any) {
+        console.log('--------------error----------------', error);
+        if (error?.status === 500) {
+          message.open({
+            type: 'error',
+            content: t('common:somethingWentWrong'),
+            duration: 4,
+            style: { textAlign: 'right', marginRight: 15, marginTop: 10 },
+          });
+        } else {
+          message.open({
+            type: 'error',
+            content: error.message,
+            duration: 4,
+            style: { textAlign: 'right', marginRight: 15, marginTop: 10 },
+          });
+        }
+      } finally {
+        if (handleLoading) {
+          handleLoading(false);
+        }
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       }
     }
   };
@@ -233,6 +347,7 @@ export const AppendixStep = (props: VerificationStepProps) => {
       {current === 10 && (
         <div>
           <div className="step-form-container">
+<<<<<<< HEAD
             {(state?.mode === FormMode.CREATE ||
               state?.mode === FormMode.EDIT) && (
               <>
@@ -241,12 +356,25 @@ export const AppendixStep = (props: VerificationStepProps) => {
                   title={t("verificationReport:confirmModalMessage")}
                   onCancel={closeDialog}
                   actionBtnText={t("common:yes")}
+=======
+            {(state?.mode === FormMode.CREATE || state?.mode === FormMode.EDIT) && (
+              <>
+                <SlcfFormActionModel
+                  icon={<ConfirmSubmitSVG className="custom-icon-color" />}
+                  title={t('verificationReport:confirmModalMessage')}
+                  onCancel={closeDialog}
+                  actionBtnText={t('common:yes')}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                   onFinish={() => {
                     onFinish(formValues);
                     closeDialog();
                   }}
                   openModal={showDialog}
+<<<<<<< HEAD
                   type={"primary"}
+=======
+                  type={'primary'}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                   remarkRequired={false}
                   t={t}
                 />
@@ -255,6 +383,7 @@ export const AppendixStep = (props: VerificationStepProps) => {
 
             {state?.mode === FormMode.VERIFY && (
               <>
+<<<<<<< HEAD
                 <FormActionModel
                   actionBtnText={t("verificationReport:reject")}
                   onCancel={closeDeclineDialogBox}
@@ -262,6 +391,15 @@ export const AppendixStep = (props: VerificationStepProps) => {
                   title={t("verificationReport:declineMessage")}
                   onFinish={(remarks: string) => {
                     console.log("-----remarks-------", remarks);
+=======
+                <SlcfFormActionModel
+                  actionBtnText={t('verificationReport:reject')}
+                  onCancel={closeDeclineDialogBox}
+                  icon={<CloseCircleOutlined />}
+                  title={t('verificationReport:declineMessage')}
+                  onFinish={(remarks: string) => {
+                    console.log('-----remarks-------', remarks);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     reject(remarks);
                   }}
                   remarkRequired
@@ -271,11 +409,19 @@ export const AppendixStep = (props: VerificationStepProps) => {
                   t={t}
                 />
 
+<<<<<<< HEAD
                 <FormActionModel
                   actionBtnText={t("verificationReport:approve")}
                   onCancel={closeVerifyDialogBox}
                   icon={<CheckCircleOutlined />}
                   title={t("verificationReport:approveMessage")}
+=======
+                <SlcfFormActionModel
+                  actionBtnText={t('verificationReport:approve')}
+                  onCancel={closeVerifyDialogBox}
+                  icon={<CheckCircleOutlined />}
+                  title={t('verificationReport:approveMessage')}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                   onFinish={() => {
                     approve();
                   }}
@@ -305,8 +451,13 @@ export const AppendixStep = (props: VerificationStepProps) => {
                     {/* appendix 1 start */}
                     <>
                       <h4 className="appendix-title">
+<<<<<<< HEAD
                         <i>{t("verificationReport:appendix")} 1 </i>:{" "}
                         {t("verificationReport:appendixTitle1")}
+=======
+                        <i>{t('verificationReport:appendix')} 1 </i>:{' '}
+                        {t('verificationReport:appendixTitle1')}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                       </h4>
                       <Form.Item
                         // label={`${t('PDD:additionalComments')}`}
@@ -319,15 +470,23 @@ export const AppendixStep = (props: VerificationStepProps) => {
                           {
                             validator: async (rule, value) => {
                               if (
+<<<<<<< HEAD
                                 String(value).trim() === "" ||
+=======
+                                String(value).trim() === '' ||
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                 String(value).trim() === undefined ||
                                 value === null ||
                                 value === undefined
                               ) {
                                 throw new Error(
+<<<<<<< HEAD
                                   `${t(
                                     "verificationReport:additionalComments"
                                   )} ${t("isRequired")}`
+=======
+                                  `${t('verificationReport:additionalComments')} ${t('isRequired')}`
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                 );
                               }
                             },
@@ -338,7 +497,11 @@ export const AppendixStep = (props: VerificationStepProps) => {
                       </Form.Item>
 
                       <div className="custom-upload-verification">
+<<<<<<< HEAD
                         {t("verificationReport:appendix1Documents")}
+=======
+                        {t('verificationReport:appendix1Documents')}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                       </div>
                       <Form.Item
                         //label={t('verificationReport:appendix1Documents')}
@@ -353,7 +516,11 @@ export const AppendixStep = (props: VerificationStepProps) => {
                               for (let i = 0; i < file?.length; i++) {
                                 if (file[i]?.size > maximumImageSize) {
                                   // default size format of files would be in bytes -> 1MB = 1000000bytes
+<<<<<<< HEAD
                                   throw new Error(`${t("common:maxSizeVal")}`);
+=======
+                                  throw new Error(`${t('common:maxSizeVal')}`);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                 }
                               }
                             },
@@ -379,7 +546,11 @@ export const AppendixStep = (props: VerificationStepProps) => {
                             icon={<UploadOutlined />}
                             disabled={disableFields}
                           >
+<<<<<<< HEAD
                             {t("verificationReport:upload")}
+=======
+                            {t('verificationReport:upload')}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           </Button>
                         </Upload>
                       </Form.Item>
@@ -388,8 +559,13 @@ export const AppendixStep = (props: VerificationStepProps) => {
 
                     {/* appendix 2 starts */}
                     <h4 className="appendix-title">
+<<<<<<< HEAD
                       <i>{t("verificationReport:appendix")} 2 </i>:{" "}
                       {t("verificationReport:appendixTitle2")}
+=======
+                      <i>{t('verificationReport:appendix')} 2 </i>:{' '}
+                      {t('verificationReport:appendixTitle2')}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     </h4>
                     {/* document reviewd table */}
                     <div className="appendix-documents-reviewed-table">
@@ -419,13 +595,21 @@ export const AppendixStep = (props: VerificationStepProps) => {
                               {fields.map(({ key, name, ...restFields }) => (
                                 <>
                                   <Col xl={1} className="col-1 col">
+<<<<<<< HEAD
                                     {name + 1 < 10 && "0"}
+=======
+                                    {name + 1 < 10 && '0'}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                     {name + 1}
                                   </Col>
 
                                   <Col xl={5} className="col other-cols ">
                                     <Form.Item
+<<<<<<< HEAD
                                       name={[name, "author"]}
+=======
+                                      name={[name, 'author']}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                       rules={[
                                         {
                                           required: true,
@@ -434,32 +618,49 @@ export const AppendixStep = (props: VerificationStepProps) => {
                                         {
                                           validator: async (rule, value) => {
                                             if (
+<<<<<<< HEAD
                                               String(value).trim() === "" ||
                                               String(value).trim() ===
                                                 undefined ||
+=======
+                                              String(value).trim() === '' ||
+                                              String(value).trim() === undefined ||
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                               value === null ||
                                               value === undefined
                                             ) {
                                               throw new Error(
+<<<<<<< HEAD
                                                 `${t(
                                                   "verificationReport:required"
                                                 )}`
+=======
+                                                `${t('verificationReport:required')}`
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                               );
                                             }
                                           },
                                         },
                                       ]}
                                     >
+<<<<<<< HEAD
                                       <Input
                                         className="ant-input"
                                         disabled={disableFields}
                                       />
+=======
+                                      <Input className="ant-input" disabled={disableFields} />
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                     </Form.Item>
                                   </Col>
 
                                   <Col xl={5} className="col other-cols">
                                     <Form.Item
+<<<<<<< HEAD
                                       name={[name, "title"]}
+=======
+                                      name={[name, 'title']}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                       rules={[
                                         {
                                           required: true,
@@ -468,31 +669,48 @@ export const AppendixStep = (props: VerificationStepProps) => {
                                         {
                                           validator: async (rule, value) => {
                                             if (
+<<<<<<< HEAD
                                               String(value).trim() === "" ||
                                               String(value).trim() ===
                                                 undefined ||
+=======
+                                              String(value).trim() === '' ||
+                                              String(value).trim() === undefined ||
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                               value === null ||
                                               value === undefined
                                             ) {
                                               throw new Error(
+<<<<<<< HEAD
                                                 `${t(
                                                   "verificationReport:required"
                                                 )}`
+=======
+                                                `${t('verificationReport:required')}`
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                               );
                                             }
                                           },
                                         },
                                       ]}
                                     >
+<<<<<<< HEAD
                                       <Input
                                         className="ant-input"
                                         disabled={disableFields}
                                       />
+=======
+                                      <Input className="ant-input" disabled={disableFields} />
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                     </Form.Item>
                                   </Col>
                                   <Col xl={5} className=" col other-cols">
                                     <Form.Item
+<<<<<<< HEAD
                                       name={[name, "referenceToTheDoc"]}
+=======
+                                      name={[name, 'referenceToTheDoc']}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                       rules={[
                                         {
                                           required: true,
@@ -501,32 +719,49 @@ export const AppendixStep = (props: VerificationStepProps) => {
                                         {
                                           validator: async (rule, value) => {
                                             if (
+<<<<<<< HEAD
                                               String(value).trim() === "" ||
                                               String(value).trim() ===
                                                 undefined ||
+=======
+                                              String(value).trim() === '' ||
+                                              String(value).trim() === undefined ||
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                               value === null ||
                                               value === undefined
                                             ) {
                                               throw new Error(
+<<<<<<< HEAD
                                                 `${t(
                                                   "verificationReport:required"
                                                 )}`
+=======
+                                                `${t('verificationReport:required')}`
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                               );
                                             }
                                           },
                                         },
                                       ]}
                                     >
+<<<<<<< HEAD
                                       <Input
                                         className="ant-input"
                                         disabled={disableFields}
                                       />
+=======
+                                      <Input className="ant-input" disabled={disableFields} />
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                     </Form.Item>
                                   </Col>
 
                                   <Col xl={5} className="col other-cols ">
                                     <Form.Item
+<<<<<<< HEAD
                                       name={[name, "provider"]}
+=======
+                                      name={[name, 'provider']}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                       rules={[
                                         {
                                           required: true,
@@ -535,26 +770,39 @@ export const AppendixStep = (props: VerificationStepProps) => {
                                         {
                                           validator: async (rule, value) => {
                                             if (
+<<<<<<< HEAD
                                               String(value).trim() === "" ||
                                               String(value).trim() ===
                                                 undefined ||
+=======
+                                              String(value).trim() === '' ||
+                                              String(value).trim() === undefined ||
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                               value === null ||
                                               value === undefined
                                             ) {
                                               throw new Error(
+<<<<<<< HEAD
                                                 `${t(
                                                   "verificationReport:required"
                                                 )}`
+=======
+                                                `${t('verificationReport:required')}`
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                               );
                                             }
                                           },
                                         },
                                       ]}
                                     >
+<<<<<<< HEAD
                                       <Input
                                         className="ant-input"
                                         disabled={disableFields}
                                       />
+=======
+                                      <Input className="ant-input" disabled={disableFields} />
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                     </Form.Item>
                                   </Col>
                                   <Col xl={3} className="action-col">
@@ -603,19 +851,32 @@ export const AppendixStep = (props: VerificationStepProps) => {
                 <Col xl={24} md={24}>
                   <div className="step-form-left-col">
                     <h4 className="appendix-title">
+<<<<<<< HEAD
                       <i>{t("verificationReport:appendix")} 3 </i>:{" "}
                       {t("verificationReport:appendixTitle3")}
                     </h4>
 
                     <h3 className="appendix-title">
                       {t("verificationReport:appendixTitle3.1")}
+=======
+                      <i>{t('verificationReport:appendix')} 3 </i>:{' '}
+                      {t('verificationReport:appendixTitle3')}
+                    </h4>
+
+                    <h3 className="appendix-sub-title">
+                      {t('verificationReport:appendixTitle3.1')}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     </h3>
 
                     <div className="form-section">
                       <Row className="row" gutter={[40, 16]}>
                         <Col xl={12} md={24}>
                           <Form.Item
+<<<<<<< HEAD
                             label={`${t("verificationReport:farId")}`}
+=======
+                            label={`${t('verificationReport:farId')}`}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                             name="farId"
                             // rules={[
                             //   {
@@ -628,7 +889,11 @@ export const AppendixStep = (props: VerificationStepProps) => {
                           </Form.Item>
 
                           <Form.Item
+<<<<<<< HEAD
                             label={`${t("verificationReport:farIdDate")}`}
+=======
+                            label={`${t('verificationReport:farIdDate')}`}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                             name="farIdDate"
                             // rules={[
                             //   {
@@ -641,14 +906,22 @@ export const AppendixStep = (props: VerificationStepProps) => {
                               size="large"
                               disabled={disableFields}
                               disabledDate={(currentDate: any) =>
+<<<<<<< HEAD
                                 currentDate < moment().startOf("day")
+=======
+                                currentDate < moment().startOf('day')
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                               }
                             />
                           </Form.Item>
                         </Col>
                         <Col xl={12} md={24}>
                           <Form.Item
+<<<<<<< HEAD
                             label={`${t("verificationReport:sectionNo")}`}
+=======
+                            label={`${t('verificationReport:sectionNo')}`}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                             name="sectionNo"
                             // rules={[
                             //   {
@@ -662,9 +935,13 @@ export const AppendixStep = (props: VerificationStepProps) => {
                         </Col>
                         <Col xl={24} md={24}>
                           <Form.Item
+<<<<<<< HEAD
                             label={`${t(
                               "verificationReport:descriptionOfFAR"
                             )}`}
+=======
+                            label={`${t('verificationReport:descriptionOfFAR')}`}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                             name="descriptionOfFAR"
                             // rules={[
                             //   {
@@ -678,9 +955,13 @@ export const AppendixStep = (props: VerificationStepProps) => {
                         </Col>
                         <Col xl={12} md={24}>
                           <Form.Item
+<<<<<<< HEAD
                             label={`${t(
                               "verificationReport:projectParticipantResponse"
                             )}`}
+=======
+                            label={`${t('verificationReport:projectParticipantResponse')}`}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                             name="projectParticipantResponse"
                             // rules={[
                             //   {
@@ -694,7 +975,11 @@ export const AppendixStep = (props: VerificationStepProps) => {
                         </Col>
                         <Col xl={12} md={24}>
                           <Form.Item
+<<<<<<< HEAD
                             label={`${t("verificationReport:responseDate")}`}
+=======
+                            label={`${t('verificationReport:responseDate')}`}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                             name="responseDate"
                             // rules={[
                             //   {
@@ -707,16 +992,24 @@ export const AppendixStep = (props: VerificationStepProps) => {
                               disabled={disableFields}
                               size="large"
                               disabledDate={(currentDate: any) =>
+<<<<<<< HEAD
                                 currentDate < moment().startOf("day")
+=======
+                                currentDate < moment().startOf('day')
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                               }
                             />
                           </Form.Item>
                         </Col>
                         <Col xl={24} md={24}>
                           <Form.Item
+<<<<<<< HEAD
                             label={`${t(
                               "verificationReport:documentationProvided"
                             )}`}
+=======
+                            label={`${t('verificationReport:documentationProvided')}`}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                             name="documentationProvided"
                             // rules={[
                             //   {
@@ -730,7 +1023,11 @@ export const AppendixStep = (props: VerificationStepProps) => {
                         </Col>
                         <Col xl={12} md={24}>
                           <Form.Item
+<<<<<<< HEAD
                             label={`${t("verificationReport:doeAssesment")}`}
+=======
+                            label={`${t('verificationReport:doeAssesment')}`}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                             name="doeAssesment"
                             // rules={[
                             //   {
@@ -744,7 +1041,11 @@ export const AppendixStep = (props: VerificationStepProps) => {
                         </Col>
                         <Col xl={12} md={24}>
                           <Form.Item
+<<<<<<< HEAD
                             label={`${t("verificationReport:doeDate")}`}
+=======
+                            label={`${t('verificationReport:doeDate')}`}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                             name="doeDate"
                             // rules={[
                             //   {
@@ -757,7 +1058,11 @@ export const AppendixStep = (props: VerificationStepProps) => {
                               disabled={disableFields}
                               size="large"
                               disabledDate={(currentDate: any) =>
+<<<<<<< HEAD
                                 currentDate < moment().startOf("day")
+=======
+                                currentDate < moment().startOf('day')
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                               }
                             />
                           </Form.Item>
@@ -768,6 +1073,7 @@ export const AppendixStep = (props: VerificationStepProps) => {
                 </Col>
               </Row>
 
+<<<<<<< HEAD
               <Row justify={"end"} className="step-actions-end">
                 {(state?.mode === FormMode.CREATE ||
                   state?.mode === FormMode.EDIT) && (
@@ -777,21 +1083,40 @@ export const AppendixStep = (props: VerificationStepProps) => {
                     </Button>
                     <Button type="primary" htmlType="submit">
                       {t("verificationReport:submit")}
+=======
+              <Row justify={'end'} className="step-actions-end">
+                {(state?.mode === FormMode.CREATE || state?.mode === FormMode.EDIT) && (
+                  <>
+                    <Button type="primary" ghost size={'large'} onClick={prev}>
+                      {t('verificationReport:prev')}
+                    </Button>
+                    <Button type="primary" htmlType="submit">
+                      {t('verificationReport:submit')}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     </Button>
                   </>
                 )}
                 {state?.mode === FormMode.VIEW && (
                   <>
+<<<<<<< HEAD
                     <Button danger size={"large"} onClick={prev}>
                       {t("verificationReport:prev")}
                     </Button>
                     <Button type="primary" onClick={next}>
                       {t("verificationReport:goBackProjectDetails")}
+=======
+                    <Button type="primary" ghost size={'large'} onClick={prev}>
+                      {t('verificationReport:prev')}
+                    </Button>
+                    <Button type="primary" onClick={next}>
+                      {t('verificationReport:goBackProjectDetails')}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     </Button>
                   </>
                 )}
                 {state?.mode === FormMode.VERIFY && (
                   <>
+<<<<<<< HEAD
                     <Button size={"large"} onClick={prev} type={"default"}>
                       {t("verificationReport:prev")}
                     </Button>
@@ -808,6 +1133,21 @@ export const AppendixStep = (props: VerificationStepProps) => {
                       type="primary"
                     >
                       {t("verificationReport:approve")}
+=======
+                    <Button size={'large'} onClick={prev} type={'default'}>
+                      {t('verificationReport:prev')}
+                    </Button>
+                    <Button
+                      type="primary"
+                      ghost
+                      size={'large'}
+                      onClick={() => setShowDeclineDialog(true)}
+                    >
+                      {t('verificationReport:reject')}
+                    </Button>
+                    <Button size={'large'} onClick={() => setShowVerifyDialog(true)} type="primary">
+                      {t('verificationReport:approve')}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     </Button>
                   </>
                 )}

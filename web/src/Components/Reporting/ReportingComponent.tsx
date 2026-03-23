@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { i18n } from "i18next";
 import React, { useEffect, useState } from "react";
 import "./ReportingComponent.scss";
@@ -9,6 +10,19 @@ import { FILE_TYPES, REPORT_TYPES } from "./reportTypes";
 import { useConnection } from "../../Context/ConnectionContext/connectionContext";
 import { API_PATHS } from "../../Config/apiConfig";
 import { Loading } from "../Loading/loading";
+=======
+import { i18n } from 'i18next';
+import React, { useEffect, useState } from 'react';
+import './ReportingComponent.scss';
+import { DatePicker, Empty, Row, Select } from 'antd';
+import moment, { Moment } from 'moment';
+import ReportCard from './ReportCard';
+import { getActionsReportColumns, getHoldingsReportColumns } from './reportingColumns';
+import { FileTypes, ReportTypes } from './reportTypes';
+import { useConnection } from '../../Context/ConnectionContext/connectionContext';
+import { API_PATHS } from '../../Config/apiConfig';
+import { Loading } from '../Loading/loading';
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
 const ReportingComponent = (props: { translator: i18n }) => {
   const { translator } = props;
@@ -24,6 +38,7 @@ const ReportingComponent = (props: { translator: i18n }) => {
   const [holdingsCount, setHoldingsCount] = useState<number>(0);
 
   const [selectedYearsArr, setSelectedYearsArr] = useState([
+<<<<<<< HEAD
     REPORT_TYPES.ACTIONS,
     REPORT_TYPES.HOLDINGS,
   ]);
@@ -34,12 +49,25 @@ const ReportingComponent = (props: { translator: i18n }) => {
   }>({
     [REPORT_TYPES.ACTIONS]: true,
     [REPORT_TYPES.HOLDINGS]: true,
+=======
+    ReportTypes.ACTIONS,
+    ReportTypes.HOLDINGS,
+  ]);
+
+  const [selectedReports, setSelectedReports] = useState<{
+    [ReportTypes.ACTIONS]: boolean;
+    [ReportTypes.HOLDINGS]: boolean;
+  }>({
+    [ReportTypes.ACTIONS]: true,
+    [ReportTypes.HOLDINGS]: true,
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   });
 
   const [actionsData, setActionsData] = useState<any[]>([]);
   const [holdingsData, setHoldingsData] = useState<any[]>([]);
 
   const [paginationInfo, setPaginationInfo] = useState<
+<<<<<<< HEAD
     Partial<Record<keyof typeof REPORT_TYPES, { page: number; pageSize: number }>>
   >({
     [REPORT_TYPES.ACTIONS]: {
@@ -47,12 +75,25 @@ const ReportingComponent = (props: { translator: i18n }) => {
       pageSize: 10,
     },
     [REPORT_TYPES.HOLDINGS]: {
+=======
+    Partial<Record<keyof typeof ReportTypes, { page: number; pageSize: number }>>
+  >({
+    [ReportTypes.ACTIONS]: {
+      page: 1,
+      pageSize: 10,
+    },
+    [ReportTypes.HOLDINGS]: {
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       page: 1,
       pageSize: 10,
     },
   });
 
+<<<<<<< HEAD
   const handlePaginationInfoChange = (page: number, pageSize: number, reportType: REPORT_TYPES) => {
+=======
+  const handlePaginationInfoChange = (page: number, pageSize: number, reportType: ReportTypes) => {
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     setPaginationInfo((prev) => ({
       ...prev,
       [reportType]: {
@@ -68,6 +109,7 @@ const ReportingComponent = (props: { translator: i18n }) => {
     try {
       setActionsLoading(true);
       const res = await post(API_PATHS.QUERY_AEF_RECORDS, {
+<<<<<<< HEAD
         page: paginationInfo[REPORT_TYPES.ACTIONS]?.page,
         size: paginationInfo[REPORT_TYPES.ACTIONS]?.pageSize,
         filterAnd: [
@@ -89,11 +131,38 @@ const ReportingComponent = (props: { translator: i18n }) => {
       });
 
       if (res?.statusText === "SUCCESS") {
+=======
+        page: paginationInfo[ReportTypes.ACTIONS]?.page,
+        size: paginationInfo[ReportTypes.ACTIONS]?.pageSize,
+        filterAnd: [
+          {
+            key: 'actionTime',
+            operation: '>',
+            value: selectedYear.startOf('year').valueOf(),
+          },
+          {
+            key: 'actionTime',
+            operation: '<',
+            value: selectedYear.endOf('year').valueOf(),
+          },
+        ],
+        sort: {
+          key: 'createdTime',
+          order: 'DESC',
+        },
+      });
+
+      if (res?.statusText === 'SUCCESS') {
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         setActionsData(res?.data);
         setActionsCount(res?.response?.data?.total);
       }
     } catch (error: any) {
+<<<<<<< HEAD
       console.log("error:", error);
+=======
+      console.log('error:', error);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     } finally {
       setActionsLoading(false);
     }
@@ -103,6 +172,7 @@ const ReportingComponent = (props: { translator: i18n }) => {
     try {
       setHoldingsLoading(true);
       const res = await post(API_PATHS.QUERY_AEF_RECORDS, {
+<<<<<<< HEAD
         page: paginationInfo[REPORT_TYPES.HOLDINGS]?.page,
         size: paginationInfo[REPORT_TYPES.HOLDINGS]?.pageSize,
         filterAnd: [
@@ -130,11 +200,44 @@ const ReportingComponent = (props: { translator: i18n }) => {
 
       console.log("---------------res--------------", res);
       if (res?.statusText === "SUCCESS") {
+=======
+        page: paginationInfo[ReportTypes.HOLDINGS]?.page,
+        size: paginationInfo[ReportTypes.HOLDINGS]?.pageSize,
+        filterAnd: [
+          {
+            key: 'actionTime',
+            operation: '>',
+            value: selectedYear.startOf('year').valueOf(),
+          },
+          {
+            key: 'actionTime',
+            operation: '<',
+            value: selectedYear.endOf('year').valueOf(),
+          },
+          {
+            key: 'actionType',
+            operation: '=',
+            value: 'authorization',
+          },
+        ],
+        sort: {
+          key: 'createdTime',
+          order: 'DESC',
+        },
+      });
+
+      console.log('---------------res--------------', res);
+      if (res?.statusText === 'SUCCESS') {
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         setHoldingsData(res?.data);
         setHoldingsCount(res?.response?.data?.total);
       }
     } catch (error) {
+<<<<<<< HEAD
       console.log("error:", error);
+=======
+      console.log('error:', error);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     } finally {
       setHoldingsLoading(false);
     }
@@ -146,8 +249,12 @@ const ReportingComponent = (props: { translator: i18n }) => {
   }, [selectedYear, paginationInfo]);
 
   const checkIfAnyReportIsSelected = () => {
+<<<<<<< HEAD
     let isReportSelected = Object.values(selectedReports).some(Boolean);
     console.log("---------isReportSelected---------", isReportSelected);
+=======
+    const isReportSelected = Object.values(selectedReports).some(Boolean);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     return isReportSelected;
   };
 
@@ -155,6 +262,7 @@ const ReportingComponent = (props: { translator: i18n }) => {
     try {
       setActionsLoading(true);
       const res = await post(API_PATHS.DOWNLOAD_AEF_RECORDS, {
+<<<<<<< HEAD
         reportType: REPORT_TYPES.ACTIONS,
         fileType: FILE_TYPES.csv,
       });
@@ -164,6 +272,17 @@ const ReportingComponent = (props: { translator: i18n }) => {
       if (res?.statusText === "SUCCESS") {
         const url = res.data.url;
         const a = document.createElement("a");
+=======
+        reportType: ReportTypes.ACTIONS,
+        fileType: FileTypes.csv,
+      });
+
+      console.log('--------res--------', res);
+
+      if (res?.statusText === 'SUCCESS') {
+        const url = res.data.url;
+        const a = document.createElement('a');
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         a.href = url;
         a.download = res.data.outputFileName;
         document.body.appendChild(a);
@@ -172,7 +291,11 @@ const ReportingComponent = (props: { translator: i18n }) => {
         window.URL.revokeObjectURL(url);
       }
     } catch (error) {
+<<<<<<< HEAD
       console.log("error:", error);
+=======
+      console.log('error:', error);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     } finally {
       setActionsLoading(false);
     }
@@ -182,6 +305,7 @@ const ReportingComponent = (props: { translator: i18n }) => {
     try {
       setActionsLoading(true);
       const res = await post(API_PATHS.DOWNLOAD_AEF_RECORDS, {
+<<<<<<< HEAD
         reportType: REPORT_TYPES.ACTIONS,
         fileType: FILE_TYPES.xlsx,
       });
@@ -191,6 +315,17 @@ const ReportingComponent = (props: { translator: i18n }) => {
       if (res?.statusText === "SUCCESS") {
         const url = res.data.url;
         const a = document.createElement("a");
+=======
+        reportType: ReportTypes.ACTIONS,
+        fileType: FileTypes.xlsx,
+      });
+
+      console.log('--------res--------', res);
+
+      if (res?.statusText === 'SUCCESS') {
+        const url = res.data.url;
+        const a = document.createElement('a');
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         a.href = url;
         a.download = res.data.outputFileName;
         document.body.appendChild(a);
@@ -199,7 +334,11 @@ const ReportingComponent = (props: { translator: i18n }) => {
         window.URL.revokeObjectURL(url);
       }
     } catch (error) {
+<<<<<<< HEAD
       console.log("error:", error);
+=======
+      console.log('error:', error);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     } finally {
       setActionsLoading(false);
     }
@@ -209,6 +348,7 @@ const ReportingComponent = (props: { translator: i18n }) => {
     try {
       setHoldingsLoading(true);
       const res = await post(API_PATHS.DOWNLOAD_AEF_RECORDS, {
+<<<<<<< HEAD
         reportType: REPORT_TYPES.HOLDINGS,
         fileType: FILE_TYPES.csv,
       });
@@ -218,6 +358,17 @@ const ReportingComponent = (props: { translator: i18n }) => {
       if (res?.statusText === "SUCCESS") {
         const url = res.data.url;
         const a = document.createElement("a");
+=======
+        reportType: ReportTypes.HOLDINGS,
+        fileType: FileTypes.csv,
+      });
+
+      console.log('--------res--------', res);
+
+      if (res?.statusText === 'SUCCESS') {
+        const url = res.data.url;
+        const a = document.createElement('a');
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         a.href = url;
         a.download = res.data.outputFileName;
         document.body.appendChild(a);
@@ -226,7 +377,11 @@ const ReportingComponent = (props: { translator: i18n }) => {
         window.URL.revokeObjectURL(url);
       }
     } catch (error) {
+<<<<<<< HEAD
       console.log("error:", error);
+=======
+      console.log('error:', error);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     } finally {
       setHoldingsLoading(false);
     }
@@ -236,6 +391,7 @@ const ReportingComponent = (props: { translator: i18n }) => {
     try {
       setHoldingsLoading(true);
       const res = await post(API_PATHS.DOWNLOAD_AEF_RECORDS, {
+<<<<<<< HEAD
         reportType: REPORT_TYPES.HOLDINGS,
         fileType: FILE_TYPES.xlsx,
       });
@@ -245,6 +401,17 @@ const ReportingComponent = (props: { translator: i18n }) => {
       if (res?.statusText === "SUCCESS") {
         const url = res.data.url;
         const a = document.createElement("a");
+=======
+        reportType: ReportTypes.HOLDINGS,
+        fileType: FileTypes.xlsx,
+      });
+
+      console.log('--------res--------', res);
+
+      if (res?.statusText === 'SUCCESS') {
+        const url = res.data.url;
+        const a = document.createElement('a');
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         a.href = url;
         a.download = res.data.outputFileName;
         document.body.appendChild(a);
@@ -253,7 +420,11 @@ const ReportingComponent = (props: { translator: i18n }) => {
         window.URL.revokeObjectURL(url);
       }
     } catch (error) {
+<<<<<<< HEAD
       console.log("error:", error);
+=======
+      console.log('error:', error);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     } finally {
       setHoldingsLoading(false);
     }
@@ -264,10 +435,17 @@ const ReportingComponent = (props: { translator: i18n }) => {
   return (
     <div className="reporting-container">
       <div className="title-container">
+<<<<<<< HEAD
         <Row justify={"space-between"}>
           <div className="main">{t("reporting:reportsTitle")}</div>
         </Row>
         <Row justify={"end"}>
+=======
+        <Row justify={'space-between'}>
+          <div className="main">{t('reporting:reportsTitle')}</div>
+        </Row>
+        <Row justify={'end'}>
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
           <DatePicker
             size="large"
             picker="year"
@@ -275,7 +453,11 @@ const ReportingComponent = (props: { translator: i18n }) => {
             value={selectedYear}
             disabledDate={disabledDate}
             onChange={(value: any) => {
+<<<<<<< HEAD
               console.log("---------value-----------", value);
+=======
+              console.log('---------value-----------', value);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
               const date = moment(value).local();
               setSelectedYear(date);
             }}
@@ -286,7 +468,11 @@ const ReportingComponent = (props: { translator: i18n }) => {
           <Select
             size="large"
             placeholder="Click to select the Reports to display"
+<<<<<<< HEAD
             mode={"multiple"}
+=======
+            mode={'multiple'}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
             value={[...selectedYearsArr]}
             className="report-type-selector"
             onSelect={(value) => {
@@ -304,7 +490,11 @@ const ReportingComponent = (props: { translator: i18n }) => {
               }));
             }}
           >
+<<<<<<< HEAD
             {Object.keys(REPORT_TYPES).map((type: keyof typeof REPORT_TYPES) => (
+=======
+            {Object.keys(ReportTypes).map((type: any) => (
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
               <Select.Option value={type}>{t(`reporting:${String(type)}`)}</Select.Option>
             ))}
           </Select>
@@ -313,18 +503,31 @@ const ReportingComponent = (props: { translator: i18n }) => {
 
       {(actionsLoading || holdingsLoading) && <Loading />}
 
+<<<<<<< HEAD
       {selectedReports[REPORT_TYPES.ACTIONS] && (
         <ReportCard
           title={"ACTIONS REPORT"}
           reportType={REPORT_TYPES.ACTIONS}
           host={"Sri Lanka"}
+=======
+      {selectedReports[ReportTypes.ACTIONS] && (
+        <ReportCard
+          title={'ACTIONS REPORT'}
+          reportType={ReportTypes.ACTIONS}
+          host={'Sri Lanka'}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
           year={String(selectedYear.year())}
           columns={getActionsReportColumns(t)}
           handlePaginationChange={handlePaginationInfoChange}
           pagination={{
             total: actionsCount,
+<<<<<<< HEAD
             current: paginationInfo[REPORT_TYPES.ACTIONS].page || 1,
             pageSize: paginationInfo[REPORT_TYPES.ACTIONS].pageSize || 1,
+=======
+            current: paginationInfo[ReportTypes.ACTIONS]?.page || 1,
+            pageSize: paginationInfo[ReportTypes.ACTIONS]?.pageSize || 1,
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
             pageSizeOptions: [10, 20, 30],
           }}
           data={actionsData || []}
@@ -333,18 +536,31 @@ const ReportingComponent = (props: { translator: i18n }) => {
         />
       )}
 
+<<<<<<< HEAD
       {selectedReports[REPORT_TYPES.HOLDINGS] && (
         <ReportCard
           title={"HOLDINGS REPORT"}
           reportType={REPORT_TYPES.HOLDINGS}
           host={"Sri Lanka"}
+=======
+      {selectedReports[ReportTypes.HOLDINGS] && (
+        <ReportCard
+          title={'HOLDINGS REPORT'}
+          reportType={ReportTypes.HOLDINGS}
+          host={'Sri Lanka'}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
           year={String(selectedYear.year())}
           columns={getHoldingsReportColumns(t)}
           handlePaginationChange={handlePaginationInfoChange}
           pagination={{
             total: holdingsCount,
+<<<<<<< HEAD
             current: paginationInfo[REPORT_TYPES.HOLDINGS].page || 1,
             pageSize: paginationInfo[REPORT_TYPES.HOLDINGS].pageSize || 1,
+=======
+            current: paginationInfo[ReportTypes.HOLDINGS]?.page || 1,
+            pageSize: paginationInfo[ReportTypes.HOLDINGS]?.pageSize || 1,
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
             pageSizeOptions: [10, 20, 30],
           }}
           data={holdingsData || []}

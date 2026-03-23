@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {
   Button,
   Col,
@@ -17,6 +18,17 @@ import sliderLogo from "../../Assets/Images/logo-slider.png";
 import "./privacyPolicy.scss";
 import { CcCircle } from "react-bootstrap-icons";
 import LayoutFooter from "../../Components/Footer/layout.footer";
+=======
+import { Button, Col, Divider, Form, Input, message, Row, Select, Statistic } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import i18next from 'i18next';
+import sliderLogo from '../../Assets/Images/logo_Gold.png';
+import './privacyPolicy.scss';
+import { CcCircle } from 'react-bootstrap-icons';
+import LayoutFooter from '../../Components/Footer/layout.footer';
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 const PrivacyPolicy = () => {
   const { i18n, t } = useTranslation(["common", "homepage"]);
   const navigate = useNavigate();
@@ -42,12 +54,18 @@ const PrivacyPolicy = () => {
               <img src={sliderLogo} alt="slider-logo" />
             </div>
             <div>
+<<<<<<< HEAD
               <div style={{ display: "flex" }}>
                 <div className="title">{"CARBON"}</div>
                 <div className="title-sub">{"REGISTRY"}</div>
               </div>
               <div className="country-name">
                 {import.meta.env.VITE_APP_COUNTRY_NAME || "CountryX"}
+=======
+              <div style={{ display: 'flex' }}>
+                <div className="title">{'IMPACT'}</div>
+                <div className="title-sub">{'REGISTRY'}</div>
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
               </div>
             </div>
           </div>

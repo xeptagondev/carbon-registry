@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @use "../../Styles/variables.scss";
+=======
+@import '../../Styles/variables.scss';
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
 .transfer-form {
   .popup-credit-input {
@@ -19,18 +23,30 @@
   .label {
     text-align: left;
     font-size: 0.9rem;
+<<<<<<< HEAD
     color: variables.$body-text-color;
   }
   .seperator {
     font-size: 1.2rem;
     color: variables.$line-colors;
+=======
+    color: $body-text-color;
+  }
+  .seperator {
+    font-size: 1.2rem;
+    color: $line-colors;
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   }
 
   .footer {
     margin-bottom: 0px;
     margin-top: 15px;
   }
+<<<<<<< HEAD
   color: variables.$body-text-color;
+=======
+  color: $body-text-color;
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
   label {
     font-size: 0.8rem;
@@ -40,7 +56,11 @@
   }
 
   input {
+<<<<<<< HEAD
     color: variables.$body-text-color;
+=======
+    color: $body-text-color;
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   }
 
   button {
@@ -50,11 +70,16 @@
 }
 
 .model-subText {
+<<<<<<< HEAD
   color: #3a354180;
+=======
+  color: #3A354180;
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   font-size: 12px;
   padding-top: 10px;
   font-weight: 600;
 }
+<<<<<<< HEAD
 // .icon{
 //   // filter: brightness(0) saturate(100%) invert(45%) sepia(99%) saturate(2067%) hue-rotate(170deg) brightness(98%) contrast(99%);
 // }
@@ -87,3 +112,22 @@
   filter: brightness(0) saturate(100%) invert(45%) sepia(99%) saturate(2067%) hue-rotate(170deg) brightness(98%) contrast(99%);
 }
 
+=======
+.popup-danger {
+  .ant-checkbox {
+    &:hover .ant-checkbox-inner,
+    &.ant-checkbox-input:focus + .ant-checkbox-inner {
+      border-color: #ff4d4f !important;
+    }
+    
+    &.ant-checkbox-checked .ant-checkbox-inner {
+      background-color: #ff4d4f !important;
+      border-color: #ff4d4f !important;
+    }
+    
+    &.ant-checkbox-checked::after {
+      border-color: #ff4d4f !important;
+    }
+  }
+}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f

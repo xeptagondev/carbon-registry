@@ -1,3 +1,4 @@
+<<<<<<< HEAD:web/public/locales/i18n/login/en.json
 {
   "heading1": "UNDP",
   "heading2": "Open Source",
@@ -19,3 +20,26 @@
   "transformation": "Carbon Registry",
   "carbonMarket": ""
 }
+=======
+{
+  "heading1": "GOLD ",
+  "heading2": "STANDARD ",
+  "heading3": "IMPACT ",
+  "heading4": "Registry",
+  "heading": "UNDP Demo Carbon Registry",
+  "carbon": "NATIONAL",
+  "nationalNdc": "NATIONAL NDC",
+  "credit": "CARBON REGISTRY",
+  "creditMrv": "TRANSPARENCY",
+  "management": "",
+  "welcome": "Welcome",
+  "welcome-back": "Welcome Back",
+  "register-acc": "Need an account?",
+  "forgot-pwd": "Forgot Password",
+  "register-here": "Register here",
+  "countryName": "{{countryName}}",
+  "digital": "National",
+  "transformation": "Carbon Registry",
+  "carbonMarket": ""
+}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f:web/src/locales/i18n/login/en.json

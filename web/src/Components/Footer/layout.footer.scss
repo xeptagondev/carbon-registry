@@ -2,12 +2,24 @@
 @use '../../Styles/variables.scss';
 
 .homepage-footer-container {
+<<<<<<< HEAD
   background-color: variables.$background-color-dark;
   min-height: 200px;
+=======
+  background-color: variables.$footer-color-dark;
+  min-height: 250px;
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   height: 100%;
   align-items: center;
   padding: 1rem 2rem 0 1rem;
   cursor: pointer;
+  @media (max-width: 645px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1rem 0 1rem;
+  }
 
   .ant-divider {
     @media (max-width: 660px) {
@@ -15,7 +27,7 @@
     }
 
     @media (max-width: 645px) {
-      margin: 2px 60px 2px 12px !important;
+      margin: 2px 60px 2px 60px !important;
     }
   }
 
@@ -25,8 +37,8 @@
     font-size: 0.875rem;
 
     @media (max-width: 645px) {
-      padding: 5px 10px 20px 10px;
-      // text-align: center;
+      padding: 5px 35px 20px 35px;
+      text-align: center;
     }
   }
 
@@ -60,10 +72,12 @@
     padding: 100px 60px 20px 60px;
     font-size: 0.75rem;
     text-decoration: underline;
-    justify-content: right;
+    justify-content: center;
+    padding-left: 400px;
 
     @media (max-width: 1077px) {
       flex-direction: column;
+      padding-left: 0px;
     }
 
     @media (max-width: 837px) {
@@ -82,6 +96,10 @@
   .footertext-links {
     padding-right: 15px;
     color: variables.$dark-text-color;
+<<<<<<< HEAD
+=======
+    white-space: nowrap;
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
     @media (max-width: 645px) {
       padding-left: 0;
@@ -101,10 +119,14 @@
 
   .logocontainer {
     display: flex;
-    margin-top: 10px;
+    margin-top: 25px;
+    margin-bottom: 20px;
 
     @media (max-width: 645px) {
       margin-left: -3.5rem;
+    }
+    .logo-text {
+      padding-left: 0.1rem;
     }
 
     @media (max-width: 576px) {
@@ -134,7 +156,9 @@
         margin-top: unset;
       }
     }
-
+    // span{
+    //   font-weight: 50;
+    // }
     .title-sub {
       font-weight: 100 !important;
       font-family: 'MuseoSans';
@@ -147,8 +171,9 @@
     }
 
     .logo {
-      height: 97px;
+      height: 94px;
       width: 110px;
+      margin-top: -12px;
 
       img {
         object-fit: cover;
@@ -159,10 +184,15 @@
     }
 
     .footer-country-name {
+<<<<<<< HEAD
       font-size: 0.875rem;
+=======
+      font-size: 1.4rem;
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       color: variables.$dark-text-color;
       font-family: 'MuseoSans';
-      margin-left: 0.6rem;
+      margin-left: 0.65rem;
+      margin-top: -16px;
     }
   }
 }

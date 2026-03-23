@@ -1,6 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+<<<<<<< HEAD
 import { useEffect, useRef, useState } from "react";
 import { CreditActionType } from "../Enums/creditActionType.enum";
+=======
+import { useEffect, useRef, useState } from 'react';
+import { CreditActionType } from '../Enums/creditActionType.enum';
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 import {
   Button,
   Checkbox,
@@ -13,6 +18,7 @@ import {
   Radio,
   Row,
   Select,
+<<<<<<< HEAD
 } from "antd";
 import { CreditBalanceInterface } from "../Interfaces/creditBalance.interface";
 import { addCommSep } from "../../../Definitions/Definitions/programme.definitions";
@@ -27,6 +33,22 @@ import {
 import { CreditRetirementTypeEmnum } from "../Enums/creditRetirementType.enum";
 import { COLOR_CONFIGS } from "../../../Config/colorConfigs";
 import { CreditEventStatusEnum } from "../Enums/creditEventEnum";
+=======
+} from 'antd';
+import { CreditBalanceInterface } from '../Interfaces/creditBalance.interface';
+import { addCommSep } from '../../../Definitions/Definitions/programme.definitions';
+import { API_PATHS } from '../../../Config/apiConfig';
+import { useConnection } from '../../../Context/ConnectionContext/connectionContext';
+import { useUserContext } from '../../../Context/UserInformationContext/userInformationContext';
+import { CreditRetirementInterface } from '../Interfaces/creditRetirement.interface';
+import {
+  CreditRetirementProceedAction,
+  RetirementActionEnum,
+} from '../Enums/creditRetirementProceedType.enum';
+import { CreditRetirementTypeEmnum } from '../Enums/creditRetirementType.enum';
+import { COLOR_CONFIGS } from '../../../Config/colorConfigs';
+import { CreditEventStatusEnum } from '../Enums/creditEventEnum';
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
 interface CreditActionModalProps {
   icon?: any;
@@ -45,8 +67,13 @@ interface CreditActionModalProps {
 }
 
 enum RetirementType {
+<<<<<<< HEAD
   CROSS_BORDER = "crossBoarderTransaction",
   VOLUNTARY_CANCELLATION = "voluntaryCancellations",
+=======
+  CROSS_BORDER = 'crossBoarderTransaction',
+  VOLUNTARY_CANCELLATION = 'voluntaryCancellations',
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 }
 
 export const CreditActionModal = (props: CreditActionModalProps) => {
@@ -65,6 +92,7 @@ export const CreditActionModal = (props: CreditActionModalProps) => {
     t,
     data,
   } = props;
+<<<<<<< HEAD
   console.log("-------------proceeed action----------", proceedAction);
 
   const { get, post } = useConnection();
@@ -82,6 +110,19 @@ export const CreditActionModal = (props: CreditActionModalProps) => {
   const [dropDownList, setDropDownList] = useState<
     { value: string; label: string }[]
   >([]);
+=======
+  const { get, post } = useConnection();
+  const { userInfoState } = useUserContext();
+  const [form] = Form.useForm();
+  const [retirementType, setRetirementType] = useState<RetirementType>(RetirementType.CROSS_BORDER);
+  const creditAmountRef = useRef<number | undefined>(undefined);
+  const recivePartyRef = useRef<any>(undefined);
+  const remarkRef = useRef<string>('');
+  const checkedRef = useRef<boolean>(type === CreditActionType.TRANSFER);
+  const [actionDisable, setActionDisable] = useState<boolean>(true);
+  const [listLoading, setListLoading] = useState<boolean>(true);
+  const [dropDownList, setDropDownList] = useState<{ value: string; label: string }[]>([]);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
   const getDropDownList = async () => {
     setListLoading(true);
@@ -96,6 +137,7 @@ export const CreditActionModal = (props: CreditActionModalProps) => {
           : await get(API_PATHS.CB_RETIRE_COINTRY_QUERY);
 
       if (response && response.data && response.data.length > 0) {
+<<<<<<< HEAD
         const filteredData =
           type === CreditActionType.TRANSFER
             ? response.data.filter((item: any) => item.state === "1")
@@ -103,18 +145,36 @@ export const CreditActionModal = (props: CreditActionModalProps) => {
 
         setDropDownList(
           filteredData.map((item: any) => ({
+=======
+        // const filteredData =
+        //   type === CreditActionType.TRANSFER
+        //     ? response.data.filter((item: any) => item.state === '1')
+        //     : response.data;
+
+        setDropDownList(
+          response?.data.map((item: any) => ({
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
             value: type === CreditActionType.TRANSFER ? item.id : item.alpha2,
             label: item.name,
           }))
         );
       }
     } catch (error: any) {
+<<<<<<< HEAD
       console.log("Error in getting List for the Action", error);
       message.open({
         type: "error",
         content: error.message,
         duration: 3,
         style: { textAlign: "right", marginRight: 15, marginTop: 10 },
+=======
+      console.log('Error in getting List for the Action', error);
+      message.open({
+        type: 'error',
+        content: error.message,
+        duration: 3,
+        style: { textAlign: 'right', marginRight: 15, marginTop: 10 },
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       });
     } finally {
       setListLoading(false);
@@ -123,6 +183,7 @@ export const CreditActionModal = (props: CreditActionModalProps) => {
 
   // eslint-disable-next-line no-unused-vars
   const handleValuesChange = (_: any, allValues: any) => {
+<<<<<<< HEAD
     console.log(
       "-------handleValuesChange func running-----------",
       allValues,
@@ -132,6 +193,8 @@ export const CreditActionModal = (props: CreditActionModalProps) => {
     );
     const keys = Object.keys(allValues);
 
+=======
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     creditAmountRef.current = allValues.creditAmount;
     recivePartyRef.current =
       type === CreditActionType.TRANSFER
@@ -144,20 +207,30 @@ export const CreditActionModal = (props: CreditActionModalProps) => {
           }
         : undefined;
 
+<<<<<<< HEAD
     remarkRef.current = allValues.comment || "";
+=======
+    remarkRef.current = allValues.comment || '';
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     checkedRef.current = allValues.confirm || false;
 
     let valid = true;
     if (allValues.retirementType) {
+<<<<<<< HEAD
       if (
         type === CreditActionType.RETIREMENT &&
         allValues.retirementType !== retirementType
       ) {
         form.setFieldValue("confirm", false);
+=======
+      if (type === CreditActionType.RETIREMENT && allValues.retirementType !== retirementType) {
+        form.setFieldValue('confirm', false);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         valid = false;
       }
       setRetirementType(allValues.retirementType);
     }
+<<<<<<< HEAD
 
     // if (keys.includes('toOrganization') && allValues['toOrganization']) {
     //   valid = true
@@ -166,6 +239,8 @@ export const CreditActionModal = (props: CreditActionModalProps) => {
     //   valid = false
     // }
 
+=======
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     if (type !== CreditActionType.TRANSFER && !checkedRef.current) {
       valid = false;
     }
@@ -185,11 +260,15 @@ export const CreditActionModal = (props: CreditActionModalProps) => {
       }
 
       const amountNum = Number(creditAmountRef.current);
+<<<<<<< HEAD
       if (
         !Number.isInteger(amountNum) ||
         amountNum <= 0 ||
         !data?.creditAmount
       ) {
+=======
+      if (!Number.isInteger(amountNum) || amountNum <= 0 || !data?.creditAmount) {
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         valid = false;
       } else if (amountNum > data.creditAmount) {
         valid = false;
@@ -198,6 +277,7 @@ export const CreditActionModal = (props: CreditActionModalProps) => {
         valid = false;
       }
     }
+<<<<<<< HEAD
 
     if (type === CreditActionType.RETIREMENT) {
       if (!isProceed) {
@@ -214,6 +294,8 @@ export const CreditActionModal = (props: CreditActionModalProps) => {
       }
     }
 
+=======
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     setActionDisable(!valid);
   };
 
@@ -260,10 +342,16 @@ export const CreditActionModal = (props: CreditActionModalProps) => {
     if (openModal) {
       form.resetFields();
       let retirementTypeRef: RetirementType;
+<<<<<<< HEAD
       if (isProceed && data && "retirementType" in data) {
         retirementTypeRef =
           data.retirementType.trim() ===
           CreditRetirementTypeEmnum.VOLUNTARY_CANCELLATIONS
+=======
+      if (isProceed && data && 'retirementType' in data) {
+        retirementTypeRef =
+          data.retirementType.trim() === CreditRetirementTypeEmnum.VOLUNTARY_CANCELLATIONS
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
             ? RetirementType.VOLUNTARY_CANCELLATION
             : RetirementType.CROSS_BORDER;
       } else {
@@ -284,11 +372,19 @@ export const CreditActionModal = (props: CreditActionModalProps) => {
         owner: data?.senderName,
         project: data?.projectName,
         retirementType: retirementTypeRef,
+<<<<<<< HEAD
         comment: "",
         confirm: type === CreditActionType.TRANSFER,
       });
 
       remarkRef.current = "";
+=======
+        comment: '',
+        confirm: type === CreditActionType.TRANSFER,
+      });
+
+      remarkRef.current = '';
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       creditAmountRef.current = undefined;
       recivePartyRef.current = undefined;
       checkedRef.current = type === CreditActionType.TRANSFER ? true : false;
@@ -326,6 +422,7 @@ export const CreditActionModal = (props: CreditActionModalProps) => {
             <Row>
               <Col span={24}>
                 {type === CreditActionType.RETIREMENT &&
+<<<<<<< HEAD
                   "status" in data &&
                   data.status === CreditEventStatusEnum.PENDING && (
                     <Form.Item
@@ -333,6 +430,11 @@ export const CreditActionModal = (props: CreditActionModalProps) => {
                       label={t("From")}
                       name="From"
                     >
+=======
+                  'status' in data &&
+                  data.status === CreditEventStatusEnum.PENDING && (
+                    <Form.Item className="credit-action-project-name" label={t('From')} name="From">
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                       <Input placeholder={data.senderName} disabled />
                     </Form.Item>
                   )}
@@ -342,7 +444,11 @@ export const CreditActionModal = (props: CreditActionModalProps) => {
               <Col span={24}>
                 <Form.Item
                   className="credit-action-project-name"
+<<<<<<< HEAD
                   label={t("project")}
+=======
+                  label={t('project')}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                   name="project"
                 >
                   <Input placeholder={data.projectName} disabled />
@@ -355,18 +461,27 @@ export const CreditActionModal = (props: CreditActionModalProps) => {
                 <Col span={24}>
                   <Form.Item
                     className="credit-action-company-select"
+<<<<<<< HEAD
                     label={t("to")}
+=======
+                    label={t('to')}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     name="toCompanyId"
                     rules={[
                       {
                         required: !isProceed,
+<<<<<<< HEAD
                         message: t("required"),
+=======
+                        message: t('required'),
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                       },
                     ]}
                   >
                     <Select
                       showSearch
                       loading={listLoading}
+<<<<<<< HEAD
                       placeholder={t("searchOrganizationByName")}
                       showArrow
                       autoClearSearchValue
@@ -378,6 +493,16 @@ export const CreditActionModal = (props: CreditActionModalProps) => {
                           typeof optionLabel === "string"
                             ? optionLabel
                             : optionLabel.join("");
+=======
+                      placeholder={t('searchOrganizationByName')}
+                      showArrow
+                      autoClearSearchValue
+                      filterOption={(input, option: any) => {
+                        const optionLabel = option?.label?.props?.children || '';
+                        const optionValue = option?.label ? option?.label : '';
+                        const label =
+                          typeof optionLabel === 'string' ? optionLabel : optionLabel.join('');
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                         const value = optionValue.toString().toLowerCase();
 
                         return (
@@ -399,17 +524,26 @@ export const CreditActionModal = (props: CreditActionModalProps) => {
             {type === CreditActionType.RETIREMENT && (
               <Form.Item
                 label={
+<<<<<<< HEAD
                   <span
                     style={{ color: `${COLOR_CONFIGS.PRIMARY_FONT_COLOR}` }}
                   >
                     {t("retirementType")}
+=======
+                  <span style={{ color: `${COLOR_CONFIGS.PRIMARY_FONT_COLOR}` }}>
+                    {t('retirementType')}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                   </span>
                 }
                 name="retirementType"
                 rules={[
                   {
                     required: !isProceed,
+<<<<<<< HEAD
                     message: t("required"),
+=======
+                    message: t('required'),
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                   },
                 ]}
               >
@@ -430,23 +564,36 @@ export const CreditActionModal = (props: CreditActionModalProps) => {
                   <Col span={24}>
                     <Form.Item
                       className="credit-action-country-select"
+<<<<<<< HEAD
                       label={t("country")}
+=======
+                      label={t('country')}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                       name="toCountry"
                       rules={[
                         {
                           required: !isProceed,
+<<<<<<< HEAD
                           message: t("required"),
+=======
+                          message: t('required'),
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                         },
                       ]}
                     >
                       {!isProceed ? (
                         <Select
                           showSearch
+<<<<<<< HEAD
                           placeholder={t("selectCountry")}
+=======
+                          placeholder={t('selectCountry')}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           showArrow
                           autoClearSearchValue
                           loading={listLoading}
                           filterOption={(input, option: any) => {
+<<<<<<< HEAD
                             const optionLabel =
                               option?.label?.props?.children || "";
                             const optionValue = option?.label
@@ -462,6 +609,16 @@ export const CreditActionModal = (props: CreditActionModalProps) => {
                               label
                                 .toLowerCase()
                                 .includes(input.toLowerCase()) ||
+=======
+                            const optionLabel = option?.label?.props?.children || '';
+                            const optionValue = option?.label ? option?.label : '';
+                            const label =
+                              typeof optionLabel === 'string' ? optionLabel : optionLabel.join('');
+                            const value = optionValue.toString().toLowerCase();
+
+                            return (
+                              label.toLowerCase().includes(input.toLowerCase()) ||
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                               value.includes(input.toLowerCase())
                             );
                           }}
@@ -473,18 +630,27 @@ export const CreditActionModal = (props: CreditActionModalProps) => {
                         />
                       ) : (
                         <Input
+<<<<<<< HEAD
                           placeholder={"country" in data ? data.country : "N/A"}
+=======
+                          placeholder={'countryName' in data ? data.countryName : 'N/A'}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled
                         />
                       )}
                     </Form.Item>
                     <Form.Item
                       className="credit-action-organization-name"
+<<<<<<< HEAD
                       label={t("organizationName")}
+=======
+                      label={t('organizationName')}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                       name="toOrganization"
                       rules={[
                         {
                           required: !isProceed,
+<<<<<<< HEAD
                           message: t("invalidOrganizationName"),
                         },
                         {
@@ -496,16 +662,23 @@ export const CreditActionModal = (props: CreditActionModalProps) => {
                             }
                             return Promise.resolve();
                           },
+=======
+                          message: t('required'),
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                         },
                       ]}
                     >
                       <Input
                         disabled={isProceed}
+<<<<<<< HEAD
                         placeholder={
                           "organizationName" in data
                             ? data.organizationName
                             : ""
                         }
+=======
+                        placeholder={'organizationName' in data ? data.organizationName : ''}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                       />
                     </Form.Item>
                   </Col>
@@ -515,16 +688,26 @@ export const CreditActionModal = (props: CreditActionModalProps) => {
             <Row gutter={8} justify="space-between">
               <Col>
                 <label>
+<<<<<<< HEAD
                   <span
                     style={{ color: `${COLOR_CONFIGS.PRIMARY_FONT_COLOR}` }}
                   >
                     {t("creditAmount")}
+=======
+                  <span style={{ color: `${COLOR_CONFIGS.PRIMARY_FONT_COLOR}` }}>
+                    {t('creditAmount')}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     {!isProceed && (
                       <span
                         style={{
                           color: `${COLOR_CONFIGS.PRIMARY_RED_COLOR}`,
+<<<<<<< HEAD
                           position: "relative",
                           top: "2px",
+=======
+                          position: 'relative',
+                          top: '2px',
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           marginLeft: 2,
                         }}
                       >
@@ -549,6 +732,7 @@ export const CreditActionModal = (props: CreditActionModalProps) => {
                             if (
                               value === undefined ||
                               value === null ||
+<<<<<<< HEAD
                               value.toString().trim() === ""
                             ) {
                               return Promise.reject(new Error(t("required")));
@@ -565,12 +749,27 @@ export const CreditActionModal = (props: CreditActionModalProps) => {
                               return Promise.reject(
                                 new Error(t("insufficientBalance"))
                               );
+=======
+                              value.toString().trim() === ''
+                            ) {
+                              return Promise.reject(new Error(t('required')));
+                            }
+                            if (value <= 0 || isNaN(value)) {
+                              return Promise.reject(new Error(t('wrongInput')));
+                            }
+                            if (!Number.isInteger(Number(value))) {
+                              return Promise.reject(new Error(t('shouldBeInterger')));
+                            }
+                            if (Number(value) > data.creditAmount) {
+                              return Promise.reject(new Error(t('insufficientBalance')));
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                             }
                             return Promise.resolve();
                           },
                         },
                       ]}
                     >
+<<<<<<< HEAD
                       <div style={{ display: "flex", alignItems: "center" }}>
                         {!isProceed && (
                           <>
@@ -587,10 +786,22 @@ export const CreditActionModal = (props: CreditActionModalProps) => {
                               // }}
                             />
                             <span style={{ margin: "0 8px" }}>/</span>
+=======
+                      <div style={{ display: 'flex', alignItems: 'center' }}>
+                        {!isProceed && (
+                          <>
+                            <InputNumber
+                              placeholder={data?.creditAmount ? addCommSep(data.creditAmount) : ''}
+                              style={{ flex: 1, marginRight: 8 }}
+                              disabled={isProceed}
+                            />
+                            <span style={{ margin: '0 8px' }}>/</span>
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           </>
                         )}
 
                         <InputNumber
+<<<<<<< HEAD
                           placeholder={
                             data?.creditAmount
                               ? addCommSep(data.creditAmount)
@@ -599,6 +810,12 @@ export const CreditActionModal = (props: CreditActionModalProps) => {
                           disabled
                           style={{ flex: 1 }}
                           value={data?.creditAmount ?? ""}
+=======
+                          placeholder={data?.creditAmount ? addCommSep(data.creditAmount) : ''}
+                          disabled
+                          style={{ flex: 1 }}
+                          value={data?.creditAmount ?? ''}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                         />
                       </div>
                     </Form.Item>
@@ -611,18 +828,31 @@ export const CreditActionModal = (props: CreditActionModalProps) => {
               <Col span={24}>
                 <Form.Item
                   className="remarks-label"
+<<<<<<< HEAD
                   label={t("remark")}
+=======
+                  label={t('remark')}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                   name="comment"
                   rules={[
                     {
                       required: remarkRequired,
+<<<<<<< HEAD
                       message: t("required"),
+=======
+                      message: t('required'),
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     },
                     {
                       // eslint-disable-next-line no-unused-vars
                       validator: (_, val) => {
+<<<<<<< HEAD
                         if (remarkRequired && val && val.trim() === "") {
                           return Promise.reject(t("required"));
+=======
+                        if (remarkRequired && val && val.trim() === '') {
+                          return Promise.reject(t('required'));
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                         }
                         return Promise.resolve();
                       },
@@ -637,6 +867,7 @@ export const CreditActionModal = (props: CreditActionModalProps) => {
             {type === CreditActionType.RETIREMENT && (
               <Row>
                 <Col span={24}>
+<<<<<<< HEAD
                   <Form.Item
                     className="text-left"
                     name="confirm"
@@ -653,6 +884,19 @@ export const CreditActionModal = (props: CreditActionModalProps) => {
                       }
                     >
                       {t(!isProceed ? "checkBoxCreate" : "checkBoxProceed")}
+=======
+                  <Form.Item className="text-left" name="confirm" valuePropName="checked">
+                    <Checkbox
+                      className={
+                        proceedAction === CreditRetirementProceedAction.ACCEPT
+                          ? 'checkbox-accept'
+                          : proceedAction === CreditRetirementProceedAction.REJECT
+                          ? 'checkbox-reject'
+                          : 'checkbox-process'
+                      }
+                    >
+                      {t(!isProceed ? 'checkBoxCreate' : 'checkBoxProceed')}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     </Checkbox>
                   </Form.Item>
                 </Col>
@@ -661,7 +905,11 @@ export const CreditActionModal = (props: CreditActionModalProps) => {
 
             <Form.Item className="footer">
               <Button htmlType="button" onClick={onCancel}>
+<<<<<<< HEAD
                 {t("view:cancel")}
+=======
+                {t('view:cancel')}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
               </Button>
               <Button
                 style={
@@ -670,15 +918,23 @@ export const CreditActionModal = (props: CreditActionModalProps) => {
                         backgroundColor:
                           proceedAction === CreditRetirementProceedAction.ACCEPT
                             ? COLOR_CONFIGS.PRIMARY_THEME_COLOR
+<<<<<<< HEAD
                             : proceedAction ===
                               CreditRetirementProceedAction.REJECT
+=======
+                            : proceedAction === CreditRetirementProceedAction.REJECT
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                             ? COLOR_CONFIGS.FAILED_RESPONSE_COLOR
                             : COLOR_CONFIGS.FAILED_RESPONSE_COLOR,
                         borderColor:
                           proceedAction === CreditRetirementProceedAction.ACCEPT
                             ? COLOR_CONFIGS.PRIMARY_THEME_COLOR
+<<<<<<< HEAD
                             : proceedAction ===
                               CreditRetirementProceedAction.REJECT
+=======
+                            : proceedAction === CreditRetirementProceedAction.REJECT
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                             ? COLOR_CONFIGS.FAILED_RESPONSE_COLOR
                             : COLOR_CONFIGS.FAILED_RESPONSE_COLOR,
                       }

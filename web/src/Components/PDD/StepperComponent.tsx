@@ -6,6 +6,10 @@ import './PDD.scss';
 import { useForm } from 'antd/lib/form/Form';
 import { useConnection } from '../../Context/ConnectionContext/connectionContext';
 import ApplicationOfMethodology from './ApplicationOfMethodology';
+<<<<<<< HEAD
+=======
+import QuantificationOfEmissions from './QuantificationOfEmissions';
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
 import DescriptionOfProjectActivity from './DescriptionOfProjectActivity';
 import EnvironmentImpacts from './EnvironmentImpacts';
@@ -20,6 +24,11 @@ import {
   descriptionOfProjectActivityDataMapToFields,
   environmentImpactsDataMaptoFields,
   localStakeholderConsultationDataMaptoFields,
+<<<<<<< HEAD
+=======
+  monitoringDataMapToFields,
+  quantificationOfGHGDataMapToFields,
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   startDateCreditingPeriodDataMapToFields,
 } from './viewDataMap';
 import { Loading } from '../Loading/loading';
@@ -27,12 +36,20 @@ import { FormMode } from '../../Definitions/Enums/formMode.enum';
 import ApprovalAndAuthoriziation from './ApprovalAndAuthoriziation';
 import StartDateCreditingPeriod from './StartDateCreditingPeriod';
 import { API_PATHS } from '../../Config/apiConfig';
+<<<<<<< HEAD
 import { DocumentEnum } from '../../Definitions/Enums/document.enum';
 import { ROUTES } from '../../Config/uiRoutingConfig';
 import { INF_SECTORAL_SCOPE } from '../AddNewProgramme/ProgrammeCreationComponent';
 import { toMoment } from '../../Utils/convertTime';
 import { safeClone } from '../../Utils/deepCopy';
 import { defaultTimeout } from '../../Definitions/Constants/defaultTimeout';
+=======
+import Monitoring from './Monitoring';
+import { DocumentEnum } from '../../Definitions/Enums/document.enum';
+import { ROUTES } from '../../Config/uiRoutingConfig';
+import { INF_SECTORAL_SCOPE } from '../AddNewProgramme/ProgrammeCreationComponent';
+import { safeClone } from '../../Utils/deepCopy';
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
 const CMA_STEPS = {};
 
@@ -42,8 +59,15 @@ const StepperComponent = (props: any) => {
   const [documentId, setDocumentId] = useState<string>();
   const navigate = useNavigate();
   const { state } = useLocation();
+<<<<<<< HEAD
 
 
+=======
+  //console.log('---state-----', state);
+  // const isView = !!state?.isView;
+  // const isEdit = !!state?.isEdit;
+
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   const [loading, setLoading] = useState<boolean>(
     state?.mode === FormMode.VIEW ||
       state?.mode === FormMode.EDIT ||
@@ -81,6 +105,10 @@ const StepperComponent = (props: any) => {
   });
 
   const handleValuesUpdate = (val: any) => {
+<<<<<<< HEAD
+=======
+    //console.log('----------temp vals-------------', val);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
     setValues((prevVal: any) => {
       const tempContent = {
@@ -126,6 +154,12 @@ const StepperComponent = (props: any) => {
       const { data } = await post(API_PATHS.PROGRAMME_BY_ID, {
         programmeId: programId,
       });
+<<<<<<< HEAD
+=======
+      // const {
+      //   data: { user },
+      // } = await get(API_PATHS.USER_PROFILE);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       if (state?.mode === FormMode?.CREATE) {
         form1.setFieldsValue({
           projectTitle: data?.title,
@@ -134,11 +168,21 @@ const StepperComponent = (props: any) => {
           sectoralScope: INF_SECTORAL_SCOPE[data?.sectoralScope] || 'NA',
         });
         form4.setFieldsValue({
+<<<<<<< HEAD
           projectActivityStartDate: toMoment(data?.startDate).format('YYYY-MM-DD'),
         });
       }
       setValues((prevVal) => ({
         ...prevVal,
+=======
+          projectActivityStartDate: moment(data?.startDate * 1000).format('YYYY-MM-DD'),
+        });
+      }
+      //.log('----------running form values--------', form4.getFieldsValue());
+      setValues((prevVal) => ({
+        ...prevVal,
+        // companyId: data?.company?.companyId,
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       }));
     } catch (error) {
       console.log('error', error);
@@ -151,6 +195,10 @@ const StepperComponent = (props: any) => {
     try {
       setLoading(true);
       const { data } = await get(API_PATHS.USER_PROFILE_DETAILS);
+<<<<<<< HEAD
+=======
+      //console.log('----------data----------', data);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       if (state?.mode === FormMode?.CREATE) {
         form8.setFieldsValue({
           organizationName: data?.Organisation?.name,
@@ -183,6 +231,10 @@ const StepperComponent = (props: any) => {
             refId: state?.documentRefId,
             documentType: DocumentEnum.PDD,
           });
+<<<<<<< HEAD
+=======
+          console.log('------PDD data-----', res?.data);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
           if (res?.statusText === 'SUCCESS') {
             const data = res?.data;
             setDocumentId(data?.refId);
@@ -263,13 +315,22 @@ const StepperComponent = (props: any) => {
     try {
       setLoading(true);
       const res = await post(API_PATHS.ADD_DOCUMENT, tempValues);
+<<<<<<< HEAD
+=======
+      //console.log('------res------------', res);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       if (res?.statusText === 'SUCCESS') {
         message.open({
           type: 'success',
           content:
             state?.mode === FormMode.EDIT
+<<<<<<< HEAD
               ? t('PDD:pddSubmitSuccess')
               : t('PDD:pddEditSuccess'),
+=======
+              ? 'Project Design Document has been edited successfully'
+              : 'Project Design Document has been submitted successfully',
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
           duration: 4,
           style: { textAlign: 'right', marginRight: 15, marginTop: 10 },
         });
@@ -393,6 +454,15 @@ const StepperComponent = (props: any) => {
           handleValuesUpdate={handleValuesUpdate}
           disableFields={disableFields}
         />
+        // <Monitoring
+        //   next={next}
+        //   prev={prev}
+        //   form={form4}
+        //   current={current}
+        //   t={t}
+        //   handleValuesUpdate={handleValuesUpdate}
+        //   disableFields={disableFields}
+        // />
       ),
     },
     {
@@ -412,6 +482,15 @@ const StepperComponent = (props: any) => {
           handleValuesUpdate={handleValuesUpdate}
           disableFields={disableFields}
         />
+        // <EligibilityCriteria
+        //   next={next}
+        //   prev={prev}
+        //   form={form5}
+        //   current={current}
+        //   t={t}
+        //   handleValuesUpdate={handleValuesUpdate}
+        //   disableFields={disableFields}
+        // />
       ),
     },
     {
@@ -422,6 +501,18 @@ const StepperComponent = (props: any) => {
         </div>
       ),
       description: (
+<<<<<<< HEAD
+=======
+        // <ApplicationOfMethodology
+        //   next={next}
+        //   prev={prev}
+        //   form={form6}
+        //   current={current}
+        //   t={t}
+        //   handleValuesUpdate={handleValuesUpdate}
+        //   disableFields={disableFields}
+        // />
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         <LocalStakeholderConsultation
           next={next}
           prev={prev}

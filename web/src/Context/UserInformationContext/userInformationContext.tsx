@@ -27,10 +27,35 @@ export const UserInformationContextProvider = ({
 
   const [isTokenExpired, setIsTokenExpired] = useState<boolean>(false);
   const initialUserProps: UserProps = {
+<<<<<<< HEAD
     id: localStorage.getItem("userId")
       ? parseInt(localStorage.getItem("userId") as string)
       : import.meta.env.STORYBOOK_USER_ID
       ? parseInt(import.meta.env.STORYBOOK_USER_ID)
+=======
+    id: localStorage.getItem('userId')
+      ? parseInt(localStorage.getItem('userId') as string)
+      : process.env.STORYBOOK_USER_ID
+      ? parseInt(process.env.STORYBOOK_USER_ID)
+      : -1,
+    userRole: localStorage.getItem('userRole')
+      ? (localStorage.getItem('userRole') as string)
+      : process.env.STORYBOOK_USER_ROLE
+      ? process.env.STORYBOOK_USER_ROLE
+      : '',
+    userHederaAccount: localStorage.getItem('userHederaAccount')
+      ? (localStorage.getItem('userHederaAccount') as string)
+      : '',
+    companyRole: localStorage.getItem('companyRole')
+      ? (localStorage.getItem('companyRole') as string)
+      : process.env.STORYBOOK_COMPANY_ROLE
+      ? process.env.STORYBOOK_COMPANY_ROLE
+      : '',
+    companyId: localStorage.getItem('companyId')
+      ? parseInt(localStorage.getItem('companyId') as string)
+      : process.env.STORYBOOK_COMPANY_ID
+      ? parseInt(process.env.STORYBOOK_COMPANY_ID)
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       : -1,
     userRole: localStorage.getItem("userRole")
       ? (localStorage.getItem("userRole") as string)
@@ -62,7 +87,14 @@ export const UserInformationContextProvider = ({
       : import.meta.env.STORYBOOK_COMPANY_STATE
       ? parseInt(import.meta.env.STORYBOOK_COMPANY_STATE)
       : 0,
+<<<<<<< HEAD
     name: localStorage.getItem("name") || "",
+=======
+    organizationHederaAccount: localStorage.getItem('organizationHederaAccount')
+      ? (localStorage.getItem('organizationHederaAccount') as string)
+      : '',
+    name: localStorage.getItem('name') || '',
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   };
   const [userInfoState, setUserInfoState] =
     useState<UserProps>(initialUserProps);
@@ -73,16 +105,25 @@ export const UserInformationContextProvider = ({
     const {
       id,
       userRole,
+      userHederaAccount,
       companyId,
       companyRole,
       companyLogo,
       companyName,
       companyState = state,
+<<<<<<< HEAD
+=======
+      organizationHederaAccount,
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       name,
     } = value;
     if (id) {
       setUserInfoState((prev) => ({ ...prev, id }));
+<<<<<<< HEAD
       localStorage.setItem("userId", id + "");
+=======
+      localStorage.setItem('userId', id + '');
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     }
 
     if (userRole) {
@@ -115,6 +156,19 @@ export const UserInformationContextProvider = ({
     if (name) {
       setUserInfoState((prev) => ({ ...prev, name }));
       localStorage.setItem("name", name);
+    }
+    if (name) {
+      setUserInfoState((prev) => ({ ...prev, name }));
+      localStorage.setItem('name', name);
+    }
+
+    if (userHederaAccount) {
+      setUserInfoState((prev) => ({ ...prev, userHederaAccount }));
+      localStorage.setItem('userHederaAccount', userHederaAccount);
+    }
+    if (organizationHederaAccount) {
+      setUserInfoState((prev) => ({ ...prev, organizationHederaAccount }));
+      localStorage.setItem('organizationHederaAccount', organizationHederaAccount);
     }
 
     setUserInfoState((prev) => ({ ...prev, companyState }));
@@ -150,6 +204,7 @@ export const UserInformationContextProvider = ({
   );
 
   const removeUserInfo = () => {
+<<<<<<< HEAD
     localStorage.removeItem("userId");
     localStorage.removeItem("userRole");
     localStorage.removeItem("companyId");
@@ -157,6 +212,17 @@ export const UserInformationContextProvider = ({
     localStorage.removeItem("companyName");
     localStorage.removeItem("companyState");
     localStorage.removeItem("companyLogo");
+=======
+    localStorage.removeItem('userId');
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('companyId');
+    localStorage.removeItem('companyRole');
+    localStorage.removeItem('companyName');
+    localStorage.removeItem('companyState');
+    localStorage.removeItem('companyLogo');
+    localStorage.removeItem('userHederaAccount');
+    localStorage.removeItem('organizationHederaAccount');
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     setUserInfoState(initialUserProps);
   };
 

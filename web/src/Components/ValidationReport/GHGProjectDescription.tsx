@@ -22,6 +22,7 @@ const GHGProjectDescription = (props: ValidationStepsProps) => {
   // }, []);
 
   const onFinish = (values: any) => {
+<<<<<<< HEAD
   const body = {
     ...values,
     // Convert numerical fields to numbers
@@ -60,6 +61,43 @@ const GHGProjectDescription = (props: ValidationStepsProps) => {
   console.log('--------body---------', body);
   handleValuesUpdate({ ghgProjectDescription: body });
 };
+=======
+    const body = {
+      ...values,
+      avgBaselineEmissionReductions: Number(values?.avgBaselineEmissionReductions),
+      avgLeakageEmissionReductions: Number(values?.avgLeakageEmissionReductions),
+      avgNetEmissionReductions: Number(values?.avgNetEmissionReductions),
+      avgProjectEmissionReductions: Number(values?.avgProjectEmissionReductions),
+      totalBaselineEmissionReductions: Number(values?.totalBaselineEmissionReductions),
+      totalLeakageEmissionReductions: Number(values?.totalLeakageEmissionReductions),
+      totalNetEmissionReductions: Number(values?.totalNetEmissionReductions),
+      totalNumberOfCreditingYears: Number(values?.totalNumberOfCreditingYears),
+      totalProjectEmissionReductions: Number(values?.totalProjectEmissionReductions),
+
+      estimatedNetEmissionReductions: values?.estimatedNetEmissionReductions?.map((item: any) => {
+        const temp = {
+          ...item,
+          vintage: item?.vintage ? moment(item?.vintage).startOf('day').valueOf() : undefined,
+          netEmissionReductions: Number(item?.netEmissionReductions),
+          leakageEmissionReductions: Number(item?.leakageEmissionReductions),
+          baselineEmissionReductions: Number(item?.baselineEmissionReductions),
+          projectEmissionReductions: Number(item?.projectEmissionReductions),
+        };
+        return temp;
+      }),
+
+      calculationOfBaselineEmissionFactor: values?.calculationOfBaselineEmissionFactor,
+      plantFactor: values?.plantFactor,
+      annualEmissionReductionCalculation: values?.annualEmissionReductionCalculation,
+      projectemission: values?.projectemission,
+      leakageEmission: values?.leakageEmission,
+      baselineEmissions: values?.baselineEmissions,
+    };
+
+    console.log('--------body---------', body);
+    handleValuesUpdate({ ghgProjectDescription: body });
+  };
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   return (
     <>
       {current === 1 && (

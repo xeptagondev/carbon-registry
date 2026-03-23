@@ -7,7 +7,11 @@
   "hederaAccount": "Hedera Account",
   "hederaKey": "Hedera Key",
   "hederaAccountRequired": "Please add the Hedera account details if available. If not we will create an account for you! ",
+<<<<<<< HEAD:web/public/locales/i18n/addCompany/en.json
   "ic": "Independent Certifier",
+=======
+  "IC": "Independent Certifier",
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f:web/src/locales/i18n/addCompany/en.json
   "email": "Email",
   "taxId": "Tax ID",
   "paymentId": "Registration Payment ID",
@@ -18,7 +22,11 @@
   "maxUploadSize": "Maximum upload file size is {{maxUploadSize}}!",
   "role": "Role",
   "Certifier": "Certifier (VVB)",
+<<<<<<< HEAD:web/public/locales/i18n/addCompany/en.json
   "ProgrammeDeveloper": "Project Developer",
+=======
+  "PD": "Project Developer",
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f:web/src/locales/i18n/addCompany/en.json
   "Ministry": "Ministry",
   "ministerName": "Name of the Minister",
   "sectoralScope": "Sectoral Scope",

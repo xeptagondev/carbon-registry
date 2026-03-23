@@ -23,6 +23,7 @@ export const basicInformationMapDataToFields = (vals: any) => {
       if (locations !== 0 && locations.length > 0) {
         tempExtraLocations = locations.map((location: any) => {
           const tempObj = {
+<<<<<<< HEAD
             locationOfProjectActivity: location?.locationOfProjectActivity,
             province: location?.province,
             district: location?.district,
@@ -30,6 +31,9 @@ export const basicInformationMapDataToFields = (vals: any) => {
             city: location?.city,
             community: location?.community,
             location: location?.location,
+=======
+            ...location,
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
             optionalImages: mapBase64ToFields(location?.additionalDocuments),
           };
           return tempObj;

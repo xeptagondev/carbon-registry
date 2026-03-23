@@ -347,9 +347,15 @@ export const UserManagementComponent = (props: any) => {
 
   const fixFilterAnd = [
     {
+<<<<<<< HEAD
       key: 'isPending',
       operation: '=',
       value: false,
+=======
+      key: 'user"."isActive',
+      operation: '=',
+      value: true,
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     },
   ];
 
@@ -481,9 +487,13 @@ export const UserManagementComponent = (props: any) => {
   const getAllUser = async () => {
     setLoading(true);
     try {
+<<<<<<< HEAD
       console.log('-----------------------User params', getAllUserParams());
       const response: any = await post(API_PATHS.USER_DETAILS, getAllUserParams());
       console.log('-----------------------User response', response);
+=======
+      const response: any = await post(API_PATHS.USER_DETAILS, getAllUserParams());
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       if (response && response.data) {
         const availableUsers = response.data.filter(
           (user: any) => user.companyRole !== CompanyRole.API

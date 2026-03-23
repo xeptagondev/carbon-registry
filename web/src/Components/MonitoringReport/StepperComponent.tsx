@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useEffect, useRef, useState } from "react";
 import { Steps, message } from "antd";
 import { BasicInformationStep } from "./BasicInformation";
@@ -18,6 +19,35 @@ import { API_PATHS } from "../../Config/apiConfig";
 import { ROUTES } from "../../Config/uiRoutingConfig";
 import { CustomStepsProps } from "./StepProps";
 import { Loading } from "../Loading/loading";
+=======
+import { useEffect, useRef, useState } from 'react';
+import { Steps, message } from 'antd';
+import { BasicInformationStep } from './BasicInformation';
+import './MonitoringReport.scss';
+import { ProjectActivityStep } from './ProjectActivityStep';
+import { ImplementationOfProjectActivityStep } from './ImplementationOfProjectActivity';
+import { DescriptionOfMSStep } from './DescriptionOfMonitoringSystemStep';
+import { DataAndParametersStep } from './DataAndParametersStep';
+import { CalcEmissionReductionStep } from './CalcOfEmissionReductionStep';
+import { AnnexureStep } from './AppendixStep';
+import { useForm } from 'antd/lib/form/Form';
+import { useConnection } from '../../Context/ConnectionContext/connectionContext';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
+import moment from 'moment';
+import { DocumentTypeEnum } from '../../Definitions/Enums/document.type.enum';
+import { DocumentEnum } from '../../Definitions/Enums/document.enum';
+import { FormMode } from '../../Definitions/Enums/formMode.enum';
+import { extractFilePropertiesFromLink, fileUploadValueExtract } from '../../Utils/utilityHelper';
+import { SlcfFormActionModel } from '../Models/SlcfFormActionModel';
+import { PopupInfo } from '../../Definitions/Definitions/ndcDetails.definitions';
+import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import { API_PATHS } from '../../Config/apiConfig';
+import { ROUTES } from '../../Config/uiRoutingConfig';
+import { DocType } from '../../Definitions/Enums/document.type';
+import ProjectDetails from '../PDD/BasicInformation';
+import { CustomStepsProps } from './StepProps';
+import { Loading } from '../Loading/loading';
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 import {
   AnnexureMapDataToFields,
   basicInformationMapDataToFields,
@@ -26,19 +56,39 @@ import {
   descriptionOfMMapDataToFields,
   implementationOfProjectAcitivityMapDataToFields,
   projectActivityMapDataToFields,
+<<<<<<< HEAD
 } from "./viewDataMap";
 import { mapBase64ToFields } from "../../Utils/mapBase64ToFields";
 import { INF_SECTORAL_SCOPE } from "../AddNewProgramme/ProgrammeCreationComponent";
 import { safeClone } from "../../Utils/deepCopy";
 import { defaultTimeout } from "../../Definitions/Constants/defaultTimeout";
+=======
+} from './viewDataMap';
+import { mapBase64ToFields } from '../../Utils/mapBase64ToFields';
+import { INF_SECTORAL_SCOPE } from '../AddNewProgramme/ProgrammeCreationComponent';
+import { safeClone } from '../../Utils/deepCopy';
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
 const StepperComponent = (props: CustomStepsProps) => {
   const navigate = useNavigate();
   const { translator, t } = props;
   const [current, setCurrent] = useState(0);
+<<<<<<< HEAD
  
   const { post } = useConnection();
   const { id } = useParams();
+=======
+  const [reportId, setReportId] = useState(0);
+  const [status, setStatus] = useState(null);
+  const { get, post } = useConnection();
+  const { id, verificationRequestId } = useParams();
+  const [projectCategory, setProjectCategory] = useState<string>('');
+  const [popupInfo, setPopupInfo] = useState<PopupInfo>();
+  const [slcfActionModalVisible, setSlcfActioModalVisible] = useState<boolean>(false);
+  const [versions, setVersions] = useState<number[]>([]);
+  const [selectedVersion, setSelectedVersion] = useState<number>();
+  const [documentStatus, setDocumentStatus] = useState('');
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   const [documentId, setDocumentId] = useState<string>();
 
   const [maxNetGHGReduction, setMaxNetGHGReduction] = useState<number>();
@@ -52,6 +102,10 @@ const StepperComponent = (props: CustomStepsProps) => {
   const [annexuresForm] = useForm();
 
   const { state } = useLocation();
+<<<<<<< HEAD
+=======
+  console.log('----state-----------', state);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
   const [loading, setLoading] = useState<boolean>(
     state?.mode === FormMode.VIEW ||
@@ -69,7 +123,11 @@ const StepperComponent = (props: CustomStepsProps) => {
 
   const [values, setValues] = useState({
     projectRefId: id,
+<<<<<<< HEAD
     name: "monitoringReport",
+=======
+    name: 'monitoringReport',
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     companyId: undefined,
     documentType: DocumentEnum.MONITORING,
     data: {},
@@ -78,8 +136,13 @@ const StepperComponent = (props: CustomStepsProps) => {
   const scrollToDiv = () => {
     if (scrollSection.current) {
       scrollSection.current.scrollIntoView({
+<<<<<<< HEAD
         behavior: "smooth",
         block: "start",
+=======
+        behavior: 'smooth',
+        block: 'start',
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       });
     }
   };
@@ -106,6 +169,7 @@ const StepperComponent = (props: CustomStepsProps) => {
     let pddData = null;
     let validationData = null;
 
+<<<<<<< HEAD
     console.log("-------state mon---------", state);
     try {
       //fetch programme data
@@ -123,6 +187,20 @@ const StepperComponent = (props: CustomStepsProps) => {
       }
     } catch (error) {
       console.log("Error fetching programme data:", error);
+=======
+    console.log('-------state mon---------', state);
+    try {
+      //fetch programme data
+      const programmeResponse = await post(API_PATHS.PROGRAMME_BY_ID, { programmeId: programId });
+      if (programmeResponse?.statusText === 'SUCCESS') {
+        programmeData = programmeResponse?.data;
+        console.log('-------programme data Monitoring-----------', programmeData);
+      } else {
+        console.log('Error: Programme API did not return SUCCESS status');
+      }
+    } catch (error) {
+      console.log('Error fetching programme data:', error);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     }
 
     try {
@@ -131,6 +209,7 @@ const StepperComponent = (props: CustomStepsProps) => {
         refId: state?.documents?.PDD?.refId,
         documentType: DocumentEnum.PDD,
       });
+<<<<<<< HEAD
 
       if (pddResponse?.statusText === "SUCCESS") {
         pddData = pddResponse?.data;
@@ -139,6 +218,16 @@ const StepperComponent = (props: CustomStepsProps) => {
       }
     } catch (error) {
       console.log("Error fetching PDD data:", error);
+=======
+      console.log('-----------------PDD Response-----------------', pddResponse);
+      if (pddResponse?.statusText === 'SUCCESS') {
+        pddData = pddResponse?.data;
+      } else {
+        console.log('Error: PDD API did not return SUCCESS status');
+      }
+    } catch (error) {
+      console.log('Error fetching PDD data:', error);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     }
 
     try {
@@ -147,6 +236,7 @@ const StepperComponent = (props: CustomStepsProps) => {
         refId: state?.documents?.VALIDATION?.refId,
         documentType: DocumentEnum.VALIDATION,
       });
+<<<<<<< HEAD
       if (validationResponse?.statusText === "SUCCESS") {
         validationData = validationResponse?.data?.data;
         console.log(
@@ -156,6 +246,14 @@ const StepperComponent = (props: CustomStepsProps) => {
       }
     } catch (error) {
       console.log("Error fetching data from validation report", error);
+=======
+      if (validationResponse?.statusText === 'SUCCESS') {
+        validationData = validationResponse?.data?.data;
+        console.log('---------validation data monitoring----------', validationData);
+      }
+    } catch (error) {
+      console.log('Error fetching data from validation report', error);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     }
 
     if (programmeData && pddData && validationData) {
@@ -165,6 +263,7 @@ const StepperComponent = (props: CustomStepsProps) => {
           Number(programmeData?.creditRetired) +
           Number(programmeData?.creditTransferred));
 
+<<<<<<< HEAD
       console.log(
         "-----------tempNetGHG---------",
         tempNetGHGEmisisionReduction
@@ -185,10 +284,25 @@ const StepperComponent = (props: CustomStepsProps) => {
         bi_hostParty: validationData?.basicInformation?.hostParty,
         bi_appliedMethodologies:
           validationData?.basicInformation?.appliedMethodologies,
+=======
+      console.log('-----------tempNetGHG---------', tempNetGHGEmisisionReduction);
+      setMaxNetGHGReduction(Number(tempNetGHGEmisisionReduction));
+
+      const docVersions = state?.documents?.[DocumentEnum.MONITORING as any]?.version;
+      const latestVersion = docVersions ? docVersions + 1 : 1;
+      basicInformationForm.setFieldsValue({
+        bi_sectoralScope: INF_SECTORAL_SCOPE[programmeData?.sectoralScope] || 'NA',
+        bi_projectTitle: validationData?.basicInformation?.titleOfTheProjectActivity,
+        bi_applicablePDDVersionNo: validationData?.basicInformation?.versionNumberPDD,
+        bi_projectDeveloper: programmeData?.projectParticipant,
+        bi_hostParty: validationData?.basicInformation?.hostParty,
+        bi_appliedMethodologies: validationData?.basicInformation?.appliedMethodologies,
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         bi_unfccRefNo: validationData?.basicInformation?.unfccRefNo,
         bi_versionNoOfMR: latestVersion,
       });
       projectActivityForm.setFieldsValue({
+<<<<<<< HEAD
         projectParticipants:
           pddData?.data?.projectActivity?.projectParticipants,
         pa_creditingPeriodType:
@@ -210,10 +324,23 @@ const StepperComponent = (props: CustomStepsProps) => {
         community:
           pddData?.data?.projectActivity?.locationsOfProjectActivity?.[0]
             ?.community,
+=======
+        projectParticipants: pddData?.data?.projectActivity?.projectParticipants,
+        pa_creditingPeriodType: pddData?.data?.startDateCreditingPeriod?.creditingPeriodType,
+        locationOfProjectActivity:
+          pddData?.data?.projectActivity?.locationsOfProjectActivity?.[0]
+            ?.locationOfProjectActivity,
+        siteNo: pddData?.data?.projectActivity?.locationsOfProjectActivity?.[0]?.siteNo,
+        province: pddData?.data?.projectActivity?.locationsOfProjectActivity?.[0]?.province,
+        district: pddData?.data?.projectActivity?.locationsOfProjectActivity?.[0]?.district,
+        city: pddData?.data?.projectActivity?.locationsOfProjectActivity?.[0]?.city,
+        community: pddData?.data?.projectActivity?.locationsOfProjectActivity?.[0]?.community,
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         geographicalLocationCoordinates:
           pddData?.data?.projectActivity?.locationsOfProjectActivity?.[0]
             ?.geographicalLocationCoordinates,
         optionalImages: mapBase64ToFields(
+<<<<<<< HEAD
           pddData?.data?.projectActivity?.locationsOfProjectActivity?.[0]
             ?.additionalDocuments
         ),
@@ -224,6 +351,16 @@ const StepperComponent = (props: CustomStepsProps) => {
               ...location,
               uploadImages: mapBase64ToFields(location?.additionalDocuments),
             })),
+=======
+          pddData?.data?.projectActivity?.locationsOfProjectActivity?.[0]?.additionalDocuments
+        ),
+        extraLocations: pddData?.data?.projectActivity?.locationsOfProjectActivity
+          ?.slice(1)
+          ?.map((location: any) => ({
+            ...location,
+            uploadImages: mapBase64ToFields(location?.additionalDocuments),
+          })),
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       });
     }
     setLoading(false);
@@ -246,9 +383,20 @@ const StepperComponent = (props: CustomStepsProps) => {
       ) {
         setLoading(true);
 
+<<<<<<< HEAD
         let res: any;
 
         if (state?.mode === FormMode.VIEW || state?.mode === FormMode.VERIFY) {
+=======
+        let res;
+
+        if (state?.mode === FormMode.VIEW || state?.mode === FormMode.VERIFY) {
+          console.log(
+            '--------state?.mode 2---------',
+            state?.mode,
+            state?.mode === FormMode.VERIFY
+          );
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
           setDisableFields(true);
         }
 
@@ -258,6 +406,7 @@ const StepperComponent = (props: CustomStepsProps) => {
             documentType: DocumentEnum.MONITORING,
           });
 
+<<<<<<< HEAD
           if (res?.statusText === "SUCCESS") {
             const data = res?.data;
             setDocumentId(data?.refId);
@@ -279,6 +428,20 @@ const StepperComponent = (props: CustomStepsProps) => {
               state?.documents?.[DocumentEnum.MONITORING as any]?.version;
             const latestVersion = docVersions ? docVersions + 1 : 1;
             console.log("------------latest version-----------", latestVersion);
+=======
+          console.log('--------mon res---------', res);
+          if (res?.statusText === 'SUCCESS') {
+            const data = res?.data;
+            setDocumentId(data?.refId);
+
+            console.log('--------mon res 2---------', data, data.data.basicInformation);
+
+            let basicInformation = basicInformationMapDataToFields(data.data.projectDetails);
+            console.log('-----------state getview monitoring-----------', state);
+            const docVersions = state?.documents?.[DocumentEnum.MONITORING as any]?.version;
+            const latestVersion = docVersions ? docVersions + 1 : 1;
+            console.log('------------latest version-----------', latestVersion);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
             if (state?.mode === FormMode.EDIT) {
               basicInformation = {
                 ...basicInformation,
@@ -296,16 +459,24 @@ const StepperComponent = (props: CustomStepsProps) => {
               implementationOfProjectAcitivityMapDataToFields(
                 data.data.implementationOfProjectActivityDetails
               );
+<<<<<<< HEAD
             implementationStatusForm.setFieldsValue(
               implementationOfProjectActivityDetails
             );
+=======
+            implementationStatusForm.setFieldsValue(implementationOfProjectActivityDetails);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
             const descriptionOfMonitoringReport = descriptionOfMMapDataToFields(
               data.data.descriptionOfMonitoringReport
             );
+<<<<<<< HEAD
             descriptionOfMonitoringForm.setFieldsValue(
               descriptionOfMonitoringReport
             );
+=======
+            descriptionOfMonitoringForm.setFieldsValue(descriptionOfMonitoringReport);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
             const dataAndParameterDetails = dataAndParametersMapDataToFields(
               data.data.dataAndParameterDetails
@@ -321,7 +492,11 @@ const StepperComponent = (props: CustomStepsProps) => {
             annexuresForm.setFieldsValue(appendix);
           }
         } catch (error: any) {
+<<<<<<< HEAD
           console.log("-------error--------", error);
+=======
+          console.log('-------error--------', error);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         } finally {
           setLoading(false);
         }
@@ -333,6 +508,10 @@ const StepperComponent = (props: CustomStepsProps) => {
 
   const submitForm = async (appendixVals: any) => {
     try {
+<<<<<<< HEAD
+=======
+      console.log('----form vals-----', appendixVals);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       setLoading(true);
       const tempValues = {
         ...safeClone(values),
@@ -343,6 +522,7 @@ const StepperComponent = (props: CustomStepsProps) => {
       };
 
       const res = await post(API_PATHS.ADD_DOCUMENT, tempValues);
+<<<<<<< HEAD
       if (res?.statusText === "SUCCESS") {
         message.open({
           type: "success",
@@ -373,12 +553,38 @@ const StepperComponent = (props: CustomStepsProps) => {
           style: { textAlign: "right", marginRight: 15, marginTop: 10 },
         });
       }
+=======
+      if (res?.statusText === 'SUCCESS') {
+        message.open({
+          type: 'success',
+          content:
+            state?.mode === FormMode.EDIT
+              ? 'Monitoring Report has been edited successfully'
+              : 'Monitoring Report has been submitted successfully',
+          duration: 4,
+          style: { textAlign: 'right', marginRight: 15, marginTop: 10 },
+        });
+        navigateToDetailsPage();
+      }
+    } catch (error: any) {
+      message.open({
+        type: 'error',
+        content: 'Something went wrong',
+        duration: 4,
+        style: { textAlign: 'right', marginRight: 15, marginTop: 10 },
+      });
+    } finally {
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       setLoading(false);
     }
   };
 
   const handleValuesUpdate = (val: any) => {
+<<<<<<< HEAD
     console.log("----------temp vals stepper-------------", val);
+=======
+    console.log('----------temp vals stepper-------------', val);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     setValues((prevVal: any) => {
       const tempContent = {
         ...prevVal.data,
@@ -388,13 +594,23 @@ const StepperComponent = (props: CustomStepsProps) => {
     });
   };
 
+<<<<<<< HEAD
+=======
+  console.log('----------state disableFields-------------', disableFields);
+
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   useEffect(() => {
     if (state?.mode === FormMode?.CREATE) {
       fetchAndSetData(id);
       //setLatestVersion();
     }
+<<<<<<< HEAD
     projectActivityForm.setFieldValue("projectParticipants", [
       { partiesInvolved: "", projectParticipants: [{ participant: "" }] },
+=======
+    projectActivityForm.setFieldValue('projectParticipants', [
+      { partiesInvolved: '', projectParticipants: [{ participant: '' }] },
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     ]);
   }, []);
 
@@ -402,7 +618,11 @@ const StepperComponent = (props: CustomStepsProps) => {
     {
       title: (
         <div ref={scrollSection} className="stepper-title-container">
+<<<<<<< HEAD
           <div className="title">{t("monitoringReport:title01")}</div>
+=======
+          <div className="title">{t('monitoringReport:title01')}</div>
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         </div>
       ),
       description: (
@@ -423,7 +643,11 @@ const StepperComponent = (props: CustomStepsProps) => {
       title: (
         <div className="stepper-title-container">
           <div className="step-count">01</div>
+<<<<<<< HEAD
           <div className="title">{t("monitoringReport:title02")}</div>
+=======
+          <div className="title">{t('monitoringReport:title02')}</div>
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         </div>
       ),
       description: (
@@ -444,7 +668,11 @@ const StepperComponent = (props: CustomStepsProps) => {
       title: (
         <div className="stepper-title-container">
           <div className="step-count">02</div>
+<<<<<<< HEAD
           <div className="title">{t("monitoringReport:title03")}</div>
+=======
+          <div className="title">{t('monitoringReport:title03')}</div>
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         </div>
       ),
       description: (
@@ -465,7 +693,11 @@ const StepperComponent = (props: CustomStepsProps) => {
       title: (
         <div className="stepper-title-container">
           <div className="step-count">03</div>
+<<<<<<< HEAD
           <div className="title">{t("monitoringReport:title04")}</div>
+=======
+          <div className="title">{t('monitoringReport:title04')}</div>
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         </div>
       ),
       description: (
@@ -486,7 +718,11 @@ const StepperComponent = (props: CustomStepsProps) => {
       title: (
         <div className="stepper-title-container">
           <div className="step-count">04</div>
+<<<<<<< HEAD
           <div className="title">{t("monitoringReport:title05")}</div>
+=======
+          <div className="title">{t('monitoringReport:title05')}</div>
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         </div>
       ),
       description: (
@@ -507,7 +743,11 @@ const StepperComponent = (props: CustomStepsProps) => {
       title: (
         <div className="stepper-title-container">
           <div className="step-count">05</div>
+<<<<<<< HEAD
           <div className="title">{t("monitoringReport:title06")}</div>
+=======
+          <div className="title">{t('monitoringReport:title06')}</div>
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         </div>
       ),
       description: (
@@ -530,7 +770,11 @@ const StepperComponent = (props: CustomStepsProps) => {
       title: (
         <div className="stepper-title-container">
           <div className="step-count">06</div>
+<<<<<<< HEAD
           <div className="title">{t("monitoringReport:title07")}</div>
+=======
+          <div className="title">{t('monitoringReport:title07')}</div>
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         </div>
       ),
       description: (
@@ -546,6 +790,35 @@ const StepperComponent = (props: CustomStepsProps) => {
           handleValuesUpdate={submitForm}
           documentId={documentId}
           handleLoading={handleLoading}
+<<<<<<< HEAD
+=======
+          // approve={() => {
+          //   showModalOnAction({
+          //     actionBtnText: t('monitoringReport:btnApprove'),
+          //     icon: <CheckCircleOutlined />,
+          //     title: t('monitoringReport:approveMonitoringModalTitle'),
+          //     okAction: () => {
+          //       approveOrReject(true);
+          //     },
+          //     remarkRequired: false,
+          //     type: 'primary',
+          //   });
+          // }}
+          // reject={() => {
+          //   showModalOnAction({
+          //     actionBtnText: t('monitoringReport:btnReject'),
+          //     icon: <CloseCircleOutlined />,
+          //     title: t('monitoringReport:rejectMonitoringModalTitle'),
+          //     okAction: (remark: string) => {
+          //       approveOrReject(false, remark);
+          //     },
+          //     remarkRequired: true,
+          //     type: 'danger',
+          //   });
+          // }}
+          //submitForm={submitForm}
+          // onFinish={onFinish}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         />
       ),
     },
@@ -565,6 +838,25 @@ const StepperComponent = (props: CustomStepsProps) => {
           description: step.description,
         }))}
       />
+<<<<<<< HEAD
+=======
+      {/* {popupInfo && (
+        <SlcfFormActionModel
+          onCancel={() => {
+            setSlcfActioModalVisible(false);
+          }}
+          actionBtnText={popupInfo!.actionBtnText}
+          onFinish={popupInfo!.okAction}
+          subText={''}
+          openModal={slcfActionModalVisible}
+          icon={popupInfo!.icon}
+          title={popupInfo!.title}
+          type={popupInfo!.type}
+          remarkRequired={popupInfo!.remarkRequired}
+          t={t}
+        />
+      )} */}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     </>
   );
 };

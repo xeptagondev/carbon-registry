@@ -2,7 +2,11 @@
   "title": "Project Name",
   "details": "Project Details",
   "creditReceived": "Credit Issued",
+<<<<<<< HEAD:web/public/locales/i18n/projectDetailsView/en.json
   "creditRetired": "Credit Retired",
+=======
+  "creditRetired": "Credit Retire",
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f:web/src/locales/i18n/projectDetailsView/en.json
   "creditBalance": "Credit Balance",
   "projectCategory": "Project Category",
   "authorizationId": "Authorization ID",
@@ -290,6 +294,10 @@
   "CONSTRUCTION": "Construction",
   "TRANSPORT": "Transport",
   "MINING_MINERAL_PRODUCTION": "Mining/Mineral Production",
+<<<<<<< HEAD:web/public/locales/i18n/projectDetailsView/en.json
+=======
+  "WASTE_FROM_FUELS":"Fugitive Emissions from Fuels (Solid, Oil and Gas) ",
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f:web/src/locales/i18n/projectDetailsView/en.json
   "METAL_PRODUCTION": "Metal Production",
   "FUGITIVE_EMISSIONS_FUELS": "Fugitive Emissions from fuels",
   "FUGITIVE_EMISSIONS_PRODUCTION": "Fugitive Emissions from Production and Consumption of Halocarbons and Sulphur Hexafluoride",
@@ -297,7 +305,11 @@
   "WASTE_HANDLING_AND_DISPOSAL": "Waste Handling and Disposal",
   "AFFORESTATION_AND_REFORESTATION": "Afforestation and Reforestation",
   "AGRICULTURE": "Agriculture",
+<<<<<<< HEAD:web/public/locales/i18n/projectDetailsView/en.json
   "checkboxConfirmMessage": "I understand that this action cannot be undone",
+=======
+  "checkboxConfirmMessage": "I reviewed all the attached documents",
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f:web/src/locales/i18n/projectDetailsView/en.json
   "infConfirmSubMessage": "The system will generate a No Objection Letter",
   "ENERGY": "Energy",
   "HEALTH": "Health",
@@ -306,6 +318,10 @@
   "HOSPITALITY": "Hospitality",
   "FORESTRY": "Forestry",
   "WASTE": "Waste",
+<<<<<<< HEAD:web/public/locales/i18n/projectDetailsView/en.json
   "OTHER": "Other",
   "N/A": "NA"
+=======
+  "OTHER": "Other"
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f:web/src/locales/i18n/projectDetailsView/en.json
 }

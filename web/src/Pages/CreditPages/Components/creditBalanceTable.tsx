@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 /* eslint-disable @typescript-eslint/no-explicit-any */
+=======
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 import {
   Checkbox,
   Col,
@@ -12,6 +15,7 @@ import {
   List,
   Typography,
   Tag,
+<<<<<<< HEAD
 } from "antd";
 import { EllipsisOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 import { useEffect, useRef, useState } from "react";
@@ -37,10 +41,38 @@ import moment from "moment";
 import { addCommSep } from "../../../Definitions/Definitions/programme.definitions";
 import { Role } from "../../../Definitions/Enums/role.enum";
 import { COLOR_CONFIGS } from "../../../Config/colorConfigs";
+=======
+} from 'antd';
+import { EllipsisOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
+import { useEffect, useRef, useState } from 'react';
+import { CheckboxValueType } from 'antd/lib/checkbox/Group';
+import { CheckboxChangeEvent } from 'antd/lib/checkbox';
+import { useConnection } from '../../../Context/ConnectionContext/connectionContext';
+import { useUserContext } from '../../../Context/UserInformationContext/userInformationContext';
+import { API_PATHS } from '../../../Config/apiConfig';
+import { CreditBalanceInterface } from '../Interfaces/creditBalance.interface';
+import { ProfileIcon } from '../../../Components/IconComponents/ProfileIcon/profile.icon';
+import '../creditPageStyles.scss';
+import { CreditEventTypeEnum } from '../Enums/creditEventEnum';
+import { CreditActionType } from '../Enums/creditActionType.enum';
+import { CreditActionModal } from './creditActionModal';
+import { CompanyRole } from '../../../Definitions/Enums/company.role.enum';
+import { HttpStatusCode } from 'axios';
+import { ActionResponseModal } from '../../../Components/Models/actionResponseModal';
+import { ActionResponseType } from '../../../Definitions/Enums/actionResponse.enum';
+import * as Icon from 'react-bootstrap-icons';
+import { CreditRetirementProceedAction } from '../Enums/creditRetirementProceedType.enum';
+import { CreditRetirementTypeEmnum } from '../Enums/creditRetirementType.enum';
+import moment from 'moment';
+import { addCommSep } from '../../../Definitions/Definitions/programme.definitions';
+import { Role } from '../../../Definitions/Enums/role.enum';
+import { COLOR_CONFIGS } from '../../../Config/colorConfigs';
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
 const { Search } = Input;
 
 enum CrediBalanceColumns {
+<<<<<<< HEAD
   ORGANIZATION_NAME = "organizationName",
   PROJECT_NAME = "projectName",
   SERIAL_NO = "serialNo",
@@ -48,16 +80,37 @@ enum CrediBalanceColumns {
   CREDITS = "credits",
   ACTION = "action",
   DATE = "date",
+=======
+  ORGANIZATION_NAME = 'organizationName',
+  PROJECT_NAME = 'projectName',
+  SERIAL_NO = 'serialNo',
+  ISSUE_OR_RECEIVED = 'issueOrReceived',
+  CREDITS = 'credits',
+  ACTION = 'action',
+  DATE = 'date',
+}
+enum IssuedOrReceivedOptions {
+  ISSUED = 'issued',
+  RECEIVED = 'received',
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 }
 
 export const getIssuedReceivedTagColor = (status: IssuedOrReceivedOptions) => {
   switch (status) {
     case IssuedOrReceivedOptions.ISSUED:
+<<<<<<< HEAD
       return "processing";
     case IssuedOrReceivedOptions.RECEIVED:
       return "success";
     default:
       return "default";
+=======
+      return 'processing';
+    case IssuedOrReceivedOptions.RECEIVED:
+      return 'success';
+    default:
+      return 'default';
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   }
 };
 
@@ -81,9 +134,13 @@ export const CreditBalanceTableComponent = (props: any) => {
     label: t(Object.values(IssuedOrReceivedOptions)[index]),
     value: Object.values(IssuedOrReceivedOptions)[index],
   }));
+<<<<<<< HEAD
   const [checkBoxOptions, setCheckBoxOptions] = useState<any[]>(
     checkBoxMenu.map((e) => e.value)
   );
+=======
+  const [checkBoxOptions, setCheckBoxOptions] = useState<any[]>(checkBoxMenu.map((e) => e.value));
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   const [modalActionVisible, setModalActionVisible] = useState<boolean>(false);
   const [modalActionLoading, setModalActionLoading] = useState<boolean>(false);
   const [modalActionData, setModalActionData] = useState<{
@@ -95,8 +152,12 @@ export const CreditBalanceTableComponent = (props: any) => {
     data: CreditBalanceInterface;
     proceedAction: CreditRetirementProceedAction;
   }>();
+<<<<<<< HEAD
   const [modalResponseVisible, setModalResponseVisible] =
     useState<boolean>(false);
+=======
+  const [modalResponseVisible, setModalResponseVisible] = useState<boolean>(false);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   const [modalResponseData, setModalResponseData] = useState<{
     type: ActionResponseType;
     icon: any;
@@ -109,14 +170,22 @@ export const CreditBalanceTableComponent = (props: any) => {
     const filterAnd: any[] = [];
     const filterOr: any[] = [];
 
+<<<<<<< HEAD
     if (checkBoxOptions && checkBoxOptions?.length > 0) {
       filterAnd.push({
         key: "type",
         operation: "in",
+=======
+    if (checkBoxOptions) {
+      filterAnd.push({
+        key: 'creditBlock"."type',
+        operation: 'in',
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         value: checkBoxOptions,
       });
     }
 
+<<<<<<< HEAD
     if (search && search.trim() !== "") {
       filterOr.push({
         key: "receiverName",
@@ -126,6 +195,17 @@ export const CreditBalanceTableComponent = (props: any) => {
       filterOr.push({
         key: "projectName",
         operation: "like",
+=======
+    if (search && search.trim() !== '') {
+      filterOr.push({
+        key: 'receiver"."name',
+        operation: 'like',
+        value: `%${search.trim()}%`,
+      });
+      filterOr.push({
+        key: 'project"."title',
+        operation: 'like',
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         value: `%${search.trim()}%`,
       });
     }
@@ -139,8 +219,13 @@ export const CreditBalanceTableComponent = (props: any) => {
       };
     } else {
       sort = {
+<<<<<<< HEAD
         key: "createdDate",
         order: "DESC",
+=======
+        key: 'createdDate',
+        order: 'DESC',
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       };
     }
 
@@ -152,6 +237,7 @@ export const CreditBalanceTableComponent = (props: any) => {
         filterOr: filterOr?.length > 0 ? filterOr : undefined,
         sort: sort,
       });
+<<<<<<< HEAD
       if (checkBoxOptions?.length <= 0) {
         setTableData([]);
         setTotalProgramme(0);
@@ -169,6 +255,18 @@ export const CreditBalanceTableComponent = (props: any) => {
         content: error.message,
         duration: 3,
         style: { textAlign: "right", marginRight: 15, marginTop: 10 },
+=======
+      setTableData(response?.data ? response.data : []);
+      setTotalProgramme(response.response?.data?.total ? response.response?.data?.total : 0);
+      isInitialRender.current = true;
+    } catch (error: any) {
+      console.log('Error in getting Credit Balances', error);
+      message.open({
+        type: 'error',
+        content: error.message,
+        duration: 3,
+        style: { textAlign: 'right', marginRight: 15, marginTop: 10 },
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       });
     } finally {
       setLoading(false);
@@ -182,6 +280,7 @@ export const CreditBalanceTableComponent = (props: any) => {
         size="small"
         dataSource={[
           {
+<<<<<<< HEAD
             text: t("transfer"),
             icon: (
               <Icon.ArrowLeftRight color={COLOR_CONFIGS.PRIMARY_THEME_COLOR} />
@@ -196,6 +295,16 @@ export const CreditBalanceTableComponent = (props: any) => {
                 title: t("tranferCredit"),
                 type: CreditActionType.TRANSFER,
                 actionBtnText: t("transfer"),
+=======
+            text: t('transfer'),
+            icon: <Icon.ArrowLeftRight color={COLOR_CONFIGS.PRIMARY_THEME_COLOR} />,
+            click: () => {
+              setModalActionData({
+                icon: <Icon.BoxArrowRight color={COLOR_CONFIGS.PRIMARY_THEME_COLOR} />,
+                title: t('tranferCredit'),
+                type: CreditActionType.TRANSFER,
+                actionBtnText: t('transfer'),
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                 remarkRequired: false,
                 proceedAction: CreditRetirementProceedAction.ACCEPT,
                 data: record,
@@ -204,6 +313,7 @@ export const CreditBalanceTableComponent = (props: any) => {
             },
           },
           {
+<<<<<<< HEAD
             text: t("retire"),
             icon: <Icon.ClockHistory color="#FF4D4F" />,
             click: () => {
@@ -216,6 +326,16 @@ export const CreditBalanceTableComponent = (props: any) => {
                 title: t("areYouWantToRetireCredit"),
                 type: CreditActionType.RETIREMENT,
                 actionBtnText: t("retire"),
+=======
+            text: t('retire'),
+            icon: <Icon.ClockHistory color="#FF4D4F" />,
+            click: () => {
+              setModalActionData({
+                icon: <Icon.BoxArrowDown color={COLOR_CONFIGS.PRIMARY_THEME_COLOR} />,
+                title: t('areYouWantToRetireCredit'),
+                type: CreditActionType.RETIREMENT,
+                actionBtnText: t('retire'),
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                 remarkRequired: false,
                 proceedAction: CreditRetirementProceedAction.ACCEPT,
                 data: record,
@@ -226,9 +346,13 @@ export const CreditBalanceTableComponent = (props: any) => {
         ]}
         renderItem={(item: any) => (
           <List.Item onClick={item.click}>
+<<<<<<< HEAD
             <Typography.Text className="action-icon color-primary">
               {item.icon}
             </Typography.Text>
+=======
+            <Typography.Text className="action-icon color-primary">{item.icon}</Typography.Text>
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
             <span>{item.text}</span>
           </List.Item>
         )}
@@ -239,18 +363,31 @@ export const CreditBalanceTableComponent = (props: any) => {
   const columns = [
     {
       title: t(CrediBalanceColumns.ORGANIZATION_NAME),
+<<<<<<< HEAD
       key: "receiverName",
       sorter: true,
       align: "left" as const,
+=======
+      key: 'receiver.name',
+      sorter: true,
+      align: 'left' as const,
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       render: (record: CreditBalanceInterface) => {
         const elements = (
           <Row>
             <ProfileIcon
               icon={record.receiverLogo}
+<<<<<<< HEAD
               bg={"rgba(185, 226, 244, 0.56)"}
               name={record.receiverName}
             />
             <span style={{ marginTop: "6px" }}>{record.receiverName}</span>
+=======
+              bg={'rgba(185, 226, 244, 0.56)'}
+              name={record.receiverName}
+            />
+            <span style={{ marginTop: '6px' }}>{record.receiverName}</span>
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
           </Row>
         );
         return <div className="org-list">{elements}</div>;
@@ -258,9 +395,15 @@ export const CreditBalanceTableComponent = (props: any) => {
     },
     {
       title: t(CrediBalanceColumns.PROJECT_NAME),
+<<<<<<< HEAD
       key: "projectName",
       sorter: true,
       align: "left" as const,
+=======
+      key: 'project.title',
+      sorter: true,
+      align: 'left' as const,
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       render: (record: CreditBalanceInterface) => {
         return <span>{record?.projectName}</span>;
       },
@@ -268,13 +411,18 @@ export const CreditBalanceTableComponent = (props: any) => {
     {
       title: t(CrediBalanceColumns.SERIAL_NO),
       key: CrediBalanceColumns.SERIAL_NO,
+<<<<<<< HEAD
       align: "left" as const,
+=======
+      align: 'left' as const,
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       render: (record: CreditBalanceInterface) => {
         return <span>{record?.serialNumber}</span>;
       },
     },
     {
       title: t(CrediBalanceColumns.DATE),
+<<<<<<< HEAD
       key: "createdDate",
       sorter: true,
       align: "left" as const,
@@ -285,6 +433,14 @@ export const CreditBalanceTableComponent = (props: any) => {
               "YYYY-MM-DD HH:mm:ss"
             )}
           </span>
+=======
+      key: 'createdDate',
+      sorter: true,
+      align: 'left' as const,
+      render: (item: CreditBalanceInterface) => {
+        return (
+          <span>{moment(parseInt(String(item?.createdDate))).format('YYYY-MM-DD HH:mm:ss')}</span>
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         );
       },
     },
@@ -293,11 +449,29 @@ export const CreditBalanceTableComponent = (props: any) => {
           {
             title: t(CrediBalanceColumns.ISSUE_OR_RECEIVED),
             key: CrediBalanceColumns.ISSUE_OR_RECEIVED,
+<<<<<<< HEAD
             align: "center" as const,
             render: (record: CreditBalanceInterface) => {
               return (
                 <Tag color={getIssuedReceivedTagColor(record?.type)}>
                   {t(record?.type)}
+=======
+            align: 'center' as const,
+            render: (record: CreditBalanceInterface) => {
+              return (
+                <Tag
+                  color={getIssuedReceivedTagColor(
+                    record?.eventType === CreditEventTypeEnum.ISSUED
+                      ? IssuedOrReceivedOptions.ISSUED
+                      : IssuedOrReceivedOptions.RECEIVED
+                  )}
+                >
+                  {t(
+                    record?.eventType === CreditEventTypeEnum.ISSUED
+                      ? IssuedOrReceivedOptions.ISSUED
+                      : IssuedOrReceivedOptions.RECEIVED
+                  )}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                 </Tag>
               );
             },
@@ -306,6 +480,7 @@ export const CreditBalanceTableComponent = (props: any) => {
       : []),
     {
       title: t(CrediBalanceColumns.CREDITS),
+<<<<<<< HEAD
       key: "creditAmount",
       sorter: true,
       align: "left" as const,
@@ -314,6 +489,14 @@ export const CreditBalanceTableComponent = (props: any) => {
           <span style={{ marginLeft: "20px" }}>
             {addCommSep(String(record?.creditAmount))}
           </span>
+=======
+      key: 'creditAmount',
+      sorter: true,
+      align: 'left' as const,
+      render: (record: CreditBalanceInterface) => {
+        return (
+          <span style={{ marginLeft: '20px' }}>{addCommSep(String(record?.creditAmount))}</span>
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         );
       },
     },
@@ -321,14 +504,21 @@ export const CreditBalanceTableComponent = (props: any) => {
     userInfoState?.userRole === Role.Admin
       ? [
           {
+<<<<<<< HEAD
             title: t(""),
             width: 6,
             align: "right" as const,
+=======
+            title: t(''),
+            width: 6,
+            align: 'right' as const,
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
             key: CrediBalanceColumns.ACTION,
             render: (record: any) => {
               const menu = actionMenu(record);
               return (
                 menu && (
+<<<<<<< HEAD
                   <Popover
                     placement="bottomRight"
                     content={menu}
@@ -341,6 +531,12 @@ export const CreditBalanceTableComponent = (props: any) => {
                         fontSize: "1rem",
                         cursor: "pointer",
                       }}
+=======
+                  <Popover placement="bottomRight" content={menu} trigger="click">
+                    <EllipsisOutlined
+                      rotate={90}
+                      style={{ fontWeight: 600, fontSize: '1rem', cursor: 'pointer' }}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     />
                   </Popover>
                 )
@@ -355,15 +551,23 @@ export const CreditBalanceTableComponent = (props: any) => {
     if (value) {
       setSearch(value.toLowerCase());
     } else {
+<<<<<<< HEAD
       setSearch("");
+=======
+      setSearch('');
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     }
   };
 
   const onStatusQuery = async (checkedValues: CheckboxValueType[]) => {
     setCheckBoxOptions(checkedValues as string[]);
+<<<<<<< HEAD
     setIndeterminate(
       !!checkedValues.length && checkedValues.length < checkBoxMenu.length
     );
+=======
+    setIndeterminate(!!checkedValues.length && checkedValues.length < checkBoxMenu.length);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     setCheckAllBox(checkedValues.length === checkBoxMenu.length);
   };
 
@@ -379,11 +583,16 @@ export const CreditBalanceTableComponent = (props: any) => {
     }
   };
 
+<<<<<<< HEAD
   const onPaginationChange: PaginationProps["onChange"] = (page, size) => {
+=======
+  const onPaginationChange: PaginationProps['onChange'] = (page, size) => {
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     setCurrentPage(page);
     setPageSize(size);
   };
 
+<<<<<<< HEAD
   const onHandleTableChange = (
     _pagination: any,
     _filters: any,
@@ -395,6 +604,11 @@ export const CreditBalanceTableComponent = (props: any) => {
         : sorter.order === "descend"
         ? "DESC"
         : undefined
+=======
+  const onHandleTableChange = (_pagination: any, _filters: any, sorter: any) => {
+    setSortOrder(
+      sorter.order === 'ascend' ? 'ASC' : sorter.order === 'descend' ? 'DESC' : undefined
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     );
     setSortField(sorter.columnKey);
   };
@@ -408,7 +622,11 @@ export const CreditBalanceTableComponent = (props: any) => {
     if (isInitialRender.current) {
       getQueryData();
     }
+<<<<<<< HEAD
   }, [currentPage, pageSize, modalActionVisible, modalResponseVisible]);
+=======
+  }, [currentPage, pageSize]);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
   useEffect(() => {
     if (isInitialRender.current) {
@@ -418,7 +636,11 @@ export const CreditBalanceTableComponent = (props: any) => {
         getQueryData();
       }
     }
+<<<<<<< HEAD
   }, [sortField, sortOrder, search, checkBoxOptions]);
+=======
+  }, [sortField, sortOrder, search, checkBoxOptions, modalActionVisible, modalResponseVisible]);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
   const onFinishAction = async (
     reciveParty: any,
@@ -435,7 +657,11 @@ export const CreditBalanceTableComponent = (props: any) => {
         response = await post(API_PATHS.CREDIT_TRANSFER_REQUEST, {
           receiverOrgId: reciveParty,
           blockId: blockId,
+<<<<<<< HEAD
           amount: Number(creditAmount),
+=======
+          amount: creditAmount,
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
           remarks: remark,
         });
       } else {
@@ -443,11 +669,18 @@ export const CreditBalanceTableComponent = (props: any) => {
           blockId: blockId,
           remarks: remark,
           retirementType: retirementType,
+<<<<<<< HEAD
           ...(retirementType ===
           CreditRetirementTypeEmnum.CROSS_BORDER_TRANSACTIONS
             ? {
                 country: reciveParty.country,
                 organizationName: reciveParty.organization?.trim(),
+=======
+          ...(retirementType === CreditRetirementTypeEmnum.CROSS_BORDER_TRANSACTIONS
+            ? {
+                country: reciveParty.country,
+                organizationName: reciveParty.organization,
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
               }
             : {}),
           amount: Number(creditAmount),
@@ -456,6 +689,7 @@ export const CreditBalanceTableComponent = (props: any) => {
       if (response.status === HttpStatusCode.Created) {
         setModalResponseData({
           type: ActionResponseType.SUCCESS,
+<<<<<<< HEAD
           icon: (
             <Icon.CheckCircle color={COLOR_CONFIGS.SUCCESS_RESPONSE_COLOR} />
           ),
@@ -465,10 +699,20 @@ export const CreditBalanceTableComponent = (props: any) => {
               : "creditRetirementSubmitted"
           ),
           buttonText: t("okay"),
+=======
+          icon: <Icon.CheckCircle color={COLOR_CONFIGS.SUCCESS_RESPONSE_COLOR} />,
+          title: t(
+            modalActionData?.type === CreditActionType.TRANSFER
+              ? 'creditTransferInitiated'
+              : 'creditRetirementSubmitted'
+          ),
+          buttonText: t('okay'),
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         });
       } else {
         setModalResponseData({
           type: ActionResponseType.FAILED,
+<<<<<<< HEAD
           icon: (
             <ExclamationCircleOutlined
               color={COLOR_CONFIGS.FAILED_RESPONSE_COLOR}
@@ -491,6 +735,24 @@ export const CreditBalanceTableComponent = (props: any) => {
         ),
         title: t("somethingWentWrong"),
         buttonText: t("okay"),
+=======
+          icon: <ExclamationCircleOutlined color={COLOR_CONFIGS.FAILED_RESPONSE_COLOR} />,
+          title: t(
+            modalActionData?.type === CreditActionType.TRANSFER
+              ? 'creditTransferInitiatedFailed'
+              : 'creditRetirementSubmittedFailed'
+          ),
+          buttonText: t('okay'),
+        });
+      }
+    } catch (error: any) {
+      message.error(error.message || t('somethingWentWrong'));
+      setModalResponseData({
+        type: ActionResponseType.FAILED,
+        icon: <Icon.ExclamationCircle color={COLOR_CONFIGS.FAILED_RESPONSE_COLOR} />,
+        title: t('somethingWentWrong'),
+        buttonText: t('okay'),
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       });
     } finally {
       setModalResponseVisible(true);
@@ -503,9 +765,13 @@ export const CreditBalanceTableComponent = (props: any) => {
     <div className="content-card">
       <Row
         justify={
+<<<<<<< HEAD
           userInfoState?.companyRole === CompanyRole.PROJECT_DEVELOPER
             ? "space-between"
             : "end"
+=======
+          userInfoState?.companyRole === CompanyRole.PROJECT_DEVELOPER ? 'space-between' : 'end'
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         }
         className="table-actions-section"
       >
@@ -520,7 +786,11 @@ export const CreditBalanceTableComponent = (props: any) => {
                 checked={checkAllBox}
                 defaultChecked={true}
               >
+<<<<<<< HEAD
                 {t("all")}
+=======
+                {t('all')}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
               </Checkbox>
               <Checkbox.Group
                 disabled={loading}
@@ -536,10 +806,15 @@ export const CreditBalanceTableComponent = (props: any) => {
           <div className="filter-section">
             <div className="search-bar">
               <Search
+<<<<<<< HEAD
                 onPressEnter={(e) =>
                   onSearch((e.target as HTMLInputElement).value)
                 }
                 placeholder={`${t("searchByProjectOrOrg")}`}
+=======
+                onPressEnter={(e) => onSearch((e.target as HTMLInputElement).value)}
+                placeholder={`${t('searchByProjectOrOrg')}`}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                 allowClear
                 onChange={(e) => setSearch(e.target.value)}
                 style={{ width: 285 }}
@@ -570,7 +845,11 @@ export const CreditBalanceTableComponent = (props: any) => {
                 emptyText: (
                   <Empty
                     image={Empty.PRESENTED_IMAGE_SIMPLE}
+<<<<<<< HEAD
                     description={tableData.length === 0 ? t("noCredits") : null}
+=======
+                    description={tableData.length === 0 ? t('noCredits') : null}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                   />
                 ),
               }}
@@ -597,7 +876,11 @@ export const CreditBalanceTableComponent = (props: any) => {
         type={modalResponseData?.type}
         icon={modalResponseData?.icon}
         title={modalResponseData?.title}
+<<<<<<< HEAD
         buttonText={modalResponseData?.buttonText || ""}
+=======
+        buttonText={modalResponseData?.buttonText || ''}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         onCancel={() => {
           setModalResponseVisible(false);
         }}

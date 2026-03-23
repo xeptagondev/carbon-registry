@@ -17,6 +17,7 @@ export function deepCopy(obj: any) {
   return copy;
 }
 
+<<<<<<< HEAD
 export function deepCloneWithoutPointerEvents(obj) {
   if (obj instanceof PointerEvent) {
     return undefined;
@@ -44,6 +45,12 @@ export function safeClone(obj) {
   const seen = new WeakSet();
 
   function internalClone(value) {
+=======
+export function safeClone(obj: any) {
+  const seen = new WeakSet();
+
+  function internalClone(value: any): any {
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     if (typeof value !== 'object' || value === null) {
       return value; // primitives
     }
@@ -58,7 +65,11 @@ export function safeClone(obj) {
       return value.map(internalClone);
     }
 
+<<<<<<< HEAD
     const newObj = {};
+=======
+    const newObj: any = {};
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     for (const key in value) {
       if (Object.prototype.hasOwnProperty.call(value, key)) {
         newObj[key] = internalClone(value[key]);
@@ -68,4 +79,8 @@ export function safeClone(obj) {
   }
 
   return internalClone(obj);
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f

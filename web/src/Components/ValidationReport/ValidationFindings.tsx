@@ -223,6 +223,7 @@ const ValidationFindings = (props: ValidationStepsProps) => {
               <h3 className="validation-findings-heading">
                 {t('validationReport:applicationMethodologiesSectionHeading')}
               </h3>
+<<<<<<< HEAD
               
               <h4 className="validation-findings-subHeading">
                   {t('validationReport:applicationMethodologiesBaselines')}
@@ -232,6 +233,13 @@ const ValidationFindings = (props: ValidationStepsProps) => {
                 {/* <h4 className="validation-findings-subHeading">
                   {t('validationReport:applicationMethodologiesBaselines')}
                 </h4> */}
+=======
+              {/* Application and selection of methodologies and standardized baselines start */}
+              <>
+                <h4 className="validation-findings-subHeading">
+                  {t('validationReport:applicationMethodologiesBaselines')}
+                </h4>
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                 <section className="validation-findings-section">
                   <Form.Item
                     className="full-width-form-item"
@@ -1235,7 +1243,11 @@ const ValidationFindings = (props: ValidationStepsProps) => {
               {/* Global stakeholder consultation end */}
 
               <Row justify={'end'} className="step-actions-end mg-top-2">
+<<<<<<< HEAD
                 <Button danger size={'large'} onClick={prev}>
+=======
+                <Button type="primary" ghost size={'large'} onClick={prev}>
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                   {t('validationReport:prev')}
                 </Button>
                 {disableFields ? (

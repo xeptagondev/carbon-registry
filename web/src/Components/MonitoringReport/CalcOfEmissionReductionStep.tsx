@@ -1,4 +1,5 @@
 //import { UploadOutlined } from '@ant-design/icons';
+<<<<<<< HEAD
 import { Button, Col, Form, Input, Row, Upload, DatePicker } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import { FormMode } from "../../Definitions/Enums/formMode.enum";
@@ -25,6 +26,27 @@ const EMISSION_CATEGORY_AVG_MAP: { [key: string]: string } = {
   projectEmissionReductions: "avgProjectEmissionReductions",
   leakageEmissionReductions: "avgLeakageEmissionReductions",
   netEmissionReductions: "avgNetEmissionReductions",
+=======
+import { Button, Col, Form, Input, Row, Upload, DatePicker } from 'antd';
+import TextArea from 'antd/lib/input/TextArea';
+import { FormMode } from '../../Definitions/Enums/formMode.enum';
+import LabelWithTooltip, { TooltipPostion } from '../LabelWithTooltip/LabelWithTooltip';
+import { MinusOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
+import NetEmissionReduction from '../Common/NetEmissonReduction';
+import { fileUploadValueExtract, formatNumberWithDecimalPlaces } from '../../Utils/utilityHelper';
+import moment from 'moment';
+import { getBase64 } from '../../Definitions/Definitions/programme.definitions';
+import { RcFile } from 'antd/lib/upload';
+import { CustomStepsProps } from './StepProps';
+import { toMoment } from '../../Utils/convertTime';
+import { disableYears } from '../../Utils/disableYears';
+
+const EMISSION_CATEGORY_AVG_MAP: { [key: string]: string } = {
+  baselineEmissionReductions: 'avgBaselineEmissionReductions',
+  projectEmissionReductions: 'avgProjectEmissionReductions',
+  leakageEmissionReductions: 'avgLeakageEmissionReductions',
+  netEmissionReductions: 'avgNetEmissionReductions',
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 };
 
 export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
@@ -39,8 +61,13 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
     disableFields,
     maxNetGHGReduction,
   } = props;
+<<<<<<< HEAD
   const maximumImageSize = import.meta.env.VITE_APP_MAXIMUM_FILE_SIZE
     ? parseInt(import.meta.env.VITE_APP_MAXIMUM_FILE_SIZE)
+=======
+  const maximumImageSize = process.env.REACT_APP_MAXIMUM_FILE_SIZE
+    ? parseInt(process.env.REACT_APP_MAXIMUM_FILE_SIZE)
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     : 5000000;
   const normFile = (e: any) => {
     if (Array.isArray(e)) {
@@ -56,6 +83,7 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
     let leakageEmissionReductionsVal = 0;
 
     if (index === undefined) {
+<<<<<<< HEAD
       baselineEmissionReductionsVal = Number(
         form.getFieldValue("baselineEmissionReductions") || 0
       );
@@ -69,22 +97,39 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
         baselineEmissionReductionsVal -
         projectEmissionReductionsVal -
         leakageEmissionReductionsVal;
+=======
+      baselineEmissionReductionsVal = Number(form.getFieldValue('baselineEmissionReductions') || 0);
+      projectEmissionReductionsVal = Number(form.getFieldValue('projectEmissionReductions') || 0);
+      leakageEmissionReductionsVal = Number(form.getFieldValue('leakageEmissionReductions') || 0);
+      const netGHGEmissions =
+        baselineEmissionReductionsVal - projectEmissionReductionsVal - leakageEmissionReductionsVal;
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
       if (netGHGEmissions <= 0) {
         form.setFields([
           {
+<<<<<<< HEAD
             name: "netEmissionReductions",
             errors: [`${t("monitoringReport:ce_shouldHavePositive")}`],
+=======
+            name: 'netEmissionReductions',
+            errors: [`${t('monitoringReport:ce_shouldHavePositive')}`],
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
           },
         ]);
       } else {
         form.setFields([
           {
+<<<<<<< HEAD
             name: "netEmissionReductions",
+=======
+            name: 'netEmissionReductions',
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
             errors: [],
           },
         ]);
       }
+<<<<<<< HEAD
       form.setFieldValue("netEmissionReductions", String(netGHGEmissions));
     } else {
       const listVals = form.getFieldValue("extraEmissionReductions");
@@ -99,6 +144,16 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
         leakageEmissionReductionsVal = Number(
           listVals[index].leakageEmissionReductions || 0
         );
+=======
+      form.setFieldValue('netEmissionReductions', String(netGHGEmissions));
+    } else {
+      const listVals = form.getFieldValue('extraEmissionReductions');
+
+      if (listVals[index] !== undefined) {
+        baselineEmissionReductionsVal = Number(listVals[index].baselineEmissionReductions || 0);
+        projectEmissionReductionsVal = Number(listVals[index].projectEmissionReductions || 0);
+        leakageEmissionReductionsVal = Number(listVals[index].leakageEmissionReductions || 0);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
         const netGHGEmissions =
           baselineEmissionReductionsVal -
@@ -110,29 +165,49 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
         if (netGHGEmissions <= 0) {
           form.setFields([
             {
+<<<<<<< HEAD
               name: ["extraEmissionReductions", index, "netEmissionReductions"],
               errors: [`${t("monitoringReport:ce_shouldHavePositive")}`],
+=======
+              name: ['extraEmissionReductions', index, 'netEmissionReductions'],
+              errors: [`${t('monitoringReport:ce_shouldHavePositive')}`],
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
             },
           ]);
         } else {
           form.setFields([
             {
+<<<<<<< HEAD
               name: ["extraEmissionReductions", index, "netEmissionReductions"],
+=======
+              name: ['extraEmissionReductions', index, 'netEmissionReductions'],
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
               errors: [],
             },
           ]);
         }
 
+<<<<<<< HEAD
         form.setFieldValue("extraEmissionReductions", listVals);
+=======
+        form.setFieldValue('extraEmissionReductions', listVals);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       }
     }
   };
 
   const CalculateNetTotalEmissions = () => {
+<<<<<<< HEAD
     const category = "netEmissionReductions";
     const categoryToAdd = "totalNetEmissionReductions";
     let tempTotal = Number(form.getFieldValue(category) || 0);
     const listVals = form.getFieldValue("extraEmissionReductions");
+=======
+    const category = 'netEmissionReductions';
+    const categoryToAdd = 'totalNetEmissionReductions';
+    let tempTotal = Number(form.getFieldValue(category) || 0);
+    const listVals = form.getFieldValue('extraEmissionReductions');
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     if (listVals !== undefined && listVals[0] !== undefined) {
       listVals.forEach((item: any) => {
         if (item[category]) {
@@ -140,6 +215,7 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
         }
       });
     }
+<<<<<<< HEAD
     const creditingYears = Number(
       form.getFieldValue("totalCreditingYears") || 0
     );
@@ -153,26 +229,44 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
     );
 
     console.log("-----maxNetGHGReduction---------", maxNetGHGReduction);
+=======
+    const creditingYears = Number(form.getFieldValue('totalCreditingYears') || 0);
+    form.setFieldValue(categoryToAdd, String(tempTotal));
+
+    console.log('---------maxNetGHGReduction---------', maxNetGHGReduction, tempTotal);
+
+    console.log('-----maxNetGHGReduction---------', maxNetGHGReduction);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
     if (maxNetGHGReduction !== undefined && tempTotal > maxNetGHGReduction) {
       form.setFields([
         {
+<<<<<<< HEAD
           name: "totalNetEmissionReductions",
           errors: [
             `Total Net Emission Reduction cannot exceed ${maxNetGHGReduction}`,
           ],
+=======
+          name: 'totalNetEmissionReductions',
+          errors: [`Total Net Emission Reduction cannot exceed ${maxNetGHGReduction}`],
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         },
       ]);
     } else {
       form.setFields([
         {
+<<<<<<< HEAD
           name: "totalNetEmissionReductions",
+=======
+          name: 'totalNetEmissionReductions',
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
           errors: [``],
         },
       ]);
     }
 
     const avgTempTotal =
+<<<<<<< HEAD
       creditingYears > 0
         ? formatNumberWithDecimalPlaces(tempTotal / creditingYears)
         : 0;
@@ -186,6 +280,15 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
   ) => {
     let tempTotal = Number(form.getFieldValue(category) || 0);
     const listVals = form.getFieldValue("extraEmissionReductions");
+=======
+      creditingYears > 0 ? formatNumberWithDecimalPlaces(tempTotal / creditingYears) : 0;
+    form.setFieldValue(EMISSION_CATEGORY_AVG_MAP[category], avgTempTotal);
+  };
+
+  const calculateTotalEmissions = (value: any, category: string, categoryToAdd: string) => {
+    let tempTotal = Number(form.getFieldValue(category) || 0);
+    const listVals = form.getFieldValue('extraEmissionReductions');
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     if (listVals !== undefined && listVals[0] !== undefined) {
       listVals.forEach((item: any) => {
         if (item[category]) {
@@ -193,6 +296,7 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
         }
       });
     }
+<<<<<<< HEAD
     const creditingYears = Number(
       form.getFieldValue("totalCreditingYears") || 0
     );
@@ -201,12 +305,19 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
       creditingYears > 0
         ? formatNumberWithDecimalPlaces(tempTotal / creditingYears)
         : 0;
+=======
+    const creditingYears = Number(form.getFieldValue('totalCreditingYears') || 0);
+    form.setFieldValue(categoryToAdd, String(tempTotal));
+    const total =
+      creditingYears > 0 ? formatNumberWithDecimalPlaces(tempTotal / creditingYears) : 0;
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     form.setFieldValue(EMISSION_CATEGORY_AVG_MAP[category], total);
 
     CalculateNetTotalEmissions();
   };
 
   const onPeriodChange = (value: any, fieldCounts: number) => {
+<<<<<<< HEAD
     const reductions = form.getFieldValue("extraEmissionReductions");
 
     let totalCreditingYears = form.getFieldValue("totalCreditingYears") || 0;
@@ -237,16 +348,37 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
       "leakageEmissionReductions",
       "totalLeakageEmissionReductions"
     );
+=======
+    const reductions = form.getFieldValue('extraEmissionReductions');
+
+    let totalCreditingYears = form.getFieldValue('totalCreditingYears') || 0;
+    console.log('-------t, f---------', totalCreditingYears, fieldCounts);
+    if (value && totalCreditingYears < fieldCounts) {
+      totalCreditingYears += 1;
+    } else if (value === null && totalCreditingYears !== 0 && totalCreditingYears >= fieldCounts) {
+      totalCreditingYears -= 1;
+    }
+    form.setFieldValue('totalCreditingYears', totalCreditingYears);
+
+    calculateNetGHGEmissions(value);
+    calculateTotalEmissions(value, 'baselineEmissionReductions', 'totalBaselineEmissionReductions');
+    calculateTotalEmissions(value, 'projectEmissionReductions', 'totalProjectEmissionReductions');
+    calculateTotalEmissions(value, 'leakageEmissionReductions', 'totalLeakageEmissionReductions');
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   };
 
   const onFinish = async (values: any) => {
     const tempValues: any = {
       calcEmissionReductions: {
         ce_baselineEmission: values?.ce_baselineEmission,
+<<<<<<< HEAD
         ce_documentUpload: await fileUploadValueExtract(
           values,
           "ce_documentUpload"
         ),
+=======
+        ce_documentUpload: await fileUploadValueExtract(values, 'ce_documentUpload'),
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         ce_projectEmissions: values?.ce_projectEmissions,
         ce_leakage: values?.ce_leakage,
 
@@ -258,6 +390,7 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
           const tempYearlyReductions: any = [];
 
           const firstReduction = {
+<<<<<<< HEAD
             vintage: moment({
               year: moment(values?.vintage).year(),
               month: 1,
@@ -274,6 +407,12 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
             leakageEmissionReductions: Number(
               values?.leakageEmissionReductions
             ),
+=======
+            vintage: moment(values?.vintage).startOf('year').valueOf(),
+            baselineEmissionReductions: Number(values?.baselineEmissionReductions),
+            projectEmissionReductions: Number(values?.projectEmissionReductions),
+            leakageEmissionReductions: Number(values?.leakageEmissionReductions),
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
             netEmissionReductions: Number(values?.netEmissionReductions),
           };
 
@@ -282,6 +421,7 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
           if (values?.extraEmissionReductions) {
             values.extraEmissionReductions.forEach((item: any) => {
               const tempObj = {
+<<<<<<< HEAD
                 vintage: moment({
                   year: moment(item?.vintage).year(),
                   month: 1,
@@ -298,6 +438,12 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                 leakageEmissionReductions: Number(
                   item?.leakageEmissionReductions
                 ),
+=======
+                vintage: moment(item?.vintage).startOf('year').valueOf(),
+                baselineEmissionReductions: Number(item?.baselineEmissionReductions),
+                projectEmissionReductions: Number(item?.projectEmissionReductions),
+                leakageEmissionReductions: Number(item?.leakageEmissionReductions),
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                 netEmissionReductions: Number(item?.netEmissionReductions),
               };
 
@@ -305,6 +451,7 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
             });
           }
           tempGHG.yearlyGHGEmissionReductions = tempYearlyReductions;
+<<<<<<< HEAD
           tempGHG.totalBaselineEmissionReductions = Number(
             values?.totalBaselineEmissionReductions
           );
@@ -332,6 +479,17 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
           tempGHG.avgNetEmissionReductions = Number(
             values?.avgNetEmissionReductions
           );
+=======
+          tempGHG.totalBaselineEmissionReductions = Number(values?.totalBaselineEmissionReductions);
+          tempGHG.totalProjectEmissionReductions = Number(values?.totalProjectEmissionReductions);
+          tempGHG.totalLeakageEmissionReductions = Number(values?.totalLeakageEmissionReductions);
+          tempGHG.totalNetEmissionReductions = Number(values?.totalNetEmissionReductions);
+          tempGHG.totalNumberOfCreditingYears = Number(values?.totalCreditingYears);
+          tempGHG.avgBaselineEmissionReductions = Number(values?.avgBaselineEmissionReductions);
+          tempGHG.avgProjectEmissionReductions = Number(values?.avgProjectEmissionReductions);
+          tempGHG.avgLeakageEmissionReductions = Number(values?.avgLeakageEmissionReductions);
+          tempGHG.avgNetEmissionReductions = Number(values?.avgNetEmissionReductions);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
           return tempGHG;
         })(),
@@ -369,14 +527,24 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                 <Col xl={24} md={24}>
                   <div className="step-form-left-col">
                     <Form.Item
+<<<<<<< HEAD
                       label={`${t("monitoringReport:ce_baselineEmission")}`}
+=======
+                      label={`${t('monitoringReport:ce_baselineEmission')}`}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                       name="ce_baselineEmission"
                       rules={[
                         {
                           required: true,
+<<<<<<< HEAD
                           message: `${t(
                             "monitoringReport:ce_baselineEmission"
                           )} ${t("isRequired")}`,
+=======
+                          message: `${t('monitoringReport:ce_baselineEmission')} ${t(
+                            'isRequired'
+                          )}`,
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                         },
                       ]}
                     >
@@ -388,7 +556,11 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                     </Form.Item> */}
 
                     <div className="custom-label-monitoring">
+<<<<<<< HEAD
                       {t("monitoringReport:ce_documentUpload")}
+=======
+                      {t('monitoringReport:ce_documentUpload')}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     </div>
                     <Form.Item
                       //label={t('monitoringReport:ce_documentUpload')}
@@ -402,7 +574,11 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                             for (let i = 0; i < file?.length; i++) {
                               if (file[i]?.size > maximumImageSize) {
                                 // default size format of files would be in bytes -> 1MB = 1000000bytes
+<<<<<<< HEAD
                                 throw new Error(`${t("common:maxSizeVal")}`);
+=======
+                                throw new Error(`${t('common:maxSizeVal')}`);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                               }
                             }
                           },
@@ -427,20 +603,34 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                           icon={<UploadOutlined />}
                           disabled={disableFields}
                         >
+<<<<<<< HEAD
                           {t("monitoringReport:upload")}
+=======
+                          {t('monitoringReport:upload')}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                         </Button>
                       </Upload>
                     </Form.Item>
 
                     <Form.Item
+<<<<<<< HEAD
                       label={`${t("monitoringReport:ce_projectEmissions")}`}
+=======
+                      label={`${t('monitoringReport:ce_projectEmissions')}`}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                       name="ce_projectEmissions"
                       rules={[
                         {
                           required: true,
+<<<<<<< HEAD
                           message: `${t(
                             "monitoringReport:ce_projectEmissions"
                           )} ${t("isRequired")}`,
+=======
+                          message: `${t('monitoringReport:ce_projectEmissions')} ${t(
+                            'isRequired'
+                          )}`,
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                         },
                       ]}
                     >
@@ -448,14 +638,22 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                     </Form.Item>
 
                     <Form.Item
+<<<<<<< HEAD
                       label={`${t("monitoringReport:ce_leakage")}`}
+=======
+                      label={`${t('monitoringReport:ce_leakage')}`}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                       name="ce_leakage"
                       rules={[
                         {
                           required: true,
+<<<<<<< HEAD
                           message: `${t("monitoringReport:ce_leakage")} ${t(
                             "isRequired"
                           )}`,
+=======
+                          message: `${t('monitoringReport:ce_leakage')} ${t('isRequired')}`,
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                         },
                       ]}
                     >
@@ -464,16 +662,24 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
 
                     <>
                       <h3 className="form-section-title">
+<<<<<<< HEAD
                         {`${t(
                           "monitoringReport:ce_estimatedEmissionReduction"
                         )}`}
+=======
+                        {`${t('monitoringReport:ce_estimatedEmissionReduction')}`}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                       </h3>
 
                       {/* need to update this */}
                       <>
                         <>
                           <div className="estimated-emmissions-table-form">
+<<<<<<< HEAD
                             <Row className="header" justify={"space-between"}>
+=======
+                            <Row className="header" justify={'space-between'}>
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                               <Col md={6} xl={6}>
                                 Year
                               </Col>
@@ -487,6 +693,7 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                 Estimated Leakage Emissions (tCO₂e)
                               </Col>
                               <Col md={3} xl={3}>
+<<<<<<< HEAD
                                 Estimated Net GHG Emission Reductions Or
                                 Removals (tCO₂e)
                               </Col>
@@ -496,6 +703,16 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                             </Row>
 
                             <Row justify={"space-between"} align={"middle"}>
+=======
+                                Estimated Net GHG Emission Reductions Or Removals (tCO₂e)
+                              </Col>
+                              <Col md={2} xl={2}>
+                                {' '}
+                              </Col>
+                            </Row>
+
+                            <Row justify={'space-between'} align={'middle'}>
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                               <Col md={6} xl={6} className="col1">
                                 <Form.Item
                                   label={``}
@@ -504,19 +721,31 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                   rules={[
                                     {
                                       required: true,
+<<<<<<< HEAD
                                       message: "",
+=======
+                                      message: '',
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                     },
                                     {
                                       validator: async (rule, value) => {
                                         if (
+<<<<<<< HEAD
                                           String(value).trim() === "" ||
+=======
+                                          String(value).trim() === '' ||
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                           String(value).trim() === undefined ||
                                           value === null ||
                                           value === undefined
                                         ) {
+<<<<<<< HEAD
                                           throw new Error(
                                             `${t("monitoringReport:required")}`
                                           );
+=======
+                                          throw new Error(`${t('monitoringReport:required')}`);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                         }
                                       },
                                     },
@@ -527,15 +756,23 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                     placeholder="Year"
                                     picker="year"
                                     format="YYYY"
+<<<<<<< HEAD
                                     onChange={(value) =>
                                       onPeriodChange(value, 1)
                                     }
+=======
+                                    onChange={(value) => onPeriodChange(value, 1)}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                     disabled={disableFields}
                                     disabledDate={(currentDate: any) => {
                                       return disableYears(
                                         currentDate,
                                         form,
+<<<<<<< HEAD
                                         "extraEmissionReductions",
+=======
+                                        'extraEmissionReductions',
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                         true
                                       );
                                     }}
@@ -554,11 +791,16 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                     {
                                       validator: async (rule, value) => {
                                         if (
+<<<<<<< HEAD
                                           String(value).trim() === "" ||
+=======
+                                          String(value).trim() === '' ||
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                           String(value).trim() === undefined ||
                                           value === null ||
                                           value === undefined
                                         ) {
+<<<<<<< HEAD
                                           throw new Error(
                                             `${t("monitoringReport:required")}`
                                           );
@@ -572,6 +814,15 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                               `${t(
                                                 "monitoringReport:ce_shouldHavePositive"
                                               )}`
+=======
+                                          throw new Error(`${t('monitoringReport:required')}`);
+                                        } else if (isNaN(value)) {
+                                          return Promise.reject(new Error('Should be a number'));
+                                        } else if (Number(value) < 0) {
+                                          return Promise.reject(
+                                            new Error(
+                                              `${t('monitoringReport:ce_shouldHavePositive')}`
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                             )
                                           );
                                         }
@@ -588,14 +839,23 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                       calculateNetGHGEmissions(value);
                                       calculateTotalEmissions(
                                         value,
+<<<<<<< HEAD
                                         "baselineEmissionReductions",
                                         "totalBaselineEmissionReductions"
+=======
+                                        'baselineEmissionReductions',
+                                        'totalBaselineEmissionReductions'
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                       );
                                     }}
                                     step="1"
                                     onKeyDown={(e) =>
+<<<<<<< HEAD
                                       (e.key === "." || e.key === ",") &&
                                       e.preventDefault()
+=======
+                                      (e.key === '.' || e.key === ',') && e.preventDefault()
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                     }
                                   />
                                 </Form.Item>
@@ -611,11 +871,16 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                     {
                                       validator: async (rule, value) => {
                                         if (
+<<<<<<< HEAD
                                           String(value).trim() === "" ||
+=======
+                                          String(value).trim() === '' ||
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                           String(value).trim() === undefined ||
                                           value === null ||
                                           value === undefined
                                         ) {
+<<<<<<< HEAD
                                           throw new Error(
                                             `${t("monitoringReport:required")}`
                                           );
@@ -629,6 +894,15 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                               `${t(
                                                 "monitoringReport:ce_shouldHavePositive"
                                               )}`
+=======
+                                          throw new Error(`${t('monitoringReport:required')}`);
+                                        } else if (isNaN(value)) {
+                                          return Promise.reject(new Error('Should be a number'));
+                                        } else if (Number(value) < 0) {
+                                          return Promise.reject(
+                                            new Error(
+                                              `${t('monitoringReport:ce_shouldHavePositive')}`
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                             )
                                           );
                                         }
@@ -645,14 +919,23 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                       calculateNetGHGEmissions(value);
                                       calculateTotalEmissions(
                                         value,
+<<<<<<< HEAD
                                         "projectEmissionReductions",
                                         "totalProjectEmissionReductions"
+=======
+                                        'projectEmissionReductions',
+                                        'totalProjectEmissionReductions'
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                       );
                                     }}
                                     step="1"
                                     onKeyDown={(e) =>
+<<<<<<< HEAD
                                       (e.key === "." || e.key === ",") &&
                                       e.preventDefault()
+=======
+                                      (e.key === '.' || e.key === ',') && e.preventDefault()
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                     }
                                   />
                                 </Form.Item>
@@ -668,11 +951,16 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                     {
                                       validator: async (rule, value) => {
                                         if (
+<<<<<<< HEAD
                                           String(value).trim() === "" ||
+=======
+                                          String(value).trim() === '' ||
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                           String(value).trim() === undefined ||
                                           value === null ||
                                           value === undefined
                                         ) {
+<<<<<<< HEAD
                                           throw new Error(
                                             `${t("monitoringReport:required")}`
                                           );
@@ -686,6 +974,15 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                               `${t(
                                                 "monitoringReport:ce_shouldHavePositive"
                                               )}`
+=======
+                                          throw new Error(`${t('monitoringReport:required')}`);
+                                        } else if (isNaN(value)) {
+                                          return Promise.reject(new Error('Should be a number'));
+                                        } else if (Number(value) < 0) {
+                                          return Promise.reject(
+                                            new Error(
+                                              `${t('monitoringReport:ce_shouldHavePositive')}`
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                             )
                                           );
                                         }
@@ -702,14 +999,23 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                       calculateNetGHGEmissions(value);
                                       calculateTotalEmissions(
                                         value,
+<<<<<<< HEAD
                                         "leakageEmissionReductions",
                                         "totalLeakageEmissionReductions"
+=======
+                                        'leakageEmissionReductions',
+                                        'totalLeakageEmissionReductions'
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                       );
                                     }}
                                     step="1"
                                     onKeyDown={(e) =>
+<<<<<<< HEAD
                                       (e.key === "." || e.key === ",") &&
                                       e.preventDefault()
+=======
+                                      (e.key === '.' || e.key === ',') && e.preventDefault()
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                     }
                                   />
                                 </Form.Item>
@@ -725,11 +1031,16 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                     {
                                       validator: async (rule, value) => {
                                         if (
+<<<<<<< HEAD
                                           String(value).trim() === "" ||
+=======
+                                          String(value).trim() === '' ||
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                           String(value).trim() === undefined ||
                                           value === null ||
                                           value === undefined
                                         ) {
+<<<<<<< HEAD
                                           throw new Error(
                                             `${t("monitoringReport:required")}`
                                           );
@@ -743,6 +1054,15 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                               `${t(
                                                 "monitoringReport:ce_shouldHavePositive"
                                               )}`
+=======
+                                          throw new Error(`${t('monitoringReport:required')}`);
+                                        } else if (isNaN(value)) {
+                                          return Promise.reject(new Error('Should be a number'));
+                                        } else if (Number(value) < 0) {
+                                          return Promise.reject(
+                                            new Error(
+                                              `${t('monitoringReport:ce_shouldHavePositive')}`
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                             )
                                           );
                                         }
@@ -754,15 +1074,23 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                 >
                                   <Input
                                     type="number"
+<<<<<<< HEAD
                                     onChange={(value) =>
                                       calculateNetGHGEmissions(value)
                                     }
+=======
+                                    onChange={(value) => calculateNetGHGEmissions(value)}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                     disabled
                                   />
                                 </Form.Item>
                               </Col>
                               <Col md={2} xl={2}>
+<<<<<<< HEAD
                                 {" "}
+=======
+                                {' '}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                               </Col>
                             </Row>
 
@@ -771,6 +1099,7 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                 <>
                                   {fields.map(({ key, name, ...restField }) => (
                                     <>
+<<<<<<< HEAD
                                       <Row
                                         justify={"space-between"}
                                         align={"middle"}
@@ -779,10 +1108,18 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                           <Form.Item
                                             label={``}
                                             name={[name, "vintage"]}
+=======
+                                      <Row justify={'space-between'} align={'middle'}>
+                                        <Col md={6} xl={6} className="col1">
+                                          <Form.Item
+                                            label={``}
+                                            name={[name, 'vintage']}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                             className="datepicker"
                                             rules={[
                                               {
                                                 required: true,
+<<<<<<< HEAD
                                                 message: "",
                                               },
                                               {
@@ -795,13 +1132,26 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                                       "" ||
                                                     String(value).trim() ===
                                                       undefined ||
+=======
+                                                message: '',
+                                              },
+                                              {
+                                                validator: async (rule, value) => {
+                                                  if (
+                                                    String(value).trim() === '' ||
+                                                    String(value).trim() === undefined ||
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                                     value === null ||
                                                     value === undefined
                                                   ) {
                                                     throw new Error(
+<<<<<<< HEAD
                                                       `${t(
                                                         "monitoringReport:required"
                                                       )}`
+=======
+                                                      `${t('monitoringReport:required')}`
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                                     );
                                                   }
                                                 },
@@ -815,6 +1165,7 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                               picker="year"
                                               format="YYYY"
                                               onChange={(value: any) => {
+<<<<<<< HEAD
                                                 onPeriodChange(
                                                   value,
                                                   fields?.length + 1
@@ -827,6 +1178,15 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                                   currentDate,
                                                   form,
                                                   "extraEmissionReductions",
+=======
+                                                onPeriodChange(value, fields?.length + 1);
+                                              }}
+                                              disabledDate={(currentDate: any) => {
+                                                return disableYears(
+                                                  currentDate,
+                                                  form,
+                                                  'extraEmissionReductions',
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                                   true
                                                 );
                                               }}
@@ -835,16 +1195,21 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                         </Col>
                                         <Col md={3} xl={3}>
                                           <Form.Item
+<<<<<<< HEAD
                                             name={[
                                               name,
                                               "baselineEmissionReductions",
                                             ]}
+=======
+                                            name={[name, 'baselineEmissionReductions']}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                             rules={[
                                               {
                                                 required: true,
                                                 message: ``,
                                               },
                                               {
+<<<<<<< HEAD
                                                 validator: async (
                                                   rule,
                                                   value
@@ -854,10 +1219,17 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                                       "" ||
                                                     String(value).trim() ===
                                                       undefined ||
+=======
+                                                validator: async (rule, value) => {
+                                                  if (
+                                                    String(value).trim() === '' ||
+                                                    String(value).trim() === undefined ||
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                                     value === null ||
                                                     value === undefined
                                                   ) {
                                                     throw new Error(
+<<<<<<< HEAD
                                                       `${t(
                                                         "monitoringReport:required"
                                                       )}`
@@ -875,6 +1247,19 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                                       new Error(
                                                         `${t(
                                                           "monitoringReport:ce_shouldHavePositive"
+=======
+                                                      `${t('monitoringReport:required')}`
+                                                    );
+                                                  } else if (isNaN(value)) {
+                                                    return Promise.reject(
+                                                      new Error('Should be a number')
+                                                    );
+                                                  } else if (Number(value) < 0) {
+                                                    return Promise.reject(
+                                                      new Error(
+                                                        `${t(
+                                                          'monitoringReport:ce_shouldHavePositive'
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                                         )}`
                                                       )
                                                     );
@@ -889,6 +1274,7 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                               type="number"
                                               disabled={disableFields}
                                               onChange={(value) => {
+<<<<<<< HEAD
                                                 calculateNetGHGEmissions(
                                                   value,
                                                   name
@@ -897,12 +1283,23 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                                   value,
                                                   "baselineEmissionReductions",
                                                   "totalBaselineEmissionReductions"
+=======
+                                                calculateNetGHGEmissions(value, name);
+                                                calculateTotalEmissions(
+                                                  value,
+                                                  'baselineEmissionReductions',
+                                                  'totalBaselineEmissionReductions'
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                                 );
                                               }}
                                               step="1"
                                               onKeyDown={(e) =>
+<<<<<<< HEAD
                                                 (e.key === "." ||
                                                   e.key === ",") &&
+=======
+                                                (e.key === '.' || e.key === ',') &&
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                                 e.preventDefault()
                                               }
                                             />
@@ -910,16 +1307,21 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                         </Col>
                                         <Col md={3} xl={3}>
                                           <Form.Item
+<<<<<<< HEAD
                                             name={[
                                               name,
                                               "projectEmissionReductions",
                                             ]}
+=======
+                                            name={[name, 'projectEmissionReductions']}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                             rules={[
                                               {
                                                 required: true,
                                                 message: ``,
                                               },
                                               {
+<<<<<<< HEAD
                                                 validator: async (
                                                   rule,
                                                   value
@@ -929,10 +1331,17 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                                       "" ||
                                                     String(value).trim() ===
                                                       undefined ||
+=======
+                                                validator: async (rule, value) => {
+                                                  if (
+                                                    String(value).trim() === '' ||
+                                                    String(value).trim() === undefined ||
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                                     value === null ||
                                                     value === undefined
                                                   ) {
                                                     throw new Error(
+<<<<<<< HEAD
                                                       `${t(
                                                         "monitoringReport:required"
                                                       )}`
@@ -950,6 +1359,19 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                                       new Error(
                                                         `${t(
                                                           "monitoringReport:ce_shouldHavePositive"
+=======
+                                                      `${t('monitoringReport:required')}`
+                                                    );
+                                                  } else if (isNaN(value)) {
+                                                    return Promise.reject(
+                                                      new Error('Should be a number')
+                                                    );
+                                                  } else if (Number(value) < 0) {
+                                                    return Promise.reject(
+                                                      new Error(
+                                                        `${t(
+                                                          'monitoringReport:ce_shouldHavePositive'
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                                         )}`
                                                       )
                                                     );
@@ -964,6 +1386,7 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                               type="number"
                                               disabled={disableFields}
                                               onChange={(value) => {
+<<<<<<< HEAD
                                                 calculateNetGHGEmissions(
                                                   value,
                                                   name
@@ -972,12 +1395,23 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                                   value,
                                                   "projectEmissionReductions",
                                                   "totalProjectEmissionReductions"
+=======
+                                                calculateNetGHGEmissions(value, name);
+                                                calculateTotalEmissions(
+                                                  value,
+                                                  'projectEmissionReductions',
+                                                  'totalProjectEmissionReductions'
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                                 );
                                               }}
                                               step="1"
                                               onKeyDown={(e) =>
+<<<<<<< HEAD
                                                 (e.key === "." ||
                                                   e.key === ",") &&
+=======
+                                                (e.key === '.' || e.key === ',') &&
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                                 e.preventDefault()
                                               }
                                             />
@@ -985,16 +1419,21 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                         </Col>
                                         <Col md={3} xl={3}>
                                           <Form.Item
+<<<<<<< HEAD
                                             name={[
                                               name,
                                               "leakageEmissionReductions",
                                             ]}
+=======
+                                            name={[name, 'leakageEmissionReductions']}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                             rules={[
                                               {
                                                 required: true,
                                                 message: ``,
                                               },
                                               {
+<<<<<<< HEAD
                                                 validator: async (
                                                   rule,
                                                   value
@@ -1004,10 +1443,17 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                                       "" ||
                                                     String(value).trim() ===
                                                       undefined ||
+=======
+                                                validator: async (rule, value) => {
+                                                  if (
+                                                    String(value).trim() === '' ||
+                                                    String(value).trim() === undefined ||
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                                     value === null ||
                                                     value === undefined
                                                   ) {
                                                     throw new Error(
+<<<<<<< HEAD
                                                       `${t(
                                                         "monitoringReport:required"
                                                       )}`
@@ -1025,6 +1471,19 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                                       new Error(
                                                         `${t(
                                                           "monitoringReport:ce_shouldHavePositive"
+=======
+                                                      `${t('monitoringReport:required')}`
+                                                    );
+                                                  } else if (isNaN(value)) {
+                                                    return Promise.reject(
+                                                      new Error('Should be a number')
+                                                    );
+                                                  } else if (Number(value) < 0) {
+                                                    return Promise.reject(
+                                                      new Error(
+                                                        `${t(
+                                                          'monitoringReport:ce_shouldHavePositive'
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                                         )}`
                                                       )
                                                     );
@@ -1039,6 +1498,7 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                               type="number"
                                               disabled={disableFields}
                                               onChange={(value) => {
+<<<<<<< HEAD
                                                 calculateNetGHGEmissions(
                                                   value,
                                                   name
@@ -1047,12 +1507,23 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                                   value,
                                                   "leakageEmissionReductions",
                                                   "totalLeakageEmissionReductions"
+=======
+                                                calculateNetGHGEmissions(value, name);
+                                                calculateTotalEmissions(
+                                                  value,
+                                                  'leakageEmissionReductions',
+                                                  'totalLeakageEmissionReductions'
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                                 );
                                               }}
                                               step="1"
                                               onKeyDown={(e) =>
+<<<<<<< HEAD
                                                 (e.key === "." ||
                                                   e.key === ",") &&
+=======
+                                                (e.key === '.' || e.key === ',') &&
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                                 e.preventDefault()
                                               }
                                             />
@@ -1060,16 +1531,21 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                         </Col>
                                         <Col md={3} xl={3}>
                                           <Form.Item
+<<<<<<< HEAD
                                             name={[
                                               name,
                                               "netEmissionReductions",
                                             ]}
+=======
+                                            name={[name, 'netEmissionReductions']}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                             rules={[
                                               {
                                                 required: true,
                                                 message: ``,
                                               },
                                               {
+<<<<<<< HEAD
                                                 validator: async (
                                                   rule,
                                                   value
@@ -1079,10 +1555,17 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                                       "" ||
                                                     String(value).trim() ===
                                                       undefined ||
+=======
+                                                validator: async (rule, value) => {
+                                                  if (
+                                                    String(value).trim() === '' ||
+                                                    String(value).trim() === undefined ||
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                                     value === null ||
                                                     value === undefined
                                                   ) {
                                                     throw new Error(
+<<<<<<< HEAD
                                                       `${t(
                                                         "monitoringReport:required"
                                                       )}`
@@ -1100,6 +1583,19 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                                       new Error(
                                                         `${t(
                                                           "monitoringReport:ce_shouldHavePositive"
+=======
+                                                      `${t('monitoringReport:required')}`
+                                                    );
+                                                  } else if (isNaN(value)) {
+                                                    return Promise.reject(
+                                                      new Error('Should be a number')
+                                                    );
+                                                  } else if (Number(value) < 0) {
+                                                    return Promise.reject(
+                                                      new Error(
+                                                        `${t(
+                                                          'monitoringReport:ce_shouldHavePositive'
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                                         )}`
                                                       )
                                                     );
@@ -1120,6 +1616,7 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                               onClick={() => {
                                                 // reduceTotalCreditingYears()
                                                 remove(name);
+<<<<<<< HEAD
                                                 onPeriodChange(
                                                   null,
                                                   fields?.length + 1
@@ -1138,6 +1635,18 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                                   null,
                                                   "leakageEmissionReductions",
                                                   "totalLeakageEmissionReductions"
+=======
+                                                onPeriodChange(null, fields?.length + 1);
+                                                calculateTotalEmissions(
+                                                  null,
+                                                  'baselineEmissionReductions',
+                                                  'totalBaselineEmissionReductions'
+                                                );
+                                                calculateTotalEmissions(
+                                                  null,
+                                                  'leakageEmissionReductions',
+                                                  'totalLeakageEmissionReductions'
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                                 );
                                               }}
                                               size="small"
@@ -1175,7 +1684,11 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
 
                             {/* Emmissions calculations */}
                             {/* calc Row 1 start */}
+<<<<<<< HEAD
                             <Row justify={"space-between"} align={"top"}>
+=======
+                            <Row justify={'space-between'} align={'top'}>
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                               <Col md={6} xl={6}>
                                 Total
                               </Col>
@@ -1190,21 +1703,33 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                     {
                                       validator: async (rule, value) => {
                                         if (
+<<<<<<< HEAD
                                           String(value).trim() === "" ||
+=======
+                                          String(value).trim() === '' ||
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                           String(value).trim() === undefined ||
                                           value === null ||
                                           value === undefined
                                         ) {
+<<<<<<< HEAD
                                           throw new Error(
                                             `${t("monitoringReport:required")}`
                                           );
+=======
+                                          throw new Error(`${t('monitoringReport:required')}`);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                         }
 
                                         // eslint-disable-next-line no-restricted-globals
                                         if (isNaN(value)) {
+<<<<<<< HEAD
                                           return Promise.reject(
                                             new Error("Should be a number")
                                           );
+=======
+                                          return Promise.reject(new Error('Should be a number'));
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                         }
 
                                         return Promise.resolve();
@@ -1226,21 +1751,33 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                     {
                                       validator: async (rule, value) => {
                                         if (
+<<<<<<< HEAD
                                           String(value).trim() === "" ||
+=======
+                                          String(value).trim() === '' ||
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                           String(value).trim() === undefined ||
                                           value === null ||
                                           value === undefined
                                         ) {
+<<<<<<< HEAD
                                           throw new Error(
                                             `${t("monitoringReport:required")}`
                                           );
+=======
+                                          throw new Error(`${t('monitoringReport:required')}`);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                         }
 
                                         // eslint-disable-next-line no-restricted-globals
                                         if (isNaN(value)) {
+<<<<<<< HEAD
                                           return Promise.reject(
                                             new Error("Should be a number")
                                           );
+=======
+                                          return Promise.reject(new Error('Should be a number'));
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                         }
 
                                         return Promise.resolve();
@@ -1262,21 +1799,33 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                     {
                                       validator: async (rule, value) => {
                                         if (
+<<<<<<< HEAD
                                           String(value).trim() === "" ||
+=======
+                                          String(value).trim() === '' ||
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                           String(value).trim() === undefined ||
                                           value === null ||
                                           value === undefined
                                         ) {
+<<<<<<< HEAD
                                           throw new Error(
                                             `${t("monitoringReport:required")}`
                                           );
+=======
+                                          throw new Error(`${t('monitoringReport:required')}`);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                         }
 
                                         // eslint-disable-next-line no-restricted-globals
                                         if (isNaN(value)) {
+<<<<<<< HEAD
                                           return Promise.reject(
                                             new Error("Should be a number")
                                           );
+=======
+                                          return Promise.reject(new Error('Should be a number'));
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                         }
 
                                         return Promise.resolve();
@@ -1298,21 +1847,33 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                     {
                                       validator: async (rule, value) => {
                                         if (
+<<<<<<< HEAD
                                           String(value).trim() === "" ||
+=======
+                                          String(value).trim() === '' ||
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                           String(value).trim() === undefined ||
                                           value === null ||
                                           value === undefined
                                         ) {
+<<<<<<< HEAD
                                           throw new Error(
                                             `${t("monitoringReport:required")}`
                                           );
+=======
+                                          throw new Error(`${t('monitoringReport:required')}`);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                         }
 
                                         // eslint-disable-next-line no-restricted-globals
                                         if (isNaN(value)) {
+<<<<<<< HEAD
                                           return Promise.reject(
                                             new Error("Should be a number")
                                           );
+=======
+                                          return Promise.reject(new Error('Should be a number'));
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                         }
 
                                         return Promise.resolve();
@@ -1324,13 +1885,21 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                 </Form.Item>
                               </Col>
                               <Col md={2} xl={2}>
+<<<<<<< HEAD
                                 {" "}
+=======
+                                {' '}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                               </Col>
                             </Row>
                             {/* calc Row 1 end */}
 
                             {/* calc row 2 start */}
+<<<<<<< HEAD
                             <Row justify={"space-between"} align={"top"}>
+=======
+                            <Row justify={'space-between'} align={'top'}>
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                               <Col md={6} xl={6}>
                                 Total number of crediting years
                               </Col>
@@ -1345,21 +1914,33 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                     {
                                       validator: async (rule, value) => {
                                         if (
+<<<<<<< HEAD
                                           String(value).trim() === "" ||
+=======
+                                          String(value).trim() === '' ||
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                           String(value).trim() === undefined ||
                                           value === null ||
                                           value === undefined
                                         ) {
+<<<<<<< HEAD
                                           throw new Error(
                                             `${t("monitoringReport:required")}`
                                           );
+=======
+                                          throw new Error(`${t('monitoringReport:required')}`);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                         }
 
                                         // eslint-disable-next-line no-restricted-globals
                                         if (isNaN(value)) {
+<<<<<<< HEAD
                                           return Promise.reject(
                                             new Error("Should be a number")
                                           );
+=======
+                                          return Promise.reject(new Error('Should be a number'));
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                         }
 
                                         return Promise.resolve();
@@ -1371,6 +1952,7 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                 </Form.Item>
                               </Col>
                               <Col md={3} xl={3}>
+<<<<<<< HEAD
                                 {" "}
                               </Col>
                               <Col md={3} xl={3}>
@@ -1381,12 +1963,28 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                               </Col>
                               <Col md={2} xl={2}>
                                 {" "}
+=======
+                                {' '}
+                              </Col>
+                              <Col md={3} xl={3}>
+                                {' '}
+                              </Col>
+                              <Col md={3} xl={3}>
+                                {' '}
+                              </Col>
+                              <Col md={2} xl={2}>
+                                {' '}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                               </Col>
                             </Row>
                             {/* calc row 2 end */}
 
                             {/* calc row 3 start */}
+<<<<<<< HEAD
                             <Row justify={"space-between"} align={"top"}>
+=======
+                            <Row justify={'space-between'} align={'top'}>
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                               <Col md={6} xl={6}>
                                 Annual average over the crediting period
                               </Col>
@@ -1401,21 +1999,33 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                     {
                                       validator: async (rule, value) => {
                                         if (
+<<<<<<< HEAD
                                           String(value).trim() === "" ||
+=======
+                                          String(value).trim() === '' ||
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                           String(value).trim() === undefined ||
                                           value === null ||
                                           value === undefined
                                         ) {
+<<<<<<< HEAD
                                           throw new Error(
                                             `${t("monitoringReport:required")}`
                                           );
+=======
+                                          throw new Error(`${t('monitoringReport:required')}`);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                         }
 
                                         // eslint-disable-next-line no-restricted-globals
                                         if (isNaN(value)) {
+<<<<<<< HEAD
                                           return Promise.reject(
                                             new Error("Should be a number")
                                           );
+=======
+                                          return Promise.reject(new Error('Should be a number'));
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                         }
 
                                         return Promise.resolve();
@@ -1437,21 +2047,33 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                     {
                                       validator: async (rule, value) => {
                                         if (
+<<<<<<< HEAD
                                           String(value).trim() === "" ||
+=======
+                                          String(value).trim() === '' ||
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                           String(value).trim() === undefined ||
                                           value === null ||
                                           value === undefined
                                         ) {
+<<<<<<< HEAD
                                           throw new Error(
                                             `${t("monitoringReport:required")}`
                                           );
+=======
+                                          throw new Error(`${t('monitoringReport:required')}`);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                         }
 
                                         // eslint-disable-next-line no-restricted-globals
                                         if (isNaN(value)) {
+<<<<<<< HEAD
                                           return Promise.reject(
                                             new Error("Should be a number")
                                           );
+=======
+                                          return Promise.reject(new Error('Should be a number'));
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                         }
 
                                         return Promise.resolve();
@@ -1473,21 +2095,33 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                     {
                                       validator: async (rule, value) => {
                                         if (
+<<<<<<< HEAD
                                           String(value).trim() === "" ||
+=======
+                                          String(value).trim() === '' ||
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                           String(value).trim() === undefined ||
                                           value === null ||
                                           value === undefined
                                         ) {
+<<<<<<< HEAD
                                           throw new Error(
                                             `${t("monitoringReport:required")}`
                                           );
+=======
+                                          throw new Error(`${t('monitoringReport:required')}`);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                         }
 
                                         // eslint-disable-next-line no-restricted-globals
                                         if (isNaN(value)) {
+<<<<<<< HEAD
                                           return Promise.reject(
                                             new Error("Should be a number")
                                           );
+=======
+                                          return Promise.reject(new Error('Should be a number'));
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                         }
 
                                         return Promise.resolve();
@@ -1509,21 +2143,33 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                     {
                                       validator: async (rule, value) => {
                                         if (
+<<<<<<< HEAD
                                           String(value).trim() === "" ||
+=======
+                                          String(value).trim() === '' ||
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                           String(value).trim() === undefined ||
                                           value === null ||
                                           value === undefined
                                         ) {
+<<<<<<< HEAD
                                           throw new Error(
                                             `${t("monitoringReport:required")}`
                                           );
+=======
+                                          throw new Error(`${t('monitoringReport:required')}`);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                         }
 
                                         // eslint-disable-next-line no-restricted-globals
                                         if (isNaN(value)) {
+<<<<<<< HEAD
                                           return Promise.reject(
                                             new Error("Should be a number")
                                           );
+=======
+                                          return Promise.reject(new Error('Should be a number'));
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                         }
 
                                         return Promise.resolve();
@@ -1535,7 +2181,11 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                                 </Form.Item>
                               </Col>
                               <Col md={2} xl={2} className="total-cols">
+<<<<<<< HEAD
                                 {" "}
+=======
+                                {' '}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                               </Col>
                             </Row>
                             {/* calc row 3 end */}
@@ -1579,6 +2229,7 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
 
                     <>
                       <h3 className="form-section-title">
+<<<<<<< HEAD
                         {`${t("monitoringReport:ce_comparisonWithPDD")}`}
                       </h3>
 
@@ -1592,12 +2243,61 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                             <div className="step-form-left-col">
                               <Form.Item
                                 label={t("monitoringReport:item")}
+=======
+                        {`${t('monitoringReport:ce_comparisonWithPDD')}`}
+                      </h3>
+
+                      <Row justify={'space-between'} gutter={[40, 16]} className="form-section">
+                        {/* First Row - Labels */}
+                        <Row className="row" gutter={[40, 8]} wrap={false}>
+                          <Col xl={8} md={24}>
+                            <div className="step-form-label">{t('monitoringReport:item')}</div>
+                          </Col>
+                          <Col xl={8} md={24}>
+                            <div className="step-form-label">
+                              {t('monitoringReport:valueApplied')}
+                            </div>
+                          </Col>
+                          <Col xl={8} md={24}>
+                            <div className="step-form-label">
+                              {t('monitoringReport:actualValues')}
+                            </div>
+                          </Col>
+                        </Row>
+                        <Row className="row " gutter={[40, 16]} wrap={false}>
+                          <Col xl={8} md={24}>
+                            <div className="step-form-left-col">
+                              <Form.Item
+                                //label={t('monitoringReport:item')}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                 name="item"
                                 rules={[
                                   {
                                     required: true,
+<<<<<<< HEAD
                                     message: `${t("monitoringReport:item")} ${t(
                                       "isRequired"
+=======
+                                    message: `${t('monitoringReport:item')} ${t('isRequired')}`,
+                                  },
+                                ]}
+                              >
+                                <Input size="large" disabled={disableFields} />
+                              </Form.Item>
+                            </div>
+                          </Col>
+
+                          <Col xl={8} md={24}>
+                            <div className="step-form-right-col">
+                              <Form.Item
+                                //label={t('monitoringReport:valueApplied')}
+                                name="valueApplied"
+                                rules={[
+                                  {
+                                    required: true,
+                                    message: `${t('monitoringReport:valueApplied')} ${t(
+                                      'isRequired'
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                     )}`,
                                   },
                                 ]}
@@ -1610,6 +2310,7 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                           <Col xl={8} md={24}>
                             <div className="step-form-right-col">
                               <Form.Item
+<<<<<<< HEAD
                                 label={
     <div style={{ display: 'block', width: '100%' }}>
       {t("monitoringReport:valueApplied")}<span style={{ color: 'red' }}>*</span>
@@ -1639,16 +2340,27 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
       {t("monitoringReport:actualValues")}<span style={{ color: 'red' }}>*</span>
     </div>
   }
+=======
+                                //label={t('monitoringReport:actualValues')}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                 name="actualValues"
                                 rules={[
                                   {
                                     required: true,
+<<<<<<< HEAD
                                     message: `${t(
                                       "monitoringReport:actualValues"
                                     )} ${t("isRequired")}`,
                                   },
                                 ]}
                                 className="no-required-mark"
+=======
+                                    message: `${t('monitoringReport:actualValues')} ${t(
+                                      'isRequired'
+                                    )}`,
+                                  },
+                                ]}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                               >
                                 <Input size="large" disabled={disableFields} />
                               </Form.Item>
@@ -1658,14 +2370,22 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                       </Row>
                     </>
                     <Form.Item
+<<<<<<< HEAD
                       label={`${t("monitoringReport:ce_remarks")}`}
+=======
+                      label={`${t('monitoringReport:ce_remarks')}`}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                       name="ce_remarks"
                       rules={[
                         {
                           required: true,
+<<<<<<< HEAD
                           message: `${t("monitoringReport:ce_remarks")} ${t(
                             "isRequired"
                           )}`,
+=======
+                          message: `${t('monitoringReport:ce_remarks')} ${t('isRequired')}`,
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                         },
                       ]}
                     >
@@ -1674,6 +2394,7 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                   </div>
                 </Col>
               </Row>
+<<<<<<< HEAD
               <Row justify={"end"} className="step-actions-end">
                 <Button danger onClick={prev} disabled={false}>
                   {t("monitoringReport:back")}
@@ -1681,15 +2402,32 @@ export const CalcEmissionReductionStep = (props: CustomStepsProps) => {
                 {disableFields ? (
                   <Button type="primary" onClick={next}>
                     {t("monitoringReport:next")}
+=======
+              <Row justify={'end'} className="step-actions-end">
+                <Button type="primary" ghost onClick={prev} disabled={false}>
+                  {t('monitoringReport:back')}
+                </Button>
+                {disableFields ? (
+                  <Button type="primary" onClick={next}>
+                    {t('monitoringReport:next')}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                   </Button>
                 ) : (
                   <Button
                     type="primary"
+<<<<<<< HEAD
                     size={"large"}
                     htmlType={"submit"}
                     // onClick={next}
                   >
                     {t("monitoringReport:next")}
+=======
+                    size={'large'}
+                    htmlType={'submit'}
+                    // onClick={next}
+                  >
+                    {t('monitoringReport:next')}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                   </Button>
                 )}
               </Row>

@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 @use '../../Styles/colors.addProgramme.scss';
 @use '../../Styles/colors.role.scss' as colors2;
 @use '../../Styles/variables.scss';
+=======
+@import '../../Styles/colors.addProgramme.scss';
+@import '../../Styles/colors.role.scss';
+@import '../../Styles/variables.scss';
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
 .to-lable {
   text-align: center;
@@ -34,7 +40,11 @@
   }
 
   &-section {
+<<<<<<< HEAD
     background-color: variables.$form-sections-bg-color;
+=======
+    background-color: $form-sections-bg-color;
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     padding: 16px;
     border: 1px solid #dddddd;
   }
@@ -50,7 +60,11 @@
   width: 50%;
 
   .icon-color {
+<<<<<<< HEAD
     color: variables.$primary-color !important;
+=======
+    color: $primary-color !important;
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   }
 
   .ant-upload-list {
@@ -73,19 +87,31 @@
     .main {
       font-size: 1.25rem;
       font-weight: 500;
+<<<<<<< HEAD
       color: variables.$primary-color;
+=======
+      color: $primary-color;
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     }
 
     .sub {
       font-size: 0.8rem;
+<<<<<<< HEAD
       color: colors.$title-sub;
+=======
+      color: $title-sub;
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     }
   }
 
   .forms-container {
     display: flex;
     flex-direction: column;
+<<<<<<< HEAD
     background-color: colors.$common-form-white;
+=======
+    background-color: $common-form-white;
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     margin: 1rem 0 1rem 0;
     border-radius: 10px;
     padding: 2.5rem 1.5rem 2.5rem 1.5rem;
@@ -151,7 +177,11 @@
   }
 
   .ant-upload-list-item-name {
+<<<<<<< HEAD
     color: variables.$primary-color;
+=======
+    color: $primary-color;
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   }
 
   .step-actions {
@@ -260,13 +290,21 @@
     font-size: 2.2rem;
     font-weight: 800;
     margin-right: 0.4rem;
+<<<<<<< HEAD
     color: colors.$steps-count;
+=======
+    color: $steps-count;
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   }
 
   .title {
     font-size: 1rem;
     font-weight: 600;
+<<<<<<< HEAD
     color: colors.$steps-title;
+=======
+    color: $steps-title;
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   }
 }
 .verification-team-member-table {
@@ -441,14 +479,22 @@
         border-top: none;
         border-right: none;
         border-left: none;
+<<<<<<< HEAD
         padding: 8px;
+=======
+        padding: 10px 15px;
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       }
 
       &-subCols-last {
         background-color: #fbfbfb;
         border: 1px solid #c6c6c6;
         border-top: none;
+<<<<<<< HEAD
         padding: 8px;
+=======
+        padding: 10px 15px;
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       }
     }
 
@@ -600,18 +646,38 @@
   }
 }
 .appendix-table-section {
+<<<<<<< HEAD
   background-color: variables.$form-sections-bg-color;
+=======
+  background-color: $form-sections-bg-color;
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   padding: 16px;
 }
 
 .appendix-title {
   font-size: 18px;
   margin-top: 36px;
+<<<<<<< HEAD
   color: #3a3541cc;
   i {
     color: rgba(58, 53, 65, 0.5);
   }
 }
+=======
+  font-weight: 500;
+  color: #1c1b1bcc !important;
+
+  .i {
+    color: rgba(58, 53, 65, 0.5);
+  }
+}
+.appendix-sub-title {
+  font-size: 18px;
+  margin-top: 36px;
+  color: rgba(49, 45, 52, 0.5);
+  font-weight: 400;
+}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
 .appendix-documents-reviewed-table {
   color: #3a3541cc;
@@ -678,3 +744,10 @@
 .ant-form-item-has-error .custom-checkbox .ant-checkbox-inner {
   border-color: red !important;
 }
+<<<<<<< HEAD
+=======
+
+.custom-icon-color {
+   filter: brightness(0) saturate(100%) invert(45%) sepia(99%) saturate(2067%) hue-rotate(170deg) brightness(98%) contrast(99%);
+}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f

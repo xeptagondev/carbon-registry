@@ -98,16 +98,13 @@ A demo site at https://www.demo.carbreg.org/login illustrates the basic function
 
 UNDP Carbon Registry is based on service oriented architecture (SOA). Following diagram visualize the basic components in the system.
 
-![alt text](./documention/imgs/System%20Architecture.svg)
+![alt text](./documention/imgs/HederaNCRArchitecture.png)
 
 <a name="services"></a>
-
 ### **System Services**
+#### *Custodian*
 
-#### _National Service_
-
-Authenticate, Validate and Accept user (DNA, Project Developer/Certifier) API requests related to the following functionalities,
-
+Authenticate, Validate and Accept user (Designated National Authority, Project Developer and Independent Certifier) API requests related to the following functionalities,
 - User and company CRUD operations.
 - User authentication.
 - Project life cycle management.
@@ -117,21 +114,20 @@ Service is horizontally scalable and state maintained in the following locations
 
 - File storage.
 - Operational Database.
-- Ledger Database.
+- Hedera Public Ledger.
 
-Uses the Serial Number Generator service to issue a serial number and track credits through any transaction.
-Uses Ledger interface to persist project and credit life cycles.
+Uses the Serial Number Generator node modules to estimate the project carbon credit amount and issue a serial number.
+Uses Hedera Public Ledger to persist project and credit life cycles.
 
-#### _Analytics Service_
+#### *Analytics Service*
+Serve all the system analytics. Generate all the statistics using the operational database. Horizontally scalable.
 
-Serve all the system analytics. Generate all the statistics using the operational database.
-Horizontally scalable.
+#### *Async Task Monitor*
+The task monitor will fetch pending tasks from the database and execute them in order. It will also consider task dependencies. 
 
-#### _Replicator Service_
-
-Asynchronously replicate ledger database events in to the operational database. During the replication process it injects additional information to the data for query purposes (Eg: Location information).
-Currently implemented for QLDB and PostgresSQL ledgers. By implementing [replicator interface](./backend/services/src/ledger-replicator/replicator-interface.service.ts) can support more ledger replicators.
-Replicator select based on the `LEDGER_TYPE` environment variable. Support types `QLDB`, `PGSQL(Default)`.
+#### *Data Replicator*
+Asynchronously verify custodian database data by referring to the Hedera Guardian.
+![alt text](./documention/imgs/HederaNCRDataFlow.png)
 
 ### **Serial Number Generation And Tracking**
 
@@ -199,47 +195,16 @@ Can add more options by implementing [file handler interface](./backend/services
 Change by environment variable `FILE_SERVICE`. Supported types `S3`, `LOCAL(Default)`
 
 ### **Database Architecture**
+Custodian database design.
 
-Primary/secondary database architecture used to store carbon project and account balances.
-Ledger database is the primary database. Add/update projects and update account balances in a single transaction. Currently implemented only for AWS QLDB
-
-Operational Database is the secondary database. Eventually replicated to this from primary database via data stream. Implemented based on PostgresSQL
-
-**Why Two Database Approach?**
-
-1. Cost and Query capabilities - Ledger database (blockchain) read capabilities can be limited and costly. To support rich statistics and minimize the cost, data is replicated in to a cheap query database.
-2. Disaster recovery
-3. Scalability - Primary/secondary database architecture is scalable since additional secondary databases can be added as needed to handle more read operations.
-
-**Why Ledger Database?**
-
-1. Immutable and Transparent - Track and maintain a sequenced history of every carbon project and credit change.
-2. Data Integrity (Cryptographic verification by third party).
-3. Reconcile carbon credits and company account balance.
-
-**Ledger Database Interface**
-
-This enables the capability to add any blockchain or ledger database support to the carbon registry without functionality module changes. Currently implemented for PostgresSQL and AWS QLDB.
-
-**PostgresSQL Ledger Implementation** storage all the carbon project and credit events in a separate event database with the sequence number. Support all the ledger functionalities except immutability.
-
-Single database approach used for user and company management.
-
-### **Ledger Layout**
-
-Carbon Registry contains 2 ledger tables.
-
-1. Project ledger - Contains all the project and credit transactions.
-2. Credit Blocks Ledger (Credit) - Contains credit blocks, transactions and ownership.
-
-The below diagram demonstrates the ledger behavior of project create, authorise, issue and transfer processes. Blue color document icon denotes a single data block in a ledger.
-
-![alt text](./documention/imgs/Ledger.png)
+![alt text](./documention/imgs/CustodianER.png)
 
 ### **Authentication**
 
 - JWT Authentication - All endpoints based on role permissions.
 - API Key Authentication - MRV System connectivity.
+
+When signing in to Custodian, the user will also be signed in to Guardian. The refresh token for that session will be cached in Custodian for the duration of the session. 
 
 <a name="structure"></a>
 
@@ -249,15 +214,16 @@ The below diagram demonstrates the ledger behavior of project create, authorise,
     ├── .github                         # CI/CD [Github Actions files]
     ├── deployment                      # Declarative configuration files for initial resource creation and setup [AWS Cloudformation]
     ├── backend                         # System service implementation
-        ├── services                    # Services implementation [NestJS application]
-            ├── src
-                ├── national-api        # National API [NestJS module]
-                ├── stats-api           # Statistics API [NestJS module]
-                ├── ledger-replicator   # Blockchain Database data replicator [QLDB to Postgres]
-            ├── libs
-                ├── core                # System and database configurations
-                ├── shared              # Shared resources [NestJS module]
+        ├── custodian                    # Services implementation [NestJS application]
+            ├── apps
+                ├── custodian        # API wrapper [NestJS module]      
+                ├── task-monitor     # Asynchronous task monitor [NestJS module]
+                ├── data-replicator  # Data replicator between guardian and custodian [NestJS module]
+                
             ├── serverless.yml          # Service deployment scripts [Serverless + AWS Lambda]
+    ├── libs
+        ├── core    # Contains auth module and other commond modules [Node module + Typescript]
+        ├── shared           # Contains all the backend modules, dtos and entities [Node module + Typescript]
     ├── web                             # System web frontend implementation [ReactJS]
     ├── .gitignore
     ├── docker-compose.yml              # Docker container definitions
@@ -341,31 +307,26 @@ For contribution and licensing terms, see [Standards and License](#standards) an
 ## Run Services As Containers
 
 - Update [docker compose file](./docker-compose.yml) env variables as required.
-  - Currently all the emails are disabled using env variable `IS_EMAIL_DISABLED`. When the emails are disabled email payload will be printed on the console. User account passwords needs to extract from this console log. Including root user account, search for a log line starting with `Password (temporary)` on national container (`docker logs -f undp-carbon-registry-national-1`).
-  - Add / update following environment variables to enable email functionality.
-    - `IS_EMAIL_DISABLED`=false
-    - `SOURCE_EMAIL` (Sender email address)
-    - `SMTP_ENDPOINT`
-    - `SMTP_USERNAME`
-    - `SMTP_PASSWORD`
-  - Use `DB_PASSWORD` env variable to change PostgresSQL database password
-  - Configure system root account email by updating environment variable `ROOT EMAIL`. If the email service is enabled, on the first docker start, this email address will receive a new email with the root user password.
-  - By default frontend does not show map images on dashboard and project view. To enable them please update `REACT_APP_MAP_TYPE` env variable to `Mapbox` and add new env variable `REACT_APP_MAPBOXGL_ACCESS_TOKEN` with [MapBox public access token](https://docs.mapbox.com/help/tutorials/get-started-tokens-api/) in web container.
-- Add user data
-  - Update [organisations.csv](./organisations.csv) file to add organisations.
-  - Update [users.csv](./users.csv) file to add users.
-  - When updating files keep the header and replace existing dummy data with your data.
-  - These users and companys add to the system each docker restart.
+    - Currently all the emails are disabled using env variable `IS_EMAIL_DISABLED`. When the emails are disabled email payload will be printed on the console. User account passwords needs to extract from this console log. Including root user account, search for a log line starting with ```Password (temporary)``` on national container (`docker logs -f undp-carbon-registry-national-1`). 
+    - Add / update following environment variables to enable email functionality.
+        - `IS_EMAIL_DISABLED`=false
+        - `SOURCE_EMAIL` (Sender email address)
+        - `SMTP_ENDPOINT`
+        - `SMTP_USERNAME`
+        - `SMTP_PASSWORD`
+    - Use `DB_PASSWORD` env variable to change PostgresSQL database password
+    - Configure system root account email by updating environment variable `ROOT EMAIL`. If the email service is enabled, on the first docker start, this email address will receive a new email with the root user password.
+    - By default frontend does not show map images on dashboard and project view. To enable them please update `REACT_APP_MAP_TYPE` env variable to `Mapbox` and add new env variable `REACT_APP_MAPBOXGL_ACCESS_TOKEN` with [MapBox public access token](https://docs.mapbox.com/help/tutorials/get-started-tokens-api/) in web container. 
+
 - Run `docker-compose up -d --build`. This will build and start containers for following services,
-  - PostgresDB container
-  - National service
-  - Analytics service
-  - Replicator service
-  - React web server with Nginx.
+    - PostgresDB container
+    - Custodian service
+    - Task monitor service
+    - Data Replicator service
+    - React web server with Nginx. 
 - Web frontend on http://localhost:3030/
 - API Endpoints,
-  - http://localhost:3000/national#/
-  - http://localhost:3100/stats#/
+  - http://localhost:3000/
 
 <a name="local"></a>
 
@@ -382,7 +343,7 @@ For contribution and licensing terms, see [Standards and License](#standards) an
 - Run `yarn run sls:install `
 - Initial user data setup `serverless invoke local --stage=local --function setup --data '{"rootEmail": "<Root user email>","systemCountryCode": "<System country Alpha 2 code>", "name": "<System country name>", "logoBase64": "<System country logo base64>"}'`
 - Start all the services by executing `sls offline --stage=local`
-- Now all the system services are up and running. Swagger documentation will be available on `http://localhost:3000/local/national`
+- Now all the system services are up and running. Swagger documentation will be available on `http://localhost:3000/docs`
 
 <a name="cloud"></a>
 

@@ -70,7 +70,11 @@ export const AddNewCompanyComponent = (props: any) => {
   const [contactNoInput] = useState<any>();
   const [current, setCurrent] = useState<number>(0);
   const [isUpdate, setIsUpdate] = useState(false);
+<<<<<<< HEAD
   const { post, put } = useConnection();
+=======
+  const { post } = useConnection();
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   const { setUserInfo, userInfoState } = useUserContext();
   const { state } = useLocation();
   const [fileList, setFileList] = useState<UploadFile[]>([]);
@@ -90,6 +94,72 @@ export const AddNewCompanyComponent = (props: any) => {
 
   const [faxNumber, setFaxNumber] = useState(state?.record?.faxNo || '');
 
+<<<<<<< HEAD
+=======
+  // let selectedGovDepatments = ministryOrgs[selectedMinistry];
+  // if (existgovDep && existgovDep.length > 0) {
+  //   selectedGovDepatments = selectedGovDepatments.filter((x: string) => !existgovDep.includes(x));
+  // }
+  // const onChangeMinistry = async (val: any) => {
+  //   const key = Object.keys(Ministry)[Object.values(Ministry).indexOf(val as Ministry)];
+  //   setSelectedMinistry(String(key));
+  //   if (isUpdate && val === initialMinistry) {
+  //     formOne.setFieldValue(
+  //       'govDep',
+  //       Object.keys(GovDepartment)[
+  //         Object.values(GovDepartment).indexOf(intialGovDep as GovDepartment)
+  //       ]
+  //     );
+  //   } else {
+  //     formOne.setFieldValue('govDep', '');
+  //   }
+  //   // eslint-disable-next-line no-use-before-define, @typescript-eslint/no-use-before-define
+  //   getGovDep(val);
+  // };
+
+  // const getMinistryList = async () => {
+  //   setLoadingList(true);
+  //   try {
+  //     let leftmins: string[] = [];
+  //     const excludingmin: string[] = [];
+  //     for (const min of ministries) {
+  //       const response: any = await post(API_PATHS.ORGANIZATION_DETAILS, {
+  //         page: 1,
+  //         size: 100,
+  //         filterAnd: [
+  //           {
+  //             key: 'ministry',
+  //             operation: '=',
+  //             value: min,
+  //           },
+  //         ],
+  //       });
+  //       const minkey = Object.keys(Ministry)[Object.values(Ministry).indexOf(min as Ministry)];
+  //       if (response.data.length === ministryOrgs[minkey].length) {
+  //         if (!isUpdate && min !== initialMinistry) {
+  //           excludingmin.push(min);
+  //         }
+  //       }
+  //     }
+  //     leftmins = ministries.filter((x: string) => !excludingmin.includes(x));
+  //     setMinistryDropdown(leftmins);
+  //   } catch (error: any) {
+  //     console.log('Error in getting min list', error);
+  //   } finally {
+  //     setLoadingList(false);
+  //   }
+  // };
+
+  // const getCountryList = async () => {
+  //   const response = await get('national/organisation/countries');
+  //   if (response.data) {
+  //     const alpha2Names = response.data.map((item: any) => {
+  //       return item.alpha2;
+  //     });
+  //     setCountries(alpha2Names);
+  //   }
+  // };
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
   const getRegionList = async () => {
     // setLoadingList(true);
@@ -101,11 +171,57 @@ export const AddNewCompanyComponent = (props: any) => {
       console.log(error);
     }
   };
+<<<<<<< HEAD
 
 
   useEffect(() => {
     setIsUpdate(state?.record ? true : false);
     getRegionList();
+=======
+  // const getGovDep = async (val: any) => {
+  //   setLoadingList(true);
+  //   try {
+  //     const response: any = await post('national/organisation/query', {
+  //       page: 1,
+  //       size: 200,
+  //       filterAnd: [
+  //         {
+  //           key: 'ministry',
+  //           operation: '=',
+  //           value: val,
+  //         },
+  //       ],
+  //     });
+  //     if (response && response.data) {
+  //       const existDep: string[] = [];
+  //       for (const i in response.data) {
+  //         if (response.data[i].govDep && response.data[i].govDep.length > 0) {
+  //           const departName =
+  //             Object.keys(GovDepartment)[
+  //               Object.values(GovDepartment).indexOf(response.data[i].govDep as GovDepartment)
+  //             ];
+  //           if (response.data[i].govDep !== intialGovDep) {
+  //             existDep.push(departName);
+  //           } else {
+  //             continue;
+  //           }
+  //         }
+  //       }
+  //       setexistGovdep(existDep);
+  //     }
+  //   } catch (error: any) {
+  //     console.log('Error in getting exist Government Department list', error);
+  //   } finally {
+  //     setLoadingList(false);
+  //   }
+  // };
+
+  useEffect(() => {
+    setIsUpdate(state?.record ? true : false);
+    // getCountryList();
+    getRegionList();
+    // getMinistryList();
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     if (state?.record?.logo) {
       setFileList([
         {
@@ -117,7 +233,16 @@ export const AddNewCompanyComponent = (props: any) => {
         },
       ]);
     }
+<<<<<<< HEAD
 
+=======
+    // if (state?.record?.ministry) {
+    //   const key =
+    //     Object.keys(Ministry)[Object.values(Ministry).indexOf(state?.record?.ministry as Ministry)];
+    //   setSelectedMinistry(key);
+    //   getGovDep(state?.record?.ministry);
+    // }
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   }, []);
 
   const normFile = (e: any) => {
@@ -156,6 +281,7 @@ export const AddNewCompanyComponent = (props: any) => {
     };
     setLoading(true);
     try {
+      requestData.company.createdBy = userInfoState?.userRole;
       if (requestData.phoneNo && requestData.phoneNo.length > 4) {
         requestData.phoneNo = formatPhoneNumberIntl(requestData.phoneNo);
       } else {
@@ -191,7 +317,11 @@ export const AddNewCompanyComponent = (props: any) => {
           setLoading(false);
         }
       } else {
+<<<<<<< HEAD
         const response = await post(API_PATHS.ADD_USER, requestData);
+=======
+        const response = await post('user/add', requestData);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         if (response.status === 200 || response.status === 201) {
           if (isUpdate) {
             setUserInfo({
@@ -270,6 +400,30 @@ export const AddNewCompanyComponent = (props: any) => {
         values.paymentId = formOneValues.paymentId;
       }
 
+<<<<<<< HEAD
+=======
+      if (state?.record?.companyRole === CompanyRole.DESIGNATED_NATIONAL_AUTHORITY) {
+        if (formOneValues.govDep in GovDepartment) {
+          const key = formOneValues.govDep as keyof typeof GovDepartment;
+          values.govDep = GovDepartment[key];
+        } else {
+          values.govDep = formOneValues.govDep;
+        }
+        values.ministry = formOneValues.ministry;
+      }
+      if (state?.record?.companyRole === CompanyRole.DESIGNATED_NATIONAL_AUTHORITY) {
+        values.sectoralScope = formOneValues.sectoralScope;
+        values.nameOfMinister = formOneValues.nameOfMinister;
+        // values.name = formOneValues.ministry;
+      }
+      if (state?.record?.companyRole === CompanyRole.DESIGNATED_NATIONAL_AUTHORITY) {
+        values.omgePercentage = Math.round(Number(formOneValues.omgePercentage));
+      }
+      if (state?.record?.companyRole === CompanyRole.DESIGNATED_NATIONAL_AUTHORITY) {
+        values.nationalSopValue = Math.floor(Number(formOneValues.nationalSopValue));
+      }
+
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       if (formOneValues.website) {
         values.website = 'https://' + formOneValues.website;
       } else {
@@ -284,8 +438,12 @@ export const AddNewCompanyComponent = (props: any) => {
         }
       }
 
+<<<<<<< HEAD
       console.log('--------------values---------------', values);
       const response = await put(API_PATHS.UPDATE_ORGANIZATION, values);
+=======
+      const response = await post(API_PATHS.UPDATE_ORGANIZATION, values);
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       if (response.status === 200 || response.status === 201) {
         setUserInfo({
           companyLogo: response.data.logo,
@@ -331,6 +489,18 @@ export const AddNewCompanyComponent = (props: any) => {
     return (
       <div className="company-details-form-container">
         <div className="company-details-form">
+          <label
+            style={{
+              display: 'inline-block',
+              color: 'rgba(58, 53, 65, 0.5)',
+              borderRadius: '4px',
+              fontSize: '14px',
+              fontWeight: 500,
+              marginBottom: '10px',
+            }}
+          >
+            {t('addCompany:hederaAccountRequired')}
+          </label>
           <Form
             name="company-details"
             className="company-details-form"
@@ -343,6 +513,51 @@ export const AddNewCompanyComponent = (props: any) => {
               <Col xl={12} md={24}>
                 <div className="details-part-one">
                   <Form.Item
+<<<<<<< HEAD
+=======
+                    label={t('addCompany:hederaAccount')}
+                    name="hederaAccount"
+                    initialValue={
+                      state?.record?.hederaAccount ? state?.record?.hederaAccount : null
+                    }
+                    rules={[
+                      {
+                        required: false,
+                        message: '',
+                      },
+                    ]}
+                  >
+                    <Input disabled={isUpdate} size="large" />
+                  </Form.Item>
+                </div>
+              </Col>
+              <Col xl={12} md={24}>
+                <div className="details-part-two">
+                  <Form.Item
+                    label={t('addCompany:hederaKey')}
+                    name="hederaKey"
+                    initialValue={
+                      state?.record?.hederaAccount
+                        ? '##################################################'
+                        : null
+                    }
+                    rules={[
+                      {
+                        required: false,
+                        message: '',
+                      },
+                    ]}
+                  >
+                    <Input disabled={isUpdate} size="large" />
+                  </Form.Item>
+                </div>
+              </Col>
+            </Row>
+            <Row className="row" gutter={[16, 16]}>
+              <Col xl={12} md={24}>
+                <div className="details-part-one">
+                  <Form.Item
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     label={t('addCompany:name')}
                     name="name"
                     initialValue={state?.record?.name}
@@ -469,6 +684,32 @@ export const AddNewCompanyComponent = (props: any) => {
                   )}
                   {companyRole === CompanyRole.DESIGNATED_NATIONAL_AUTHORITY && (
                     <div className="space-container" style={{ width: '100%' }}>
+<<<<<<< HEAD
+=======
+                      {/* <Form.Item
+                        label={t('addCompany:Ministry')}
+                        name="ministry"
+                        initialValue={state?.record?.ministry}
+                        rules={[
+                          {
+                            required: true,
+                            message: `${t('addCompany:Ministry')} ${t('isRequired')}`,
+                          },
+                        ]}
+                      >
+                        {companyRole !== CompanyRole.DESIGNATED_NATIONAL_AUTHORITY &&
+                        ministryDropdown &&
+                        ministryDropdown.length > 0 ? (
+                          <Select size="large" onChange={onChangeMinistry}>
+                            {ministryDropdown.map((ministry: any) => (
+                              <Select.Option value={ministry}>{ministry}</Select.Option>
+                            ))}
+                          </Select>
+                        ) : (
+                          <Select size="large" disabled={true}></Select>
+                        )}
+                      </Form.Item> */}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                       {
                         <Form.Item
                           label={t('addCompany:email')}
@@ -504,7 +745,39 @@ export const AddNewCompanyComponent = (props: any) => {
                           <Input size="large" />
                         </Form.Item>
                       }
+<<<<<<< HEAD
                      
+=======
+                      {/* {companyRole === CompanyRole.DESIGNATED_NATIONAL_AUTHORITY && (
+                        <Form.Item
+                          label={t('addCompany:ministerName')}
+                          name="nameOfMinister"
+                          initialValue={state?.record?.nameOfMinister}
+                          rules={[
+                            {
+                              required: true,
+                              message: '',
+                            },
+                            {
+                              validator: async (rule, value) => {
+                                if (
+                                  String(value).trim() === '' ||
+                                  String(value).trim() === undefined ||
+                                  value === null ||
+                                  value === undefined
+                                ) {
+                                  throw new Error(
+                                    `${t('addCompany:ministerName')} ${t('isRequired')}`
+                                  );
+                                }
+                              },
+                            },
+                          ]}
+                        >
+                          <Input size="large" />
+                        </Form.Item>
+                      )} */}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     </div>
                   )}
                   <Form.Item
@@ -641,7 +914,11 @@ export const AddNewCompanyComponent = (props: any) => {
                             <Tooltip placement="top" title={t('addCompany:doeToolTip')}>
                               <Radio.Button className="certifier" value="IC">
                                 <SafetyOutlined className="role-icons" />
+<<<<<<< HEAD
                                 {t('addCompany:ic')}
+=======
+                                {t('addCompany:IC')}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                               </Radio.Button>
                             </Tooltip>
                           </div>
@@ -664,16 +941,117 @@ export const AddNewCompanyComponent = (props: any) => {
                             >
                               <Radio.Button className="dev" value="PD">
                                 <ExperimentOutlined className="role-icons" />
-                                {t('addCompany:ProgrammeDeveloper')}
+                                {t('addCompany:PD')}
                               </Radio.Button>
                             </Tooltip>
                           </div>
 
+<<<<<<< HEAD
+=======
+                          {/* {userInfoState?.companyRole !==
+                            CompanyRole.DESIGNATED_NATIONAL_AUTHORITY &&
+                            !isGuest && (
+                              <div className="minister-radio-container">
+                                {ministryDropdown.length > 0 ? (
+                                  <Tooltip placement="top" title={t('addCompany:ministryToolTip')}>
+                                    <Radio.Button className="minister" value="Ministry">
+                                      <AuditOutlined className="role-icons" />
+                                      {t('addCompany:Ministry')}
+                                    </Radio.Button>
+                                  </Tooltip>
+                                ) : (
+                                  <Tooltip placement="top" title={t('addCompany:allmincreated')}>
+                                    <Radio.Button className="minister" value="Ministry" disabled>
+                                      <AuditOutlined className="role-icons" />
+                                      {t('addCompany:Ministry')}
+                                    </Radio.Button>
+                                  </Tooltip>
+                                )}
+                              </div>
+                            )} */}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                         </>
                       )}
                     </Radio.Group>
                   </Form.Item>
 
+<<<<<<< HEAD
+=======
+                  {/* {companyRole === CompanyRole.DESIGNATED_NATIONAL_AUTHORITY && (
+                    <Form.Item
+                      label={t('addCompany:govdep')}
+                      name="govDep"
+                      initialValue={
+                        Object.keys(GovDepartment)[
+                          Object.values(GovDepartment).indexOf(intialGovDep as GovDepartment)
+                        ]
+                      }
+                      rules={[
+                        {
+                          required: true,
+                          message: `${t('addCompany:govdep')} ${t('isRequired')}`,
+                        },
+                        {
+                          validator: async (rule, value) => {
+                            const val =
+                              Object.keys(GovDepartment)[
+                                Object.values(GovDepartment).indexOf(value as GovDepartment)
+                              ];
+                            if (
+                              val &&
+                              val.length > 0 &&
+                              selectedGovDepatments &&
+                              !selectedGovDepatments.includes(val)
+                            ) {
+                              throw new Error(`${t('addCompany:govdepnotexist')}`);
+                            }
+                          },
+                        },
+                      ]}
+                    >
+                      {companyRole !== CompanyRole.DESIGNATED_NATIONAL_AUTHORITY &&
+                      selectedGovDepatments &&
+                      selectedGovDepatments.length > 0 ? (
+                        <Select size="large">
+                          {selectedGovDepatments?.map((val: any) => {
+                            if (val in GovDepartment) {
+                              const key = val as keyof typeof GovDepartment;
+                              return (
+                                <Select.Option key={GovDepartment[key]} value={GovDepartment[key]}>
+                                  {val}
+                                </Select.Option>
+                              );
+                            }
+                            return null;
+                          })}
+                        </Select>
+                      ) : (
+                        <Select size="large" disabled={true}></Select>
+                      )}
+                    </Form.Item>
+                  )} */}
+                  {/* {companyRole === CompanyRole.DESIGNATED_NATIONAL_AUTHORITY && (
+                    <Form.Item
+                      label={t('addCompany:sectoralScope')}
+                      name="sectoralScope"
+                      rules={[
+                        {
+                          required: true,
+                          message: `${t('addCompany:sectoralScope')} ${t('isRequired')}`,
+                        },
+                      ]}
+                      initialValue={state?.record?.sectoralScope}
+                    >
+                      <Select mode="multiple" size="large" maxTagCount={2} allowClear>
+                        {Object.entries(SectoralScope).map(([key, value]) => (
+                          <Select.Option key={value} value={value}>
+                            {key}
+                          </Select.Option>
+                        ))}
+                      </Select>
+                    </Form.Item>
+                  )} */}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                   <Form.Item
                     name="phoneNo"
                     label={t('addCompany:phoneNo')}
@@ -845,6 +1223,21 @@ export const AddNewCompanyComponent = (props: any) => {
   const CompanyAdminDetailsForm = () => {
     return (
       <>
+<<<<<<< HEAD
+=======
+        <label
+          style={{
+            display: 'inline-block',
+            color: 'rgba(58, 53, 65, 0.5)',
+            borderRadius: '4px',
+            fontSize: '14px',
+            fontWeight: 500,
+            marginBottom: '10px',
+          }}
+        >
+          {t('addCompany:hederaAccountRequired')}
+        </label>
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         <div className="company-details-form-container">
           <Form
             name="company-admin-details"
@@ -858,6 +1251,7 @@ export const AddNewCompanyComponent = (props: any) => {
               <Col xl={12} md={24}>
                 <div className="details-part-one">
                   <Form.Item
+<<<<<<< HEAD
                     label={t('addCompany:name')}
                     name="name"
                     rules={[
@@ -865,6 +1259,73 @@ export const AddNewCompanyComponent = (props: any) => {
                         required: true,
                         message: '',
                       },
+=======
+                    label={t('addCompany:hederaAccount')}
+                    name="hederaAccount"
+                    rules={[
+                      {
+                        required: false,
+                        message: '',
+                      },
+                      // {
+                      //   validator: async (rule, value) => {
+                      //     if (
+                      //       String(value).trim() === '' ||
+                      //       String(value).trim() === undefined ||
+                      //       value === null ||
+                      //       value === undefined
+                      //     ) {
+                      //       throw new Error(`${t('addCompany:hederaAccount')} ${t('isRequired')}`);
+                      //     }
+                      //   },
+                      // },
+                    ]}
+                  >
+                    <Input size="large" />
+                  </Form.Item>
+                </div>
+              </Col>
+              <Col xl={12} md={24}>
+                <div className="details-part-two">
+                  <Form.Item
+                    label={t('addCompany:hederaKey')}
+                    name="hederaKey"
+                    rules={[
+                      {
+                        required: false,
+                        message: '',
+                      },
+                      // {
+                      //   validator: async (rule, value) => {
+                      //     if (
+                      //       String(value).trim() === '' ||
+                      //       String(value).trim() === undefined ||
+                      //       value === null ||
+                      //       value === undefined
+                      //     ) {
+                      //       throw new Error(`${t('addCompany:hederaKey')} ${t('isRequired')}`);
+                      //     }
+                      //   },
+                      // },
+                    ]}
+                  >
+                    <Input size="large" />
+                  </Form.Item>
+                </div>
+              </Col>
+            </Row>
+            <Row className="row" gutter={[16, 16]}>
+              <Col xl={12} md={24}>
+                <div className="details-part-one">
+                  <Form.Item
+                    label={t('addCompany:name')}
+                    name="name"
+                    rules={[
+                      {
+                        required: true,
+                        message: '',
+                      },
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                       {
                         validator: async (rule, value) => {
                           if (

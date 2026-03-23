@@ -2,9 +2,31 @@
 
 .dialog-box {
   width: 400px !important;
+<<<<<<< HEAD
   .icon {
     width: 95px;
     filter: brightness(0) saturate(100%) invert(45%) sepia(99%) saturate(2067%) hue-rotate(190deg) brightness(98%) contrast(99%);
+=======
+
+  .icon-container {
+    width: full;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .icon {
+    width: 90px;
+
+    font-size: 90px;
+    filter: none !important;
+    // filter: brightness(0) saturate(100%) invert(45%) sepia(99%) saturate(2067%) hue-rotate(190deg) brightness(98%) contrast(99%);
+
+    .anticon {
+      color: variables.$primary-color !important;
+    }
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   }
   .message {
     color: variables.$confirm-modal-message-color;
@@ -32,4 +54,8 @@
     gap: 8px;
     cursor: pointer;
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f

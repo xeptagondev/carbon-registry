@@ -1,18 +1,31 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 // import { AddNewCompanyComponent } from '@undp/carbon-library';
+<<<<<<< HEAD
 import "./registerNewCompany.scss";
 import { Row, Col, Button } from "antd";
 import sliderLogo from "../../Assets/Images/logo-slider.png";
 import { AddNewCompanyComponent } from "../../Components/Company/AddNewCompany/addNewCompanyComponent";
 import { ROUTES } from "../../Config/uiRoutingConfig";
+=======
+import './registerNewCompany.scss';
+import { Row, Col, Button } from 'antd';
+import sliderLogo from '../../Assets/Images/logo_Gold.png';
+import { AddNewCompanyComponent } from '../../Components/Company/AddNewCompany/addNewCompanyComponent';
+import { ROUTES } from '../../Config/uiRoutingConfig';
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
 const RegisterNewCompany = () => {
   const navigate = useNavigate();
   const { t } = useTranslation(["addCompany"]);
 
+<<<<<<< HEAD
   const maximumImageSize = import.meta.env.VITE_APP_MAXIMUM_FILE_SIZE
     ? parseInt(import.meta.env.VITE_APP_MAXIMUM_FILE_SIZE)
+=======
+  const maximumImageSize = process.env.REACT_APP_MAXIMUM_FILE_SIZE
+    ? parseInt(process.env.REACT_APP_MAXIMUM_FILE_SIZE)
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     : 1048576;
 
   const onNavigateToHome = () => {
@@ -32,10 +45,15 @@ const RegisterNewCompany = () => {
                 <img src={sliderLogo} alt="slider-logo" />
               </div>
               <div>
+<<<<<<< HEAD
                 <div style={{ display: "flex" }}>
                   <div className="title">
                     {"CARBON MARKET DIGITAL PLATFORM"}
                   </div>
+=======
+                <div style={{ display: 'flex' }}>
+                  <div className="title">{'IMPACT REGISTRY'}</div>
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                   {/* <div className="title-sub">{'REGISTRY'}</div> */}
                 </div>
                 <div className="country-name">

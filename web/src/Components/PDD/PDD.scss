@@ -413,7 +413,11 @@
     width: 50%;
 
     .icon-color {
+<<<<<<< HEAD
       color: variables.$primary-color !important;
+=======
+      color: $primary-color !important;
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     }
 
     .ant-upload-list {

@@ -14,6 +14,7 @@ export interface DetailsBarChartStatsProps {
   width: string;
 }
 
+<<<<<<< HEAD:web/src/Components/Dashboard/DetailsBarChartStatsComponent.tsx
 export const DetailsBarChartsStatComponent: FC<
   DetailsBarChartStatsProps
 > = (props: DetailsBarChartStatsProps) => {
@@ -28,6 +29,12 @@ export const DetailsBarChartsStatComponent: FC<
     height,
     width,
   } = props;
+=======
+export const SLCFDetailsBarChartsStatComponent: FC<DetailsBarChartStatsProps> = (
+  props: DetailsBarChartStatsProps
+) => {
+  const { id, title, options, series, loading, toolTipText, Chart, height, width } = props;
+>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f:web/src/Components/SLCFDashboard/slcfDetailsBarChartStatsComponent.tsx
   return (
     <div className="statistics-and-pie-card height-bar-rem project-details-bar-chart">
       <div className="pie-charts-top">
