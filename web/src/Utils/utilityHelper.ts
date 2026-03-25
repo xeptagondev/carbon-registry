@@ -76,8 +76,6 @@ export const formatBytes = (bytes: number, decimals = 0) => {
   const i = Math.floor(Math.log(bytes) / Math.log(k));
   return `${parseFloat((bytes / Math.pow(k, i)).toFixed(decimals))} ${sizes[i]}`;
 };
-<<<<<<< HEAD
-=======
 
 export const thousandBasedFormatterWithDecimalPlaces = (decimalPlaces: number, num: number) => {
   if (num) {
@@ -112,4 +110,3 @@ export const thousandBasedFormatterWithDecimalPlaces = (decimalPlaces: number, n
     };
   }
 };
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f

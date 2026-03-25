@@ -1,4 +1,4 @@
-@use '../../Styles/variables.scss';
+@import '../../Styles/variables.scss';
 
 .remark {
   padding-top: 7px;
@@ -6,11 +6,11 @@
   .remark-title {
     text-transform: capitalize;
     font-weight: 500;
-    color: variables.$body-text-color-light;
+    color: $body-text-color-light;
   }
 
   .remark-body {
     font-weight: 400;
-    color: variables.$body-text-color-light;
+    color: $body-text-color-light;
   }
 }

@@ -1,24 +1,3 @@
-<<<<<<< HEAD
-import {
-  Button,
-  Col,
-  Divider,
-  Form,
-  Input,
-  message,
-  Row,
-  Select,
-  Statistic,
-} from "antd";
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import i18next from "i18next";
-import sliderLogo from "../../Assets/Images/logo-slider.png";
-import LayoutFooter from "../../Components/Footer/layout.footer";
-import "./help.scss";
-import { CcCircle } from "react-bootstrap-icons";
-=======
 import { Button, Col, Divider, Form, Input, message, Row, Select, Statistic } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -28,37 +7,28 @@ import sliderLogo from '../../Assets/Images/logo_Gold.png';
 import LayoutFooter from '../../Components/Footer/layout.footer';
 import './help.scss';
 import { CcCircle } from 'react-bootstrap-icons';
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 const CarbonHelp = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (localStorage.getItem("i18nextLng")!.length > 2) {
-      i18next.changeLanguage("en");
+    if (localStorage.getItem('i18nextLng')!.length > 2) {
+      i18next.changeLanguage('en');
     }
   }, []);
   return (
     <div className="code-container">
       <Row>
         <Col md={24} lg={24}>
-          <div onClick={() => navigate("/")} className="code-header-container">
+          <div onClick={() => navigate('/')} className="code-header-container">
             <div className="logo">
               <img src={sliderLogo} alt="slider-logo" />
             </div>
             <div>
-<<<<<<< HEAD
-              <div style={{ display: "flex" }}>
-                <div className="title">{"CARBON"}</div>
-                <div className="title-sub">{"REGISTRY"}</div>
-              </div>
-              <div className="country-name">
-                {import.meta.env.VITE_APP_COUNTRY_NAME || "CountryX"}
-=======
               <div style={{ display: 'flex' }}>
                 <div className="title">{'IMPACT'}</div>
                 <div className="title-sub">{'REGISTRY'}</div>
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
               </div>
+              <div className="country-name">{process.env.REACT_APP_COUNTRY_NAME || 'CountryX'}</div>
             </div>
           </div>
         </Col>

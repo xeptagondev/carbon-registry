@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-@use '../../Styles/variables.scss';
-=======
 @import '../../Styles/variables.scss';
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
 .body-title {
   margin-bottom: 30px;
@@ -61,13 +57,8 @@
 }
 
 .checkbox-accept .ant-checkbox-checked .ant-checkbox-inner {
-<<<<<<< HEAD
-  background-color: variables.$primary-color;
-  border-color: variables.$primary-color;
-=======
   background-color: $primary-color;
   border-color: $primary-color;
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   border: none;
 }
 
@@ -137,11 +128,7 @@
     margin-bottom: 0px;
 
     input {
-<<<<<<< HEAD
-      font-family: variables.$primary-font-family;
-=======
       font-family: $primary-font-family;
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       font-size: 0.8rem;
     }
 
@@ -162,8 +149,6 @@
   // padding: 0px 20px;
   padding: 0px;
 }
-<<<<<<< HEAD
-=======
 .ant-btn[disabled], 
 .ant-btn[disabled]:hover, 
 .ant-btn[disabled]:focus, 
@@ -175,4 +160,3 @@
   box-shadow: none !important;
 }
 
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f

@@ -13,17 +13,6 @@ import {
   Typography,
   Tag,
   Tooltip,
-<<<<<<<< HEAD:web/src/Components/ProgrammeManagement/ProgrammeManagementComponent.tsx
-  Select,
-} from "antd";
-import { useEffect, useState, useRef } from "react";
-import moment from "moment";
-import "./ProgrammeManagementComponent.scss";
-import "../../Styles/common.table.scss";
-import { UserTableDataType } from "../../Definitions/Definitions/userManagement.definitions";
-import { TooltipColor } from "../../Styles/role.color.constants";
-import { CheckboxValueType } from "antd/lib/checkbox/Group";
-========
 } from 'antd';
 import { useEffect, useState } from 'react';
 import './SLCFProgrammeManagementComponent.scss';
@@ -31,7 +20,6 @@ import '../../Styles/common.table.scss';
 import { UserTableDataType } from '../../Definitions/Definitions/userManagement.definitions';
 import { TooltipColor } from '../../Styles/role.color.constants';
 import { CheckboxValueType } from 'antd/lib/checkbox/Group';
->>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f:web/src/Components/SLCFProgrammeManagement/SLCFProgrammeManagementComponent.tsx
 import {
   addSpaces,
   getCompanyBgColor,
@@ -39,20 +27,6 @@ import {
   getCreditTypeTagType,
   getProjectProposalStage,
   getProjectProposalStageEnumVal,
-<<<<<<<< HEAD:web/src/Components/ProgrammeManagement/ProgrammeManagementComponent.tsx
-} from "../../Definitions/Definitions/programme.definitions";
-import { CheckboxChangeEvent } from "antd/lib/checkbox";
-import { ProgrammeManagementSlColumns } from "../../Definitions/Enums/programme.management.sl.columns.enum";
-import {
-  PlusOutlined,
-  EllipsisOutlined,
-  DownloadOutlined,
-} from "@ant-design/icons";
-import { CompanyRole } from "../../Definitions/Enums/company.role.enum";
-import * as Icon from "react-bootstrap-icons";
-import { useConnection } from "../../Context/ConnectionContext/connectionContext";
-import { useUserContext } from "../../Context/UserInformationContext/userInformationContext";
-========
 } from '../../Definitions/Definitions/programme.definitions';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { ProgrammeManagementSlColumns } from '../../Definitions/Enums/programme.management.sl.columns.enum';
@@ -61,32 +35,19 @@ import { CompanyRole } from '../../Definitions/Enums/company.role.enum';
 import * as Icon from 'react-bootstrap-icons';
 import { useConnection } from '../../Context/ConnectionContext/connectionContext';
 import { useUserContext } from '../../Context/UserInformationContext/userInformationContext';
->>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f:web/src/Components/SLCFProgrammeManagement/SLCFProgrammeManagementComponent.tsx
 import {
   getProjectCategory,
   ProgrammeStatus,
   ProjectProposalStage,
-<<<<<<<< HEAD:web/src/Components/ProgrammeManagement/ProgrammeManagementComponent.tsx
-} from "../../Definitions/Enums/programmeStage.enum";
-import { ProfileIcon } from "../IconComponents/ProfileIcon/profile.icon";
-import { CreditTypeSl } from "../../Definitions/Enums/creditTypeSl.enum";
-import { Role } from "../../Definitions/Enums/role.enum";
-import { API_PATHS } from "../../Config/apiConfig";
-import { APPLICATION_STAGE } from "../../Definitions/Constants/ApplicationStage";
-import { downloadCSV } from "../../Utils/downloadCSV";
-import { deepCopy } from "../../Utils/deepCopy";
-import { toMoment } from "../../Utils/convertTime";
-========
 } from '../../Definitions/Enums/programmeStage.enum';
 import { ProfileIcon } from '../IconComponents/ProfileIcon/profile.icon';
 import { CreditTypeSl } from '../../Definitions/Enums/creditTypeSl.enum';
 import { Role } from '../../Definitions/Enums/role.enum';
 import { API_PATHS } from '../../Config/apiConfig';
->>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f:web/src/Components/SLCFProgrammeManagement/SLCFProgrammeManagementComponent.tsx
 
 const { Search } = Input;
 
-export const ProgrammeManagementComponent = (props: any) => {
+export const SLCFProgrammeManagementComponent = (props: any) => {
   const {
     t,
     visibleColumns,
@@ -104,85 +65,56 @@ export const ProgrammeManagementComponent = (props: any) => {
   const [pageSize, setPageSize] = useState<number>(10);
   const [search, setSearch] = useState<string>();
   const [searchText, setSearchText] = useState<string>();
-  const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
-  // const [statusFilter, setStatusFilter] = useState<any>();
+  const [statusFilter, setStatusFilter] = useState<any>();
   const [dataFilter, setDataFilter] = useState<any>();
   const [sortOrder, setSortOrder] = useState<string>();
   const [sortField, setSortField] = useState<string>();
   const [ministrySectoralScope, setMinistrySectoralScope] = useState<any[]>([]);
-  const [ministryLevelFilter, setMinistryLevelFilter] =
-    useState<boolean>(false);
+  const [ministryLevelFilter, setMinistryLevelFilter] = useState<boolean>(false);
   const { userInfoState } = useUserContext();
   const ability = useAbilityContext();
   const [dataQuery, setDataQuery] = useState<any>();
-
-  const [applicationStageFilter, setApplicationStageFilter] = useState<{
-    key: string;
-    operation: string;
-    value: string;
-  }>();
-
-  const onSelectedApplicationStageChange = (value: string) => {
-    if (value) {
-      setApplicationStageFilter({
-        key: "projectProposalStage",
-        operation: "=",
-        value: value,
-      });
-    } else {
-      setApplicationStageFilter(undefined);
-    }
-  };
 
   const statusOptions = Object.keys(ProgrammeStatus).map((k, index) => ({
     label: t(`projectList:${Object.values(ProgrammeStatus)[index]}`),
     value: k,
   }));
 
-  const applicationStageOptions = Object.keys(APPLICATION_STAGE).map(
-    (k, index) => ({
-      label: t(`projectList:${Object.values(APPLICATION_STAGE)[index]}`),
-      value: k,
-    })
-  );
-
-  const [selectedStatus, setSelectedStatus] = useState<any>(
-    statusOptions.map((e) => e.value)
-  );
+  const [selectedStatus, setSelectedStatus] = useState<any>(statusOptions.map((e) => e.value));
 
   const [indeterminate, setIndeterminate] = useState(false);
   const [checkAll, setCheckAll] = useState(true);
 
-  // const onStatusQuery = async (checkedValues: CheckboxValueType[]) => {
-  //   if (checkedValues !== selectedStatus) {
-  //     setSelectedStatus(checkedValues);
+  const onStatusQuery = async (checkedValues: CheckboxValueType[]) => {
+    if (checkedValues !== selectedStatus) {
+      setSelectedStatus(checkedValues);
 
-  //     setIndeterminate(
-  //       !!checkedValues.length && checkedValues.length < Object.keys(statusOptions).length
-  //     );
-  //     setCheckAll(checkedValues.length === Object.keys(statusOptions).length);
-  //   }
+      setIndeterminate(
+        !!checkedValues.length && checkedValues.length < Object.keys(statusOptions).length
+      );
+      setCheckAll(checkedValues.length === Object.keys(statusOptions).length);
+    }
 
-  //   if (checkedValues.length === 0) {
-  //     setTableData([]);
-  //     setTotalProgramme(0);
-  //     return;
-  //   }
+    if (checkedValues.length === 0) {
+      setTableData([]);
+      setTotalProgramme(0);
+      return;
+    }
 
-  //   setStatusFilter({
-  //     key: 'projectStatus',
-  //     operation: 'in',
-  //     value: checkedValues,
-  //   });
-  // };
+    setStatusFilter({
+      key: 'projectStatus',
+      operation: 'in',
+      value: checkedValues,
+    });
+  };
 
-  // const onCheckAllChange = (e: CheckboxChangeEvent) => {
-  //   const nw = e.target.checked ? statusOptions.map((el) => el.value) : [];
-  //   setSelectedStatus(nw);
-  //   setIndeterminate(false);
-  //   setCheckAll(e.target.checked);
-  //   onStatusQuery(nw);
-  // };
+  const onCheckAllChange = (e: CheckboxChangeEvent) => {
+    const nw = e.target.checked ? statusOptions.map((el) => el.value) : [];
+    setSelectedStatus(nw);
+    setIndeterminate(false);
+    setCheckAll(e.target.checked);
+    onStatusQuery(nw);
+  };
 
   const actionMenu = (record: any) => {
     return (
@@ -191,7 +123,7 @@ export const ProgrammeManagementComponent = (props: any) => {
         size="small"
         dataSource={[
           {
-            text: t("projectList:view"),
+            text: t('projectList:view'),
             icon: <Icon.InfoCircle />,
             click: () => {
               onNavigateToProgrammeView(record);
@@ -200,9 +132,7 @@ export const ProgrammeManagementComponent = (props: any) => {
         ]}
         renderItem={(item: any) => (
           <List.Item onClick={item.click}>
-            <Typography.Text className="action-icon color-primary">
-              {item.icon}
-            </Typography.Text>
+            <Typography.Text className="action-icon color-primary">{item.icon}</Typography.Text>
             <span>{item.text}</span>
           </List.Item>
         )}
@@ -212,11 +142,11 @@ export const ProgrammeManagementComponent = (props: any) => {
 
   const columns = [
     {
-      title: t("projectList:title"),
-      dataIndex: "title",
+      title: t('projectList:title'),
+      dataIndex: 'title',
       key: ProgrammeManagementSlColumns.title,
       sorter: true,
-      align: "left" as const,
+      align: 'left' as const,
       render: (item: any) => {
         return <span className="clickable">{item}</span>;
       },
@@ -229,10 +159,10 @@ export const ProgrammeManagementComponent = (props: any) => {
       },
     },
     {
-      title: t("projectList:orgName"),
-      dataIndex: "company",
+      title: t('projectList:orgName'),
+      dataIndex: 'company',
       key: ProgrammeManagementSlColumns.company,
-      align: "left" as const,
+      align: 'left' as const,
       render: (item: any) => {
         const elements = (
           <Tooltip title={item.name} color={TooltipColor} key={TooltipColor}>
@@ -248,42 +178,32 @@ export const ProgrammeManagementComponent = (props: any) => {
         return <div className="org-list">{elements}</div>;
       },
     },
-    // {
-    //   title: t('projectList:projectCategory'),
-    //   dataIndex: 'projectCategory',
-    //   sorter: true,
-    //   key: ProgrammeManagementSlColumns.projectCategory,
-    //   align: 'center' as const,
-    //   render: (item: any) => {
-    //     return <span>{getProjectCategory[item]}</span>;
-    //   },
-    // },
     {
-      title: t("projectList:sector"),
-      dataIndex: "sector",
-      key: ProgrammeManagementSlColumns.sector,
+      title: t('projectList:projectCategory'),
+      dataIndex: 'projectCategory',
       sorter: true,
-      align: "center" as const,
+      key: ProgrammeManagementSlColumns.projectCategory,
+      align: 'center' as const,
       render: (item: any) => {
-        return <>{t(`projectList:${item}`)}</>;
+        return <span>{getProjectCategory[item]}</span>;
       },
     },
     {
-      title: t("projectList:sectoralScope"),
-      dataIndex: "sectoralScope",
-      key: ProgrammeManagementSlColumns.sectoralScope,
+      title: t('projectList:status'),
+      dataIndex: 'projectStatus',
+      key: ProgrammeManagementSlColumns.projectStatus,
       sorter: true,
-      align: "center" as const,
+      align: 'center' as const,
       render: (item: any) => {
-        return <>{t(`projectList:${item}`)}</>;
+        return <span>{t(`projectList:${item}`)}</span>;
       },
     },
     {
-      title: t("projectList:proposalStage"),
-      dataIndex: "projectProposalStage",
+      title: t('projectList:proposalStage'),
+      dataIndex: 'projectProposalStage',
       key: ProgrammeManagementSlColumns.projectProposalStage,
       sorter: true,
-      align: "center" as const,
+      align: 'center' as const,
       render: (item: any) => {
         return (
           <>a</>
@@ -295,48 +215,49 @@ export const ProgrammeManagementComponent = (props: any) => {
       },
     },
     {
-      title: t("projectList:balance"),
-      dataIndex: "creditBalance",
+      title: t('projectList:purposeOfCreditDevelopment'),
+      dataIndex: 'purposeOfCreditDevelopment',
+      key: ProgrammeManagementSlColumns.purposeOfCreditDevelopment,
+      sorter: true,
+      align: 'center' as const,
+      render: (item: any) => {
+        return (
+          <Tag color={getCreditTypeTagType(item as CreditTypeSl)}>
+            {addSpaces(getCreditTypeName(item as string))}
+          </Tag>
+        );
+      },
+    },
+    {
+      title: t('projectList:balance'),
+      dataIndex: 'creditBalance',
       key: ProgrammeManagementSlColumns.creditBalance,
       sorter: true,
-      align: "right" as const,
+      align: 'right' as const,
       render: (item: any) => {
         return <span>{item}</span>;
       },
     },
     {
-      title: t("projectList:creditRetired"),
-      dataIndex: "creditRetired",
+      title: t('projectList:creditRetired'),
+      dataIndex: 'creditRetired',
       key: ProgrammeManagementSlColumns.creditRetired,
       sorter: true,
-      align: "right" as const,
+      align: 'right' as const,
       render: (item: any) => {
         return <span>{item}</span>;
       },
     },
     {
-      title: t("projectList:authorizationId"),
-      dataIndex: "authorizationId",
-      key: ProgrammeManagementSlColumns.authorizationId,
-      align: "center" as const,
-      render: (item: any) => {
-        return <span>{item ? item : t("projectList:na")}</span>;
-      },
+      title: t('projectList:regitrationSerialNo'),
+      dataIndex: 'serialNo',
+      key: ProgrammeManagementSlColumns.serialNo,
+      align: 'left' as const,
     },
     {
-      title: t("projectList:projectCreatedDate"),
-      dataIndex: "createdTime",
-      key: ProgrammeManagementSlColumns.projectCreatedDate,
-      align: "center" as const,
-      render: (item: any) => {
-        console.log("-----------item-----------", item);
-        return <>{toMoment(Number(item)).format("YYYY/MM/DD HH:mm:ss")}</>;
-      },
-    },
-    {
-      title: t(""),
+      title: t(''),
       width: 6,
-      align: "right" as const,
+      align: 'right' as const,
       key: ProgrammeManagementSlColumns.action,
       render: (_: any, record: any) => {
         const menu = actionMenu(record);
@@ -345,7 +266,7 @@ export const ProgrammeManagementComponent = (props: any) => {
             <Popover placement="bottomRight" content={menu} trigger="click">
               <EllipsisOutlined
                 rotate={90}
-                style={{ fontWeight: 600, fontSize: "1rem", cursor: "pointer" }}
+                style={{ fontWeight: 600, fontSize: '1rem', cursor: 'pointer' }}
               />
             </Popover>
           )
@@ -363,18 +284,13 @@ export const ProgrammeManagementComponent = (props: any) => {
     if (dataFilter) {
       filter.push(dataFilter);
     }
-    // if (statusFilter) {
-    //   filter.push(statusFilter);
-    // }
-
-    if (applicationStageFilter) {
-      filter.push(applicationStageFilter);
+    if (statusFilter) {
+      filter.push(statusFilter);
     }
-
-    if (search && search !== "") {
+    if (search && search !== '') {
       filter.push({
-        key: "title",
-        operation: "ilike",
+        key: 'title',
+        operation: 'like',
         value: `%${search}%`,
       });
     }
@@ -382,14 +298,14 @@ export const ProgrammeManagementComponent = (props: any) => {
     let sort: any;
     if (sortOrder && sortField) {
       sort = {
-        key: sortField === "certifierId" ? "certifierId[1]" : sortField,
+        key: sortField === 'certifierId' ? 'certifierId[1]' : sortField,
         order: sortOrder,
         nullFirst: false,
       };
     } else {
       sort = {
-        key: "createdTime",
-        order: "DESC",
+        key: 'createdTime',
+        order: 'DESC',
       };
     }
 
@@ -402,9 +318,7 @@ export const ProgrammeManagementComponent = (props: any) => {
         sort: sort,
       });
       setTableData(response?.data ? response.data : []);
-      setTotalProgramme(
-        response.response?.data?.total ? response.response?.data?.total : 0
-      );
+      setTotalProgramme(response.response?.data?.total ? response.response?.data?.total : 0);
       setLoading(false);
       setDataQuery({
         filterAnd: filter,
@@ -412,12 +326,12 @@ export const ProgrammeManagementComponent = (props: any) => {
         sort: sort,
       });
     } catch (error: any) {
-      console.log("Error in getting programme", error);
+      console.log('Error in getting programme', error);
       message.open({
-        type: "error",
+        type: 'error',
         content: error.message,
         duration: 3,
-        style: { textAlign: "right", marginRight: 15, marginTop: 10 },
+        style: { textAlign: 'right', marginRight: 15, marginTop: 10 },
       });
       setLoading(false);
     }
@@ -432,8 +346,8 @@ export const ProgrammeManagementComponent = (props: any) => {
         size: 10,
         filterAnd: [
           {
-            key: "id",
-            operation: "=",
+            key: 'id',
+            operation: '=',
             value: userId,
           },
         ],
@@ -449,7 +363,7 @@ export const ProgrammeManagementComponent = (props: any) => {
       }
       setLoading(false);
     } catch (error: any) {
-      console.log("Error in getting users", error);
+      console.log('Error in getting users', error);
       setLoading(false);
     }
   };
@@ -486,20 +400,9 @@ export const ProgrammeManagementComponent = (props: any) => {
   //   }
   // };
 
-  // Debounced search effect
-  useEffect(() => {
-    if (debounceTimeout.current) {
-      clearTimeout(debounceTimeout.current);
-    }
-    debounceTimeout.current = setTimeout(() => {
-      setSearch(searchText ? searchText.toLowerCase() : "");
-    }, 500);
-    return () => {
-      if (debounceTimeout.current) {
-        clearTimeout(debounceTimeout.current);
-      }
-    };
-  }, [searchText]);
+  const onSearch = async () => {
+    setSearch(searchText);
+  };
 
   useEffect(() => {
     if (currentPage !== 1) {
@@ -507,18 +410,11 @@ export const ProgrammeManagementComponent = (props: any) => {
     } else {
       getAllProgramme();
     }
-  }, [dataFilter, applicationStageFilter]);
+  }, [statusFilter, dataFilter]);
 
   useEffect(() => {
     getAllProgramme();
-  }, [
-    currentPage,
-    pageSize,
-    sortField,
-    sortOrder,
-    search,
-    ministryLevelFilter,
-  ]);
+  }, [currentPage, pageSize, sortField, sortOrder, search, ministryLevelFilter]);
 
   useEffect(() => {
     if (userInfoState?.companyRole === CompanyRole.MINISTRY) {
@@ -526,84 +422,28 @@ export const ProgrammeManagementComponent = (props: any) => {
     }
   }, []);
 
-  const onChange: PaginationProps["onChange"] = (page, size) => {
+  const onChange: PaginationProps['onChange'] = (page, size) => {
     setCurrentPage(page);
     setPageSize(size);
   };
 
   const handleTableChange = (pag: any, sorter: any) => {
     setSortOrder(
-      sorter.order === "ascend"
-        ? "ASC"
-        : sorter.order === "descend"
-        ? "DESC"
-        : undefined
+      sorter.order === 'ascend' ? 'ASC' : sorter.order === 'descend' ? 'DESC' : undefined
     );
     setSortField(sorter.columnKey);
     // setCurrentPage(1);
   };
 
-  const mapBase64ToFields = (fileUrls: string[]) => {
-    let fileObjs: any[] = [];
-
-    if (fileUrls !== undefined && fileUrls.length > 0) {
-      fileObjs = fileUrls.map((item: any, index) => {
-        const nameParts = item.split("/");
-        const name = nameParts[nameParts.length - 1];
-        const tempObj = {
-          uid: name,
-          name: name,
-          status: "done",
-          url: item,
-        };
-        return tempObj;
-      });
-    }
-
-    return fileObjs;
-  };
-
-  const downloadData = async () => {
-    try {
-      const res = await post(API_PATHS.GET_PROJECT, {
-        page: 1,
-        size: totalProgramme,
-      });
-
-      if (res?.data) {
-        console.log("--------res--------", res);
-        delete res.data.additionalDocuments;
-        res.data = {
-          ...res.data,
-          ...res.data.company,
-        };
-        downloadCSV(deepCopy(res.data), "projectList.csv", [
-          "additionalDocuments",
-          "geographicalLocationCoordinates",
-          "documents",
-          "infRefId",
-          "refId",
-          "company",
-        ]);
-      }
-    } catch (error) {
-      console.log("------error--------", error);
-    }
-  };
-  // MARK: Main JSX START
-
   return (
     <div className="content-container programme-management">
       <div className="programme-title-bar">
         <div className="title-bar">
-          <div className="body-title">
-            {t("projectList:slcfViewProgrammes")}
-          </div>
+          <div className="body-title">{t('projectList:slcfViewProgrammes')}</div>
         </div>
         <div className="actions">
           {userInfoState?.companyRole === CompanyRole.PROJECT_DEVELOPER &&
             userInfoState.userRole !== Role.ViewOnly &&
-            userInfoState.userRole !== Role.Manager &&
             enableAddProgramme && (
               <div className="action-bar">
                 <Button
@@ -613,7 +453,7 @@ export const ProgrammeManagementComponent = (props: any) => {
                   icon={<PlusOutlined />}
                   onClick={onClickAddProgramme}
                 >
-                  {t("projectList:addProgramme")}
+                  {t('projectList:addProgramme')}
                 </Button>
               </div>
             )}
@@ -623,14 +463,7 @@ export const ProgrammeManagementComponent = (props: any) => {
         <Row className="table-actions-section">
           <Col lg={{ span: 15 }} md={{ span: 14 }}>
             <div className="action-bar">
-              <Select
-                className="application-stage-selector"
-                options={applicationStageOptions}
-                onChange={onSelectedApplicationStageChange}
-                placeholder={t("projectList:proposalStage")}
-                allowClear
-              />
-              {/* <Checkbox
+              <Checkbox
                 className="all-check"
                 disabled={loading}
                 indeterminate={indeterminate}
@@ -646,22 +479,24 @@ export const ProgrammeManagementComponent = (props: any) => {
                 defaultValue={statusOptions.map((e) => e.value)}
                 value={selectedStatus}
                 onChange={onStatusQuery}
-              /> */}
+              />
             </div>
           </Col>
           <Col lg={{ span: 9 }} md={{ span: 10 }}>
             <div className="filter-section">
               <div className="search-bar">
                 <Search
-                  value={searchText}
-                  placeholder={`${t("projectList:searchByName")}`}
+                  onPressEnter={onSearch}
+                  placeholder={`${t('projectList:searchByName')}`}
                   allowClear
-                  onChange={(e) => setSearchText(e.target.value)}
+                  onChange={(e) =>
+                    e.target.value === ''
+                      ? setSearch(e.target.value)
+                      : setSearchText(e.target.value)
+                  }
+                  onSearch={setSearch}
                   style={{ width: 265 }}
                 />
-              </div>
-              <div className="download-icon" onClick={downloadData}>
-                <DownloadOutlined />
               </div>
             </div>
           </Col>
@@ -682,18 +517,12 @@ export const ProgrammeManagementComponent = (props: any) => {
                   showSizeChanger: true,
                   onChange: onChange,
                 }}
-                onChange={(val: any, filter: any, sorter: any) =>
-                  handleTableChange(val, sorter)
-                }
+                onChange={(val: any, filter: any, sorter: any) => handleTableChange(val, sorter)}
                 locale={{
                   emptyText: (
                     <Empty
                       image={Empty.PRESENTED_IMAGE_SIMPLE}
-                      description={
-                        tableData.length === 0
-                          ? t("projectList:noProgrammes")
-                          : null
-                      }
+                      description={tableData.length === 0 ? t('projectList:noProgrammes') : null}
                     />
                   ),
                 }}

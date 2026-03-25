@@ -25,7 +25,7 @@ export interface MapComponentProps {
   updateCenter?: (center: [number, number]) => void;
   markers?: MarkerData[];
   zoom: number;
-  mapSource?: any;  // TODO: Change the type 
+  mapSource?: MapSourceData | MapSourceData[];
   onClick?: any;
   showPopupOnClick?: boolean;
   onMouseMove?: any;

@@ -1,4 +1,4 @@
-@use '../../Styles/variables.scss';
+@import '../../Styles/variables.scss';
 
 .info-view {
   .title-icon {
@@ -6,7 +6,7 @@
   }
 
   .title-text {
-    color: variables.$title-text-color;
+    color: $title-text-color;
     font-weight: 600;
   }
 
@@ -15,14 +15,14 @@
   }
 
   .field-key {
-    color: variables.$body-text-color;
+    color: $body-text-color;
     font-weight: 500;
     text-overflow: ellipsis;
     overflow: hidden;
   }
 
   .field-value {
-    color: variables.$body-text-color;
+    color: $body-text-color;
     text-overflow: ellipsis;
     overflow: hidden;
 

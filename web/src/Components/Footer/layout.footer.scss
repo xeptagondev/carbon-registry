@@ -2,13 +2,8 @@
 @use '../../Styles/variables.scss';
 
 .homepage-footer-container {
-<<<<<<< HEAD
-  background-color: variables.$background-color-dark;
-  min-height: 200px;
-=======
   background-color: variables.$footer-color-dark;
   min-height: 250px;
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   height: 100%;
   align-items: center;
   padding: 1rem 2rem 0 1rem;
@@ -96,10 +91,7 @@
   .footertext-links {
     padding-right: 15px;
     color: variables.$dark-text-color;
-<<<<<<< HEAD
-=======
     white-space: nowrap;
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
     @media (max-width: 645px) {
       padding-left: 0;
@@ -129,10 +121,6 @@
       padding-left: 0.1rem;
     }
 
-    @media (max-width: 576px) {
-      align-items: center;
-    }
-
     .title {
       font-family: 'MuseoSans';
       font-size: 2rem;
@@ -143,17 +131,6 @@
 
       @media (max-width: 645px) {
         font-size: 1.8rem;
-      }
-
-      @media (max-width: 576px) {
-        font-size: 1.4rem;
-        line-height: 1.4rem;
-        margin-top: 5px;
-      }
-
-      @media (max-width: 480px) {
-        font-size: 1.2rem;
-        margin-top: unset;
       }
     }
     // span{
@@ -184,11 +161,7 @@
     }
 
     .footer-country-name {
-<<<<<<< HEAD
-      font-size: 0.875rem;
-=======
       font-size: 1.4rem;
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       color: variables.$dark-text-color;
       font-family: 'MuseoSans';
       margin-left: 0.65rem;

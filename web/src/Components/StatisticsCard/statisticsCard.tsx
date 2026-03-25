@@ -1,8 +1,8 @@
-import { FC } from "react";
-import "./statisticsCard.scss";
-import { Skeleton, Tooltip } from "antd";
-import { InfoCircle } from "react-bootstrap-icons";
-import { addCommSep } from "../../Definitions/Definitions/programme.definitions";
+import { FC } from 'react';
+import './statisticsCard.scss';
+import { Skeleton, Tooltip } from 'antd';
+import { InfoCircle } from 'react-bootstrap-icons';
+import { addCommSep } from '../../Definitions/Definitions/programme.definitions';
 
 export interface StatisticsCardItemProps {
   value: number;
@@ -15,11 +15,8 @@ export interface StatisticsCardItemProps {
   t: any;
 }
 
-export const StasticCard: FC<StatisticsCardItemProps> = (
-  props: StatisticsCardItemProps
-) => {
-  const { value, title, updatedDate, icon, loading, companyRole, tooltip, t } =
-    props;
+export const StasticCard: FC<StatisticsCardItemProps> = (props: StatisticsCardItemProps) => {
+  const { value, title, updatedDate, icon, loading, companyRole, tooltip, t } = props;
 
   return (
     <div className="stastic-card-main-container">
@@ -30,12 +27,7 @@ export const StasticCard: FC<StatisticsCardItemProps> = (
           <div className="title-section">
             <div className="title">{t(title)}</div>
             <div className="info-container">
-              <Tooltip
-                arrowPointAtCenter
-                placement="bottomRight"
-                trigger="hover"
-                title={tooltip}
-              >
+              <Tooltip arrowPointAtCenter placement="bottomRight" trigger="hover" title={tooltip}>
                 <InfoCircle color="#000000" size={17} />
               </Tooltip>
             </div>
@@ -43,8 +35,8 @@ export const StasticCard: FC<StatisticsCardItemProps> = (
           <div className="values-section">
             <div className="values-and-unit">
               <div className="value">
-                {title.includes("credit")
-                  ? value === 0 || String(value) === "NaN"
+                {title.includes('credit')
+                  ? value === 0 || String(value) === 'NaN'
                     ? 0
                     : addCommSep(value)
                   : value}
@@ -52,9 +44,7 @@ export const StasticCard: FC<StatisticsCardItemProps> = (
             </div>
             <div className="icon-section">{icon}</div>
           </div>
-          {updatedDate !== "0" && (
-            <div className="updated-on">{updatedDate}</div>
-          )}
+          {updatedDate !== '0' && <div className="updated-on">{updatedDate}</div>}
         </>
       )}
     </div>

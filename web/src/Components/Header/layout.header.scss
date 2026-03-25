@@ -1,21 +1,21 @@
-@use '../../Styles/variables.scss';
+@import '../../Styles/variables.scss';
 
 .header-container {
-  background-color: variables.$background-color;
+  background-color: $background-color;
 
   .toggle-btn {
     margin-left: -58px;
-    color: variables.$primary-color;
+    color: $primary-color;
     cursor: pointer;
   }
 
   .ant-checkbox-inner {
     border-radius: 100%;
-    border-color: variables.$primary-color;
+    border-color: $primary-color;
   }
 
   .ant-checkbox-checked .ant-checkbox-inner::after {
-    background-color: variables.$primary-color;
+    background-color: $primary-color;
   }
 
 }
@@ -28,7 +28,7 @@
 .header-country-logo {
   height: 44px;
   width: 44px;
-  background-color: variables.$outside-background-color;
+  background-color: $outside-background-color;
   border-radius: 50%;
   margin-top: 14px;
   text-align: center;

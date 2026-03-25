@@ -1,6 +1,6 @@
-@use '../../Styles/colors.addProgramme.scss';
-@use '../../Styles/colors.role.scss' as colors2;
-@use '../../Styles/variables.scss';
+@import '../../Styles/colors.addProgramme.scss';
+@import '../../Styles/colors.role.scss';
+@import '../../Styles/variables.scss';
 
 .validation-form-container {
   display: flex;
@@ -16,12 +16,12 @@
     .main {
       font-size: 1.25rem;
       font-weight: 500;
-      color: variables.$primary-color;
+      color: $primary-color;
     }
 
     .sub {
       font-size: 0.8rem;
-      color: colors.$title-sub;
+      color: $title-sub;
     }
 
     .version-selector {
@@ -39,11 +39,7 @@
     width: 50%;
 
     .icon-color {
-<<<<<<< HEAD
-      color: variables.$primary-color !important;
-=======
       color: $primary-color !important;
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     }
 
     .ant-upload-list {
@@ -61,7 +57,7 @@
   .forms-container {
     display: flex;
     flex-direction: column;
-    background-color: colors.$common-form-white;
+    background-color: $common-form-white;
     margin: 1rem 0 1rem 0;
     border-radius: 10px;
     padding: 2.5rem 1.5rem 2.5rem 1.5rem;
@@ -123,22 +119,14 @@
     }
 
     &-section {
-<<<<<<< HEAD
-      background-color: variables.$form-sections-bg-color;
-=======
       background-color: $form-sections-bg-color;
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       padding: 16px;
       border: 1px solid #dddddd;
     }
   }
 
   .appendix-table-section {
-<<<<<<< HEAD
-    background-color: variables.$form-sections-bg-color;
-=======
     background-color: $form-sections-bg-color;
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     padding: 16px;
   }
 
@@ -698,7 +686,7 @@
   }
 
   .ant-upload-list-item-name {
-    color: variables.$primary-color;
+    color: $primary-color;
   }
 
   .step-actions {

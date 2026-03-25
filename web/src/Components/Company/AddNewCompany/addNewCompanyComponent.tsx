@@ -70,11 +70,7 @@ export const AddNewCompanyComponent = (props: any) => {
   const [contactNoInput] = useState<any>();
   const [current, setCurrent] = useState<number>(0);
   const [isUpdate, setIsUpdate] = useState(false);
-<<<<<<< HEAD
-  const { post, put } = useConnection();
-=======
   const { post } = useConnection();
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   const { setUserInfo, userInfoState } = useUserContext();
   const { state } = useLocation();
   const [fileList, setFileList] = useState<UploadFile[]>([]);
@@ -94,8 +90,6 @@ export const AddNewCompanyComponent = (props: any) => {
 
   const [faxNumber, setFaxNumber] = useState(state?.record?.faxNo || '');
 
-<<<<<<< HEAD
-=======
   // let selectedGovDepatments = ministryOrgs[selectedMinistry];
   // if (existgovDep && existgovDep.length > 0) {
   //   selectedGovDepatments = selectedGovDepatments.filter((x: string) => !existgovDep.includes(x));
@@ -159,7 +153,6 @@ export const AddNewCompanyComponent = (props: any) => {
   //     setCountries(alpha2Names);
   //   }
   // };
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
   const getRegionList = async () => {
     // setLoadingList(true);
@@ -171,13 +164,6 @@ export const AddNewCompanyComponent = (props: any) => {
       console.log(error);
     }
   };
-<<<<<<< HEAD
-
-
-  useEffect(() => {
-    setIsUpdate(state?.record ? true : false);
-    getRegionList();
-=======
   // const getGovDep = async (val: any) => {
   //   setLoadingList(true);
   //   try {
@@ -221,7 +207,6 @@ export const AddNewCompanyComponent = (props: any) => {
     // getCountryList();
     getRegionList();
     // getMinistryList();
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     if (state?.record?.logo) {
       setFileList([
         {
@@ -233,16 +218,12 @@ export const AddNewCompanyComponent = (props: any) => {
         },
       ]);
     }
-<<<<<<< HEAD
-
-=======
     // if (state?.record?.ministry) {
     //   const key =
     //     Object.keys(Ministry)[Object.values(Ministry).indexOf(state?.record?.ministry as Ministry)];
     //   setSelectedMinistry(key);
     //   getGovDep(state?.record?.ministry);
     // }
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   }, []);
 
   const normFile = (e: any) => {
@@ -317,11 +298,7 @@ export const AddNewCompanyComponent = (props: any) => {
           setLoading(false);
         }
       } else {
-<<<<<<< HEAD
-        const response = await post(API_PATHS.ADD_USER, requestData);
-=======
         const response = await post('user/add', requestData);
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         if (response.status === 200 || response.status === 201) {
           if (isUpdate) {
             setUserInfo({
@@ -349,12 +326,6 @@ export const AddNewCompanyComponent = (props: any) => {
       setLoading(false);
     }
   };
-  const companyRoleMap: Record<string, string> = {
-  PD: 'Project Developer',
-  IC: 'Independent Certifier',
-  DNA: 'DNA'
-};
-
 
   const onUpdateCompany = async () => {
     setLoading(true);
@@ -400,8 +371,6 @@ export const AddNewCompanyComponent = (props: any) => {
         values.paymentId = formOneValues.paymentId;
       }
 
-<<<<<<< HEAD
-=======
       if (state?.record?.companyRole === CompanyRole.DESIGNATED_NATIONAL_AUTHORITY) {
         if (formOneValues.govDep in GovDepartment) {
           const key = formOneValues.govDep as keyof typeof GovDepartment;
@@ -423,7 +392,6 @@ export const AddNewCompanyComponent = (props: any) => {
         values.nationalSopValue = Math.floor(Number(formOneValues.nationalSopValue));
       }
 
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       if (formOneValues.website) {
         values.website = 'https://' + formOneValues.website;
       } else {
@@ -438,12 +406,7 @@ export const AddNewCompanyComponent = (props: any) => {
         }
       }
 
-<<<<<<< HEAD
-      console.log('--------------values---------------', values);
-      const response = await put(API_PATHS.UPDATE_ORGANIZATION, values);
-=======
       const response = await post(API_PATHS.UPDATE_ORGANIZATION, values);
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       if (response.status === 200 || response.status === 201) {
         setUserInfo({
           companyLogo: response.data.logo,
@@ -513,8 +476,6 @@ export const AddNewCompanyComponent = (props: any) => {
               <Col xl={12} md={24}>
                 <div className="details-part-one">
                   <Form.Item
-<<<<<<< HEAD
-=======
                     label={t('addCompany:hederaAccount')}
                     name="hederaAccount"
                     initialValue={
@@ -557,7 +518,6 @@ export const AddNewCompanyComponent = (props: any) => {
               <Col xl={12} md={24}>
                 <div className="details-part-one">
                   <Form.Item
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     label={t('addCompany:name')}
                     name="name"
                     initialValue={state?.record?.name}
@@ -684,8 +644,6 @@ export const AddNewCompanyComponent = (props: any) => {
                   )}
                   {companyRole === CompanyRole.DESIGNATED_NATIONAL_AUTHORITY && (
                     <div className="space-container" style={{ width: '100%' }}>
-<<<<<<< HEAD
-=======
                       {/* <Form.Item
                         label={t('addCompany:Ministry')}
                         name="ministry"
@@ -709,7 +667,6 @@ export const AddNewCompanyComponent = (props: any) => {
                           <Select size="large" disabled={true}></Select>
                         )}
                       </Form.Item> */}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                       {
                         <Form.Item
                           label={t('addCompany:email')}
@@ -745,9 +702,6 @@ export const AddNewCompanyComponent = (props: any) => {
                           <Input size="large" />
                         </Form.Item>
                       }
-<<<<<<< HEAD
-                     
-=======
                       {/* {companyRole === CompanyRole.DESIGNATED_NATIONAL_AUTHORITY && (
                         <Form.Item
                           label={t('addCompany:ministerName')}
@@ -777,7 +731,6 @@ export const AddNewCompanyComponent = (props: any) => {
                           <Input size="large" />
                         </Form.Item>
                       )} */}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     </div>
                   )}
                   <Form.Item
@@ -895,7 +848,7 @@ export const AddNewCompanyComponent = (props: any) => {
                             ) : (
                               <BankOutlined className="role-icons" />
                             )}
-                            {t(companyRoleMap[companyRole])}
+                            {t('addCompany:' + companyRole)}
                           </Radio.Button>
                         </div>
                       ) : (
@@ -914,11 +867,7 @@ export const AddNewCompanyComponent = (props: any) => {
                             <Tooltip placement="top" title={t('addCompany:doeToolTip')}>
                               <Radio.Button className="certifier" value="IC">
                                 <SafetyOutlined className="role-icons" />
-<<<<<<< HEAD
-                                {t('addCompany:ic')}
-=======
                                 {t('addCompany:IC')}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                               </Radio.Button>
                             </Tooltip>
                           </div>
@@ -946,8 +895,6 @@ export const AddNewCompanyComponent = (props: any) => {
                             </Tooltip>
                           </div>
 
-<<<<<<< HEAD
-=======
                           {/* {userInfoState?.companyRole !==
                             CompanyRole.DESIGNATED_NATIONAL_AUTHORITY &&
                             !isGuest && (
@@ -969,14 +916,11 @@ export const AddNewCompanyComponent = (props: any) => {
                                 )}
                               </div>
                             )} */}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                         </>
                       )}
                     </Radio.Group>
                   </Form.Item>
 
-<<<<<<< HEAD
-=======
                   {/* {companyRole === CompanyRole.DESIGNATED_NATIONAL_AUTHORITY && (
                     <Form.Item
                       label={t('addCompany:govdep')}
@@ -1051,7 +995,6 @@ export const AddNewCompanyComponent = (props: any) => {
                       </Select>
                     </Form.Item>
                   )} */}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                   <Form.Item
                     name="phoneNo"
                     label={t('addCompany:phoneNo')}
@@ -1107,6 +1050,14 @@ export const AddNewCompanyComponent = (props: any) => {
                       },
                       {
                         validator: async (rule: any, value: any) => {
+                          // if (
+                          //   String(value).trim() === '' ||
+                          //   String(value).trim() === undefined ||
+                          //   value === null ||
+                          //   value === undefined
+                          // ) {
+                          //   throw new Error(`${t('addCompany:phoneNo')} ${t('isRequired')}`);
+                          // } else
                           if (
                             String(value).trim() !== '' &&
                             String(value).trim() !== undefined &&
@@ -1223,8 +1174,6 @@ export const AddNewCompanyComponent = (props: any) => {
   const CompanyAdminDetailsForm = () => {
     return (
       <>
-<<<<<<< HEAD
-=======
         <label
           style={{
             display: 'inline-block',
@@ -1237,7 +1186,6 @@ export const AddNewCompanyComponent = (props: any) => {
         >
           {t('addCompany:hederaAccountRequired')}
         </label>
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         <div className="company-details-form-container">
           <Form
             name="company-admin-details"
@@ -1251,15 +1199,6 @@ export const AddNewCompanyComponent = (props: any) => {
               <Col xl={12} md={24}>
                 <div className="details-part-one">
                   <Form.Item
-<<<<<<< HEAD
-                    label={t('addCompany:name')}
-                    name="name"
-                    rules={[
-                      {
-                        required: true,
-                        message: '',
-                      },
-=======
                     label={t('addCompany:hederaAccount')}
                     name="hederaAccount"
                     rules={[
@@ -1325,7 +1264,6 @@ export const AddNewCompanyComponent = (props: any) => {
                         required: true,
                         message: '',
                       },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                       {
                         validator: async (rule, value) => {
                           if (
