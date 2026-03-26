@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-@use '../../Styles/variables.scss';
-=======
 @import '../../Styles/variables.scss';
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
 .programme-management {
   .programme-title-bar {
@@ -58,11 +54,7 @@
     margin-bottom: 0px;
 
     input {
-<<<<<<< HEAD
-      font-family: variables.$primary-font-family;
-=======
       font-family: $primary-font-family;
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       font-size: 0.8rem;
     }
 

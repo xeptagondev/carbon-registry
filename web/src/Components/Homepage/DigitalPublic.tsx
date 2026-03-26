@@ -1,23 +1,3 @@
-<<<<<<< HEAD
-import React from "react";
-import { motion } from "framer-motion";
-import "./Dashboard.scss";
-import publicGoodImage from "../../Assets/Images/public-good.jpg";
-import { Trans, useTranslation } from "react-i18next";
-
-const DigitalPublicGood = () => {
-  const { i18n, t } = useTranslation(["common", "homepage"]);
-  return (
-    <div className="digital-public-good">
-      <h2 className="header-title">{t("homepage:digitalPublicTitle")}</h2>
-
-      <div className="image-containers">
-        <img
-          src={publicGoodImage}
-          alt="A Digital Public Good"
-          className="main-image"
-        />
-=======
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import './Dashboard.scss';
@@ -33,34 +13,11 @@ const DigitalPublicGood = () => {
 
       <div className="image-containers">
         <img src={publicGoodImage} alt="A Digital Public Good" className="main-image" />
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
         <motion.div
           className="image-caption"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 0.8, y: 0 }}
-<<<<<<< HEAD
-          transition={{ duration: 1, ease: "easeOut" }}
-          viewport={{ once: true }}
-        >
-          <Trans
-            i18nKey="homepage:digitalPublicBody"
-            components={{
-              a1: (
-                <a
-                  href="https://digitalpublicgoods.net/digital-public-goods/"
-                  target="_blank"
-                />
-              ),
-              a2: (
-                <a
-                  href="https://github.com/undp/carbon-registry"
-                  target="_blank"
-                />
-              ),
-            }}
-          />
-=======
           transition={{ duration: 1, ease: 'easeOut' }}
           viewport={{ once: true }}
         >
@@ -75,7 +32,6 @@ const DigitalPublicGood = () => {
           </a>{' '}
           to customize a Registry according to their national needs. This approach helps save time,
           reduce costs, and avoids duplication of effort.
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         </motion.div>
       </div>
     </div>

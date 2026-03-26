@@ -14,21 +14,6 @@ import {
   SelectProps,
   Space,
   Tooltip,
-<<<<<<< HEAD
-} from "antd";
-import React, { FC, useEffect, useState } from "react";
-import { CompanyState } from "../../Definitions/Enums/company.state.enum";
-import {
-  addCommSep,
-  ProgrammeSl,
-} from "../../Definitions/Definitions/programme.definitions";
-import { creditUnit } from "../../Definitions/Definitions/common.definitions";
-import { InfoCircle } from "react-bootstrap-icons";
-import { useConnection } from "../../Context/ConnectionContext/connectionContext";
-import { CompanyRole } from "../../Definitions/Enums/company.role.enum";
-import { CreditType } from "../../Definitions/Enums/programmeStage.enum";
-import { API_PATHS } from "../../Config/apiConfig";
-=======
 } from 'antd';
 import React, { FC, useEffect, useState } from 'react';
 import { CompanyState } from '../../Definitions/Enums/company.state.enum';
@@ -39,7 +24,6 @@ import { useConnection } from '../../Context/ConnectionContext/connectionContext
 import { CompanyRole } from '../../Definitions/Enums/company.role.enum';
 import { CreditType } from '../../Definitions/Enums/programmeStage.enum';
 import { API_PATHS } from '../../Config/apiConfig';
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
 export interface CreditRetirementSlRequestFormProps {
   programme: ProgrammeSl;
@@ -66,11 +50,7 @@ export const CreditRetirementSlRequestForm: FC<
     translator,
   } = props;
 
-<<<<<<< HEAD
-  const countryName = import.meta.env.VITE_APP_COUNTRY_NAME || "CountryX";
-=======
   const countryName = process.env.REACT_APP_COUNTRY_NAME || 'CountryX';
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
   const t = translator.t;
   const [popupError, setPopupError] = useState<string | undefined>(undefined);
@@ -360,13 +340,8 @@ export const CreditRetirementSlRequestForm: FC<
                 onChange={(v) => setChecked(v.target.checked)}
               >
                 {programme.purposeOfCreditDevelopment === CreditType.TRACK_1
-<<<<<<< HEAD
-                  ? t("view:confirmTransferSl", { countryName: countryName })
-                  : t("view:confirmRetireSl", { countryName: countryName })}
-=======
                   ? t('view:confirmTransferSl', { countryName: countryName })
                   : t('view:confirmRetireSl', { countryName: countryName })}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
               </Checkbox>
             </Form.Item>
           </Col>

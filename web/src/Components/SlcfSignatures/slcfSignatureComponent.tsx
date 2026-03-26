@@ -1,29 +1,5 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable no-use-before-define */
-<<<<<<< HEAD
-import { UploadOutlined } from "@ant-design/icons";
-import {
-  Button,
-  Card,
-  Col,
-  Divider,
-  Empty,
-  Form,
-  Row,
-  Upload,
-  UploadFile,
-  message,
-} from "antd";
-import { useEffect, useState } from "react";
-import { useConnection } from "../../Context/ConnectionContext/connectionContext";
-import { RcFile } from "antd/lib/upload";
-import { getBase64 } from "../../Definitions/Definitions/programme.definitions";
-import { ConfigurationSettingsType } from "../../Definitions/Definitions/settings.definitions";
-import "./slcfSignatureComponent.scss";
-import "../../Styles/app.scss";
-import { SLCFCertificateType } from "../../Definitions/Definitions/certificate.type.enum";
-import { API_PATHS } from "../../Config/apiConfig";
-=======
 import { UploadOutlined } from '@ant-design/icons';
 import { Button, Card, Col, Divider, Empty, Form, Row, Upload, UploadFile, message } from 'antd';
 import { useEffect, useState } from 'react';
@@ -35,16 +11,11 @@ import './slcfSignatureComponent.scss';
 import '../../Styles/app.scss';
 import { SLCFCertificateType } from '../../Definitions/Definitions/certificate.type.enum';
 import { API_PATHS } from '../../Config/apiConfig';
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 const { Meta } = Card;
 
 const SLCFSignatureComponent = (props: any) => {
   const { t, maximumImageSize } = props;
-<<<<<<< HEAD
-  const countryName = import.meta.env.VITE_APP_COUNTRY_NAME || "CountryX";
-=======
   const countryName = process.env.REACT_APP_COUNTRY_NAME || 'CountryX';
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   const [form] = Form.useForm();
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -189,15 +160,8 @@ const SLCFSignatureComponent = (props: any) => {
   return (
     <div className="slcf-signs-container">
       <div className="slcf-signs-title">
-<<<<<<< HEAD
-        <h1 className="add-sign-title">{t("certificateSignatures")}</h1>
-        <p>
-          {t("settings:certificateSignaturesSub", { countryName: countryName })}
-        </p>
-=======
         <h1 className="add-sign-title">{t('certificateSignatures')}</h1>
         <p>{t('settings:certificateSignaturesSub', { countryName: countryName })}</p>
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       </div>
       <div className="slcf-upload-signs-main">
         <div className="slcf-upload-signs-form">

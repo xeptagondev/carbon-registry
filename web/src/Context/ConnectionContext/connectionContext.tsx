@@ -12,13 +12,8 @@ import {
   ConnectionProps,
   ConnectionContextProviderProps,
   Methods,
-<<<<<<< HEAD
-} from "../../Definitions/Definitions/connectionContext.definitions";
-import { API_PATHS } from "../../Config/apiConfig";
-=======
 } from '../../Definitions/Definitions/connectionContext.definitions';
 import { API_PATHS } from '../../Config/apiConfig';
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
 const ConnectionContext = createContext<{
   connection?: ConnectionProps;
@@ -135,11 +130,7 @@ export const ConnectionContextProvider: FC<ConnectionContextProviderProps> = (
                 });
               }
             } else {
-<<<<<<< HEAD
-              // console.log("------------e----------------", e, data);
-=======
               // console.log('------------e----------------', e, data);
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
               reject({
                 statusText: "ERROR",
                 message: t("common:networkError"),

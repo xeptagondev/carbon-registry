@@ -13,17 +13,6 @@ import {
   Typography,
   Tag,
   Tooltip,
-<<<<<<<< HEAD:web/src/Components/ProgrammeManagement/ProgrammeManagementComponent.tsx
-  Select,
-} from "antd";
-import { useEffect, useState, useRef } from "react";
-import moment from "moment";
-import "./ProgrammeManagementComponent.scss";
-import "../../Styles/common.table.scss";
-import { UserTableDataType } from "../../Definitions/Definitions/userManagement.definitions";
-import { TooltipColor } from "../../Styles/role.color.constants";
-import { CheckboxValueType } from "antd/lib/checkbox/Group";
-========
 } from 'antd';
 import { useEffect, useState } from 'react';
 import './SLCFProgrammeManagementComponent.scss';
@@ -31,7 +20,6 @@ import '../../Styles/common.table.scss';
 import { UserTableDataType } from '../../Definitions/Definitions/userManagement.definitions';
 import { TooltipColor } from '../../Styles/role.color.constants';
 import { CheckboxValueType } from 'antd/lib/checkbox/Group';
->>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f:web/src/Components/SLCFProgrammeManagement/SLCFProgrammeManagementComponent.tsx
 import {
   addSpaces,
   getCompanyBgColor,
@@ -39,20 +27,6 @@ import {
   getCreditTypeTagType,
   getProjectProposalStage,
   getProjectProposalStageEnumVal,
-<<<<<<<< HEAD:web/src/Components/ProgrammeManagement/ProgrammeManagementComponent.tsx
-} from "../../Definitions/Definitions/programme.definitions";
-import { CheckboxChangeEvent } from "antd/lib/checkbox";
-import { ProgrammeManagementSlColumns } from "../../Definitions/Enums/programme.management.sl.columns.enum";
-import {
-  PlusOutlined,
-  EllipsisOutlined,
-  DownloadOutlined,
-} from "@ant-design/icons";
-import { CompanyRole } from "../../Definitions/Enums/company.role.enum";
-import * as Icon from "react-bootstrap-icons";
-import { useConnection } from "../../Context/ConnectionContext/connectionContext";
-import { useUserContext } from "../../Context/UserInformationContext/userInformationContext";
-========
 } from '../../Definitions/Definitions/programme.definitions';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { ProgrammeManagementSlColumns } from '../../Definitions/Enums/programme.management.sl.columns.enum';
@@ -61,28 +35,15 @@ import { CompanyRole } from '../../Definitions/Enums/company.role.enum';
 import * as Icon from 'react-bootstrap-icons';
 import { useConnection } from '../../Context/ConnectionContext/connectionContext';
 import { useUserContext } from '../../Context/UserInformationContext/userInformationContext';
->>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f:web/src/Components/SLCFProgrammeManagement/SLCFProgrammeManagementComponent.tsx
 import {
   getProjectCategory,
   ProgrammeStatus,
   ProjectProposalStage,
-<<<<<<<< HEAD:web/src/Components/ProgrammeManagement/ProgrammeManagementComponent.tsx
-} from "../../Definitions/Enums/programmeStage.enum";
-import { ProfileIcon } from "../IconComponents/ProfileIcon/profile.icon";
-import { CreditTypeSl } from "../../Definitions/Enums/creditTypeSl.enum";
-import { Role } from "../../Definitions/Enums/role.enum";
-import { API_PATHS } from "../../Config/apiConfig";
-import { APPLICATION_STAGE } from "../../Definitions/Constants/ApplicationStage";
-import { downloadCSV } from "../../Utils/downloadCSV";
-import { deepCopy } from "../../Utils/deepCopy";
-import { toMoment } from "../../Utils/convertTime";
-========
 } from '../../Definitions/Enums/programmeStage.enum';
 import { ProfileIcon } from '../IconComponents/ProfileIcon/profile.icon';
 import { CreditTypeSl } from '../../Definitions/Enums/creditTypeSl.enum';
 import { Role } from '../../Definitions/Enums/role.enum';
 import { API_PATHS } from '../../Config/apiConfig';
->>>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f:web/src/Components/SLCFProgrammeManagement/SLCFProgrammeManagementComponent.tsx
 
 const { Search } = Input;
 

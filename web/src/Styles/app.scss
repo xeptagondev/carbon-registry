@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-@use "variables.scss";
-=======
 @use './variables.scss';
 @use 'sass:color';
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
 body {
   background-color: variables.$background-color;
@@ -22,13 +18,10 @@ body {
 
 .ant-menu {
   background-color: variables.$background-color;
-<<<<<<< HEAD
-=======
 }
 
 .ant-menu-light .ant-menu-submenu-title:hover {
   color: variables.$primary-color;
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 }
 
 .ant-layout-header {
@@ -46,13 +39,10 @@ body {
 }
 .ant-menu-item {
   background-color: variables.$background-color;
-<<<<<<< HEAD
-=======
 
   a:hover {
     color: variables.$primary-color;
   }
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 }
 
 .ant-menu-sub {
@@ -77,15 +67,12 @@ body {
   border-radius: 6px !important;
 }
 
-<<<<<<< HEAD
-=======
 .ant-table-pagination {
   display: flex;
   justify-content: flex-end;
   font-weight: 400;
 }
 
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 .ant-input-group .ant-input {
   width: 99% !important;
 }
@@ -286,11 +273,7 @@ body {
 
 .filter-title {
   color: variables.$common-filter-color;
-<<<<<<< HEAD
-  font-family: "Inter";
-=======
   font-family: 'Inter';
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   font-style: normal;
   font-weight: 600;
   font-size: 0.875rem;
@@ -330,19 +313,11 @@ body {
 
 .layout-content-container {
   padding-bottom: 100px;
-<<<<<<< HEAD
-  .ant-btn-primary {
-    background-color: variables.$primary-color !important;
-    color: variables.$dark-text-color;
-    border: none;
-  }
-=======
   // .ant-btn-primary {
   //   background-color: variables.$primary-color !important;
   //   color: variables.$dark-text-color;
   //   border: none;
   // }
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
   .ant-btn {
     height: 32px;

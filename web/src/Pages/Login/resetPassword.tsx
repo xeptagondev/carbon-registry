@@ -7,13 +7,10 @@ import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { useConnection } from '../../Context/ConnectionContext/connectionContext';
 import { API_PATHS } from '../../Config/apiConfig';
 import { ROUTES } from '../../Config/uiRoutingConfig';
-<<<<<<< HEAD
-=======
 
 // eslint-disable-next-line no-duplicate-imports
 import { Tooltip } from 'antd';
 import { InfoCircle } from 'react-bootstrap-icons';
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
 export interface ResetPasswordPageProps {
   forgotPassword?: boolean;
@@ -60,11 +57,6 @@ const ResetPassword: FC<ResetPasswordPageProps> = (props: ResetPasswordPageProps
   const onSubmit = async (values: any) => {
     try {
       setLoading(true);
-<<<<<<< HEAD
-      if (!requestid) {
-        throw new Error('Request ID is missing');
-      }
-=======
       setResetError(false);
 
       if (!requestid) {
@@ -78,7 +70,6 @@ const ResetPassword: FC<ResetPasswordPageProps> = (props: ResetPasswordPageProps
         return;
       }
 
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       const response: any = await put(API_PATHS.RESET_PW(requestid), {
         newPassword: values.password,
       });

@@ -145,11 +145,7 @@
   "FUGITIVE_EMISSIONS_PRODUCTION": "Fugitive Emissions from Production and Consumption of Halocarbons and Sulphur Hexafluoride",
   "SOLVENT_USE": "Solvent Use",
   "WASTE_HANDLING_AND_DISPOSAL": "Waste Handling and Disposal",
-<<<<<<< HEAD:web/public/locales/i18n/projectList/en.json
-  "WASTE_FROM_FUELS": "Fugitive Emissions from Fuels (Solid, Oil and Gas)",
-=======
   "WASTE_FROM_FUELS":"Fugitive Emissions from Fuels (Solid, Oil and Gas) ",
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f:web/src/locales/i18n/projectList/en.json
   "AFFORESTATION_AND_REFORESTATION": "Afforestation and Reforestation",
   "AGRICULTURE": "Agriculture",
   "ENERGY": "Energy",
@@ -162,10 +158,5 @@
   "OTHER": "Other",
   "authorizationId": "AUTHORIZATION ID",
   "projectCreatedDate": "PROJECT CREATED DATE & TIME",
-<<<<<<< HEAD:web/public/locales/i18n/projectList/en.json
-  "N/A": "NA",
-  "na": "NA"
-=======
   "na": "N/A"
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f:web/src/locales/i18n/projectList/en.json
 }

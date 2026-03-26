@@ -371,10 +371,5 @@
   "approve": "Approve",
   "reject": "Reject",
   "approveMessage": "Are you sure you want to approve this Validation report?",
-<<<<<<< HEAD:web/public/locales/i18n/validationReport/en.json
-  "declineMessage": "Are you sure you want to reject this Validation report?",
-  "atLeastOneInvolvementRequired":"At least one involvement must be selected"
-=======
   "declineMessage": "Are you sure you want to reject this Validation report?"
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f:web/src/locales/i18n/validationReport/en.json
 }

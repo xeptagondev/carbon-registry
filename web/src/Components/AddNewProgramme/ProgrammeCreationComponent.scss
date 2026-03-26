@@ -1,12 +1,6 @@
-<<<<<<< HEAD
-@use '../../Styles/colors.addProgramme.scss';
-@use '../../Styles/colors.role.scss' as colors2;
-@use '../../Styles/variables.scss';
-=======
 @import '../../Styles/colors.addProgramme.scss';
 @import '../../Styles/colors.role.scss';
 @import '../../Styles/variables.scss';
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
 .programme-details-form-container,
 .programme-sought-form-container {
@@ -51,11 +45,7 @@
     }
 
     .ant-upload-list-item-name {
-<<<<<<< HEAD
-      color: variables.$primary-color;
-=======
       color: $primary-color;
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       width: 40px;
     }
 
@@ -145,13 +135,7 @@
         width: 100%;
         overflow-y: auto;
 
-<<<<<<< HEAD
-        .icon-color {
-          color: variables.$primary-color !important;
-        }
 
-=======
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         .ant-upload {
           width: 20%;
 

@@ -1,12 +1,6 @@
-<<<<<<< HEAD
-import React from "react";
-import { Mail, CheckCircle, Hammer, Wallet, LucideClipboardList } from "lucide-react";
-import { Trans, useTranslation } from "react-i18next";
-=======
 import React from 'react';
 import { Mail, CheckCircle, Hammer, Wallet } from 'lucide-react';
 import { Trans, useTranslation } from 'react-i18next';
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
 // Invisible SVG that defines the linear gradient
 const GradientDefs = () => (
@@ -21,22 +15,13 @@ const GradientDefs = () => (
 );
 
 const ProcessFlow = () => {
-<<<<<<< HEAD
-  const { i18n, t } = useTranslation(["common", "homepage"]);
-=======
   const { i18n, t } = useTranslation(['common', 'homepage']);
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   return (
     <div className="process-flow-container">
       {/* Inject the gradient definition once */}
       <GradientDefs />
 
-<<<<<<< HEAD
-      <h2 className="process-flow-title">Example process flow</h2>
-      <p className="process-flow-subtitle">{t("homepage:HdiwBody")}</p>
-=======
       <h2 className="process-flow-title">How Does It Work?</h2>
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       <div className="process-flow">
         {/* Step 1 */}
         <div className="step-card card1">
@@ -45,15 +30,8 @@ const ProcessFlow = () => {
               <Mail size={80} stroke="url(#iconGradient)" />
             </div>
           </div>
-<<<<<<< HEAD
-          <h3 className="step-title">{t("homepage:feature1Title")}</h3>
-          <p className="step-description">
-            {t("homepage:feature1Description")}
-          </p>
-=======
           <h3 className="step-title">{t('homepage:feature1Title')}</h3>
           <p className="step-description">{t('homepage:feature1Description')}</p>
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         </div>
 
         {/* Step 2 */}
@@ -63,15 +41,8 @@ const ProcessFlow = () => {
               <CheckCircle size={80} stroke="url(#iconGradient)" />
             </div>
           </div>
-<<<<<<< HEAD
-          <h3 className="step-title">{t("homepage:feature2Title")}</h3>
-          <p className="step-description">
-            {t("homepage:feature2Description")}
-          </p>
-=======
           <h3 className="step-title">{t('homepage:feature2Title')}</h3>
           <p className="step-description">{t('homepage:feature2Description')}</p>
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         </div>
 
         {/* Step 3 */}
@@ -81,15 +52,8 @@ const ProcessFlow = () => {
               <Hammer size={80} stroke="url(#iconGradient)" />
             </div>
           </div>
-<<<<<<< HEAD
-          <h3 className="step-title">{t("homepage:feature3Title")}</h3>
-          <p className="step-description">
-            {t("homepage:feature3Description")}
-          </p>
-=======
           <h3 className="step-title">{t('homepage:feature3Title')}</h3>
           <p className="step-description">{t('homepage:feature3Description')}</p>
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         </div>
 
         {/* Step 4 */}
@@ -99,28 +63,8 @@ const ProcessFlow = () => {
               <Wallet size={80} stroke="url(#iconGradient)" />
             </div>
           </div>
-<<<<<<< HEAD
-          <h3 className="step-title">{t("homepage:feature4Title")}</h3>
-          <p className="step-description">
-            {t("homepage:feature4Description")}
-          </p>
-        </div>
-
-        {/* Step 5 */}
-        <div className="step-card card5">
-          <div className="step-header">
-            <div className="step-icon">
-              <LucideClipboardList size={80} stroke="url(#iconGradient)" />
-            </div>
-          </div>
-          <h3 className="step-title">{t("homepage:feature5Title")}</h3>
-          <p className="step-description">
-            {t("homepage:feature5Description")}
-          </p>
-=======
           <h3 className="step-title">{t('homepage:feature4Title')}</h3>
           <p className="step-description">{t('homepage:feature4Description')}</p>
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         </div>
       </div>
     </div>

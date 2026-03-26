@@ -39,11 +39,7 @@
     width: 50%;
 
     .icon-color {
-<<<<<<< HEAD
-      color: variables.$primary-color !important;
-=======
       color: $primary-color !important;
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     }
 
     .ant-upload-list {
@@ -123,22 +119,14 @@
     }
 
     &-section {
-<<<<<<< HEAD
-      background-color: variables.$form-sections-bg-color;
-=======
       background-color: $form-sections-bg-color;
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       padding: 16px;
       border: 1px solid #dddddd;
     }
   }
 
   .appendix-table-section {
-<<<<<<< HEAD
-    background-color: variables.$form-sections-bg-color;
-=======
     background-color: $form-sections-bg-color;
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     padding: 16px;
   }
 

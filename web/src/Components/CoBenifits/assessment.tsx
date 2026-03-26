@@ -12,20 +12,6 @@ import {
   Skeleton,
   Upload,
   message,
-<<<<<<< HEAD
-} from "antd";
-import React, { useEffect, useState } from "react";
-import PhoneInput, { formatPhoneNumberIntl } from "react-phone-number-input";
-import { RcFile } from "antd/lib/upload";
-import { useConnection } from "../../Context/ConnectionContext/connectionContext";
-import { getBase64 } from "../../Definitions/Definitions/programme.definitions";
-import {
-  RadioButtonStatus,
-  titleList,
-} from "../../Definitions/Enums/commonEnums";
-import { isValidateFileType } from "../../Utils/DocumentValidator";
-import { API_PATHS } from "../../Config/apiConfig";
-=======
 } from 'antd';
 import React, { useEffect, useState } from 'react';
 import PhoneInput, { formatPhoneNumberIntl } from 'react-phone-number-input';
@@ -35,7 +21,6 @@ import { getBase64 } from '../../Definitions/Definitions/programme.definitions';
 import { RadioButtonStatus, titleList } from '../../Definitions/Enums/commonEnums';
 import { isValidateFileType } from '../../Utils/DocumentValidator';
 import { API_PATHS } from '../../Config/apiConfig';
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
 const Assessment = (props: any) => {
   const { onFormSubmit, assessmentViewData, viewOnly, translator } = props;

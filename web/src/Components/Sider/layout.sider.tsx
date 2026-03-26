@@ -1,18 +1,9 @@
-<<<<<<< HEAD
-import { useEffect, useState } from "react";
-import { Menu, Layout, MenuProps } from "antd";
-import sliderLogo from "../../Assets/Images/logo-slider.png";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import "./layout.sider.scss";
-import * as Icon from "react-bootstrap-icons";
-=======
 import { useEffect, useState } from 'react';
 import { Menu, Layout, MenuProps, Col, Row, Tooltip } from 'antd';
 import logo from '../../Assets/Images/logo_Gold.png';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './layout.sider.scss';
 import * as Icon from 'react-bootstrap-icons';
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 import {
   AppstoreOutlined,
   DashboardOutlined,
@@ -22,15 +13,6 @@ import {
   UnorderedListOutlined,
   UserOutlined,
   SwapOutlined,
-<<<<<<< HEAD
-} from "@ant-design/icons";
-import { useTranslation } from "react-i18next";
-import { LayoutSiderProps } from "../../Definitions/Definitions/layout.sider.definitions";
-import { useUserContext } from "../../Context/UserInformationContext/userInformationContext";
-import { CompanyRole } from "../../Definitions/Enums/company.role.enum";
-import { Role } from "../../Definitions/Enums/role.enum";
-import { ROUTES } from "../../Config/uiRoutingConfig";
-=======
 } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { LayoutSiderProps } from '../../Definitions/Definitions/layout.sider.definitions';
@@ -42,7 +24,6 @@ import { thousandBasedFormatterWithDecimalPlaces } from '../../Utils/utilityHelp
 import { useConnection } from '../../Context/ConnectionContext/connectionContext';
 import { API_PATHS } from '../../Config/apiConfig';
 import { Role } from '../../Definitions/Enums/role.enum';
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
 const { Sider } = Layout;
 
@@ -75,21 +56,6 @@ const LayoutSider = (props: LayoutSiderProps) => {
   const location = useLocation();
   const [collapsed, setCollapsed] = useState(false);
   const [selectKey, setSelectKey] = useState<any>(selectedKey);
-<<<<<<< HEAD
-  const { i18n, t } = useTranslation(["nav"]);
-
-  const currentPage = location.pathname.replace(/^\/|\/$/g, "");
-
-  const items: MenuItem[] = [
-    getItem(t("nav:dashboard"), "dashboard", <DashboardOutlined />),
-    getItem(
-      t("nav:projectList"),
-      "programmeManagement/viewAll",
-      <UnorderedListOutlined />
-    ),
-    getItem(t("nav:companies"), "companyManagement/viewAll", <ShopOutlined />),
-    getItem(t("nav:users"), "userManagement/viewAll", <UserOutlined />),
-=======
   const { t } = useTranslation(['nav']);
   const [orgHederaBalance, setOrgHederaBalance] = useState<string>('0.00');
   const [userHederaBalance, setUserHederaBalance] = useState<string>('0.00');
@@ -107,7 +73,6 @@ const LayoutSider = (props: LayoutSiderProps) => {
     // getItem(t('nav:transfers'), 'creditTransfers/viewAll', <Icon.ArrowLeftRight />),
     // getItem(t('nav:companies'), 'companyManagement/viewAll', <ShopOutlined />),
     // getItem(t('nav:users'), 'userManagement/viewAll', <UserOutlined />),
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   ];
   if (
     userInfoState?.companyRole === CompanyRole.DESIGNATED_NATIONAL_AUTHORITY ||
@@ -254,13 +219,8 @@ const LayoutSider = (props: LayoutSiderProps) => {
   //   items.push(getItem(t('nav:settings'), 'settings', <SettingOutlined />));
   // }
 
-<<<<<<< HEAD
-  const onClick: MenuProps["onClick"] = (e: { key: string }) => {
-    navigate("/" + e.key);
-=======
   const onClick: MenuProps['onClick'] = (e: { key: string }) => {
     navigate('/' + e.key);
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   };
   return (
     <Sider
@@ -280,34 +240,12 @@ const LayoutSider = (props: LayoutSiderProps) => {
           {!collapsed && (
             <div>
               <div>
-<<<<<<< HEAD
-                <div className="title">{collapsed ? "" : "CARBON MARKET"}</div>
-                <div className="title-sub">
-                  {collapsed ? "" : "DIGITAL PLATFORM"}
-                </div>
-              </div>
-              <div className="country-name">
-                {import.meta.env.VITE_APP_COUNTRY_NAME || "CountryX"}
-              </div>
-            </div>
-          )}
-          {collapsed && (
-            <div className="country-flag">
-              <img
-                alt="country flag"
-                src={
-                  import.meta.env.VITE_APP_COUNTRY_FLAG_URL ||
-                  "https://carbon-common-dev.s3.amazonaws.com/flag.png"
-                }
-              />
-=======
                 <div className="title">{collapsed ? '' : 'IMPACT REGISTRY'}</div>
               </div>
               <div className="country-name">
                 {'Gold Standard'}
                 {/* {process.env.REACT_APP_COUNTRY_NAME || 'Gold Standard'} */}
               </div>
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
             </div>
           )}
         </div>
@@ -315,30 +253,14 @@ const LayoutSider = (props: LayoutSiderProps) => {
           <Menu
             theme="light"
             selectedKeys={[
-<<<<<<< HEAD
-              selectedKey
-                ? selectedKey
-                : !selectedKey && selectKey
-                ? selectKey
-                : "dashboard",
-=======
               selectedKey ? selectedKey : !selectedKey && selectKey ? selectKey : 'dashboard',
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
             ]}
             mode="inline"
             onClick={onClick}
           >
             {items.map((item) =>
               item?.children ? (
-<<<<<<< HEAD
-                <Menu.SubMenu
-                  key={item.key}
-                  icon={item.icon}
-                  title={item.label}
-                >
-=======
                 <Menu.SubMenu key={item.key} icon={item.icon} title={item.label}>
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                   {item.children.map((child) => (
                     <Menu.Item key={child?.key} icon={child?.icon}>
                       <Link to={`/${child?.key}`}>{child?.label}</Link>
@@ -350,22 +272,6 @@ const LayoutSider = (props: LayoutSiderProps) => {
                   key={item?.key}
                   icon={item?.icon}
                   className={
-<<<<<<< HEAD
-                    item?.key === "ndcManagement/viewAll" ||
-                    item?.key === "investmentManagement/viewAll" ||
-                    item?.key === "retirementManagement/viewAll" ||
-                    item?.key === "creditTransfers/viewAll"
-                      ? "custom-padding-left"
-                      : item?.key === "cdmManagement/viewAll"
-                      ? "custom-padding-left wrap-content-overflow"
-                      : ""
-                  }
-                  disabled={
-                    // item?.key === 'programmeManagement/viewAll' ||
-                    item?.key === "cdmManagement/viewAll" ||
-                    item?.key === "goldStandardManagement/viewAll" ||
-                    item?.key === "verraManagement/viewAll"
-=======
                     item?.key === 'ndcManagement/viewAll' ||
                     item?.key === 'investmentManagement/viewAll' ||
                     item?.key === 'retirementManagement/viewAll' ||
@@ -380,7 +286,6 @@ const LayoutSider = (props: LayoutSiderProps) => {
                     item?.key === 'cdmManagement/viewAll' ||
                     item?.key === 'goldStandardManagement/viewAll' ||
                     item?.key === 'verraManagement/viewAll'
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                   }
                 >
                   <Link to={`/${item?.key}`}>{item?.label}</Link>

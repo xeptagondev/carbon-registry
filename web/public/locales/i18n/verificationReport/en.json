@@ -44,13 +44,7 @@
   "firstName": "First name",
   "affliation": "Affliation",
   "technicalReviewer": "Technical Reviewer",
-<<<<<<< HEAD:web/public/locales/i18n/verificationReport/en.json
-  "approver": "Approver",
-  "viewer": "Viewer",
-  "verifier":"Verifier",
-=======
   "verifier": "Verifier",
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f:web/src/locales/i18n/verificationReport/en.json
   "financialOtherExpert":"Financial/Other Expert",
   "trainee":"Trainee",
   "DeskDocument":"Desk/Document Review",
@@ -107,18 +101,12 @@
   "projectBoundarySources": "Project boundary, sources and GHGs",
   "baselineScenario": "Baseline Scenario",
   "demonstrationOfAdditionality": "Demonstration Of Additionality",
-<<<<<<< HEAD:web/public/locales/i18n/verificationReport/en.json
-  "demonstrationPriorCDM": "Demonstration of prior consideration of the CDM",
-=======
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f:web/src/locales/i18n/verificationReport/en.json
+
   "estimationOfEmissionReduction": "Estimation of emission reductions or net anthropogenic removals",
   "startDateCreditingPeriod": "Start date, Crediting period type and Duration",
   "environmentImpacts": "Environmental Impacts",
   "sustainableDevelopment": "Sustainable Development Co-benefits",
-<<<<<<< HEAD:web/public/locales/i18n/verificationReport/en.json
-=======
   "demonstrationPriorCMD": "Demonstration of prior consideration of the CDM",
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f:web/src/locales/i18n/verificationReport/en.json
   "approval": "Approval",
   "authorization": "Authorization",
   "modalitiesOfCommunication": "Modalities of Communication",
@@ -435,11 +423,7 @@
   "addFinding": "Add Finding",
   "confirmModalMessage": "Are you sure you want to submit ?",
   "confirmModalSubMessage": "You can't undo this action",
-<<<<<<< HEAD:web/public/locales/i18n/verificationReport/en.json
-  "approveMessage": "Are you sure you want to approve this Verification Report?",
-=======
   "approveMessage": "Are you sure you want to approve this Verification Report ?",
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f:web/src/locales/i18n/verificationReport/en.json
   "declineMessage": "Are you sure you want to decline this Verification Report?",
   "checkboxMessage": "I understand that this action cannot be undone",
   "interviews": "Interviews",

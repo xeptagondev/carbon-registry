@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-import React, { useEffect, useState } from "react";
-import StepperComponent from "./StepperComponent";
-import { i18n } from "i18next";
-import "./ValidationReport.scss";
-import { useLocation, useParams } from "react-router-dom";
-import { useConnection } from "../../Context/ConnectionContext/connectionContext";
-import { DocumentTypeEnum } from "../../Definitions/Enums/document.type";
-import { Col, Row, Select, Tag } from "antd";
-import { FormMode } from "../../Definitions/Enums/formMode.enum";
-import { getDocumentStatusColor } from "../../Definitions/Definitions/programme.definitions";
-import { API_PATHS } from "../../Config/apiConfig";
-=======
 import React, { useEffect, useState } from 'react';
 import ValidationStepperComponent from './ValidationStepperComponent';
 import { i18n } from 'i18next';
@@ -22,7 +9,6 @@ import { Col, Row, Select, Tag } from 'antd';
 import { FormMode } from '../../Definitions/Enums/formMode.enum';
 import { getDocumentStatusColor } from '../../Definitions/Definitions/programme.definitions';
 import { API_PATHS } from '../../Config/apiConfig';
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
 const ValidationReport = (props: { translator: i18n }) => {
   const { translator } = props;

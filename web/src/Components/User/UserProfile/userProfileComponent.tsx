@@ -9,10 +9,7 @@ import LanguageSelection from '../../LanguageSelection/languageSelection';
 import { UserRoleIcon } from '../../IconComponents/UserRoleIcon/userRoleIcon';
 import { CompanyDetailsComponent } from '../../Company/CompanyDetails/companyDetailsComponent';
 import { API_PATHS } from '../../../Config/apiConfig';
-<<<<<<< HEAD
-=======
 import { thousandBasedFormatterWithDecimalPlaces } from '../../../Utils/utilityHelper';
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
 export const UserProfileComponent = (props: any) => {
   const { t, i18n, onNavigateUpdateUser, onNavigateLogin } = props;
@@ -36,23 +33,17 @@ export const UserProfileComponent = (props: any) => {
   const getUserProfileDetails = async () => {
     try {
       setIsLoading(true);
-<<<<<<< HEAD
-      const response = await get(API_PATHS.USER_PROFILE_DETAILS);
-=======
       const [orgBalanceResponse, userBalanceResponse, response] = await Promise.all([
         get(API_PATHS.ORGANIZATION_HBAR_BALANCE),
         get(API_PATHS.USER_HBAR_BALANCE),
         get(API_PATHS.USER_PROFILE_DETAILS),
       ]);
 
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       if (response.data) {
         setOrganisationDetails(response.data.Organisation);
         setUserDetails(response.data.user);
         setIsLoading(false);
       }
-<<<<<<< HEAD
-=======
 
       if (orgBalanceResponse && userBalanceResponse) {
         const formattedOrgBalance = thousandBasedFormatterWithDecimalPlaces(
@@ -67,7 +58,6 @@ export const UserProfileComponent = (props: any) => {
         setOrgHederaBalance(`${formattedOrgBalance.number}${formattedOrgBalance.suffix}`);
         setUserHederaBalance(`${formattedUserBalance.number}${formattedUserBalance.suffix}`);
       }
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       //console.log('---------profile details--------', response);
     } catch (exception) {}
   };

@@ -1,107 +1,3 @@
-<<<<<<< HEAD
-import { ValidationStepsProps } from "./StepProps";
-import { Row, Button, Form, Input, Col, Upload, DatePicker, Radio } from "antd";
-import { MinusOutlined, PlusOutlined, UploadOutlined } from "@ant-design/icons";
-import TextArea from "antd/lib/input/TextArea";
-import { ProcessSteps } from "./StepperComponent";
-import moment from "moment";
-import { fileUploadValueExtract } from "../../Utils/utilityHelper";
-import { FormMode } from "../../Definitions/Enums/formMode.enum";
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-
-const clCols = [
-  "finding-cl-1",
-  "finding-cl-2",
-  "finding-cl-3",
-  "finding-cl-4",
-  "finding-cl-5",
-  "finding-cl-6",
-  "finding-cl-7",
-  "finding-cl-8",
-  "finding-cl-9",
-  "finding-cl-10",
-  "finding-cl-11",
-  "finding-cl-12",
-  "finding-cl-13",
-  "finding-cl-14",
-  "finding-cl-15",
-  "finding-cl-16",
-  "finding-cl-17",
-  "finding-cl-18",
-  "finding-cl-19",
-  "finding-cl-20",
-];
-
-const carCols = [
-  "finding-car-1",
-  "finding-car-2",
-  "finding-car-3",
-  "finding-car-4",
-  "finding-car-5",
-  "finding-car-6",
-  "finding-car-7",
-  "finding-car-8",
-  "finding-car-9",
-  "finding-car-10",
-  "finding-car-11",
-  "finding-car-12",
-  "finding-car-13",
-  "finding-car-14",
-  "finding-car-15",
-  "finding-car-16",
-  "finding-car-17",
-  "finding-car-18",
-  "finding-car-19",
-  "finding-car-20",
-];
-
-const farCols = [
-  "finding-far-1",
-  "finding-far-2",
-  "finding-far-3",
-  "finding-far-4",
-  "finding-far-5",
-  "finding-far-6",
-  "finding-far-7",
-  "finding-far-8",
-  "finding-far-9",
-  "finding-far-10",
-  "finding-far-11",
-  "finding-far-12",
-  "finding-far-13",
-  "finding-far-14",
-  "finding-far-15",
-  "finding-far-16",
-  "finding-far-17",
-  "finding-far-18",
-  "finding-far-19",
-  "finding-far-20",
-];
-
-const MeansOfValidation = (props: ValidationStepsProps) => {
-  const {
-    prev,
-    next,
-    form,
-    current,
-    t,
-    countries,
-    handleValuesUpdate,
-    disableFields,
-    formMode,
-  } = props;
-
-  useEffect(() => {
-    if (formMode === FormMode.CREATE) {
-      form.setFieldValue("onSiteInspection", [{ activity: "" }]);
-      form.setFieldValue("interviewees", [{ lastName: "" }]);
-    }
-  }, [formMode]);
-
-  const maximumImageSize = import.meta.env.VITE_APP_MAXIMUM_FILE_SIZE
-    ? parseInt(import.meta.env.VITE_APP_MAXIMUM_FILE_SIZE)
-=======
 import { ValidationStepsProps } from './StepProps';
 import { Row, Button, Form, Input, Col, Upload, DatePicker, Radio } from 'antd';
 import { MinusOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
@@ -195,7 +91,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
   const maximumImageSize = process.env.REACT_APP_MAXIMUM_FILE_SIZE
     ? parseInt(process.env.REACT_APP_MAXIMUM_FILE_SIZE)
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     : 5000000;
 
   const normFile = (e: any) => {
@@ -204,54 +99,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
     }
     return e?.fileList;
   };
-<<<<<<< HEAD
-  const validatePositiveNumber = async (rule, value) => {
-    const valStr = String(value).trim();
 
-    // Check for empty/null/undefined values
-    if (valStr === "" || value === null || value === undefined) {
-      throw new Error(`${t("validationReport:required")}`);
-    }
-
-    // Check if it's a valid number
-    if (isNaN(value)) {
-      throw new Error("Should be a number");
-    }
-
-    const numValue = Number(value);
-
-    // Check if it's an integer
-    if (!Number.isInteger(numValue)) {
-      throw new Error("Value must be an integer");
-    }
-
-    // Check if it's a positive integer (0 or more)
-    if (numValue < 0) {
-      throw new Error("Value must be a positive integer");
-    }
-
-    return Promise.resolve();
-  };
-
-=======
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   const onFinish = async (values: any) => {
     const body: any = {
       ...values,
       siteInspectionDurationStart: moment(values?.siteInspectionDurationStart)
-<<<<<<< HEAD
-        .startOf("day")
-        .unix(),
-      siteInspectionDurationEnd: moment(values?.siteInspectionDurationEnd)
-        .startOf("day")
-        .unix(),
-      onSiteInspection: values?.onSiteInspection.map((item: any) => {
-        const temp = {
-          activity: item?.activity,
-          siteLocation: item?.siteLocation,
-          teamMember: item?.teamMember,
-          date: moment(item?.date).startOf("day").unix(),
-=======
         .startOf('day')
         .unix(),
       siteInspectionDurationEnd: moment(values?.siteInspectionDurationEnd).startOf('day').unix(),
@@ -262,7 +114,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
           siteLocation: item?.siteLocation,
           teamMember: item?.teamMember,
           date: moment(item?.date).startOf('day').unix(),
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         };
         return temp;
       }),
@@ -274,11 +125,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
           affliationName: item?.affliationName,
           subject: item?.subject,
           teamMember: item?.teamMember,
-<<<<<<< HEAD
-          date: moment(item?.date).startOf("day").unix(),
-=======
           date: moment(item?.date).startOf('day').unix(),
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
         };
         return temp;
       }),
@@ -293,11 +140,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
       total += Number(form.getFieldValue(colKey)) || 0;
     });
 
-<<<<<<< HEAD
-    form.setFieldValue("cl-total", total);
-=======
     form.setFieldValue('cl-total', total);
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   };
 
   const calculateTotalCar = (value: number) => {
@@ -306,11 +149,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
       total += Number(form.getFieldValue(colKey)) || 0;
     });
 
-<<<<<<< HEAD
-    form.setFieldValue("car-total", total);
-=======
     form.setFieldValue('car-total', total);
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   };
 
   const calculateTotalFar = (value: number) => {
@@ -319,11 +158,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
       total += Number(form.getFieldValue(colKey)) || 0;
     });
 
-<<<<<<< HEAD
-    form.setFieldValue("far-total", total);
-=======
     form.setFieldValue('far-total', total);
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   };
 
   return (
@@ -348,22 +183,12 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
             >
               <Form.Item
                 className="full-width-form-item"
-<<<<<<< HEAD
-                label={`${t("validationReport:documentReview")}`}
-=======
                 label={`${t('validationReport:documentReview')}`}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                 name="documentReview"
                 rules={[
                   {
                     required: true,
-<<<<<<< HEAD
-                    message: `${t("validationReport:documentReview")} ${t(
-                      "isRequired"
-                    )}`,
-=======
                     message: `${t('validationReport:documentReview')} ${t('isRequired')}`,
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                   },
                 ]}
               >
@@ -372,13 +197,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
               {/* On-site inspection table start */}
               <>
-<<<<<<< HEAD
-                <h4 className="form-section-heading">
-                  {t("validationReport:onSiteInspection")}
-                </h4>
-=======
                 <h4 className="form-section-heading">{t('validationReport:onSiteInspection')}</h4>
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                 <div className="onSiteInspection-table mg-bottom-2">
                   <Row>
                     <Col xl={21} className="duration-header">
@@ -388,31 +207,17 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-=======
                             message: '',
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                           {
                             validator: async (rule, value) => {
                               if (
-<<<<<<< HEAD
-                                String(value).trim() === "" ||
-=======
                                 String(value).trim() === '' ||
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                 String(value).trim() === undefined ||
                                 value === null ||
                                 value === undefined
                               ) {
-<<<<<<< HEAD
-                                throw new Error(
-                                  `${t("validationReport:required")}`
-                                );
-=======
                                 throw new Error(`${t('validationReport:required')}`);
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                               }
                             },
                           },
@@ -420,13 +225,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                       >
                         <DatePicker
                           size="small"
-<<<<<<< HEAD
-                          disabledDate={(currentDate: any) =>
-                            currentDate < moment().startOf("day")
-                          }
-=======
                           disabledDate={(currentDate: any) => currentDate < moment().startOf('day')}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -436,31 +235,17 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-=======
                             message: '',
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                           {
                             validator: async (rule, value) => {
                               if (
-<<<<<<< HEAD
-                                String(value).trim() === "" ||
-=======
                                 String(value).trim() === '' ||
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                 String(value).trim() === undefined ||
                                 value === null ||
                                 value === undefined
                               ) {
-<<<<<<< HEAD
-                                throw new Error(
-                                  `${t("validationReport:required")}`
-                                );
-=======
                                 throw new Error(`${t('validationReport:required')}`);
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                               }
                             },
                           },
@@ -469,21 +254,12 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         <DatePicker
                           size="small"
                           disabledDate={(currentDate: any) => {
-<<<<<<< HEAD
-                            const siteInspectionDurationStart =
-                              form.getFieldValue("siteInspectionDurationStart");
-                            return (
-                              currentDate &&
-                              currentDate <
-                                moment(siteInspectionDurationStart).endOf("day")
-=======
                             const siteInspectionDurationStart = form.getFieldValue(
                               'siteInspectionDurationStart'
                             );
                             return (
                               currentDate &&
                               currentDate < moment(siteInspectionDurationStart).endOf('day')
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                             );
                           }}
                           disabled={disableFields}
@@ -517,20 +293,12 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                           {fields.map(({ key, name, ...restFields }) => (
                             <>
                               <Col xl={1} className="col-1 col" key={key}>
-<<<<<<< HEAD
-                                {name + 1 < 10 && "0"}
-=======
                                 {name + 1 < 10 && '0'}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                 {name + 1}
                               </Col>
                               <Col xl={6} className="other-cols col">
                                 <Form.Item
-<<<<<<< HEAD
-                                  name={[name, "activity"]}
-=======
                                   name={[name, 'activity']}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                   rules={[
                                     {
                                       required: true,
@@ -539,22 +307,12 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                                     {
                                       validator: async (rule, value) => {
                                         if (
-<<<<<<< HEAD
-                                          String(value).trim() === "" ||
-=======
                                           String(value).trim() === '' ||
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                           String(value).trim() === undefined ||
                                           value === null ||
                                           value === undefined
                                         ) {
-<<<<<<< HEAD
-                                          throw new Error(
-                                            `${t("validationReport:required")}`
-                                          );
-=======
                                           throw new Error(`${t('validationReport:required')}`);
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                         }
                                       },
                                     },
@@ -565,11 +323,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                               </Col>
                               <Col xl={5} className="other-cols col">
                                 <Form.Item
-<<<<<<< HEAD
-                                  name={[name, "siteLocation"]}
-=======
                                   name={[name, 'siteLocation']}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                   rules={[
                                     {
                                       required: true,
@@ -578,22 +332,12 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                                     {
                                       validator: async (rule, value) => {
                                         if (
-<<<<<<< HEAD
-                                          String(value).trim() === "" ||
-=======
                                           String(value).trim() === '' ||
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                           String(value).trim() === undefined ||
                                           value === null ||
                                           value === undefined
                                         ) {
-<<<<<<< HEAD
-                                          throw new Error(
-                                            `${t("validationReport:required")}`
-                                          );
-=======
                                           throw new Error(`${t('validationReport:required')}`);
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                         }
                                       },
                                     },
@@ -604,11 +348,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                               </Col>
                               <Col xl={5} className="other-cols col">
                                 <Form.Item
-<<<<<<< HEAD
-                                  name={[name, "date"]}
-=======
                                   name={[name, 'date']}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                   rules={[
                                     {
                                       required: true,
@@ -617,22 +357,12 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                                     {
                                       validator: async (rule, value) => {
                                         if (
-<<<<<<< HEAD
-                                          String(value).trim() === "" ||
-=======
                                           String(value).trim() === '' ||
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                           String(value).trim() === undefined ||
                                           value === null ||
                                           value === undefined
                                         ) {
-<<<<<<< HEAD
-                                          throw new Error(
-                                            `${t("validationReport:required")}`
-                                          );
-=======
                                           throw new Error(`${t('validationReport:required')}`);
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                         }
                                       },
                                     },
@@ -641,11 +371,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                                   <DatePicker
                                     size="small"
                                     disabledDate={(currentDate: any) =>
-<<<<<<< HEAD
-                                      currentDate < moment().startOf("day")
-=======
                                       currentDate < moment().startOf('day')
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                     }
                                     disabled={disableFields}
                                   />
@@ -653,11 +379,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                               </Col>
                               <Col xl={4} className="other-cols col">
                                 <Form.Item
-<<<<<<< HEAD
-                                  name={[name, "teamMember"]}
-=======
                                   name={[name, 'teamMember']}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                   rules={[
                                     {
                                       required: true,
@@ -666,23 +388,13 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                                     {
                                       validator: async (rule, value) => {
                                         if (
-<<<<<<< HEAD
-                                          String(value).trim() === "" ||
-=======
                                           String(value).trim() === '' ||
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                           String(value).trim() === undefined ||
                                           value === null ||
                                           value === undefined
                                         ) {
                                           throw new Error(
-<<<<<<< HEAD
-                                            `${t(
-                                              "validationReport:provider"
-                                            )} ${t("isRequired")}`
-=======
                                             `${t('validationReport:provider')} ${t('isRequired')}`
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                           );
                                         }
                                       },
@@ -733,13 +445,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
               {/* Interviews table start */}
               <>
-<<<<<<< HEAD
-                <h4 className="form-section-heading">
-                  {t("validationReport:interviews")}
-                </h4>
-=======
                 <h4 className="form-section-heading">{t('validationReport:interviews')}</h4>
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                 <div className="interviews-table">
                   <Row className="header">
                     <Col xl={1} className="col-1 col">
@@ -781,20 +487,12 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                           {fields.map(({ key, name, ...restFields }) => (
                             <>
                               <Col xl={1} className="col-1 col">
-<<<<<<< HEAD
-                                {name + 1 < 10 && "0"}
-=======
                                 {name + 1 < 10 && '0'}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                 {name + 1}
                               </Col>
                               <Col xl={3} className="other-cols col">
                                 <Form.Item
-<<<<<<< HEAD
-                                  name={[name, "lastName"]}
-=======
                                   name={[name, 'lastName']}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                   rules={[
                                     {
                                       required: true,
@@ -803,22 +501,12 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                                     {
                                       validator: async (rule, value) => {
                                         if (
-<<<<<<< HEAD
-                                          String(value).trim() === "" ||
-=======
                                           String(value).trim() === '' ||
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                           String(value).trim() === undefined ||
                                           value === null ||
                                           value === undefined
                                         ) {
-<<<<<<< HEAD
-                                          throw new Error(
-                                            `${t("validationReport:required")}`
-                                          );
-=======
                                           throw new Error(`${t('validationReport:required')}`);
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                         }
                                       },
                                     },
@@ -829,11 +517,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                               </Col>
                               <Col xl={3} className="other-cols col">
                                 <Form.Item
-<<<<<<< HEAD
-                                  name={[name, "firstName"]}
-=======
                                   name={[name, 'firstName']}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                   rules={[
                                     {
                                       required: true,
@@ -842,22 +526,12 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                                     {
                                       validator: async (rule, value) => {
                                         if (
-<<<<<<< HEAD
-                                          String(value).trim() === "" ||
-=======
                                           String(value).trim() === '' ||
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                           String(value).trim() === undefined ||
                                           value === null ||
                                           value === undefined
                                         ) {
-<<<<<<< HEAD
-                                          throw new Error(
-                                            `${t("validationReport:required")}`
-                                          );
-=======
                                           throw new Error(`${t('validationReport:required')}`);
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                         }
                                       },
                                     },
@@ -868,11 +542,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                               </Col>
                               <Col xl={3} className="other-cols col">
                                 <Form.Item
-<<<<<<< HEAD
-                                  name={[name, "affliationName"]}
-=======
                                   name={[name, 'affliationName']}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                   rules={[
                                     {
                                       required: true,
@@ -881,22 +551,12 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                                     {
                                       validator: async (rule, value) => {
                                         if (
-<<<<<<< HEAD
-                                          String(value).trim() === "" ||
-=======
                                           String(value).trim() === '' ||
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                           String(value).trim() === undefined ||
                                           value === null ||
                                           value === undefined
                                         ) {
-<<<<<<< HEAD
-                                          throw new Error(
-                                            `${t("validationReport:required")}`
-                                          );
-=======
                                           throw new Error(`${t('validationReport:required')}`);
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                         }
                                       },
                                     },
@@ -907,11 +567,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                               </Col>
                               <Col xl={3} className="other-cols col">
                                 <Form.Item
-<<<<<<< HEAD
-                                  name={[name, "date"]}
-=======
                                   name={[name, 'date']}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                   rules={[
                                     {
                                       required: true,
@@ -920,22 +576,12 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                                     {
                                       validator: async (rule, value) => {
                                         if (
-<<<<<<< HEAD
-                                          String(value).trim() === "" ||
-=======
                                           String(value).trim() === '' ||
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                           String(value).trim() === undefined ||
                                           value === null ||
                                           value === undefined
                                         ) {
-<<<<<<< HEAD
-                                          throw new Error(
-                                            `${t("validationReport:required")}`
-                                          );
-=======
                                           throw new Error(`${t('validationReport:required')}`);
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                         }
                                       },
                                     },
@@ -944,11 +590,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                                   <DatePicker
                                     size="small"
                                     disabledDate={(currentDate: any) =>
-<<<<<<< HEAD
-                                      currentDate < moment().startOf("day")
-=======
                                       currentDate < moment().startOf('day')
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                     }
                                     disabled={disableFields}
                                   />
@@ -956,11 +598,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                               </Col>
                               <Col xl={3} className="other-cols col">
                                 <Form.Item
-<<<<<<< HEAD
-                                  name={[name, "subject "]}
-=======
                                   name={[name, 'subject ']}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                   rules={[
                                     {
                                       required: true,
@@ -969,22 +607,12 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                                     {
                                       validator: async (rule, value) => {
                                         if (
-<<<<<<< HEAD
-                                          String(value).trim() === "" ||
-=======
                                           String(value).trim() === '' ||
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                           String(value).trim() === undefined ||
                                           value === null ||
                                           value === undefined
                                         ) {
-<<<<<<< HEAD
-                                          throw new Error(
-                                            `${t("validationReport:required")}`
-                                          );
-=======
                                           throw new Error(`${t('validationReport:required')}`);
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                         }
                                       },
                                     },
@@ -995,11 +623,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                               </Col>
                               <Col xl={4} className="other-cols col">
                                 <Form.Item
-<<<<<<< HEAD
-                                  name={[name, "teamMember"]}
-=======
                                   name={[name, 'teamMember']}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                   rules={[
                                     {
                                       required: true,
@@ -1008,22 +632,12 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                                     {
                                       validator: async (rule, value) => {
                                         if (
-<<<<<<< HEAD
-                                          String(value).trim() === "" ||
-=======
                                           String(value).trim() === '' ||
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                           String(value).trim() === undefined ||
                                           value === null ||
                                           value === undefined
                                         ) {
-<<<<<<< HEAD
-                                          throw new Error(
-                                            `${t("validationReport:required")}`
-                                          );
-=======
                                           throw new Error(`${t('validationReport:required')}`);
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                                         }
                                       },
                                     },
@@ -1073,22 +687,12 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
               <Form.Item
                 className="full-width-form-item"
-<<<<<<< HEAD
-                label={`${t("validationReport:samplingApproach")}`}
-=======
                 label={`${t('validationReport:samplingApproach')}`}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                 name="samplingApproach"
                 rules={[
                   {
                     required: true,
-<<<<<<< HEAD
-                    message: `${t("validationReport:samplingApproach")} ${t(
-                      "isRequired"
-                    )}`,
-=======
                     message: `${t('validationReport:samplingApproach')} ${t('isRequired')}`,
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                   },
                 ]}
               >
@@ -1097,11 +701,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
               {/* Clarification Table start */}
               <h4 className="form-section-heading">
-<<<<<<< HEAD
-                {t("validationReport:clarificationRequestsTableTitle")}
-=======
                 {t('validationReport:clarificationRequestsTableTitle')}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
               </h4>
               <div className="clarification-requests-table mg-bottom-2">
                 <Row className="header">
@@ -1121,11 +721,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                 <div className="body">
                   <Row>
                     <Col xl={15} className="col col-1">
-<<<<<<< HEAD
-                      {t("validationReport:demonstrationPriorCDM")}
-=======
                       {t('validationReport:demonstrationPriorCDM')}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     </Col>
                     <Col xl={3} className="col other-cols">
                       <Form.Item
@@ -1133,12 +729,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -1169,18 +759,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCL(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCL(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -1191,12 +774,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -1227,18 +804,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -1249,12 +819,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -1285,18 +849,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalFar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalFar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -1305,11 +862,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                   <Row>
                     <Col xl={15} className="col col-1">
-<<<<<<< HEAD
-                      {t("validationReport:identificationOfProjectType")}
-=======
                       {t('validationReport:identificationOfProjectType')}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     </Col>
                     <Col xl={3} className="col other-cols">
                       <Form.Item
@@ -1317,12 +870,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -1353,18 +900,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCL(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCL(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -1375,12 +915,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -1411,18 +945,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -1433,12 +960,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -1469,18 +990,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalFar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalFar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -1489,11 +1003,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                   <Row>
                     <Col xl={15} className="col col-1">
-<<<<<<< HEAD
-                      {t("validationReport:descriptionOfProjectActivity")}
-=======
                       {t('validationReport:descriptionOfProjectActivity')}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     </Col>
                     <Col xl={3} className="col other-cols">
                       <Form.Item
@@ -1501,12 +1011,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -1537,18 +1041,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCL(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCL(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -1559,12 +1056,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -1595,18 +1086,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -1617,12 +1101,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -1653,18 +1131,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalFar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalFar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -1673,13 +1144,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                   <Row>
                     <Col xl={15} className="col col-1">
-<<<<<<< HEAD
-                      {t(
-                        "validationReport:applicationMethodologiesSectionHeading"
-                      )}
-=======
                       {t('validationReport:applicationMethodologiesSectionHeading')}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     </Col>
                     <Col xl={3} className="col other-cols"></Col>
                     <Col xl={3} className="col other-cols"></Col>
@@ -1688,11 +1153,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                   <Row>
                     <Col xl={15} className="col col-1 pd-left">
-<<<<<<< HEAD
-                      {t("validationReport:applicationMethodologiesBaselines")}
-=======
                       {t('validationReport:applicationMethodologiesBaselines')}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     </Col>
                     <Col xl={3} className="col other-cols">
                       <Form.Item
@@ -1700,12 +1161,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -1728,18 +1183,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCL(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCL(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -1750,12 +1198,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -1778,18 +1220,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -1800,12 +1235,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -1828,18 +1257,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalFar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalFar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -1848,11 +1270,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                   <Row>
                     <Col xl={15} className="col col-1 pd-left">
-<<<<<<< HEAD
-                      {t("validationReport:deviationMethodology")}
-=======
                       {t('validationReport:deviationMethodology')}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     </Col>
                     <Col xl={3} className="col other-cols">
                       <Form.Item
@@ -1860,12 +1278,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -1888,18 +1300,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCL(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCL(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -1910,12 +1315,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -1938,18 +1337,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -1960,12 +1352,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -1988,18 +1374,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalFar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalFar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -2008,11 +1387,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                   <Row>
                     <Col xl={15} className="col col-1 pd-left">
-<<<<<<< HEAD
-                      {t("validationReport:clarificationOnMethodology")}
-=======
                       {t('validationReport:clarificationOnMethodology')}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     </Col>
                     <Col xl={3} className="col other-cols">
                       <Form.Item
@@ -2020,12 +1395,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -2048,18 +1417,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCL(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCL(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -2070,12 +1432,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -2098,18 +1454,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -2120,12 +1469,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -2148,18 +1491,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalFar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalFar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -2168,11 +1504,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                   <Row>
                     <Col xl={15} className="col col-1 pd-left">
-<<<<<<< HEAD
-                      {t("validationReport:projectBoundarySources")}
-=======
                       {t('validationReport:projectBoundarySources')}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     </Col>
                     <Col xl={3} className="col other-cols">
                       <Form.Item
@@ -2180,12 +1512,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -2208,18 +1534,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCL(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCL(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -2230,12 +1549,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -2258,18 +1571,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -2280,12 +1586,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -2308,18 +1608,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalFar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalFar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -2328,11 +1621,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                   <Row>
                     <Col xl={15} className="col col-1 pd-left">
-<<<<<<< HEAD
-                      {t("validationReport:baselineScenario")}
-=======
                       {t('validationReport:baselineScenario')}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     </Col>
                     <Col xl={3} className="col other-cols">
                       <Form.Item
@@ -2340,12 +1629,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -2368,18 +1651,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCL(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCL(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -2390,12 +1666,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -2418,18 +1688,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -2440,12 +1703,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -2468,18 +1725,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalFar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalFar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -2488,11 +1738,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                   <Row>
                     <Col xl={15} className="col col-1 pd-left">
-<<<<<<< HEAD
-                      {t("validationReport:demonstrationOfAdditionality")}
-=======
                       {t('validationReport:demonstrationOfAdditionality')}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     </Col>
                     <Col xl={3} className="col other-cols">
                       <Form.Item
@@ -2500,12 +1746,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -2528,18 +1768,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCL(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCL(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -2550,12 +1783,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -2578,18 +1805,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -2600,12 +1820,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -2628,18 +1842,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalFar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalFar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -2648,11 +1855,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                   <Row>
                     <Col xl={15} className="col col-1 pd-left">
-<<<<<<< HEAD
-                      {t("validationReport:estimationOfEmissionReduction")}
-=======
                       {t('validationReport:estimationOfEmissionReduction')}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     </Col>
                     <Col xl={3} className="col other-cols">
                       <Form.Item
@@ -2660,12 +1863,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -2688,18 +1885,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCL(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCL(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -2710,12 +1900,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -2738,18 +1922,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -2760,12 +1937,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -2788,18 +1959,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalFar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalFar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -2808,11 +1972,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                   <Row>
                     <Col xl={15} className="col col-1 pd-left">
-<<<<<<< HEAD
-                      {t("validationReport:monitoringPlan")}
-=======
                       {t('validationReport:monitoringPlan')}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     </Col>
                     <Col xl={3} className="col other-cols">
                       <Form.Item
@@ -2820,12 +1980,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -2848,18 +2002,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCL(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCL(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -2870,12 +2017,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -2898,18 +2039,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -2920,12 +2054,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -2948,18 +2076,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalFar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalFar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -2968,11 +2089,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                   <Row>
                     <Col xl={15} className="col col-1">
-<<<<<<< HEAD
-                      {t("validationReport:startDateCreditingPeriod")}
-=======
                       {t('validationReport:startDateCreditingPeriod')}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     </Col>
                     <Col xl={3} className="col other-cols">
                       <Form.Item
@@ -2980,12 +2097,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -3008,18 +2119,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCL(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCL(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -3030,12 +2134,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -3058,18 +2156,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -3080,12 +2171,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -3108,18 +2193,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalFar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalFar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -3128,11 +2206,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                   <Row>
                     <Col xl={15} className="col col-1">
-<<<<<<< HEAD
-                      {t("validationReport:environmentImpacts")}
-=======
                       {t('validationReport:environmentImpacts')}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     </Col>
                     <Col xl={3} className="col other-cols">
                       <Form.Item
@@ -3140,12 +2214,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -3168,18 +2236,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCL(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCL(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -3190,12 +2251,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -3218,18 +2273,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -3240,12 +2288,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -3268,18 +2310,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalFar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalFar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -3288,11 +2323,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                   <Row>
                     <Col xl={15} className="col col-1">
-<<<<<<< HEAD
-                      {t("validationReport:localStakeholderConsultation")}
-=======
                       {t('validationReport:localStakeholderConsultation')}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     </Col>
                     <Col xl={3} className="col other-cols">
                       <Form.Item
@@ -3300,12 +2331,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -3328,18 +2353,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCL(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCL(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -3350,12 +2368,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -3378,18 +2390,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -3400,12 +2405,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -3428,18 +2427,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalFar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalFar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -3447,11 +2439,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                   </Row>
                   <Row>
                     <Col xl={15} className="col col-1">
-<<<<<<< HEAD
-                      {t("validationReport:sustainableDevelopment")}
-=======
                       {t('validationReport:sustainableDevelopment')}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     </Col>
                     <Col xl={3} className="col other-cols">
                       <Form.Item
@@ -3459,12 +2447,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -3487,18 +2469,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCL(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCL(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -3509,12 +2484,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -3537,18 +2506,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -3559,12 +2521,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -3587,18 +2543,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalFar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalFar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -3607,11 +2556,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                   <Row>
                     <Col xl={15} className="col col-1">
-<<<<<<< HEAD
-                      {t("validationReport:approval")}
-=======
                       {t('validationReport:approval')}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     </Col>
                     <Col xl={3} className="col other-cols">
                       <Form.Item
@@ -3619,12 +2564,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -3647,18 +2586,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCL(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCL(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -3669,12 +2601,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -3697,18 +2623,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -3719,12 +2638,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -3747,18 +2660,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalFar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalFar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -3767,11 +2673,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                   <Row>
                     <Col xl={15} className="col col-1">
-<<<<<<< HEAD
-                      {t("validationReport:authorization")}
-=======
                       {t('validationReport:authorization')}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     </Col>
                     <Col xl={3} className="col other-cols">
                       <Form.Item
@@ -3779,12 +2681,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -3807,18 +2703,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCL(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCL(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -3829,12 +2718,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -3857,18 +2740,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -3879,12 +2755,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -3907,18 +2777,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalFar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalFar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -3927,11 +2790,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                   <Row>
                     <Col xl={15} className="col col-1">
-<<<<<<< HEAD
-                      {t("validationReport:modalitiesOfCommunication")}
-=======
                       {t('validationReport:modalitiesOfCommunication')}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     </Col>
                     <Col xl={3} className="col other-cols">
                       <Form.Item
@@ -3939,12 +2798,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -3967,18 +2820,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCL(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCL(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -3989,12 +2835,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -4017,18 +2857,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -4039,12 +2872,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -4067,18 +2894,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalFar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalFar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -4087,11 +2907,7 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                   <Row>
                     <Col xl={15} className="col col-1">
-<<<<<<< HEAD
-                      {t("validationReport:globalStakeholderConsultation")}
-=======
                       {t('validationReport:globalStakeholderConsultation')}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                     </Col>
                     <Col xl={3} className="col other-cols">
                       <Form.Item
@@ -4099,12 +2915,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -4127,18 +2937,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCL(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCL(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -4149,12 +2952,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -4177,18 +2974,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -4199,12 +2989,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -4227,18 +3011,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalFar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalFar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -4252,9 +3029,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-=======
                             message: '',
                           },
                           {
@@ -4268,16 +3042,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                                 throw new Error(`${t('validationReport:required')}`);
                               }
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          placeholder={t("validationReport:others")}
-=======
                           placeholder={t('validationReport:others')}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -4288,12 +3057,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -4316,18 +3079,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCL(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCL(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -4338,12 +3094,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -4366,18 +3116,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalCar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalCar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -4388,12 +3131,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -4416,18 +3153,11 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
                         <Input
-<<<<<<< HEAD
-                          onChange={(e) =>
-                            calculateTotalFar(Number(e.target.value))
-                          }
-=======
                           onChange={(e) => calculateTotalFar(Number(e.target.value))}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           disabled={disableFields}
                         />
                       </Form.Item>
@@ -4444,12 +3174,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -4472,7 +3196,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
@@ -4485,12 +3208,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -4513,7 +3230,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
@@ -4526,12 +3242,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                         rules={[
                           {
                             required: true,
-<<<<<<< HEAD
-                            message: "",
-                          },
-                          {
-                            validator: validatePositiveNumber,
-=======
                             message: '',
                           },
                           {
@@ -4551,7 +3261,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
 
                               return Promise.resolve();
                             },
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                           },
                         ]}
                       >
@@ -4563,29 +3272,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
               </div>
               {/* Clarification Table end */}
 
-<<<<<<< HEAD
-              <Row justify={"end"} className="step-actions-end mg-bottom-2">
-                <Button danger size={"large"} onClick={prev} disabled={false}>
-                  {t("validationReport:prev")}
-                </Button>
-                {disableFields ? (
-                  <Button
-                    type="primary"
-                    size={"large"}
-                    disabled={false}
-                    onClick={next}
-                  >
-                    {t("validationReport:next")}
-                  </Button>
-                ) : (
-                  <Button
-                    type="primary"
-                    size={"large"}
-                    disabled={false}
-                    htmlType="submit"
-                  >
-                    {t("validationReport:next")}
-=======
               <Row justify={'end'} className="step-actions-end mg-bottom-2">
                 <Button type="primary" ghost size={'large'} onClick={prev} disabled={false}>
                   {t('validationReport:prev')}
@@ -4597,7 +3283,6 @@ const MeansOfValidation = (props: ValidationStepsProps) => {
                 ) : (
                   <Button type="primary" size={'large'} disabled={false} htmlType="submit">
                     {t('validationReport:next')}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                   </Button>
                 )}
               </Row>

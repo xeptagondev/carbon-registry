@@ -1,27 +1,3 @@
-<<<<<<< HEAD
-import { ValidationStepsProps } from "./StepProps";
-import { Row, Button, Form, Input, Col, Upload, DatePicker } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
-import TextArea from "antd/lib/input/TextArea";
-import { ProcessSteps } from "./StepperComponent";
-import moment from "moment";
-import { fileUploadValueExtract } from "../../Utils/utilityHelper";
-import { FormMode } from "../../Definitions/Enums/formMode.enum";
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-
-const ValidationOpinion = (props: ValidationStepsProps) => {
-  const {
-    prev,
-    next,
-    form,
-    current,
-    t,
-    countries,
-    handleValuesUpdate,
-    disableFields,
-  } = props;
-=======
 import { ValidationStepsProps } from './StepProps';
 import { Row, Button, Form, Input, Col, Upload, DatePicker } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
@@ -35,7 +11,6 @@ import { useLocation } from 'react-router-dom';
 
 const ValidationOpinion = (props: ValidationStepsProps) => {
   const { prev, next, form, current, t, countries, handleValuesUpdate, disableFields } = props;
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
   const maximumImageSize = import.meta.env.VITE_APP_MAXIMUM_FILE_SIZE
     ? parseInt(import.meta.env.VITE_APP_MAXIMUM_FILE_SIZE)
@@ -107,29 +82,6 @@ const ValidationOpinion = (props: ValidationStepsProps) => {
                 <TextArea disabled={disableFields} rows={4} />
               </Form.Item>
 
-<<<<<<< HEAD
-              <Row justify={"end"} className="step-actions-end">
-                <Button danger size={"large"} onClick={prev} disabled={false}>
-                  {t("validationReport:prev")}
-                </Button>
-                {disableFields ? (
-                  <Button
-                    type="primary"
-                    size={"large"}
-                    disabled={false}
-                    onClick={next}
-                  >
-                    {t("validationReport:next")}
-                  </Button>
-                ) : (
-                  <Button
-                    type="primary"
-                    size={"large"}
-                    disabled={false}
-                    htmlType="submit"
-                  >
-                    {t("validationReport:next")}
-=======
               <Row justify={'end'} className="step-actions-end">
                 <Button danger size={'large'} onClick={prev} disabled={false}>
                   {t('validationReport:prev')}
@@ -141,7 +93,6 @@ const ValidationOpinion = (props: ValidationStepsProps) => {
                 ) : (
                   <Button type="primary" size={'large'} disabled={false} htmlType="submit">
                     {t('validationReport:next')}
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
                   </Button>
                 )}
               </Row>

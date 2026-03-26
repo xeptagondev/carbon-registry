@@ -118,15 +118,9 @@ export const CompanyProfileComponent = (props: any) => {
       // const response: any = await put(`organisation/suspend?id=${companyDetails.companyId}`, {
       //   remarks: remarks,
       // });
-<<<<<<< HEAD
-      console.log('Deauthorisation company id', companyDetails.companyId);
-      const response: any = await put(API_PATHS.ORG_SUSPEND(companyDetails.companyId), {
-        remarks: remarks,
-=======
       const response: any = await post(API_PATHS.ORG_CHANGE_STATUS, {
         id: companyDetails.companyId,
         state: '0',
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       });
       setOpenDeauthorisationModal(false);
       message.open({
@@ -149,14 +143,9 @@ export const CompanyProfileComponent = (props: any) => {
       // const response: any = await put(`organisation/activate?id=${companyDetails.companyId}`, {
       //   remarks: remarks,
       // });
-<<<<<<< HEAD
-      const response: any = await put(API_PATHS.ORG_REACTIVATE(companyDetails.companyId), {
-        remarks: remarks,
-=======
       const response: any = await post(API_PATHS.ORG_CHANGE_STATUS, {
         id: companyDetails.companyId,
         state: '1',
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       });
       setOpenReactivateModal(false);
       message.open({

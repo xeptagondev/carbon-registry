@@ -1,12 +1,6 @@
-<<<<<<< HEAD
-@use "../../Styles/colors.addProgramme.scss";
-@use "../../Styles/colors.role.scss" as colors2;
-@use "../../Styles/variables.scss";
-=======
 @import '../../Styles/colors.addProgramme.scss';
 @import '../../Styles/colors.role.scss';
 @import '../../Styles/variables.scss';
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 
 .to-lable {
   text-align: center;
@@ -26,31 +20,19 @@
     .main {
       font-size: 1.25rem;
       font-weight: 500;
-<<<<<<< HEAD
-      color: variables.$primary-color;
-=======
       color: $primary-color;
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     }
 
     .sub {
       font-size: 0.8rem;
-<<<<<<< HEAD
-      color: colors.$title-sub;
-=======
       color: $title-sub;
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     }
   }
 
   .forms-container {
     display: flex;
     flex-direction: column;
-<<<<<<< HEAD
-    background-color: colors.$common-form-white;
-=======
     background-color: $common-form-white;
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     margin: 1rem 0 1rem 0;
     border-radius: 10px;
     padding: 2.5rem 1.5rem 2.5rem 1.5rem;
@@ -80,11 +62,7 @@
     width: 50%;
 
     .icon-color {
-<<<<<<< HEAD
-      color: variables.$primary-color !important;
-=======
       color: $primary-color !important;
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     }
 
     .ant-upload-list {
@@ -128,28 +106,13 @@
   }
   .custom-label {
     .ant-form-item-label
-<<<<<<< HEAD
-      > label.ant-form-item-required:not(
-        .ant-form-item-required-mark-optional
-      )::before {
-=======
       > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
       margin-bottom: 10px;
     }
   }
 
-<<<<<<< HEAD
-  .ant-input-status-error:not(.ant-input-disabled):not(
-      .ant-input-borderless
-    ).ant-input,
-  .ant-input-status-error:not(.ant-input-disabled):not(
-      .ant-input-borderless
-    ).ant-input:hover {
-=======
   .ant-input-status-error:not(.ant-input-disabled):not(.ant-input-borderless).ant-input,
   .ant-input-status-error:not(.ant-input-disabled):not(.ant-input-borderless).ant-input:hover {
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
     border-color: #ff4d4f !important;
   }
 
@@ -159,11 +122,7 @@
   }
 
   .ant-upload-list-item-name {
-<<<<<<< HEAD
-    color: variables.$primary-color;
-=======
     color: $primary-color;
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   }
 
   .step-actions {
@@ -184,14 +143,11 @@
 
     // }
   }
-<<<<<<< HEAD
-=======
   .step-form-label {
     text-align: center;
     color: rgba(58, 53, 65, 0.58);
     font-weight: bold;
   }
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
 }
 
 .stepper-title-container {
@@ -205,21 +161,13 @@
     font-size: 2.2rem;
     font-weight: 800;
     margin-right: 0.4rem;
-<<<<<<< HEAD
-    color: colors.$steps-count;
-=======
     color: $steps-count;
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   }
 
   .title {
     font-size: 1rem;
     font-weight: 600;
-<<<<<<< HEAD
-    color: colors.$steps-title;
-=======
     color: $steps-title;
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   }
 }
 .projectParticipantsTable {
@@ -241,15 +189,11 @@
     width: 20%;
     padding: 10px 20px;
   }
-<<<<<<< HEAD
-
-=======
   .bold-header {
     display: flex;
     flex-direction: row;
     font-weight: bold;
   }
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
   .header {
     display: flex;
     flex-direction: row;
@@ -335,10 +279,4 @@
 //     }
 //   }
 // }
-<<<<<<< HEAD
-/* Hides the default required asterisk in Ant Design Form.Item */
-.no-required-mark .ant-form-item-required::before {
-  display: none !important;
-}
-=======
->>>>>>> 1db9d126a020558b324be754ac861a2b937fa63f
+
