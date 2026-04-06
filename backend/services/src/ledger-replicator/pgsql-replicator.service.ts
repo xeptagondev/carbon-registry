@@ -6,12 +6,13 @@ import { LedgerReplicatorInterface } from "./replicator-interface.service";
 import { Pool } from "pg";
 import { plainToClass } from "class-transformer";
 import { ProcessEventService } from "./process.event.service";
-import { Counter } from "../entities/counter.entity";
-import { CounterType } from "../util/counter.type.enum";
-import { Programme } from "../entities/programme.entity";
-import { CreditOverall } from "../entities/credit.overall.entity";
+import { Counter } from "@app/shared/entities/counter.entity";
+import { CounterType } from "@app/shared/util/counter.type.enum";
+import { Programme } from "@app/shared/entities/programme.entity";
+import { CreditOverall } from "@app/shared/entities/credit.overall.entity";
 import { DataImporterService } from "../data-importer/data-importer.service";
-import { ProgrammeSl } from "../entities/programmeSl.entity";
+import { ProjectEntity } from "@app/shared/entities/projects.entity";
+import { CreditBlocksEntity } from "@app/shared/entities/credit.blocks.entity";
 
 @Injectable()
 export class PgSqlReplicatorService implements LedgerReplicatorInterface {
@@ -42,8 +43,15 @@ export class PgSqlReplicatorService implements LedgerReplicatorInterface {
 
     const replicateActions = async () => {
       const tableName = this.configService.get<string>("ledger.table");
-      const companyTableName = this.configService.get<string>("ledger.companyTable");
-      const programmeSlTableName = this.configService.get<string>("ledger.programmeSlTable");
+      const companyTableName = this.configService.get<string>(
+        "ledger.companyTable"
+      );
+      const projectTableName = this.configService.get<string>(
+        "ledger.projectTable"
+      );
+      const creditBlocksTableName = this.configService.get<string>(
+        "ledger.creditBlocksTable"
+      );
 
       try {
         const seqObj = await this.counterRepo.findOneBy({
@@ -66,10 +74,16 @@ export class PgSqlReplicatorService implements LedgerReplicatorInterface {
           let newSeq = 0;
           for (const row of results.rows) {
             const data = row.data;
-            const programme: Programme = plainToClass(Programme, JSON.parse(JSON.stringify(data)));
+            const programme: Programme = plainToClass(
+              Programme,
+              JSON.parse(JSON.stringify(data))
+            );
             await this.eventProcessor.process(programme, undefined, 0, 0);
             newSeq = row.hash;
-            await this.counterRepo.save({ id: CounterType.REPLICATE_SEQ, counter: newSeq });
+            await this.counterRepo.save({
+              id: CounterType.REPLICATE_SEQ,
+              counter: newSeq,
+            });
           }
         }
         retryCountTable = 0;
@@ -112,7 +126,10 @@ export class PgSqlReplicatorService implements LedgerReplicatorInterface {
               row.hash,
               new Date(row.meta.txTime).getTime()
             );
-            await this.counterRepo.save({ id: CounterType.REPLICATE_SEQ_COMP, counter: newSeq });
+            await this.counterRepo.save({
+              id: CounterType.REPLICATE_SEQ_COMP,
+              counter: newSeq,
+            });
           }
         }
         retryCountCTable = 0;
@@ -129,7 +146,7 @@ export class PgSqlReplicatorService implements LedgerReplicatorInterface {
 
       try {
         const seqObj = await this.counterRepo.findOneBy({
-          id: CounterType.REPLICATE_SEQ_PROGRAMME_SL,
+          id: CounterType.PROJECT_REPLICATE_SEQ,
         });
 
         let lastSeq = 0;
@@ -137,7 +154,7 @@ export class PgSqlReplicatorService implements LedgerReplicatorInterface {
           lastSeq = seqObj.counter;
         }
 
-        const sql = `select data, hash from ${programmeSlTableName} where hash > $1 order by hash`;
+        const sql = `select data, hash from ${projectTableName} where hash > $1 order by hash`;
         const results = await dbCon.query(sql, [lastSeq]);
         this.logger.log(`Query for new data ${sql} ${lastSeq}`);
         this.logger.log(
@@ -149,23 +166,77 @@ export class PgSqlReplicatorService implements LedgerReplicatorInterface {
           for (const row of results.rows) {
             const data = row.data;
             console.log("replicator data:", data);
-            const programme: ProgrammeSl = plainToClass(
-              ProgrammeSl,
+            const project: ProjectEntity = plainToClass(
+              ProjectEntity,
               JSON.parse(JSON.stringify(data))
             );
 
-            console.log("replicator data after conversion", programme);
-            await this.eventProcessor.processProgrammeSl(programme);
+            console.log("replicator data after conversion", project);
+            await this.eventProcessor.processProject(project);
             newSeq = row.hash;
             await this.counterRepo.save({
-              id: CounterType.REPLICATE_SEQ_PROGRAMME_SL,
+              id: CounterType.PROJECT_REPLICATE_SEQ,
               counter: newSeq,
             });
           }
         }
         retryCountTable = 0;
       } catch (exception) {
-        this.logger.log(`Failed Executing Ops for : ${programmeSlTableName}`, exception);
+        this.logger.log(
+          `Failed Executing Ops for : ${projectTableName}`,
+          exception
+        );
+        if (retryCountTable > retryLimit) {
+          this.logger.log("Ledger Replicator terminated");
+          return;
+        } else {
+          retryCountTable += 1; //ref
+          replicateActions;
+        }
+      }
+
+      try {
+        const seqObj = await this.counterRepo.findOneBy({
+          id: CounterType.CREDIT_BLOCKS_REPLICATE_SEQ,
+        });
+
+        let lastSeq = 0;
+        if (seqObj) {
+          lastSeq = seqObj.counter;
+        }
+
+        const sql = `select data, hash from ${creditBlocksTableName} where hash > $1 order by hash`;
+        const results = await dbCon.query(sql, [lastSeq]);
+        this.logger.log(`Query for new data ${sql} ${lastSeq}`);
+        this.logger.log(
+          `Periodical replicate check - last seq:${lastSeq} new events: ${results?.rows?.length}`
+        );
+
+        if (results) {
+          let newSeq = 0;
+          for (const row of results.rows) {
+            const data = row.data;
+            console.log("replicator data:", data);
+            const creditBlock: CreditBlocksEntity = plainToClass(
+              CreditBlocksEntity,
+              JSON.parse(JSON.stringify(data))
+            );
+
+            console.log("replicator data after conversion", creditBlock);
+            await this.eventProcessor.processCreditBlock(creditBlock);
+            newSeq = row.hash;
+            await this.counterRepo.save({
+              id: CounterType.CREDIT_BLOCKS_REPLICATE_SEQ,
+              counter: newSeq,
+            });
+          }
+        }
+        retryCountTable = 0;
+      } catch (exception) {
+        this.logger.log(
+          `Failed Executing Ops for : ${creditBlocksTableName}`,
+          exception
+        );
         if (retryCountTable > retryLimit) {
           this.logger.log("Ledger Replicator terminated");
           return;
@@ -189,8 +260,13 @@ export class PgSqlReplicatorService implements LedgerReplicatorInterface {
           lastDate = lastItmoseq.counter;
         }
         if (today > lastDate) {
-          await this.dataImportService.importData({ importTypes: "ITMO_SYSTEM" });
-          await this.counterRepo.save({ id: CounterType.ITMO_SYSTEM, counter: today });
+          await this.dataImportService.importData({
+            importTypes: "ITMO_SYSTEM",
+          });
+          await this.counterRepo.save({
+            id: CounterType.ITMO_SYSTEM,
+            counter: today,
+          });
         }
       }
       setTimeout(replicateActions, 1000);

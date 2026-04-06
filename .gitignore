@@ -10,6 +10,9 @@ backend/services/.env
 ./data/*
 !./data/README.md
 web/src/Assets/.DS_Store
-web/public/locales/*
 .yalc
 yalc.lock
+backend/services/*.pdf
+backend/services/*.csv
+backend/services/*.xlsx
+backend/services/public/*

@@ -1,6 +1,6 @@
-@import '../../Styles/colors.addProgramme.scss';
-@import '../../Styles/colors.role.scss';
-@import '../../Styles/variables.scss';
+@use '../../Styles/colors.addProgramme.scss';
+@use '../../Styles/colors.role.scss' as colors2;
+@use '../../Styles/variables.scss';
 
 .validation-form-container {
   display: flex;
@@ -16,12 +16,12 @@
     .main {
       font-size: 1.25rem;
       font-weight: 500;
-      color: $primary-color;
+      color: variables.$primary-color;
     }
 
     .sub {
       font-size: 0.8rem;
-      color: $title-sub;
+      color: colors.$title-sub;
     }
 
     .version-selector {
@@ -57,7 +57,7 @@
   .forms-container {
     display: flex;
     flex-direction: column;
-    background-color: $common-form-white;
+    background-color: colors.$common-form-white;
     margin: 1rem 0 1rem 0;
     border-radius: 10px;
     padding: 2.5rem 1.5rem 2.5rem 1.5rem;
@@ -686,7 +686,7 @@
   }
 
   .ant-upload-list-item-name {
-    color: $primary-color;
+    color: variables.$primary-color;
   }
 
   .step-actions {

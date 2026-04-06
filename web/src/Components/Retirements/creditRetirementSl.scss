@@ -41,7 +41,7 @@
   .transfer-freeze-icon {
     float: right;
     .pause-circle {
-      color: $error-color;
+      color: variables.$error-color;
     }
     .play-circle {
       color: rgba(#76c327, 0.6);

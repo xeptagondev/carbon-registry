@@ -77,6 +77,12 @@ body {
   width: 99% !important;
 }
 
+.ant-table-pagination {
+  display: flex;
+  justify-content: flex-end;
+  font-weight: 400;
+}
+
 .ant-tooltip-inner {
   border-radius: 5px !important;
   background-color: variables.$primary-color !important;
@@ -227,7 +233,9 @@ body {
 
 .ant-table-thead
   > tr
-  > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
+  > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not(
+    [colspan]
+  )::before {
   background-color: transparent !important;
 }
 
@@ -272,7 +280,7 @@ body {
 }
 
 .ant-radio-wrapper {
-  font-family: 'Inter';
+  font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 0.875rem;
@@ -641,7 +649,7 @@ body {
 }
 
 .filter-section input {
-  font-family: 'Inter';
+  font-family: "Inter";
   font-size: 0.8rem !important;
 }
 

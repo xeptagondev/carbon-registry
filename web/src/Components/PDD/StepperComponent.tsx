@@ -5,7 +5,6 @@ import './PDD.scss';
 
 import { useForm } from 'antd/lib/form/Form';
 import { useConnection } from '../../Context/ConnectionContext/connectionContext';
-import EligibilityCriteria from './EligibilityCriteria';
 import ApplicationOfMethodology from './ApplicationOfMethodology';
 import QuantificationOfEmissions from './QuantificationOfEmissions';
 
@@ -13,7 +12,6 @@ import DescriptionOfProjectActivity from './DescriptionOfProjectActivity';
 import EnvironmentImpacts from './EnvironmentImpacts';
 import Appendix from './Appendix';
 import LocalStakeholderConsultation from './LocalStakeholderConsultation';
-import moment from 'moment';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import {
   appendixDataMapToFields,
@@ -21,7 +19,6 @@ import {
   approvalAndAuthorizationDataMapToFields,
   BasicInformationDataMapToFields,
   descriptionOfProjectActivityDataMapToFields,
-  eligibilityCriteriaDataMapToFields,
   environmentImpactsDataMaptoFields,
   localStakeholderConsultationDataMaptoFields,
   monitoringDataMapToFields,
@@ -100,7 +97,6 @@ const StepperComponent = (props: any) => {
   };
 
   const [countries, setCountries] = useState<[]>([]);
-  const [projectCategory, setProjectCategory] = useState<string>('');
 
   const { get, post } = useConnection();
 
@@ -290,7 +286,11 @@ const StepperComponent = (props: any) => {
           duration: 4,
           style: { textAlign: 'right', marginRight: 15, marginTop: 10 },
         });
-        navigateToDetailsPage();
+        
+        setTimeout(() => {
+          navigateToDetailsPage();
+          setLoading(false);
+        }, defaultTimeout)
       }
     } catch (error: any) {
       message.open({
@@ -299,7 +299,6 @@ const StepperComponent = (props: any) => {
         duration: 4,
         style: { textAlign: 'right', marginRight: 15, marginTop: 10 },
       });
-    } finally {
       setLoading(false);
     }
   };

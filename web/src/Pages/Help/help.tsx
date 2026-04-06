@@ -11,15 +11,15 @@ const CarbonHelp = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (localStorage.getItem('i18nextLng')!.length > 2) {
-      i18next.changeLanguage('en');
+    if (localStorage.getItem("i18nextLng")!.length > 2) {
+      i18next.changeLanguage("en");
     }
   }, []);
   return (
     <div className="code-container">
       <Row>
         <Col md={24} lg={24}>
-          <div onClick={() => navigate('/')} className="code-header-container">
+          <div onClick={() => navigate("/")} className="code-header-container">
             <div className="logo">
               <img src={sliderLogo} alt="slider-logo" />
             </div>
@@ -28,7 +28,6 @@ const CarbonHelp = () => {
                 <div className="title">{'IMPACT'}</div>
                 <div className="title-sub">{'REGISTRY'}</div>
               </div>
-              <div className="country-name">{process.env.REACT_APP_COUNTRY_NAME || 'CountryX'}</div>
             </div>
           </div>
         </Col>

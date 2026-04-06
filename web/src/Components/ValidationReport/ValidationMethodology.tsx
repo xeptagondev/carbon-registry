@@ -1,4 +1,4 @@
-import { ValidationStepsProps } from './StepProps';
+import { ValidationStepsProps } from "./StepProps";
 import {
   Row,
   Button,

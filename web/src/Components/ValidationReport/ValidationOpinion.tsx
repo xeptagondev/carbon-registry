@@ -12,8 +12,8 @@ import { useLocation } from 'react-router-dom';
 const ValidationOpinion = (props: ValidationStepsProps) => {
   const { prev, next, form, current, t, countries, handleValuesUpdate, disableFields } = props;
 
-  const maximumImageSize = process.env.REACT_APP_MAXIMUM_FILE_SIZE
-    ? parseInt(process.env.REACT_APP_MAXIMUM_FILE_SIZE)
+  const maximumImageSize = import.meta.env.VITE_APP_MAXIMUM_FILE_SIZE
+    ? parseInt(import.meta.env.VITE_APP_MAXIMUM_FILE_SIZE)
     : 5000000;
 
   const normFile = (e: any) => {
@@ -24,8 +24,12 @@ const ValidationOpinion = (props: ValidationStepsProps) => {
   };
 
   const onFinish = async (values: any) => {
-    const sig1 = (await fileUploadValueExtract(values, 'validator1Signature'))[0];
-    const sig2 = (await fileUploadValueExtract(values, 'validator2Signature'))[0];
+    const sig1 = (
+      await fileUploadValueExtract(values, "validator1Signature")
+    )[0];
+    const sig2 = (
+      await fileUploadValueExtract(values, "validator2Signature")
+    )[0];
 
     const validationOpinionFormValues: any = {
       opinion: values?.opinion,
@@ -64,12 +68,14 @@ const ValidationOpinion = (props: ValidationStepsProps) => {
             >
               <Form.Item
                 className="full-width-form-item"
-                label={`${t('validationReport:validationOpinion')}`}
+                label={`${t("validationReport:validationOpinion")}`}
                 name="opinion"
                 rules={[
                   {
                     required: true,
-                    message: `${t('validationReport:validationOpinion')} ${t('isRequired')}`,
+                    message: `${t("validationReport:validationOpinion")} ${t(
+                      "isRequired"
+                    )}`,
                   },
                 ]}
               >

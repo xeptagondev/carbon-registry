@@ -5,7 +5,7 @@ import { ROUTES } from '../../Config/uiRoutingConfig';
 
 const AddNewCompany = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation(['addCompany']);
+  const { t } = useTranslation(["addCompany"]);
 
   const maximumImageSize = process.env.REACT_APP_MAXIMUM_FILE_SIZE
     ? parseInt(process.env.REACT_APP_MAXIMUM_FILE_SIZE)

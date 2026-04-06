@@ -6,73 +6,61 @@ import {
   Post,
   Body,
   Query,
-  Req,
-  HttpException,
-  HttpStatus,
   Delete,
   Put,
 } from "@nestjs/common";
 
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
-import { ApiKeyJwtAuthGuard } from "../auth/guards/api-jwt-key.guard";
-import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
-import { Action } from "../casl/action.enum";
-import { CaslAbilityFactory } from "../casl/casl-ability.factory";
-import { CheckPolicies } from "../casl/policy.decorator";
-import { PoliciesGuard, PoliciesGuardEx } from "../casl/policy.guard";
-import { Role } from "../casl/role.enum";
-import { DataExportQueryDto } from "../dto/data.export.query.dto";
-import { PasswordUpdateDto } from "../dto/password.update.dto";
-import { QueryDto } from "../dto/query.dto";
-import { UserDto } from "../dto/user.dto";
-import { UserUpdateDto } from "../dto/user.update.dto";
-import { User } from "../entities/user.entity";
-import { UserService } from "../user/user.service";
-import { HelperService } from "../util/helpers.service";
+import { ApiKeyJwtAuthGuard } from "@app/shared/auth/guards/api-jwt-key.guard";
+import { JwtAuthGuard } from "@app/shared/auth/guards/jwt-auth.guard";
+import { Action } from "@app/shared/casl/action.enum";
+import { CaslAbilityFactory } from "@app/shared/casl/casl-ability.factory";
+import { CheckPolicies } from "@app/shared/casl/policy.decorator";
+import { PoliciesGuard, PoliciesGuardEx } from "@app/shared/casl/policy.guard";
+import { DataExportQueryDto } from "@app/shared/dto/data.export.query.dto";
+import { PasswordUpdateDto } from "@app/shared/dto/password.update.dto";
+import { QueryDto } from "@app/shared/dto/query.dto";
+import { UserDto } from "@app/shared/dto/user.dto";
+import { UserUpdateDto } from "@app/shared/dto/user.update.dto";
+import { User } from "@app/shared/entities/user.entity";
+import { UserService } from "@app/shared/user/user.service";
+import { HelperService } from "@app/shared/util/helpers.service";
 
 @ApiTags("User")
 @ApiBearerAuth()
 @Controller("user")
 export class UserController {
-  constructor(
-    private readonly userService: UserService,
-    private caslAbilityFactory: CaslAbilityFactory,
-    private helperService: HelperService
-  ) {}
+  constructor(private readonly userService: UserService) {}
 
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Get("profile")
   async getProfile(@Request() req) {
-    return await this.userService.getUserProfileDetails(req.user.id);
+    return await this.userService.getUserProfileDetails(req.user.id, true);
   }
 
   @ApiBearerAuth("api_key")
   @ApiBearerAuth()
   @UseGuards(ApiKeyJwtAuthGuard, PoliciesGuard)
-  @CheckPolicies((ability, body) => ability.can(Action.Create, Object.assign(new User(), body)))
+  @CheckPolicies((ability, body) =>
+    ability.can(Action.Create, Object.assign(new User(), body))
+  )
   @Post("add")
   addUser(@Body() user: UserDto, @Request() req) {
-    if (user.role == Role.Root) {
-      throw new HttpException(
-        this.helperService.formatReqMessagesString("user.rootCreatesRoot", []),
-        HttpStatus.FORBIDDEN
-      );
-    }
     global.baseUrl = `${req.protocol}://${req.get("Host")}`;
-    return this.userService.create(user, req.user.companyId, req.user.companyRole);
+    return this.userService.create(
+      user,
+      req.user.companyId,
+      req.user.companyRole,
+      false,
+      req.user.role
+    );
   }
 
   @Post("register")
   registerUser(@Body() user: UserDto, @Request() req) {
-    if (user.role == Role.Root) {
-      throw new HttpException(
-        this.helperService.formatReqMessagesString("user.rootCreatesRoot", []),
-        HttpStatus.FORBIDDEN
-      );
-    }
     global.baseUrl = `${req.protocol}://${req.get("Host")}`;
-    return this.userService.create(user, null, user.company.companyRole, true);
+    return this.userService.create(user, null, user.company?.companyRole, true);
   }
 
   @ApiBearerAuth()
@@ -81,7 +69,7 @@ export class UserController {
   @Put("update")
   updateUser(@Body() user: UserUpdateDto, @Request() req) {
     global.baseUrl = `${req.protocol}://${req.get("Host")}`;
-    return this.userService.update(user, req.abilityCondition);
+    return this.userService.update(user, req.abilityCondition, req.user);
   }
 
   @ApiBearerAuth()
@@ -89,7 +77,11 @@ export class UserController {
   // @CheckPolicies((ability, body) => ability.can(Action.Update, Object.assign(new User(), body)))
   @Put("resetPassword")
   resetPassword(@Body() reset: PasswordUpdateDto, @Request() req) {
-    return this.userService.resetPassword(req.user.id, reset, req.abilityCondition);
+    return this.userService.resetPassword(
+      req.user.id,
+      reset,
+      req.abilityCondition
+    );
   }
 
   @ApiBearerAuth()
@@ -104,7 +96,7 @@ export class UserController {
   @UseGuards(JwtAuthGuard, PoliciesGuardEx(true, Action.Read, User, true))
   @Post("query")
   queryUser(@Body() query: QueryDto, @Request() req) {
-    return this.userService.query(query, req.abilityCondition);
+    return this.userService.query(query, req.abilityCondition, req.user);
   }
 
   @ApiBearerAuth()
@@ -123,6 +115,6 @@ export class UserController {
   @UseGuards(JwtAuthGuard, PoliciesGuardEx(true, Action.Delete, User))
   @Delete("delete")
   deleteUser(@Query("userId") userId: number, @Request() req) {
-    return this.userService.delete(userId, req.abilityCondition);
+    return this.userService.delete(userId, req.abilityCondition, req.user);
   }
 }

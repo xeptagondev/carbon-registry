@@ -36,9 +36,9 @@ export interface CreditRetirementSlRequestFormProps {
   translator: any;
 }
 
-export const CreditRetirementSlRequestForm: FC<CreditRetirementSlRequestFormProps> = (
-  props: CreditRetirementSlRequestFormProps
-) => {
+export const CreditRetirementSlRequestForm: FC<
+  CreditRetirementSlRequestFormProps
+> = (props: CreditRetirementSlRequestFormProps) => {
   const {
     programme,
     onFinish,
@@ -55,12 +55,12 @@ export const CreditRetirementSlRequestForm: FC<CreditRetirementSlRequestFormProp
   const t = translator.t;
   const [popupError, setPopupError] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(false);
-  const [type, setType] = useState<string>('');
+  const [type, setType] = useState<string>("");
   const [form] = Form.useForm();
 
   const [currentSum, setCurrentSum] = useState<number>(0);
-  const [countryList, setCountryList] = useState<SelectProps['options']>([]);
-  const [companyList, setCompanyList] = useState<SelectProps['options']>([]);
+  const [countryList, setCountryList] = useState<SelectProps["options"]>([]);
+  const [companyList, setCompanyList] = useState<SelectProps["options"]>([]);
   const [value, setValue] = useState<string>();
   const [checked, setChecked] = useState<boolean>(false);
   const [govData, setGovData] = useState<any>();
@@ -75,8 +75,8 @@ export const CreditRetirementSlRequestForm: FC<CreditRetirementSlRequestFormProp
         size: 100,
         filterAnd: [
           {
-            key: 'companyRole',
-            operation: '=',
+            key: "companyRole",
+            operation: "=",
             value: CompanyRole.GOVERNMENT,
           },
         ],
@@ -86,7 +86,7 @@ export const CreditRetirementSlRequestForm: FC<CreditRetirementSlRequestFormProp
         return response?.data[0];
       }
     } catch (error: any) {
-      console.log('Error in getting government data', error);
+      console.log("Error in getting government data", error);
     } finally {
       setLoading(false);
     }
@@ -99,19 +99,19 @@ export const CreditRetirementSlRequestForm: FC<CreditRetirementSlRequestFormProp
         size: 50,
         filterAnd: [
           {
-            key: 'name',
-            operation: 'like',
-            value: '%' + newValue + '%',
+            key: "name",
+            operation: "like",
+            value: "%" + newValue + "%",
           },
           {
-            key: 'companyRole',
-            operation: '=',
+            key: "companyRole",
+            operation: "=",
             value: CompanyRole.PROGRAMME_DEVELOPER,
           },
         ],
         sort: {
-          key: 'name',
-          order: 'ASC',
+          key: "name",
+          order: "ASC",
         },
       });
       setCompanyList(
@@ -123,7 +123,8 @@ export const CreditRetirementSlRequestForm: FC<CreditRetirementSlRequestFormProp
           }))
           .filter((d: any) => {
             return (
-              d.value !== programme.companyId && parseInt(d.state) === CompanyState.ACTIVE.valueOf()
+              d.value !== programme.companyId &&
+              parseInt(d.state) === CompanyState.ACTIVE.valueOf()
             );
           })
       );
@@ -143,9 +144,9 @@ export const CreditRetirementSlRequestForm: FC<CreditRetirementSlRequestFormProp
   const programmeCredit = programme.creditBalance ? programme.creditBalance : 0;
 
   useEffect(() => {
-    handleSearch('');
+    handleSearch("");
     if (hideType) {
-      setType('0');
+      setType("0");
     }
     2;
     getGovernmentDetails();
@@ -195,7 +196,11 @@ export const CreditRetirementSlRequestForm: FC<CreditRetirementSlRequestFormProp
         <>
           <Row>
             <Col span={24}>
-              <Form.Item className="remarks-label" label={t('view:programme')} name="programme">
+              <Form.Item
+                className="remarks-label"
+                label={t("view:programme")}
+                name="programme"
+              >
                 <Input placeholder={programme.title} disabled />
               </Form.Item>
             </Col>
@@ -207,19 +212,19 @@ export const CreditRetirementSlRequestForm: FC<CreditRetirementSlRequestFormProp
               <Col span={24}>
                 <Form.Item
                   className="remarks-label"
-                  label={t('view:to')}
+                  label={t("view:to")}
                   name="toCompanyId"
                   rules={[
                     {
                       required: true,
-                      message: 'Required!',
+                      message: "Required!",
                     },
                   ]}
                 >
                   <Select
                     showSearch
                     // disabled={disableToCompany}
-                    placeholder={t('view:searchCompany')}
+                    placeholder={t("view:searchCompany")}
                     showArrow={true}
                     filterOption={false}
                     onSearch={handleSearch}
@@ -234,36 +239,41 @@ export const CreditRetirementSlRequestForm: FC<CreditRetirementSlRequestFormProp
         )}
         <Row>
           <Col lg={11} md={24}>
-            <div className="label">{`${t('view:creditsToRetire')} (${creditUnit})`}</div>
+            <div className="label">{`${t(
+              "view:creditsToRetire"
+            )} (${creditUnit})`}</div>
           </Col>
           <Col lg={6} md={12}>
             <Form.Item
               className="popup-credit-input"
-              name={'creditAmount'}
+              name={"creditAmount"}
               rules={[
                 {
                   pattern: /^[1-9]\d*$/,
-                  message: 'Credit Should be a positive number',
+                  message: "Credit Should be a positive number",
                 },
                 {
                   required: true,
-                  message: 'Required!',
+                  message: "Required!",
                 },
                 ({ getFieldValue }) => ({
                   validator(rule, v) {
                     if (
-                      getFieldValue('creditAmount') &&
-                      parseFloat(getFieldValue('creditAmount')) > programmeCredit
+                      getFieldValue("creditAmount") &&
+                      parseFloat(getFieldValue("creditAmount")) >
+                        programmeCredit
                     ) {
                       // eslint-disable-next-line prefer-promise-reject-errors
-                      return Promise.reject('Retire Amount > Credit Balance');
+                      return Promise.reject("Retire Amount > Credit Balance");
                     }
                     if (
-                      getFieldValue('creditAmount') &&
-                      parseFloat(getFieldValue('creditAmount')) > companyCredit
+                      getFieldValue("creditAmount") &&
+                      parseFloat(getFieldValue("creditAmount")) > companyCredit
                     ) {
                       // eslint-disable-next-line prefer-promise-reject-errors
-                      return Promise.reject('Retire Amount > Organisation Credit Balance');
+                      return Promise.reject(
+                        "Retire Amount > Organisation Credit Balance"
+                      );
                     }
                     return Promise.resolve();
                   },
@@ -282,7 +292,7 @@ export const CreditRetirementSlRequestForm: FC<CreditRetirementSlRequestFormProp
             </Form.Item>
           </Col>
           <Col lg={1} md={1} className="seperator">
-            {'/'}
+            {"/"}
           </Col>
           <Col lg={6} md={12}>
             <Form.Item className="popup-credit-input">
@@ -298,14 +308,15 @@ export const CreditRetirementSlRequestForm: FC<CreditRetirementSlRequestFormProp
               name="comment"
               rules={[
                 {
-                  required: programme.purposeOfCreditDevelopment === CreditType.TRACK_2,
-                  message: 'Required!',
+                  required:
+                    programme.purposeOfCreditDevelopment === CreditType.TRACK_2,
+                  message: "Required!",
                 },
                 ({ getFieldValue }) => ({
                   validator(rule, v) {
-                    if (v !== undefined && v !== '' && v.trim() === '') {
+                    if (v !== undefined && v !== "" && v.trim() === "") {
                       // eslint-disable-next-line prefer-promise-reject-errors
-                      return Promise.reject('Required field');
+                      return Promise.reject("Required field");
                     }
                     return Promise.resolve();
                   },
@@ -318,8 +329,16 @@ export const CreditRetirementSlRequestForm: FC<CreditRetirementSlRequestFormProp
         </Row>
         <Row>
           <Col span={24}>
-            <Form.Item className="text-left" valuePropName="checked" label="" name="confirm">
-              <Checkbox className="label" onChange={(v) => setChecked(v.target.checked)}>
+            <Form.Item
+              className="text-left"
+              valuePropName="checked"
+              label=""
+              name="confirm"
+            >
+              <Checkbox
+                className="label"
+                onChange={(v) => setChecked(v.target.checked)}
+              >
                 {programme.purposeOfCreditDevelopment === CreditType.TRACK_1
                   ? t('view:confirmTransferSl', { countryName: countryName })
                   : t('view:confirmRetireSl', { countryName: countryName })}
@@ -327,10 +346,14 @@ export const CreditRetirementSlRequestForm: FC<CreditRetirementSlRequestFormProp
             </Form.Item>
           </Col>
         </Row>
-        {popupError ? <Alert className="error" message={popupError} type="error" showIcon /> : ''}
+        {popupError ? (
+          <Alert className="error" message={popupError} type="error" showIcon />
+        ) : (
+          ""
+        )}
         <Form.Item className="footer">
           <Button htmlType="button" onClick={onCancel}>
-            {t('view:cancel')}
+            {t("view:cancel")}
           </Button>
           <Button
             className="mg-left-2"

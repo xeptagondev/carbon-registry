@@ -37,11 +37,12 @@ services:
       rootEmail: <ROOT EMAIL>
       cfAdminEmail: <CLIMATE FUND ADMIN EMAIL>
       exComAdminEmail: <EXCECUTIVE COMMITTEE ADMIN EMAIL>
-      systemCountryCode: "ZW"
-      systemCountryName: "Zimbabwe"
-      systemContinentName: "Zimbabwe"
+      systemCountryCode: "NG"
+      systemCountryName: "CountryX"
+      systemContinentName: "CountryX"
       name: "Antactic Region"
-      climateFundName: "Zimbabwe Climate Fund"
+      climateFundName: "CountryX Climate Fund"
+      countryClimateFundName: "CountryX Climate Fund (Pvt) Ltd"
       exComName: "Executive Committee"
       logoBase64: "sss"
       IS_EMAIL_DISABLED: "true"
@@ -106,7 +107,7 @@ services:
       RUN_MODULE: replicator,async-operations-handler
       LOCATION_SERVICE: OPENSTREET
       SMTP_ENDPOINT: email-smtp.us-east-1.amazonaws.com
-      SMTP_USERNAME: AKIAUMXKTXDJEQ555F4J
+      SMTP_USERNAME: ***REMOVED***
       SMTP_PASSWORD: ""
       IS_EMAIL_DISABLED: "true"
       DISABLE_LOW_PRIORITY_EMAIL: "true"

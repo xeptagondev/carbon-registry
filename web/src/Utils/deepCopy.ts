@@ -1,6 +1,6 @@
 export function deepCopy(obj: any) {
   // Check if the input is a primitive value or null
-  if (obj === null || typeof obj !== 'object') {
+  if (obj === null || typeof obj !== "object") {
     return obj;
   }
 

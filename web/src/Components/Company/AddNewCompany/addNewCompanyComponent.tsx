@@ -326,6 +326,12 @@ export const AddNewCompanyComponent = (props: any) => {
       setLoading(false);
     }
   };
+  const companyRoleMap: Record<string, string> = {
+  PD: 'Project Developer',
+  IC: 'Independent Certifier',
+  DNA: 'DNA'
+};
+
 
   const onUpdateCompany = async () => {
     setLoading(true);
@@ -848,7 +854,7 @@ export const AddNewCompanyComponent = (props: any) => {
                             ) : (
                               <BankOutlined className="role-icons" />
                             )}
-                            {t('addCompany:' + companyRole)}
+                            {t(companyRoleMap[companyRole])}
                           </Radio.Button>
                         </div>
                       ) : (
@@ -1050,14 +1056,6 @@ export const AddNewCompanyComponent = (props: any) => {
                       },
                       {
                         validator: async (rule: any, value: any) => {
-                          // if (
-                          //   String(value).trim() === '' ||
-                          //   String(value).trim() === undefined ||
-                          //   value === null ||
-                          //   value === undefined
-                          // ) {
-                          //   throw new Error(`${t('addCompany:phoneNo')} ${t('isRequired')}`);
-                          // } else
                           if (
                             String(value).trim() !== '' &&
                             String(value).trim() !== undefined &&
