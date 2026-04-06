@@ -7,19 +7,6 @@
 
 <a name="about"></a>
 
-<<<<<<< HEAD
-# National Carbon Credit Registry
-The National Carbon Registry enables carbon credit trading to reduce greenhouse gas emissions. 
-
-As an online database, the National Carbon Registry adheres to national and international standards for quantifying and verifying greenhouse gas emission reductions by projects. It tracks the issuance, holding, transfer, acquisition, cancellation, and retirement of carbon credits in an efficient and transparent manner. All data on mitigation projects and credit transactions is recorded and stored, ensuring that information is publicly accessible to boost confidence in the emissions reduction agenda. 
-
-Now, with our new registry implementation, the familiar front-end and operational flow remain unchanged. However, the backend is being transformed—incorporating Guardian Policy for enhanced security and compliance and utilizing the Hedera blockchain as the ledger. Ultimately, NFTs will be created for each carbon credit to standardize, secure, and streamline cross-border carbon trading. In addition, a custodian wrapper will be introduced on the registry side to manage communication and logic with Guardian, ensuring seamless integration with national and international systems, MRV platforms, and more. 
-
-The system continues to offer two key features: 
-* **Analytics Dashboard:** Enabling governments, companies, and certification bodies to operate transparently and function on an immutable blockchain.
-
-* **Serial Number Generator:** Standardizing the technical format to allow for easy cross-border collaboration between carbon trading systems.
-=======
 # National Carbon Credit Registry (NEW RELEASE) 
 
 # About
@@ -41,7 +28,6 @@ The system continues to offer the below key features:
 - **Dashboard and Reporting:**  
   The dashboard displays overall system statistics, including all relevant projects and credit details. Users can also access comprehensive project information on the project detail overview page. This includes an activity timeline, which provides a clear audit trail of all actions performed by stakeholders, ensuring transparency and traceability throughout the project lifecycle.  
   Additionally, the system supports Agreed Electronic Format (AEF) reports, allowing structured reporting of data such as, authorizations, issuances, transfers, and retirements ensuring international compliance and data standardization.
->>>>>>> e2419803f035568acc7275984058886ad7a794d6
 
 ## Index
 * [About](#about)
@@ -142,8 +128,6 @@ The task monitor will fetch pending tasks from the database and execute them in 
 #### *Data Replicator*
 Asynchronously verify custodian database data by referring to the Hedera Guardian.
 ![alt text](./documention/imgs/HederaNCRDataFlow.png)
-<<<<<<< HEAD
-=======
 
 ### **Serial Number Generation And Tracking**
 
@@ -176,7 +160,6 @@ When credits are Tranferred or Retired, it can be a transaction of a full block 
   Example: Transfer of 1000 credits from CA0004-VU-CH-356-1-3000-2023 block.<br>
   Before transaction: CA0004-VU-CH-356-1-3000-2023 : Owner 1<br>
   After transaction: CA0004-VU-CH-356-1-2000-2023 : Owner 1 and CA0004-VU-CH-356-2001-3000-2023 : Owner 2
->>>>>>> e2419803f035568acc7275984058886ad7a794d6
 
 ### **Deployment**
 
@@ -378,32 +361,17 @@ For contribution and licensing terms, see [Standards and License](#standards) an
   - replicator: Replicate Ledger database entries in to Postgres database for analytics. Trigger by new record on the Kinesis stream.
   - setup: Function to add initial system user data.
 - Create initial user data in the system by invoking setup lambda function by executing
-<<<<<<< HEAD
-    ```
-    aws lambda invoke \
-        --function-name carbon-registry-services-dev-setup --cli-binary-format raw-in-base64-out\
-        --payload '{"rootEmail": "<Root user email>","systemCountryCode": "<System country Alpha 2 code>", "name": "<System country name>", "logoBase64": "<System country logo base64>"}' \
-        response.json
-    ```
-
-
-### Serial Number Generation
-Serial Number generation implemented in a separate node module. [Please refer this](./libs/serial-number-gen/README.md) for more information.
-=======
   ```
   aws lambda invoke \
       --function-name carbon-registry-services-dev-setup --cli-binary-format raw-in-base64-out\
       --payload '{"rootEmail": "<Root user email>","systemCountryCode": "<System country Alpha 2 code>", "name": "<System country name>", "logoBase64": "<System country logo base64>"}' \
       response.json
   ```
->>>>>>> e2419803f035568acc7275984058886ad7a794d6
 
 <a name="external"></a>
 
 ## External Connectivity
 
-<<<<<<< HEAD
-=======
 ### UNDP'S ITMO Platform
 The Carbon Registry is designed to be linked to the ITMO Voluntary Bilateral Cooperation Platform, https://carboncooperation.undp.org/, managed by UNDP. This enables countries to automatically sync projects created/authorised and credits issued within its national registry to the international trading platform. The system does this by: 
 1. Carbon Registry make a daily to the retrieve ITMO platform projects.
@@ -505,7 +473,6 @@ The Carbon Registry is designed to be linked to the ITMO Voluntary Bilateral Coo
 | agriculture             | Agriculture | Agriculture         | Agriculture         |
 | energy-industries       | Energy      | Energy Industry     | EE Industry         |
 | Default                 | Other       | Energy Industry     | EE Industry         |
->>>>>>> e2419803f035568acc7275984058886ad7a794d6
 
 #### <b>Assumptions</b>
 
